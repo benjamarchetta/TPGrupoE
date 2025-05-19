@@ -28,84 +28,124 @@
         /// </summary>
         private void InitializeComponent()
         {
+            ListViewItem listViewItem3 = new ListViewItem(new ListViewItem.ListViewSubItem[] { new ListViewItem.ListViewSubItem(null, "OS25001", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "18/05/2025", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "20123456780 - Juan Soto"), new ListViewItem.ListViewSubItem(null, "SKU12345"), new ListViewItem.ListViewSubItem(null, "Producto de ejemplo"), new ListViewItem.ListViewSubItem(null, "8"), new ListViewItem.ListViewSubItem(null, "aledezma"), new ListViewItem.ListViewSubItem(null, "11/04/2025") }, -1);
             ordenesPreparacionEntregaLabel = new Label();
-            generarEntregaListView = new ListView();
-            fechaColumna = new ColumnHeader();
-            idOrdenColumna = new ColumnHeader();
-            skuColumna = new ColumnHeader();
-            cantidadColumna = new ColumnHeader();
-            idClienteColumna = new ColumnHeader();
-            button1 = new Button();
+            agregarOS = new Button();
+            ordenesPickingCumplidas = new ListView();
+            idOrdenPicking = new ColumnHeader();
+            fechaDespachoOE = new ColumnHeader();
+            cuitCliente = new ColumnHeader();
+            skuProductoPicking = new ColumnHeader();
+            nombreProducto = new ColumnHeader();
+            productoCantidad = new ColumnHeader();
+            idUsuarioPicking = new ColumnHeader();
+            fechaPickingCumplida = new ColumnHeader();
+            borrarSelección = new Button();
             SuspendLayout();
             // 
             // ordenesPreparacionEntregaLabel
             // 
             ordenesPreparacionEntregaLabel.AutoSize = true;
-            ordenesPreparacionEntregaLabel.Location = new Point(12, 9);
+            ordenesPreparacionEntregaLabel.Location = new Point(26, 22);
+            ordenesPreparacionEntregaLabel.Margin = new Padding(6, 0, 6, 0);
             ordenesPreparacionEntregaLabel.Name = "ordenesPreparacionEntregaLabel";
-            ordenesPreparacionEntregaLabel.Size = new Size(133, 15);
+            ordenesPreparacionEntregaLabel.Size = new Size(387, 37);
             ordenesPreparacionEntregaLabel.TabIndex = 0;
-            ordenesPreparacionEntregaLabel.Text = "Ordenes de preparacion";
+            ordenesPreparacionEntregaLabel.Text = "Órdenes de selección validadas";
             // 
-            // generarEntregaListView
+            // agregarOS
             // 
-            generarEntregaListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, skuColumna, cantidadColumna, idClienteColumna });
-            generarEntregaListView.FullRowSelect = true;
-            generarEntregaListView.Location = new Point(12, 27);
-            generarEntregaListView.Name = "generarEntregaListView";
-            generarEntregaListView.Size = new Size(776, 175);
-            generarEntregaListView.TabIndex = 2;
-            generarEntregaListView.UseCompatibleStateImageBehavior = false;
-            generarEntregaListView.View = View.Details;
+            agregarOS.Enabled = false;
+            agregarOS.Location = new Point(1270, 286);
+            agregarOS.Margin = new Padding(6, 7, 6, 7);
+            agregarOS.Name = "agregarOS";
+            agregarOS.Size = new Size(230, 67);
+            agregarOS.TabIndex = 3;
+            agregarOS.Text = "Agregar";
+            agregarOS.UseVisualStyleBackColor = true;
             // 
-            // fechaColumna
+            // ordenesPickingCumplidas
             // 
-            fechaColumna.Text = "Fecha de despacho";
-            fechaColumna.Width = 160;
+            ordenesPickingCumplidas.BackColor = SystemColors.ControlLightLight;
+            ordenesPickingCumplidas.CheckBoxes = true;
+            ordenesPickingCumplidas.Columns.AddRange(new ColumnHeader[] { idOrdenPicking, fechaDespachoOE, cuitCliente, skuProductoPicking, nombreProducto, productoCantidad, idUsuarioPicking, fechaPickingCumplida });
+            ordenesPickingCumplidas.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ordenesPickingCumplidas.FullRowSelect = true;
+            ordenesPickingCumplidas.GridLines = true;
+            listViewItem3.StateImageIndex = 0;
+            ordenesPickingCumplidas.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            ordenesPickingCumplidas.LabelEdit = true;
+            ordenesPickingCumplidas.Location = new Point(26, 75);
+            ordenesPickingCumplidas.Name = "ordenesPickingCumplidas";
+            ordenesPickingCumplidas.OwnerDraw = true;
+            ordenesPickingCumplidas.Size = new Size(1474, 201);
+            ordenesPickingCumplidas.TabIndex = 6;
+            ordenesPickingCumplidas.UseCompatibleStateImageBehavior = false;
+            ordenesPickingCumplidas.View = View.Details;
             // 
-            // idOrdenColumna
+            // idOrdenPicking
             // 
-            idOrdenColumna.Text = "ID de Orden";
-            idOrdenColumna.Width = 160;
+            idOrdenPicking.Text = "Número";
+            idOrdenPicking.Width = 150;
             // 
-            // skuColumna
+            // fechaDespachoOE
             // 
-            skuColumna.DisplayIndex = 3;
-            skuColumna.Text = "SKU de producto";
-            skuColumna.Width = 160;
+            fechaDespachoOE.Text = "Fecha de despacho";
+            fechaDespachoOE.Width = 160;
             // 
-            // cantidadColumna
+            // cuitCliente
             // 
-            cantidadColumna.DisplayIndex = 4;
-            cantidadColumna.Text = "Cantidad";
-            cantidadColumna.Width = 160;
+            cuitCliente.Text = "CUIT - Cliente";
+            cuitCliente.Width = 300;
             // 
-            // idClienteColumna
+            // skuProductoPicking
             // 
-            idClienteColumna.DisplayIndex = 2;
-            idClienteColumna.Text = "ID del Cliente";
-            idClienteColumna.Width = 160;
+            skuProductoPicking.Text = "SKU";
+            skuProductoPicking.Width = 160;
             // 
-            // button1
+            // nombreProducto
             // 
-            button1.Enabled = false;
-            button1.Location = new Point(638, 208);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 23);
-            button1.TabIndex = 3;
-            button1.Text = "Cargar orden de entrega";
-            button1.UseVisualStyleBackColor = true;
+            nombreProducto.Text = "Producto";
+            nombreProducto.Width = 225;
+            // 
+            // productoCantidad
+            // 
+            productoCantidad.Text = "Cantidad";
+            productoCantidad.Width = 125;
+            // 
+            // idUsuarioPicking
+            // 
+            idUsuarioPicking.Text = "Preparada por";
+            idUsuarioPicking.Width = 180;
+            // 
+            // fechaPickingCumplida
+            // 
+            fechaPickingCumplida.Text = "Fecha de picking";
+            fechaPickingCumplida.Width = 160;
+            // 
+            // borrarSelección
+            // 
+            borrarSelección.Enabled = false;
+            borrarSelección.Location = new Point(1028, 286);
+            borrarSelección.Margin = new Padding(6, 7, 6, 7);
+            borrarSelección.Name = "borrarSelección";
+            borrarSelección.Size = new Size(230, 67);
+            borrarSelección.TabIndex = 7;
+            borrarSelección.Text = "Borrar selección";
+            borrarSelección.UseVisualStyleBackColor = true;
             // 
             // CargarOrdenDeEntregaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 239);
-            Controls.Add(button1);
-            Controls.Add(generarEntregaListView);
+            ClientSize = new Size(1526, 755);
+            Controls.Add(borrarSelección);
+            Controls.Add(ordenesPickingCumplidas);
+            Controls.Add(agregarOS);
             Controls.Add(ordenesPreparacionEntregaLabel);
+            Margin = new Padding(6, 7, 6, 7);
             Name = "CargarOrdenDeEntregaForm";
-            Text = "Cargar orden de entrega";
+            Text = "Generar - Órden de Entrega";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -113,12 +153,16 @@
         #endregion
 
         private Label ordenesPreparacionEntregaLabel;
-        private ListView generarEntregaListView;
-        private ColumnHeader fechaColumna;
-        private ColumnHeader idOrdenColumna;
-        private ColumnHeader skuColumna;
-        private ColumnHeader cantidadColumna;
-        private ColumnHeader idClienteColumna;
-        private Button button1;
+        private Button agregarOS;
+        private ListView ordenesPickingCumplidas;
+        private ColumnHeader idOrdenPicking;
+        private ColumnHeader fechaDespachoOE;
+        private ColumnHeader cuitCliente;
+        private ColumnHeader skuProductoPicking;
+        private ColumnHeader nombreProducto;
+        private ColumnHeader productoCantidad;
+        private ColumnHeader idUsuarioPicking;
+        private ColumnHeader fechaPickingCumplida;
+        private Button borrarSelección;
     }
 }
