@@ -19,7 +19,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
-
+            comboBox3.SelectedIndex = 0;
         }
 
         private void cantidadARetirarTextBox_TextChanged(object sender, EventArgs e)
@@ -49,6 +49,36 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
