@@ -19,7 +19,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
-            comboBox3.SelectedIndex = 0;
+            palletCerradoComboBox.SelectedIndex = 0;
         }
 
         private void cantidadARetirarTextBox_TextChanged(object sender, EventArgs e)

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
 {
-    public partial class CargarOrdenDeEntregaForm : Form
+    public partial class EmitirRemitoForm : Form
     {
-        public CargarOrdenDeEntregaForm()
+        public EmitirRemitoForm()
         {
             InitializeComponent();
+        }
+
+        private void EmitirRemitoForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
