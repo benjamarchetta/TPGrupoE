@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem3 = new ListViewItem(new string[] { "OS25001", "20123456780 - Juan Soto", "SKU12345", "Producto de ejemplo", "8", "aledezma", "11/04/2025", "sdsf" }, -1, SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0));
+            ListViewItem listViewItem2 = new ListViewItem(new string[] { "OS25001", "20123456780 - Juan Soto", "SKU12345", "Producto de ejemplo", "8", "aledezma", "11/04/2025", "sdsf" }, -1, SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0));
             agregarPickingButton = new Button();
             pickingEnPreparacionListView = new ListView();
             idOrdenPicking = new ColumnHeader();
@@ -43,8 +43,6 @@
             empaquetadoGroupBox = new GroupBox();
             textBox1 = new TextBox();
             cantidadBultosLabel = new Label();
-            numeroOrdenEntregaLabel = new Label();
-            numeroOeTextBox = new TextBox();
             pickingPreparadoListView = new ListView();
             pickingNumero = new ColumnHeader();
             cuitClienteName = new ColumnHeader();
@@ -76,9 +74,9 @@
             pickingEnPreparacionListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             pickingEnPreparacionListView.FullRowSelect = true;
             pickingEnPreparacionListView.GridLines = true;
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            pickingEnPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            listViewItem2.Checked = true;
+            listViewItem2.StateImageIndex = 1;
+            pickingEnPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             pickingEnPreparacionListView.LabelEdit = true;
             pickingEnPreparacionListView.Location = new Point(22, 50);
             pickingEnPreparacionListView.Name = "pickingEnPreparacionListView";
@@ -95,7 +93,7 @@
             // 
             // cuitCliente
             // 
-            cuitCliente.Text = "CUIT - Cliente";
+            cuitCliente.Text = "CUIT - Razón social";
             cuitCliente.Width = 300;
             // 
             // skuProductoPicking
@@ -115,12 +113,12 @@
             // 
             // idUsuarioPicking
             // 
-            idUsuarioPicking.Text = "Preparada por";
+            idUsuarioPicking.Text = "Seleccionada por";
             idUsuarioPicking.Width = 180;
             // 
             // fechaEntrega
             // 
-            fechaEntrega.Text = "Fecha de envío";
+            fechaEntrega.Text = "Fecha de despacho";
             fechaEntrega.Width = 225;
             // 
             // borrarSelecciónButton
@@ -146,7 +144,7 @@
             pickingEnPreparacionGroupBox.Size = new Size(1423, 315);
             pickingEnPreparacionGroupBox.TabIndex = 8;
             pickingEnPreparacionGroupBox.TabStop = false;
-            pickingEnPreparacionGroupBox.Text = "Órdenes de selección en preparación";
+            pickingEnPreparacionGroupBox.Text = "Órdenes de preparación seleccionadas";
             pickingEnPreparacionGroupBox.Enter += groupBox1_Enter;
             // 
             // empaquetadoGroupBox
@@ -154,8 +152,6 @@
             empaquetadoGroupBox.BackColor = SystemColors.Control;
             empaquetadoGroupBox.Controls.Add(textBox1);
             empaquetadoGroupBox.Controls.Add(cantidadBultosLabel);
-            empaquetadoGroupBox.Controls.Add(numeroOrdenEntregaLabel);
-            empaquetadoGroupBox.Controls.Add(numeroOeTextBox);
             empaquetadoGroupBox.Controls.Add(pickingPreparadoListView);
             empaquetadoGroupBox.Controls.Add(confirmarEmpaquetadoButton);
             empaquetadoGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -164,13 +160,13 @@
             empaquetadoGroupBox.Size = new Size(1423, 397);
             empaquetadoGroupBox.TabIndex = 9;
             empaquetadoGroupBox.TabStop = false;
-            empaquetadoGroupBox.Text = "Mercaderías a empaquetar";
+            empaquetadoGroupBox.Text = "Mercaderías a embalar";
             // 
             // textBox1
             // 
             textBox1.BackColor = SystemColors.ControlLight;
             textBox1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(763, 55);
+            textBox1.Location = new Point(252, 52);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(225, 39);
             textBox1.TabIndex = 10;
@@ -179,33 +175,11 @@
             // 
             cantidadBultosLabel.AutoSize = true;
             cantidadBultosLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cantidadBultosLabel.Location = new Point(536, 55);
+            cantidadBultosLabel.Location = new Point(25, 52);
             cantidadBultosLabel.Name = "cantidadBultosLabel";
             cantidadBultosLabel.Size = new Size(221, 32);
             cantidadBultosLabel.TabIndex = 9;
             cantidadBultosLabel.Text = "Cantidad de bultos:";
-            // 
-            // numeroOrdenEntregaLabel
-            // 
-            numeroOrdenEntregaLabel.AutoSize = true;
-            numeroOrdenEntregaLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            numeroOrdenEntregaLabel.Location = new Point(22, 55);
-            numeroOrdenEntregaLabel.Name = "numeroOrdenEntregaLabel";
-            numeroOrdenEntregaLabel.Size = new Size(242, 32);
-            numeroOrdenEntregaLabel.TabIndex = 8;
-            numeroOrdenEntregaLabel.Text = "N° Orden de Entrega:";
-            numeroOrdenEntregaLabel.Click += label1_Click;
-            // 
-            // numeroOeTextBox
-            // 
-            numeroOeTextBox.BackColor = SystemColors.ControlLight;
-            numeroOeTextBox.Enabled = false;
-            numeroOeTextBox.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            numeroOeTextBox.ForeColor = SystemColors.ControlDarkDark;
-            numeroOeTextBox.Location = new Point(260, 55);
-            numeroOeTextBox.Name = "numeroOeTextBox";
-            numeroOeTextBox.Size = new Size(225, 39);
-            numeroOeTextBox.TabIndex = 7;
             // 
             // pickingPreparadoListView
             // 
@@ -225,12 +199,12 @@
             // 
             // pickingNumero
             // 
-            pickingNumero.Text = "N° O. Selección";
-            pickingNumero.Width = 180;
+            pickingNumero.Text = "N° O. Preparación";
+            pickingNumero.Width = 225;
             // 
             // cuitClienteName
             // 
-            cuitClienteName.Text = "CUIT - Cliente";
+            cuitClienteName.Text = "CUIT - Razón social";
             cuitClienteName.Width = 300;
             // 
             // skuProductoName
@@ -250,8 +224,8 @@
             // 
             // fechaEnvio
             // 
-            fechaEnvio.Text = "Fecha de envío";
-            fechaEnvio.Width = 180;
+            fechaEnvio.Text = "Fecha de despacho";
+            fechaEnvio.Width = 225;
             // 
             // confirmarEmpaquetadoButton
             // 
@@ -263,7 +237,7 @@
             confirmarEmpaquetadoButton.Name = "confirmarEmpaquetadoButton";
             confirmarEmpaquetadoButton.Size = new Size(320, 67);
             confirmarEmpaquetadoButton.TabIndex = 3;
-            confirmarEmpaquetadoButton.Text = "Confirmar empaquetado";
+            confirmarEmpaquetadoButton.Text = "Embalar";
             confirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
             // 
             // CargarOrdenDeEntregaForm
@@ -305,8 +279,6 @@
         private ColumnHeader productoName;
         private ColumnHeader cantidadName;
         private Button confirmarEmpaquetadoButton;
-        private TextBox numeroOeTextBox;
-        private Label numeroOrdenEntregaLabel;
         private Label cantidadBultosLabel;
         private TextBox textBox1;
         private ColumnHeader fechaEnvio;
