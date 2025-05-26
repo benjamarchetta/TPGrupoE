@@ -1,6 +1,6 @@
-﻿namespace TPGrupoE.CasoU_Generar_Orden_de_Despacho
+﻿namespace TP_Grupo_E._6_CasoU_Cumplir_Orden_de_Entrega
 {
-    partial class CumplirOrdenEntregaForm
+    partial class CumplirOrdenEntregaForm : Form 
     {
         /// <summary>
         /// Required designer variable.
