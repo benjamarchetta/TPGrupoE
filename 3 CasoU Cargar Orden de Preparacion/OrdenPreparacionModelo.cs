@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.CasoU_Orden_Preparacion
 {
-    internal class OrdenDeSeleccionModelo
+    internal class OrdenPreparacionModelo
     {
     }
 }

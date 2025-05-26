@@ -14,9 +14,10 @@ namespace TPGrupoE
         }
 
         ProcesarOrdenPreparacionForm ProcesarOrdenPreparacion = new ProcesarOrdenPreparacionForm();
-        CargarOrdenSeleccionForm ProcesarOrdenSeleccion = new CargarOrdenSeleccionForm();
-        CargarOrdenDeEntregaForm GenerarOrdenDeEntrega = new CargarOrdenDeEntregaForm();
-        CumplirOrdenSeleccionForm ConfirmarSeleccion = new CumplirOrdenSeleccionForm();
+        GenerarOrdenSeleccionForm ProcesarOrdenSeleccion = new GenerarOrdenSeleccionForm();
+        EmitirRemitoForm EmitirRemito = new EmitirRemitoForm();
+        GestionarOrdenSeleccionForm ConfirmarSeleccion = new GestionarOrdenSeleccionForm();
+        CumplirOrdenEntregaForm CumplirOrdenEntrega = new CumplirOrdenEntregaForm();
         CumplirOrdenEntregaForm GenerarOrdenDespacho = new CumplirOrdenEntregaForm();
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
@@ -41,12 +42,12 @@ namespace TPGrupoE
 
         private void generarOrdenEntrega_Click(object sender, EventArgs e)
         {
-            GenerarOrdenDeEntrega.ShowDialog();
+            CumplirOrdenEntrega.ShowDialog();
         }
 
-        private void GenerarOrdenDespachoButton_Click(object sender, EventArgs e)
+        private void EmitirRemitoButton_Click(object sender, EventArgs e)
         {
-            GenerarOrdenDespacho.ShowDialog();
+            EmitirRemito.ShowDialog();
         }
     }
 }
