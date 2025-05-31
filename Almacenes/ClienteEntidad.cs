@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TPGrupoE.Almacenes
+{
+    internal class ClienteEntidad
+    {
+        public string Cuit { get; set; } = string.Empty;
+        public string RazonSocial { get; set; } = string.Empty;
+        public string Domicilio { get; set; } = string.Empty;
+    }
+}

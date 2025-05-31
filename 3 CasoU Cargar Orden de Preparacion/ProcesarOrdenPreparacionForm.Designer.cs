@@ -59,6 +59,7 @@
             dniTransportistaComboBox = new ComboBox();
             label12 = new Label();
             estadoDeOrdenTextBox = new TextBox();
+            label13 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -125,7 +126,7 @@
             ordenDePreparacionListView.TabIndex = 15;
             ordenDePreparacionListView.UseCompatibleStateImageBehavior = false;
             ordenDePreparacionListView.View = View.Details;
-            ordenDePreparacionListView.SelectedIndexChanged += listView2_SelectedIndexChanged;
+            ordenDePreparacionListView.SelectedIndexChanged += ordenDePreparacionListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -156,6 +157,7 @@
             razonSocialComboBox.Name = "razonSocialComboBox";
             razonSocialComboBox.Size = new Size(382, 23);
             razonSocialComboBox.TabIndex = 16;
+            razonSocialComboBox.SelectedIndexChanged += razonSocialComboBox_SelectedIndexChanged;
             // 
             // label7
             // 
@@ -169,13 +171,10 @@
             // 
             // label8
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(400, 68);
+            label8.Location = new Point(0, 0);
             label8.Name = "label8";
-            label8.Size = new Size(90, 15);
-            label8.TabIndex = 18;
-            label8.Text = "CUIT del cliente";
-            label8.Click += label8_Click;
+            label8.Size = new Size(100, 23);
+            label8.TabIndex = 36;
             // 
             // cuitTextBox
             // 
@@ -185,16 +184,18 @@
             cuitTextBox.Size = new Size(383, 23);
             cuitTextBox.TabIndex = 19;
             cuitTextBox.Text = "00000000000";
-            cuitTextBox.TextChanged += textBox5_TextChanged;
+            cuitTextBox.TextChanged += cuitTextBox_TextChanged;
             // 
             // productoComboBox
             // 
             productoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            productoComboBox.Enabled = false;
             productoComboBox.FormattingEnabled = true;
             productoComboBox.Location = new Point(12, 154);
             productoComboBox.Name = "productoComboBox";
             productoComboBox.Size = new Size(382, 23);
             productoComboBox.TabIndex = 20;
+            productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -221,7 +222,8 @@
             skuTextBox.Name = "skuTextBox";
             skuTextBox.Size = new Size(385, 23);
             skuTextBox.TabIndex = 23;
-            skuTextBox.Text = "XX-XXX-XXX";
+            skuTextBox.Text = "-";
+            skuTextBox.TextChanged += skuTextBox_TextChanged;
             // 
             // cantidadEnStockTextBox
             // 
@@ -230,7 +232,8 @@
             cantidadEnStockTextBox.Name = "cantidadEnStockTextBox";
             cantidadEnStockTextBox.Size = new Size(385, 23);
             cantidadEnStockTextBox.TabIndex = 24;
-            cantidadEnStockTextBox.Text = "500";
+            cantidadEnStockTextBox.Text = "-";
+            cantidadEnStockTextBox.TextChanged += cantidadEnStockTextBox_TextChanged;
             // 
             // label9
             // 
@@ -272,10 +275,13 @@
             // 
             // cantidadARetirarTextBox
             // 
+            cantidadARetirarTextBox.Enabled = false;
             cantidadARetirarTextBox.Location = new Point(12, 198);
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
+            cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
+            cantidadARetirarTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
             // 
             // agregarProductoButton
             // 
@@ -331,11 +337,21 @@
             estadoDeOrdenTextBox.TabIndex = 35;
             estadoDeOrdenTextBox.Text = "Pendiente";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(400, 68);
+            label13.Name = "label13";
+            label13.Size = new Size(86, 15);
+            label13.TabIndex = 37;
+            label13.Text = "Cuit del cliente";
+            // 
             // ProcesarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(797, 597);
+            Controls.Add(label13);
             Controls.Add(estadoDeOrdenTextBox);
             Controls.Add(label12);
             Controls.Add(dniTransportistaComboBox);
@@ -403,5 +419,6 @@
         private ComboBox dniTransportistaComboBox;
         private Label label12;
         private TextBox estadoDeOrdenTextBox;
+        private Label label13;
     }
 }
