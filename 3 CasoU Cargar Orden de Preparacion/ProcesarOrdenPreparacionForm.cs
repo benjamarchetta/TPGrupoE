@@ -88,9 +88,16 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void palletCerradoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (palletCerradoComboBox.SelectedIndex == 1)
+            {
+                cantidadARetirarLabel.Text = "Cantidad de pallets a retirar";
+            }
+            else
+            {
+                cantidadARetirarLabel.Text = "Cantidad a retirar";
+            }
         }
 
         private void razonSocialComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +110,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 productoComboBox.Enabled = (razonSocialComboBox.SelectedIndex != -1);
             }
 
-            
+
 
 
             if (razonSocialComboBox.SelectedIndex != -1)
@@ -156,7 +163,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 skuTextBox.Text = producto.sku;
                 cantidadEnStockTextBox.Text = producto.CantidadEnStock.ToString();
             }
-            
+
 
             //Habilitar cantidad al elegir producto
             cantidadARetirarTextBox.Enabled = (productoComboBox.SelectedIndex != -1);
@@ -183,7 +190,8 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
-                        cantidadARetirarTextBox.Text = "";
+                        cantidadARetirarTextBox.Text = null;
+                        agregarProductoButton.Enabled = false;
                     }
                 }
             }
@@ -196,11 +204,18 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             {
                 e.Handled = true; // bloquea la tecla
             }
+            agregarProductoButton.Enabled = true;
         }
 
         private void cantidadEnStockTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void agregarProductoButton_Click(object sender, EventArgs e)
+        {
+            string producto = productoComboBox.Text;
+             
         }
     }
 }

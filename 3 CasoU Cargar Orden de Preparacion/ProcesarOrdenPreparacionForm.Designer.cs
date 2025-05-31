@@ -37,7 +37,6 @@
             ordenDePreparacionListView = new ListView();
             skuColumnaSelec = new ColumnHeader();
             cantidadColumnaSelec = new ColumnHeader();
-            palletColumnaPrep = new ColumnHeader();
             ubicacionColumnaPrep = new ColumnHeader();
             razonSocialComboBox = new ComboBox();
             label7 = new Label();
@@ -51,7 +50,7 @@
             label9 = new Label();
             palletCerradoComboBox = new ComboBox();
             label10 = new Label();
-            label11 = new Label();
+            cantidadARetirarLabel = new Label();
             cantidadARetirarTextBox = new TextBox();
             agregarProductoButton = new Button();
             label4 = new Label();
@@ -119,7 +118,7 @@
             // 
             // ordenDePreparacionListView
             // 
-            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, palletColumnaPrep, ubicacionColumnaPrep });
+            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, ubicacionColumnaPrep });
             ordenDePreparacionListView.Location = new Point(12, 310);
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
             ordenDePreparacionListView.Size = new Size(776, 153);
@@ -131,22 +130,17 @@
             // skuColumnaSelec
             // 
             skuColumnaSelec.Text = "SKU de producto";
-            skuColumnaSelec.Width = 195;
+            skuColumnaSelec.Width = 257;
             // 
             // cantidadColumnaSelec
             // 
             cantidadColumnaSelec.Text = "Cantidad a retirar";
-            cantidadColumnaSelec.Width = 195;
-            // 
-            // palletColumnaPrep
-            // 
-            palletColumnaPrep.Text = "Pallet cerrado";
-            palletColumnaPrep.Width = 195;
+            cantidadColumnaSelec.Width = 257;
             // 
             // ubicacionColumnaPrep
             // 
             ubicacionColumnaPrep.Text = "Ubicación";
-            ubicacionColumnaPrep.Width = 195;
+            ubicacionColumnaPrep.Width = 257;
             // 
             // razonSocialComboBox
             // 
@@ -171,10 +165,10 @@
             // 
             // label8
             // 
-            label8.Location = new Point(0, 0);
+            label8.Location = new Point(499, 284);
             label8.Name = "label8";
-            label8.Size = new Size(100, 23);
-            label8.TabIndex = 36;
+            label8.Size = new Size(28, 23);
+            label8.TabIndex = 38;
             // 
             // cuitTextBox
             // 
@@ -249,29 +243,29 @@
             palletCerradoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             palletCerradoComboBox.FormattingEnabled = true;
             palletCerradoComboBox.Items.AddRange(new object[] { "No", "Sí" });
-            palletCerradoComboBox.Location = new Point(12, 242);
+            palletCerradoComboBox.Location = new Point(400, 26);
             palletCerradoComboBox.Name = "palletCerradoComboBox";
-            palletCerradoComboBox.Size = new Size(382, 23);
+            palletCerradoComboBox.Size = new Size(383, 23);
             palletCerradoComboBox.TabIndex = 26;
-            palletCerradoComboBox.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+            palletCerradoComboBox.SelectedIndexChanged += palletCerradoComboBox_SelectedIndexChanged;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(12, 224);
+            label10.Location = new Point(406, 8);
             label10.Name = "label10";
             label10.Size = new Size(79, 15);
             label10.TabIndex = 27;
             label10.Text = "Pallet cerrado";
             // 
-            // label11
+            // cantidadARetirarLabel
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(12, 180);
-            label11.Name = "label11";
-            label11.Size = new Size(98, 15);
-            label11.TabIndex = 28;
-            label11.Text = "Cantidad a retirar";
+            cantidadARetirarLabel.AutoSize = true;
+            cantidadARetirarLabel.Location = new Point(12, 180);
+            cantidadARetirarLabel.Name = "cantidadARetirarLabel";
+            cantidadARetirarLabel.Size = new Size(98, 15);
+            cantidadARetirarLabel.TabIndex = 28;
+            cantidadARetirarLabel.Text = "Cantidad a retirar";
             // 
             // cantidadARetirarTextBox
             // 
@@ -292,6 +286,7 @@
             agregarProductoButton.TabIndex = 30;
             agregarProductoButton.Text = "Agregar producto a órden de preparación";
             agregarProductoButton.UseVisualStyleBackColor = true;
+            agregarProductoButton.Click += agregarProductoButton_Click;
             // 
             // label4
             // 
@@ -359,7 +354,7 @@
             Controls.Add(label4);
             Controls.Add(agregarProductoButton);
             Controls.Add(cantidadARetirarTextBox);
-            Controls.Add(label11);
+            Controls.Add(cantidadARetirarLabel);
             Controls.Add(label10);
             Controls.Add(palletCerradoComboBox);
             Controls.Add(label9);
@@ -409,11 +404,10 @@
         private Label label9;
         private ComboBox palletCerradoComboBox;
         private Label label10;
-        private Label label11;
+        private Label cantidadARetirarLabel;
         private TextBox cantidadARetirarTextBox;
         private Button agregarProductoButton;
         private Label label4;
-        private ColumnHeader palletColumnaPrep;
         private ColumnHeader ubicacionColumnaPrep;
         private Label label5;
         private ComboBox dniTransportistaComboBox;
