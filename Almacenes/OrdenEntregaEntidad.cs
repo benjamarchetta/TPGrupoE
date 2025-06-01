@@ -8,9 +8,9 @@ namespace TPGrupoE.Almacenes
 {
     internal class OrdenEntregaEntidad
     {
-        public string IdOrdenEntrega { get; set; } = string.Empty;
-        public List<int> IdsOrdenesPreparacion { get; set; } = new List<int>();
-        public string  Estado { get; set; } = string.Empty;
-        public int DniTransportista { get; set; }
+        public int IdOrdenEntrega { get; set; }
+        public EstadoOrdenEntrega Estado { get; set; }
+        public List<int> IdOrdenPreparacion { get; set; } = new ();
+        
     }
 }

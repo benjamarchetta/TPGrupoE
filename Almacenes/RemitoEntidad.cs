@@ -9,13 +9,13 @@ namespace TPGrupoE.Almacenes
     internal class RemitoEntidad
     {
         public int IdRemito { get; set; }
-        public DateTime Fecha { get; set; }
-        public string CuitCliente { get; set; } = string.Empty;
-        public int DniTransportista { get; set; }
-        public int IdOrdenEntrega { get; set; } 
-        
-      
-      
+        public DateTime FechaEmision { get; set; }
+        public int IDCliente { get; set; }
+        public int DNITransportista { get; set; }
+        public List<int> IDOrdenPreparacion { get; set; }
+
+
+
 
     }
 }
