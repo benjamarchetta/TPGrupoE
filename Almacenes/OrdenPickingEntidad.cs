@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class OrdenSeleccionEntidad
+    internal class OrdenPickingEntidad
     {
         public int IdOrdenSeleccion { get; set; }
-       
-        public string Estado { get; set; } = string.Empty;
-        public List<OrdenPreparacionEntidad> ordenesPreparacion { get; set; }
-       
+        public EstadoOrdenSeleccion Estado { get; set; }
+        public List<int> IdOrdenPreparacion { get; set; } = new();
+
     }
 }
