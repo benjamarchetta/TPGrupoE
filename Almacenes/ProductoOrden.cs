@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class ProductoOrdenEntidad
+    internal class ProductoOrden
     {
-        public int Id { get; set; }
-        public string sku { get; set; } = string.Empty;
-        public string TipoProducto { get; set; } = string.Empty;
+        public int IdProducto { get; set; }
         public int Cantidad { get; set; }
+        public bool PalletCerrado { get; set; }
     }
 }
