@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TPGrupoE.CasoU_Procesar_Orden_de_Seleccion
 {
-    public partial class CargarOrdenSeleccionForm : Form
+    public partial class GenerarOrdenSeleccionForm : Form
     {
-        public CargarOrdenSeleccionForm()
+        public GenerarOrdenSeleccionForm()
         {
             InitializeComponent();
         }

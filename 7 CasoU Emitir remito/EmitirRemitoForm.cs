@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TP_Grupo_E._6_CasoU_Cumplir_Orden_de_Entrega
+namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
 {
-    public partial class CumplirOrdenEntregaForm : Form
+    public partial class EmitirRemitoForm : Form
     {
-        public CumplirOrdenEntregaForm()
+        public EmitirRemitoForm()
         {
             InitializeComponent();
+        }
+
+        private void EmitirRemitoForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
