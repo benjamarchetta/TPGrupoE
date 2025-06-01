@@ -145,7 +145,7 @@
             pickingEnPreparacionGroupBox.TabIndex = 8;
             pickingEnPreparacionGroupBox.TabStop = false;
             pickingEnPreparacionGroupBox.Text = "Órdenes de preparación seleccionadas";
-            pickingEnPreparacionGroupBox.Enter += groupBox1_Enter;
+            pickingEnPreparacionGroupBox.Enter += pickingEnPreparacionGroupBox_Enter;
             // 
             // empaquetadoGroupBox
             // 
