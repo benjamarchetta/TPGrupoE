@@ -8,12 +8,8 @@ namespace TPGrupoE.Almacenes
 {
     internal class ProductoEntidad
     {
-        public int Id { get; set; }
-        public string CuitCliente { get; set; } = string.Empty;
-        public string sku { get; set; } = string.Empty;
-        public string TipoProducto { get; set; } = string.Empty;
-        public int CantidadEnStock { get; set; }
-        public string DescripcionMercaderia { get; set; } = string.Empty;
-        public string Ubicacion {  get; set; } = string.Empty; 
+        public int IdProducto { get; set; }
+        public string Sku { get; set; } = string.Empty;
+        public string DescripcionProducto { get; set; } = string.Empty;
     }
 }
