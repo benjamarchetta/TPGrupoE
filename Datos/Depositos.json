@@ -1,0 +1,27 @@
+[
+  {
+    "IDCliente": 1,
+    "CUITCliente": "20-34567345-3",
+    "Nombre": "CAI S.R.L"
+  },
+  {
+    "IDCliente": 2,
+    "CUITCliente": "30-12345678-9",
+    "Nombre": "Fravega S.A."
+  },
+  {
+    "IDCliente": 3,
+    "CUITCliente": "27-87654321-5",
+    "Nombre": "Mercado Libre S.A."
+  },
+  {
+    "IDCliente": 4,
+    "CUITCliente": "33-56789012-4",
+    "Nombre": "Amazon S.R.L."
+  },
+  {
+    "IDCliente": 5,
+    "CUITCliente": "23-23456789-6",
+    "Nombre": "Ebay"
+  }
+]
