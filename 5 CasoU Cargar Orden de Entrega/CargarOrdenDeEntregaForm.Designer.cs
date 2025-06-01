@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem3 = new ListViewItem(new ListViewItem.ListViewSubItem[] { new ListViewItem.ListViewSubItem(null, "OS25001", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "18/05/2025", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "20123456780 - Juan Soto"), new ListViewItem.ListViewSubItem(null, "SKU12345"), new ListViewItem.ListViewSubItem(null, "Producto de ejemplo"), new ListViewItem.ListViewSubItem(null, "8"), new ListViewItem.ListViewSubItem(null, "aledezma"), new ListViewItem.ListViewSubItem(null, "11/04/2025") }, -1);
+            ListViewItem listViewItem1 = new ListViewItem(new ListViewItem.ListViewSubItem[] { new ListViewItem.ListViewSubItem(null, "OS25001", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "18/05/2025", SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0)), new ListViewItem.ListViewSubItem(null, "20123456780 - Juan Soto"), new ListViewItem.ListViewSubItem(null, "SKU12345"), new ListViewItem.ListViewSubItem(null, "Producto de ejemplo"), new ListViewItem.ListViewSubItem(null, "8"), new ListViewItem.ListViewSubItem(null, "aledezma"), new ListViewItem.ListViewSubItem(null, "11/04/2025") }, -1);
             ordenesPreparacionEntregaLabel = new Label();
             agregarOS = new Button();
             ordenesPickingCumplidas = new ListView();
@@ -46,20 +46,18 @@
             // ordenesPreparacionEntregaLabel
             // 
             ordenesPreparacionEntregaLabel.AutoSize = true;
-            ordenesPreparacionEntregaLabel.Location = new Point(26, 22);
-            ordenesPreparacionEntregaLabel.Margin = new Padding(6, 0, 6, 0);
+            ordenesPreparacionEntregaLabel.Location = new Point(12, 9);
             ordenesPreparacionEntregaLabel.Name = "ordenesPreparacionEntregaLabel";
-            ordenesPreparacionEntregaLabel.Size = new Size(387, 37);
+            ordenesPreparacionEntregaLabel.Size = new Size(171, 15);
             ordenesPreparacionEntregaLabel.TabIndex = 0;
             ordenesPreparacionEntregaLabel.Text = "Órdenes de selección validadas";
             // 
             // agregarOS
             // 
             agregarOS.Enabled = false;
-            agregarOS.Location = new Point(1270, 286);
-            agregarOS.Margin = new Padding(6, 7, 6, 7);
+            agregarOS.Location = new Point(593, 116);
             agregarOS.Name = "agregarOS";
-            agregarOS.Size = new Size(230, 67);
+            agregarOS.Size = new Size(107, 27);
             agregarOS.TabIndex = 3;
             agregarOS.Text = "Agregar";
             agregarOS.UseVisualStyleBackColor = true;
@@ -72,13 +70,14 @@
             ordenesPickingCumplidas.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ordenesPickingCumplidas.FullRowSelect = true;
             ordenesPickingCumplidas.GridLines = true;
-            listViewItem3.StateImageIndex = 0;
-            ordenesPickingCumplidas.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            listViewItem1.StateImageIndex = 0;
+            ordenesPickingCumplidas.Items.AddRange(new ListViewItem[] { listViewItem1 });
             ordenesPickingCumplidas.LabelEdit = true;
-            ordenesPickingCumplidas.Location = new Point(26, 75);
+            ordenesPickingCumplidas.Location = new Point(12, 30);
+            ordenesPickingCumplidas.Margin = new Padding(1, 1, 1, 1);
             ordenesPickingCumplidas.Name = "ordenesPickingCumplidas";
             ordenesPickingCumplidas.OwnerDraw = true;
-            ordenesPickingCumplidas.Size = new Size(1474, 201);
+            ordenesPickingCumplidas.Size = new Size(690, 84);
             ordenesPickingCumplidas.TabIndex = 6;
             ordenesPickingCumplidas.UseCompatibleStateImageBehavior = false;
             ordenesPickingCumplidas.View = View.Details;
@@ -126,24 +125,22 @@
             // borrarSelección
             // 
             borrarSelección.Enabled = false;
-            borrarSelección.Location = new Point(1028, 286);
-            borrarSelección.Margin = new Padding(6, 7, 6, 7);
+            borrarSelección.Location = new Point(480, 116);
             borrarSelección.Name = "borrarSelección";
-            borrarSelección.Size = new Size(230, 67);
+            borrarSelección.Size = new Size(107, 27);
             borrarSelección.TabIndex = 7;
             borrarSelección.Text = "Borrar selección";
             borrarSelección.UseVisualStyleBackColor = true;
             // 
             // CargarOrdenDeEntregaForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1526, 755);
+            ClientSize = new Size(779, 304);
             Controls.Add(borrarSelección);
             Controls.Add(ordenesPickingCumplidas);
             Controls.Add(agregarOS);
             Controls.Add(ordenesPreparacionEntregaLabel);
-            Margin = new Padding(6, 7, 6, 7);
             Name = "CargarOrdenDeEntregaForm";
             Text = "Generar - Órden de Entrega";
             ResumeLayout(false);
