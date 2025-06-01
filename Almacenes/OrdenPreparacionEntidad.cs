@@ -15,6 +15,16 @@ namespace TPGrupoE.Almacenes
         public bool PalletCerrado { get; set; }
         public List<ProductoOrdenEntidad> productosOrden { get; set; }
 
+
         
     }
+    public enum EstadoOrdenPreparacion
+    {
+        Pendiente,
+        EnPreparacion,
+        Seleccionada, // Nuevo estado para CU5
+        Preparada,
+        Despachada
+    }
+
 }
