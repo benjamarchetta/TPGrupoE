@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "OS25001", "20123456780 - Juan Soto", "SKU12345", "Producto de ejemplo", "8", "aledezma", "11/04/2025", "sdsf" }, -1, SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0));
+            ListViewItem listViewItem2 = new ListViewItem(new string[] { "OS25001", "20123456780 - Juan Soto", "SKU12345", "Producto de ejemplo", "8", "aledezma", "11/04/2025", "sdsf" }, -1, SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0));
             agregarPickingButton = new Button();
             pickingEnPreparacionListView = new ListView();
             idOrdenPicking = new ColumnHeader();
@@ -74,9 +74,9 @@
             pickingEnPreparacionListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             pickingEnPreparacionListView.FullRowSelect = true;
             pickingEnPreparacionListView.GridLines = true;
-            listViewItem1.Checked = true;
-            listViewItem1.StateImageIndex = 1;
-            pickingEnPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            listViewItem2.Checked = true;
+            listViewItem2.StateImageIndex = 1;
+            pickingEnPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             pickingEnPreparacionListView.LabelEdit = true;
             pickingEnPreparacionListView.Location = new Point(22, 50);
             pickingEnPreparacionListView.Name = "pickingEnPreparacionListView";
@@ -249,7 +249,7 @@
             Controls.Add(pickingEnPreparacionGroupBox);
             Margin = new Padding(6, 7, 6, 7);
             Name = "CargarOrdenDeEntregaForm";
-            Text = "Confirmar embalaje";
+            Text = "Generar - Órden de Entrega";
             pickingEnPreparacionGroupBox.ResumeLayout(false);
             empaquetadoGroupBox.ResumeLayout(false);
             empaquetadoGroupBox.PerformLayout();
