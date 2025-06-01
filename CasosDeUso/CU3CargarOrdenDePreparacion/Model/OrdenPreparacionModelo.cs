@@ -69,6 +69,23 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 return Productos;
             }
         }
+
+        public static List<TransportistaEntidad> Transportistas
+        {
+            get
+            {
+                var Transportistas = new List<TransportistaEntidad>();
+                foreach (var Transportista in TransportistaAlmacen.Transportistas)
+                {
+                    Transportistas.Add(new TransportistaEntidad
+                    {
+                        dni = Transportista.dni,
+                        Nombre = Transportista.Nombre,
+                    });
+                }
+                return Transportistas;
+            }
+        }
     };
 }
 
