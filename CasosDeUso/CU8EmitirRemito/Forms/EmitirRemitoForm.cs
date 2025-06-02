@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU6EmitirRemito.Model;
 
 namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
@@ -23,13 +24,19 @@ namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
 
         private void EmitirRemitoForm_Load(object sender, EventArgs e)
         {
+            // Leer los datos de los almacenes al cargar el formulario
+            ClienteAlmacen.LeerCliente();
+            OrdenPreparacionAlmacen.LeerOP();
+            RemitoAlmacen.Leer();
+            
+
             comboBoxTransportistas.Items.Clear();
             foreach (var t in _model.Transportistas)
             {
                 comboBoxTransportistas.Items.Add(new ComboBoxItem { Text = t.Nombre, Value = t.DNI.ToString() });
             }
             comboBoxClientes.Items.Clear();
-            dataGridViewOPs.DataSource = null;
+            ListViewOrdenesADespachar.Items.Clear();
         }
 
 

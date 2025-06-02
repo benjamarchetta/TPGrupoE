@@ -30,13 +30,13 @@
         {
             ordenesPreparacionEntregaLabel = new Label();
             despacharButton = new Button();
-            TransportistasCombobox = new ComboBox();
+            comboBoxTransportistas = new ComboBox();
             label2 = new Label();
             SeleccionarTransportistaButton = new Button();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxClientes = new ComboBox();
             button1 = new Button();
-            OrdenesADespacharListView = new ListView();
+            ListViewOrdenesADespachar = new ListView();
             IdOrden = new ColumnHeader();
             FechaEntrega = new ColumnHeader();
             SuspendLayout();
@@ -60,16 +60,16 @@
             despacharButton.Text = "Despachar";
             despacharButton.UseVisualStyleBackColor = true;
             // 
-            // TransportistasCombobox
+            // comboBoxTransportistas
             // 
-            TransportistasCombobox.DropDownHeight = 150;
-            TransportistasCombobox.FormattingEnabled = true;
-            TransportistasCombobox.IntegralHeight = false;
-            TransportistasCombobox.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
-            TransportistasCombobox.Location = new Point(12, 27);
-            TransportistasCombobox.Name = "TransportistasCombobox";
-            TransportistasCombobox.Size = new Size(233, 23);
-            TransportistasCombobox.TabIndex = 9;
+            comboBoxTransportistas.DropDownHeight = 150;
+            comboBoxTransportistas.FormattingEnabled = true;
+            comboBoxTransportistas.IntegralHeight = false;
+            comboBoxTransportistas.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
+            comboBoxTransportistas.Location = new Point(12, 27);
+            comboBoxTransportistas.Name = "comboBoxTransportistas";
+            comboBoxTransportistas.Size = new Size(233, 23);
+            comboBoxTransportistas.TabIndex = 9;
             // 
             // label2
             // 
@@ -99,16 +99,16 @@
             label3.Text = "Cliente";
             label3.Click += label3_Click;
             // 
-            // comboBox1
+            // comboBoxClientes
             // 
-            comboBox1.DropDownHeight = 150;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.IntegralHeight = false;
-            comboBox1.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
-            comboBox1.Location = new Point(12, 80);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(233, 23);
-            comboBox1.TabIndex = 13;
+            comboBoxClientes.DropDownHeight = 150;
+            comboBoxClientes.FormattingEnabled = true;
+            comboBoxClientes.IntegralHeight = false;
+            comboBoxClientes.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
+            comboBoxClientes.Location = new Point(12, 80);
+            comboBoxClientes.Name = "comboBoxClientes";
+            comboBoxClientes.Size = new Size(233, 23);
+            comboBoxClientes.TabIndex = 13;
             // 
             // button1
             // 
@@ -120,15 +120,15 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // OrdenesADespacharListView
+            // ListViewOrdenesADespachar
             // 
-            OrdenesADespacharListView.Columns.AddRange(new ColumnHeader[] { IdOrden, FechaEntrega });
-            OrdenesADespacharListView.Location = new Point(12, 143);
-            OrdenesADespacharListView.Name = "OrdenesADespacharListView";
-            OrdenesADespacharListView.Size = new Size(407, 248);
-            OrdenesADespacharListView.TabIndex = 15;
-            OrdenesADespacharListView.UseCompatibleStateImageBehavior = false;
-            OrdenesADespacharListView.View = View.Details;
+            ListViewOrdenesADespachar.Columns.AddRange(new ColumnHeader[] { IdOrden, FechaEntrega });
+            ListViewOrdenesADespachar.Location = new Point(12, 143);
+            ListViewOrdenesADespachar.Name = "ListViewOrdenesADespachar";
+            ListViewOrdenesADespachar.Size = new Size(407, 248);
+            ListViewOrdenesADespachar.TabIndex = 15;
+            ListViewOrdenesADespachar.UseCompatibleStateImageBehavior = false;
+            ListViewOrdenesADespachar.View = View.Details;
             // 
             // IdOrden
             // 
@@ -145,13 +145,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(431, 449);
-            Controls.Add(OrdenesADespacharListView);
+            Controls.Add(ListViewOrdenesADespachar);
             Controls.Add(button1);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxClientes);
             Controls.Add(label3);
             Controls.Add(SeleccionarTransportistaButton);
             Controls.Add(label2);
-            Controls.Add(TransportistasCombobox);
+            Controls.Add(comboBoxTransportistas);
             Controls.Add(despacharButton);
             Controls.Add(ordenesPreparacionEntregaLabel);
             Name = "EmitirRemitoForm";
@@ -165,13 +165,13 @@
 
         private Label ordenesPreparacionEntregaLabel;
         private Button despacharButton;
-        private ComboBox TransportistasCombobox;
+        private ComboBox comboBoxTransportistas;
         private Label label2;
         private Button SeleccionarTransportistaButton;
         private Label label3;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxClientes;
         private Button button1;
-        private ListView OrdenesADespacharListView;
+        private ListView ListViewOrdenesADespachar;
         private ColumnHeader IdOrden;
         private ColumnHeader FechaEntrega;
     }
