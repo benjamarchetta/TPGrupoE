@@ -28,219 +28,151 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ordenesPreparacionEntregaLabel = new Label();
-            mercaderiasADespacharListView = new ListView();
-            fechaColumna = new ColumnHeader();
-            idOrdenColumna = new ColumnHeader();
-            idClienteColumna = new ColumnHeader();
-            columnHeader6 = new ColumnHeader();
-            cantidadColumna = new ColumnHeader();
-            columnHeader7 = new ColumnHeader();
-            borrarSeleccionButton = new Button();
-            label1 = new Label();
-            agregarButton = new Button();
-            despacharButton = new Button();
-            ordenesPreparadasListView = new ListView();
-            columnHeader8 = new ColumnHeader();
-            columnHeader9 = new ColumnHeader();
-            columnHeader10 = new ColumnHeader();
-            columnHeader11 = new ColumnHeader();
-            columnHeader12 = new ColumnHeader();
-            columnHeader13 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            columnHeader1 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
+            TransportistaLabel = new Label();
+            ClienteLabel = new Label();
+            TransportistaComboBox = new ComboBox();
+            ClienteComboBox = new ComboBox();
+            SeleccionarButton = new Button();
+            EmitirRemitogroupBox = new GroupBox();
+            EmitirRemitoListView = new ListView();
+            IdOrdenPreparacion = new ColumnHeader();
+            IdOrdenEntrega = new ColumnHeader();
+            FechaEntrega = new ColumnHeader();
+            EmitirRemitoButton = new Button();
+            VolverButton = new Button();
+            EmitirRemitogroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // ordenesPreparacionEntregaLabel
+            // TransportistaLabel
             // 
-            ordenesPreparacionEntregaLabel.AutoSize = true;
-            ordenesPreparacionEntregaLabel.Location = new Point(12, 9);
-            ordenesPreparacionEntregaLabel.Name = "ordenesPreparacionEntregaLabel";
-            ordenesPreparacionEntregaLabel.Size = new Size(194, 15);
-            ordenesPreparacionEntregaLabel.TabIndex = 0;
-            ordenesPreparacionEntregaLabel.Text = "Ordenes de preparación preparadas";
+            TransportistaLabel.AutoSize = true;
+            TransportistaLabel.Location = new Point(12, 9);
+            TransportistaLabel.Name = "TransportistaLabel";
+            TransportistaLabel.Size = new Size(216, 15);
+            TransportistaLabel.TabIndex = 0;
+            TransportistaLabel.Text = "Transportistas con Ordenes a Despachar";
             // 
-            // mercaderiasADespacharListView
+            // ClienteLabel
             // 
-            mercaderiasADespacharListView.Columns.AddRange(new ColumnHeader[] { columnHeader7, fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, columnHeader6, cantidadColumna });
-            mercaderiasADespacharListView.FullRowSelect = true;
-            mercaderiasADespacharListView.Location = new Point(12, 234);
-            mercaderiasADespacharListView.Name = "mercaderiasADespacharListView";
-            mercaderiasADespacharListView.Size = new Size(892, 155);
-            mercaderiasADespacharListView.TabIndex = 2;
-            mercaderiasADespacharListView.UseCompatibleStateImageBehavior = false;
-            mercaderiasADespacharListView.View = View.Details;
+            ClienteLabel.AutoSize = true;
+            ClienteLabel.Location = new Point(12, 64);
+            ClienteLabel.Name = "ClienteLabel";
+            ClienteLabel.Size = new Size(44, 15);
+            ClienteLabel.TabIndex = 1;
+            ClienteLabel.Text = "Cliente";
             // 
-            // fechaColumna
+            // TransportistaComboBox
             // 
-            fechaColumna.Text = "Fecha de despacho";
-            fechaColumna.Width = 150;
+            TransportistaComboBox.FormattingEnabled = true;
+            TransportistaComboBox.Location = new Point(12, 27);
+            TransportistaComboBox.Name = "TransportistaComboBox";
+            TransportistaComboBox.Size = new Size(254, 23);
+            TransportistaComboBox.TabIndex = 2;
             // 
-            // idOrdenColumna
+            // ClienteComboBox
             // 
-            idOrdenColumna.Text = "ID de Orden";
-            idOrdenColumna.Width = 150;
+            ClienteComboBox.FormattingEnabled = true;
+            ClienteComboBox.Location = new Point(12, 82);
+            ClienteComboBox.Name = "ClienteComboBox";
+            ClienteComboBox.Size = new Size(254, 23);
+            ClienteComboBox.TabIndex = 3;
             // 
-            // idClienteColumna
+            // SeleccionarButton
             // 
-            idClienteColumna.Text = "CUIT cliente";
-            idClienteColumna.Width = 150;
+            SeleccionarButton.Location = new Point(285, 64);
+            SeleccionarButton.Name = "SeleccionarButton";
+            SeleccionarButton.Size = new Size(164, 41);
+            SeleccionarButton.TabIndex = 4;
+            SeleccionarButton.Text = "Seleccionar";
+            SeleccionarButton.UseVisualStyleBackColor = true;
             // 
-            // columnHeader6
+            // EmitirRemitogroupBox
             // 
-            columnHeader6.DisplayIndex = 4;
-            columnHeader6.Text = "Razón social";
-            columnHeader6.Width = 150;
+            EmitirRemitogroupBox.Controls.Add(EmitirRemitoListView);
+            EmitirRemitogroupBox.Location = new Point(12, 129);
+            EmitirRemitogroupBox.Name = "EmitirRemitogroupBox";
+            EmitirRemitogroupBox.Size = new Size(447, 293);
+            EmitirRemitogroupBox.TabIndex = 5;
+            EmitirRemitogroupBox.TabStop = false;
+            EmitirRemitogroupBox.Text = "Ordenes de Preparación a Despachar";
             // 
-            // cantidadColumna
+            // EmitirRemitoListView
             // 
-            cantidadColumna.DisplayIndex = 5;
-            cantidadColumna.Text = "Cantidad de bultos";
-            cantidadColumna.Width = 150;
+            EmitirRemitoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, IdOrdenEntrega, FechaEntrega });
+            EmitirRemitoListView.FullRowSelect = true;
+            EmitirRemitoListView.Location = new Point(6, 32);
+            EmitirRemitoListView.Name = "EmitirRemitoListView";
+            EmitirRemitoListView.Size = new Size(431, 255);
+            EmitirRemitoListView.TabIndex = 16;
+            EmitirRemitoListView.UseCompatibleStateImageBehavior = false;
+            EmitirRemitoListView.View = View.Details;
             // 
-            // columnHeader7
+            // IdOrdenPreparacion
             // 
-            columnHeader7.Text = "Destino";
-            columnHeader7.Width = 150;
+            IdOrdenPreparacion.Text = "Id Orden de Preparacion";
+            IdOrdenPreparacion.Width = 140;
             // 
-            // borrarSeleccionButton
+            // IdOrdenEntrega
             // 
-            borrarSeleccionButton.Enabled = false;
-            borrarSeleccionButton.Location = new Point(754, 188);
-            borrarSeleccionButton.Name = "borrarSeleccionButton";
-            borrarSeleccionButton.Size = new Size(150, 23);
-            borrarSeleccionButton.TabIndex = 3;
-            borrarSeleccionButton.Text = "Borrar selección";
-            borrarSeleccionButton.UseVisualStyleBackColor = true;
+            IdOrdenEntrega.Text = "Id Orden de Entrega";
+            IdOrdenEntrega.Width = 140;
             // 
-            // label1
+            // FechaEntrega
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 216);
-            label1.Name = "label1";
-            label1.Size = new Size(137, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Mercaderías a despachar";
+            FechaEntrega.Text = "Fecha de Entrega";
+            FechaEntrega.Width = 130;
             // 
-            // agregarButton
+            // EmitirRemitoButton
             // 
-            agregarButton.Enabled = false;
-            agregarButton.Location = new Point(598, 188);
-            agregarButton.Name = "agregarButton";
-            agregarButton.Size = new Size(150, 23);
-            agregarButton.TabIndex = 6;
-            agregarButton.Text = "Agregar";
-            agregarButton.UseVisualStyleBackColor = true;
+            EmitirRemitoButton.Location = new Point(18, 428);
+            EmitirRemitoButton.Name = "EmitirRemitoButton";
+            EmitirRemitoButton.Size = new Size(210, 44);
+            EmitirRemitoButton.TabIndex = 6;
+            EmitirRemitoButton.Text = "Despachar y Emitir Remito";
+            EmitirRemitoButton.UseVisualStyleBackColor = true;
             // 
-            // despacharButton
+            // VolverButton
             // 
-            despacharButton.Enabled = false;
-            despacharButton.Location = new Point(754, 395);
-            despacharButton.Name = "despacharButton";
-            despacharButton.Size = new Size(150, 23);
-            despacharButton.TabIndex = 7;
-            despacharButton.Text = "Despachar";
-            despacharButton.UseVisualStyleBackColor = true;
-            // 
-            // ordenesPreparadasListView
-            // 
-            ordenesPreparadasListView.Columns.AddRange(new ColumnHeader[] { columnHeader8, columnHeader9, columnHeader10, columnHeader11, columnHeader12, columnHeader13, columnHeader2, columnHeader1 });
-            ordenesPreparadasListView.FullRowSelect = true;
-            ordenesPreparadasListView.Location = new Point(12, 27);
-            ordenesPreparadasListView.Name = "ordenesPreparadasListView";
-            ordenesPreparadasListView.Size = new Size(892, 155);
-            ordenesPreparadasListView.TabIndex = 8;
-            ordenesPreparadasListView.UseCompatibleStateImageBehavior = false;
-            ordenesPreparadasListView.View = View.Details;
-            // 
-            // columnHeader8
-            // 
-            columnHeader8.Text = "Fecha de despacho";
-            columnHeader8.Width = 115;
-            // 
-            // columnHeader9
-            // 
-            columnHeader9.Text = "ID de Orden";
-            columnHeader9.Width = 85;
-            // 
-            // columnHeader10
-            // 
-            columnHeader10.Text = "CUIT cliente";
-            columnHeader10.Width = 115;
-            // 
-            // columnHeader11
-            // 
-            columnHeader11.Text = "Razón social";
-            columnHeader11.Width = 115;
-            // 
-            // columnHeader12
-            // 
-            columnHeader12.Text = "SKU de producto";
-            columnHeader12.Width = 115;
-            // 
-            // columnHeader13
-            // 
-            columnHeader13.Text = "Tipo de producto";
-            columnHeader13.Width = 115;
-            // 
-            // columnHeader2
-            // 
-            columnHeader2.Text = "Pallet cerrado";
-            columnHeader2.Width = 115;
-            // 
-            // columnHeader1
-            // 
-            columnHeader1.Text = "Cantidad";
-            columnHeader1.Width = 115;
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.DisplayIndex = 6;
-            columnHeader3.Text = "ColumnPrueba";
+            VolverButton.Location = new Point(234, 428);
+            VolverButton.Name = "VolverButton";
+            VolverButton.Size = new Size(215, 44);
+            VolverButton.TabIndex = 7;
+            VolverButton.Text = "Volver al Menú Principal";
+            VolverButton.UseVisualStyleBackColor = true;
             // 
             // EmitirRemitoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(916, 426);
-            Controls.Add(ordenesPreparadasListView);
-            Controls.Add(despacharButton);
-            Controls.Add(agregarButton);
-            Controls.Add(label1);
-            Controls.Add(borrarSeleccionButton);
-            Controls.Add(mercaderiasADespacharListView);
-            Controls.Add(ordenesPreparacionEntregaLabel);
+            ClientSize = new Size(470, 484);
+            Controls.Add(VolverButton);
+            Controls.Add(EmitirRemitoButton);
+            Controls.Add(EmitirRemitogroupBox);
+            Controls.Add(SeleccionarButton);
+            Controls.Add(ClienteComboBox);
+            Controls.Add(TransportistaComboBox);
+            Controls.Add(ClienteLabel);
+            Controls.Add(TransportistaLabel);
             Name = "EmitirRemitoForm";
-            Text = "Emitir remito";
-            Load += EmitirRemitoForm_Load;
+            Text = "Emitir Remito";
+            EmitirRemitogroupBox.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label ordenesPreparacionEntregaLabel;
-        private ListView mercaderiasADespacharListView;
-        private ColumnHeader fechaColumna;
-        private ColumnHeader idOrdenColumna;
-        private ColumnHeader cantidadColumna;
-        private ColumnHeader idClienteColumna;
-        private Button borrarSeleccionButton;
-        private Label label1;
-        private Button agregarButton;
-        private ColumnHeader columnHeader6;
-        private ColumnHeader columnHeader7;
-        private Button despacharButton;
-        private ListView ordenesPreparadasListView;
-        private ColumnHeader columnHeader8;
-        private ColumnHeader columnHeader9;
-        private ColumnHeader columnHeader10;
-        private ColumnHeader columnHeader11;
-        private ColumnHeader columnHeader12;
-        private ColumnHeader columnHeader13;
-        private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader3;
+        private Label TransportistaLabel;
+        private Label ClienteLabel;
+        private ComboBox TransportistaComboBox;
+        private ComboBox ClienteComboBox;
+        private Button SeleccionarButton;
+        private GroupBox EmitirRemitogroupBox;
+        private ListView EmitirRemitoListView;
+        private ColumnHeader IdOrdenPreparacion;
+        private ColumnHeader IdOrdenEntrega;
+        private ColumnHeader FechaEntrega;
+        private Button EmitirRemitoButton;
+        private Button VolverButton;
     }
 }
