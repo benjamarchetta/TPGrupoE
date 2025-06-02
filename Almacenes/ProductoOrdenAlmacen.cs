@@ -8,14 +8,14 @@ namespace TPGrupoE.Almacenes
 {
     internal class ProductoOrdenAlmacen
     {
-        private static List<ProductoOrdenEntidad> productosOrden = new List<ProductoOrdenEntidad>()
+        private static List<ProductoOrden> productosOrden = new List<ProductoOrden>()
         {
 
         };
 
-        public static IReadOnlyList<ProductoOrdenEntidad> ProductosOrden = productosOrden.AsReadOnly();
+        public static IReadOnlyList<ProductoOrden> ProductosOrden = productosOrden.AsReadOnly();
 
-        public static void AgregarProductoOrden(ProductoOrdenEntidad productoOrden)
+        public static void AgregarProductoOrden(ProductoOrden productoOrden)
         {
             productosOrden.Add(productoOrden);
         }
