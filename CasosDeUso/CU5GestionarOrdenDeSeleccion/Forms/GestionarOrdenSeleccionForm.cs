@@ -7,8 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+//using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
+//using static TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model.GestionarOrdenSeleccionModelo;
 
-namespace TPGrupoE.CasoU_Confirmar_Seleccion
+namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
+
 {
     public partial class GestionarOrdenSeleccionForm : Form
     {

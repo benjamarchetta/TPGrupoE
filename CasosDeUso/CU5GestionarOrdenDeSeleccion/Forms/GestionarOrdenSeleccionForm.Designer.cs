@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.CasoU_Confirmar_Seleccion
+﻿namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 {
     partial class GestionarOrdenSeleccionForm
     {

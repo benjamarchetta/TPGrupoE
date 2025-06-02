@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.CasoU_Orden_Preparacion
+﻿namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
     partial class ProcesarOrdenPreparacionForm
     {
@@ -191,7 +191,7 @@
             productoComboBox.Name = "productoComboBox";
             productoComboBox.Size = new Size(382, 23);
             productoComboBox.TabIndex = 20;
-            productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
+            //productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -276,7 +276,7 @@
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
-            cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
+            //cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
             cantidadARetirarTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
             // 
             // agregarProductoButton
@@ -380,7 +380,7 @@
             Controls.Add(label1);
             Name = "ProcesarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
-            Load += ProcesarOrdenPreparacion_Load;
+            //Load += ProcesarOrdenPreparacion_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,5 +1,5 @@
 ﻿
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     partial class EmpaquetadoForm
     {
@@ -49,7 +49,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             idOrdenTextBox.Size = new Size(149, 27);
             idOrdenTextBox.TabIndex = 1;
             idOrdenTextBox.Text = "XX";
-            idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
+            //idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
             // 
             // label2
             // 
@@ -60,7 +60,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             label2.Size = new Size(147, 20);
             label2.TabIndex = 2;
             label2.Text = "Orden a Empaquetar";
-            label2.Click += label2_Click;
+            //label2.Click += label2_Click;
             // 
             // empaquetarButton
             // 
@@ -72,7 +72,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             empaquetarButton.TabIndex = 14;
             empaquetarButton.Text = "Empaquetar";
             empaquetarButton.UseVisualStyleBackColor = true;
-            empaquetarButton.Click += empaquetarButton_Click;
+            //empaquetarButton.Click += empaquetarButton_Click;
             // 
             // productoAEmpaquetarListView
             // 
@@ -85,7 +85,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             productoAEmpaquetarListView.TabIndex = 15;
             productoAEmpaquetarListView.UseCompatibleStateImageBehavior = false;
             productoAEmpaquetarListView.View = View.Details;
-            productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
+            //productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -114,7 +114,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmpaquetadoForm";
             Text = "Empaquetado";
-            Load += Empaquetado_Load;
+            //Load += Empaquetado_Load;
             ResumeLayout(false);
             PerformLayout();
         }

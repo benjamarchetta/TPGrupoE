@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasoU_EmpaquetadoOrdenes;
-using TPGrupoE.CasoU_Orden_Preparacion;
-using TPGrupoE_CU_OrdenPreparacion_Model;
+using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
+//using TPGrupoE_CU_OrdenPreparacion_Model;
 
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
 
-    internal class EmpaquetadoModel
+    internal class EmpaquetadoModelo
     {
+        /*
         public List<OrdenDePreparacionAEmpaquetar> OrdenesDePreparacionAEmpaquetar { get; private set; }
 
         private List<Almacenes.ProductoAlmacen> ProductosIniciales = new List<Almacenes.ProductoAlmacen>();
@@ -59,6 +59,6 @@ namespace TPGrupoE.CasoU_Empaquetado
             ordenPreparacion.MarcarComoPreparada();
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
-        }
+        }*/
     }
 }
