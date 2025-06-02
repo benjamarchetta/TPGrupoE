@@ -12,6 +12,8 @@ namespace TPGrupoE
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new MenuPrincipal());
+
+            
         }
     }
 }
