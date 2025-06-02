@@ -105,6 +105,7 @@
             cargarOrdenButton.TabIndex = 10;
             cargarOrdenButton.Text = "Cargar orden de preparación";
             cargarOrdenButton.UseVisualStyleBackColor = true;
+            cargarOrdenButton.Click += cargarOrdenButton_Click;
             // 
             // quitarProductoButton
             // 
@@ -254,7 +255,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(406, 8);
+            label10.Location = new Point(400, 8);
             label10.Name = "label10";
             label10.Size = new Size(79, 15);
             label10.TabIndex = 27;
@@ -310,6 +311,7 @@
             // 
             // dniTransportistaComboBox
             // 
+            dniTransportistaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             dniTransportistaComboBox.Enabled = false;
             dniTransportistaComboBox.FormattingEnabled = true;
             dniTransportistaComboBox.Location = new Point(12, 504);
