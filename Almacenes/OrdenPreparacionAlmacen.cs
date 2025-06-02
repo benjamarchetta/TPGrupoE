@@ -20,17 +20,42 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\ordenesPreparacion.json", datosOP);
         }
 
+        
         public static void LeerOP()
         {
-            if (!File.Exists(@"Datos\ordenesPreparacion.json"))
-            {
-                return;
-            }
+            
+             if (!File.Exists(@"Datos\ordenesPreparacion.json"))
+             {
+                 return;
+             }
 
-            var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
+             var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
 
-            ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
+             ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
         }
+        
+        //public static void LeerOP()
+        //{
+        //    if (!File.Exists(@"Datos\ordenesPreparacion.json"))
+        //    {
+        //        MessageBox.Show("El archivo no existe.");
+        //        return;
+        //    }
+
+        //    var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
+
+        //    MessageBox.Show($"Contenido crudo del archivo:\n{datos.Substring(0, Math.Min(datos.Length, 500))}");
+
+        //    try
+        //    {
+        //        ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
+        //        MessageBox.Show($"Cantidad deserializada: {ordenesPreparacion.Count}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al deserializar: " + ex.Message);
+        //    }
+        //}
 
         //REVISAR SI NOS SIRVE AHORA
         public static List<OrdenPreparacionEntidad> BuscarTodasLasOrdenes()
