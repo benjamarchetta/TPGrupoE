@@ -97,7 +97,7 @@
             label3.Size = new Size(44, 15);
             label3.TabIndex = 12;
             label3.Text = "Cliente";
-            label3.Click += label3_Click;
+           
             // 
             // comboBoxClientes
             // 
@@ -118,7 +118,7 @@
             button1.TabIndex = 14;
             button1.Text = "Despachar y Emitir Remito";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+           
             // 
             // ListViewOrdenesADespachar
             // 
