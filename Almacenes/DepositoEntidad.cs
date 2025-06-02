@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class ClienteEntidad
+    internal class DepositoEntidad
     {
-        public int IdCliente { get; set; }
-        public string Cuit { get; set; } = string.Empty;
-        public string RazonSocial { get; set; } = string.Empty;
+        public int IdDeposito { get; set; }
+        public int Capacidad { get; set; }
         public string Domicilio { get; set; } = string.Empty;
     }
 }

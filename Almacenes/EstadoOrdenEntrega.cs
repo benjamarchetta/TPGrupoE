@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class TransportistaEntidad
+    public enum EstadoOrdenEntrega
     {
-        public int dni { get; set; }
-        public string Nombre { get; set; } = string.Empty;
+        Pendiente,
+        Cumplida
     }
 }
