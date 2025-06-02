@@ -4,281 +4,215 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
-namespace TPGrupoE.CasoU_Orden_Preparacion
+namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+
+internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benja haga un pull
 {
-    internal class OrdenPreparacionModelo
+    /*
+    public static List<OrdenPreparacionEntidad> OrdenesDePreparacion
     {
-        public static List<OrdenPreparacionEntidad> OrdenesDePreparacion
+        get
         {
-            get
+            var OrdenesDePreparacion = new List<OrdenPreparacionEntidad>();
+            foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
             {
-                var OrdenesDePreparacion = new List<OrdenPreparacionEntidad>();
-                foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
+                OrdenesDePreparacion.Add(new OrdenPreparacionEntidad
                 {
-                    OrdenesDePreparacion.Add(new OrdenPreparacionEntidad
-                    {
-                        Id = OrdenDePreparacion.Id,
-                        CuitCliente = OrdenDePreparacion.CuitCliente,
-                        Estado = OrdenDePreparacion.Estado,
-                        FechaDespacho = OrdenDePreparacion.FechaDespacho,
-                        PalletCerrado = OrdenDePreparacion.PalletCerrado,
-                        productosOrden = OrdenDePreparacion.productosOrden,
-                    });
-                }
-                return OrdenesDePreparacion;
+                    Id = OrdenDePreparacion.Id,
+                    CuitCliente = OrdenDePreparacion.CuitCliente,
+                    Estado = OrdenDePreparacion.Estado,
+                    FechaDespacho = OrdenDePreparacion.FechaDespacho,
+                    PalletCerrado = OrdenDePreparacion.PalletCerrado,
+                    productosOrden = OrdenDePreparacion.productosOrden,
+                });
             }
-        }
-
-        public static List<ClienteEntidad> Clientes
-        {
-            get
-            {
-                var Clientes = new List<ClienteEntidad>();
-                foreach (var Cliente in ClienteAlmacen.Clientes)
-                {
-                    Clientes.Add(new ClienteEntidad
-                    {
-                        Cuit = Cliente.Cuit,
-                        RazonSocial = Cliente.RazonSocial,
-                        Domicilio = Cliente.Domicilio,
-                    });
-                }
-                return Clientes;
-            }
-        }
-
-        
-        /*public static List<ProductoEntidad> Productos
-        {
-            get
-            {
-                var Productos = new List<ProductoEntidad>();
-                foreach (var Producto in ProductoAlmacen.Productos)
-                {
-                    Productos.Add(new ProductoEntidad
-                    {
-                        Id = Producto.Id,
-                        CuitCliente = Producto.CuitCliente,
-                        sku = Producto.sku,
-                        TipoProducto = Producto.TipoProducto,
-                        CantidadEnStock = Producto.CantidadEnStock,
-                        DescripcionMercaderia = Producto.DescripcionMercaderia,
-                        Ubicacion = Producto.Ubicacion,
-                    });
-                }
-                return Productos;
-            }
-        }*/
-
-        /*public static List<ProductoEntidad> Productos { get; private set; }
-
-        static OrdenPreparacionModelo()
-        {
-            // Inicializamos una vez al comienzo
-            Productos = ProductoAlmacen.Productos.Select(p => new ProductoEntidad
-            {
-                Id = p.Id,
-                CuitCliente = p.CuitCliente,
-                sku = p.sku,
-                TipoProducto = p.TipoProducto,
-                CantidadEnStock = p.CantidadEnStock,
-                DescripcionMercaderia = p.DescripcionMercaderia,
-                Ubicacion = p.Ubicacion,
-            }).ToList();
-        }*/
-
-        private static List<ProductoEntidad> productosCopia;
-
-        public static List<ProductoEntidad> Productos
-        {
-            get
-            {
-                if (productosCopia == null)
-                {
-                    productosCopia = new List<ProductoEntidad>();
-                    foreach (var producto in ProductoAlmacen.Productos)
-                    {
-                        productosCopia.Add(new ProductoEntidad
-                        {
-                            Id = producto.Id,
-                            CuitCliente = producto.CuitCliente,
-                            sku = producto.sku,
-                            TipoProducto = producto.TipoProducto,
-                            CantidadEnStock = producto.CantidadEnStock,
-                            DescripcionMercaderia = producto.DescripcionMercaderia,
-                            Ubicacion = producto.Ubicacion,
-                        });
-                    }
-                }
-
-                return productosCopia;
-            }
-        }
-
-
-
-        public static List<TransportistaEntidad> Transportistas
-        {
-            get
-            {
-                var Transportistas = new List<TransportistaEntidad>();
-                foreach (var Transportista in TransportistaAlmacen.Transportistas)
-                {
-                    Transportistas.Add(new TransportistaEntidad
-                    {
-                        dni = Transportista.dni,
-                        Nombre = Transportista.Nombre,
-                    });
-                }
-                return Transportistas;
-            }
-        }
-
-        public static List<ProductoOrdenEntidad> ProductosOrden
-        {
-            get
-            {
-                var ProductosOrden = new List<ProductoOrdenEntidad>();
-                foreach (var productoOrden in ProductoOrdenAlmacen.ProductosOrden)
-                {
-                    ProductosOrden.Add(new ProductoOrdenEntidad
-                    {
-                        Id = productoOrden.Id,
-                        sku = productoOrden.sku,
-                        TipoProducto = productoOrden.TipoProducto,
-                        Cantidad = productoOrden.Cantidad,
-                    });
-                }
-                return ProductosOrden;
-            }
-        }
-    };
-}
-
-
-        /*
-        internal string? Borrar(int personaSeleccionadaId)
-        {
-            //TODO: validaciones, si son necesarias.
-
-            //no me pongo a validar si el id es válido.
-            //si me llega acá un id inválido, el error no está aca.
-            Personas.RemoveAll(p => p.Id == personaSeleccionadaId);
-            return null;
-        }
-
-        internal string ModificarPersona(Persona personaModificada)
-        {
-            var personaOriginal = ObtenerPersona(personaModificada.Id);
-
-            personaOriginal.TipoDocumento = personaModificada.TipoDocumento;
-            personaOriginal.Documento = personaModificada.Documento;
-            personaOriginal.Tratamiento = personaModificada.Tratamiento;
-            personaOriginal.Apellido = personaModificada.Apellido;
-            personaOriginal.Nombre = personaModificada.Nombre;
-            personaOriginal.FechaNacimiento = personaModificada.FechaNacimiento;
-            personaOriginal.Direccion = personaModificada.Direccion;
-            personaOriginal.Telefono = personaModificada.Telefono;
-
-            return null;
-        }
-
-        
-        internal string? NuevaPersona(Persona persona)
-        {
-            //validar TODO.
-
-            //if(algo está mal)
-            //{
-            //  return "Mensaje de error";
-            //}
-
-            if (persona.Tratamiento != "Sr." && persona.Tratamiento != "Sra.")
-            {
-                return "El tratamiento no es válido";
-            }
-
-            if (string.IsNullOrWhiteSpace(persona.Apellido))
-            {
-                return "El apellido no puede estar vacío";
-            }
-
-            if (persona.Apellido.Length > 50)
-            {
-                return "El apellido no puede tener más de 50 caracteres";
-            }
-
-            if (string.IsNullOrWhiteSpace(persona.Nombre))
-            {
-                return "El nombre no puede estar vacío";
-            }
-
-            if (persona.Nombre.Length > 50)
-            {
-                return "El nombre no puede tener más de 50 caracteres";
-            }
-
-            if (persona.TipoDocumento != "DNI" || persona.TipoDocumento != "Pasaporte")
-            {
-                return "El tipo de documento debe ser DNI o Pasaporte";
-            }
-
-            if (persona.Documento < 1000000 || persona.Documento > 99999999)
-            {
-                return "El número de documento no es válido";
-            }
-
-            if (persona.FechaNacimiento > DateTime.Now)
-            {
-                return "La fecha de nacimiento no puede ser mayor a la fecha actual";
-            }
-
-            if (persona.FechaNacimiento < DateTime.Now.AddYears(-120))
-            {
-                return "La fecha de nacimiento no puede ser menor a 120 años atrás";
-            }
-
-            if (string.IsNullOrWhiteSpace(persona.Direccion))
-            {
-                return "La dirección no puede estar vacía";
-            }
-
-            if (persona.Telefono < 10_000_000)
-            {
-                return "El telefono debe tener al menos 8 dígitos";
-            }
-
-            //valido que el tipo/numero de documento no exista.            
-
-            foreach (var personaEx in Personas)
-            {
-                if (personaEx.Documento == persona.Documento && personaEx.TipoDocumento == persona.TipoDocumento)
-                {
-                    return "Ya existe una persona con ese documento y tipo de documento";
-                }
-            }
-
-            /*
-            //Lo mismo pero abreviado. (LINQ)
-            if (Personas.Any(p => p.Documento == persona.Documento && p.TipoDocumento == persona.TipoDocumento))
-            {
-                return "Ya existe una persona con ese documento y tipo de documento";
-            }*/
-
-
-            //hacer lo que haiga que hacer para guardar la persona
-            //Personas.Add(persona);
-
-
-            /*return null; //null indica que no hay errores.
-        }
-
-        internal Persona ObtenerPersona(int personaEnEdicionId)
-        {
-            return Personas.Single(p => p.Id == personaEnEdicionId);
+            return OrdenesDePreparacion;
         }
     }
+
+    public static List<ClienteEntidad> Clientes
+    {
+        get
+        {
+            var Clientes = new List<ClienteEntidad>();
+            foreach (var Cliente in ClienteAlmacen.Clientes)
+            {
+                Clientes.Add(new ClienteEntidad
+                {
+                    Cuit = Cliente.Cuit,
+                    RazonSocial = Cliente.RazonSocial,
+                    Domicilio = Cliente.Domicilio,
+                });
+            }
+            return Clientes;
+        }
+    }
+
+    public static List<ProductoEntidad> Productos
+    {
+        get
+        {
+            var Productos = new List<ProductoEntidad>();
+            foreach (var Producto in ProductoAlmacen.Productos)
+            {
+                Productos.Add(new ProductoEntidad
+                {
+                    Id = Producto.Id,
+                    CuitCliente = Producto.CuitCliente,
+                    sku = Producto.sku,
+                    TipoProducto = Producto.TipoProducto,
+                    CantidadEnStock = Producto.CantidadEnStock,
+                    DescripcionMercaderia = Producto.DescripcionMercaderia,
+                    Ubicacion = Producto.Ubicacion,
+                });
+            }
+            return Productos;
+        }
+    }
+
+    public static List<TransportistaEntidad> Transportistas
+    {
+        get
+        {
+            var Transportistas = new List<TransportistaEntidad>();
+            foreach (var Transportista in TransportistaAlmacen.Transportistas)
+            {
+                Transportistas.Add(new TransportistaEntidad
+                {
+                    dni = Transportista.dni,
+                    Nombre = Transportista.Nombre,
+                });
+            }
+            return Transportistas;
+        }
+    }*/
+};
+
+
+    /*
+    internal string? Borrar(int personaSeleccionadaId)
+    {
+        //TODO: validaciones, si son necesarias.
+
+        //no me pongo a validar si el id es válido.
+        //si me llega acá un id inválido, el error no está aca.
+        Personas.RemoveAll(p => p.Id == personaSeleccionadaId);
+        return null;
+    }
+
+    internal string ModificarPersona(Persona personaModificada)
+    {
+        var personaOriginal = ObtenerPersona(personaModificada.Id);
+
+        personaOriginal.TipoDocumento = personaModificada.TipoDocumento;
+        personaOriginal.Documento = personaModificada.Documento;
+        personaOriginal.Tratamiento = personaModificada.Tratamiento;
+        personaOriginal.Apellido = personaModificada.Apellido;
+        personaOriginal.Nombre = personaModificada.Nombre;
+        personaOriginal.FechaNacimiento = personaModificada.FechaNacimiento;
+        personaOriginal.Direccion = personaModificada.Direccion;
+        personaOriginal.Telefono = personaModificada.Telefono;
+
+        return null;
+    }
+
+    
+    internal string? NuevaPersona(Persona persona)
+    {
+        //validar TODO.
+
+        //if(algo está mal)
+        //{
+        //  return "Mensaje de error";
+        //}
+
+        if (persona.Tratamiento != "Sr." && persona.Tratamiento != "Sra.")
+        {
+            return "El tratamiento no es válido";
+        }
+
+        if (string.IsNullOrWhiteSpace(persona.Apellido))
+        {
+            return "El apellido no puede estar vacío";
+        }
+
+        if (persona.Apellido.Length > 50)
+        {
+            return "El apellido no puede tener más de 50 caracteres";
+        }
+
+        if (string.IsNullOrWhiteSpace(persona.Nombre))
+        {
+            return "El nombre no puede estar vacío";
+        }
+
+        if (persona.Nombre.Length > 50)
+        {
+            return "El nombre no puede tener más de 50 caracteres";
+        }
+
+        if (persona.TipoDocumento != "DNI" || persona.TipoDocumento != "Pasaporte")
+        {
+            return "El tipo de documento debe ser DNI o Pasaporte";
+        }
+
+        if (persona.Documento < 1000000 || persona.Documento > 99999999)
+        {
+            return "El número de documento no es válido";
+        }
+
+        if (persona.FechaNacimiento > DateTime.Now)
+        {
+            return "La fecha de nacimiento no puede ser mayor a la fecha actual";
+        }
+
+        if (persona.FechaNacimiento < DateTime.Now.AddYears(-120))
+        {
+            return "La fecha de nacimiento no puede ser menor a 120 años atrás";
+        }
+
+        if (string.IsNullOrWhiteSpace(persona.Direccion))
+        {
+            return "La dirección no puede estar vacía";
+        }
+
+        if (persona.Telefono < 10_000_000)
+        {
+            return "El telefono debe tener al menos 8 dígitos";
+        }
+
+        //valido que el tipo/numero de documento no exista.            
+
+        foreach (var personaEx in Personas)
+        {
+            if (personaEx.Documento == persona.Documento && personaEx.TipoDocumento == persona.TipoDocumento)
+            {
+                return "Ya existe una persona con ese documento y tipo de documento";
+            }
+        }
+
+        /*
+        //Lo mismo pero abreviado. (LINQ)
+        if (Personas.Any(p => p.Documento == persona.Documento && p.TipoDocumento == persona.TipoDocumento))
+        {
+            return "Ya existe una persona con ese documento y tipo de documento";
+        }*/
+
+
+        //hacer lo que haiga que hacer para guardar la persona
+        //Personas.Add(persona);
+
+
+        /*return null; //null indica que no hay errores.
+    }
+
+    internal Persona ObtenerPersona(int personaEnEdicionId)
+    {
+        return Personas.Single(p => p.Id == personaEnEdicionId);
+    }
+}
 }
 }
 */

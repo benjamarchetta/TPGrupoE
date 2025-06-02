@@ -8,9 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
+using static TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model.GenerarOrdenDeSeleccionModelo;
 
-namespace TPGrupoE.CasoU_Procesar_Orden_de_Seleccion
+
+namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
 {
     public partial class GenerarOrdenSeleccionForm : Form
     {
@@ -20,26 +23,26 @@ namespace TPGrupoE.CasoU_Procesar_Orden_de_Seleccion
             InitializeComponent();
         }
 
-        private void ProcesarOrdenSeleccionForm_Load(object sender, EventArgs e)
-        {
-            modelo = new GenerarOrdenDeSeleccionModelo();
-            ordenesPendientesListView.Items.Clear(); // Limpia la lista visual
-            // 
-            foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
-            {
-                ListViewItem OrdenDePreparacionitem = new ListViewItem();
-                OrdenDePreparacionitem.Text = OrdenDePreparacion.FechaDespacho.ToString("dd/mm/yyyy");
-                OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.Id.ToString());
-                OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.CuitCliente);
-                //OrdenDePreparacionitem.Tag = OrdenDePreparacion.Doco;
-                string razonSocial = modelo.ObtenerRazonSocialPorCuit(OrdenDePreparacion.CuitCliente);
-                OrdenDePreparacionitem.SubItems.Add(razonSocial); // Razón social cliente
+        //private void ProcesarOrdenSeleccionForm_Load(object sender, EventArgs e)
+        //{
+        //    modelo = new GenerarOrdenDeSeleccionModelo();
+        //    ordenesPendientesListView.Items.Clear(); // Limpia la lista visual
+        //    // 
+        //    foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
+        //    {
+        //        ListViewItem OrdenDePreparacionitem = new ListViewItem();
+        //        OrdenDePreparacionitem.Text = OrdenDePreparacion.FechaDespacho.ToString("dd/mm/yyyy");
+        //        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.Id.ToString());
+        //        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.CuitCliente);
+        //        //OrdenDePreparacionitem.Tag = OrdenDePreparacion.Doco;
+        //        string razonSocial = modelo.ObtenerRazonSocialPorCuit(OrdenDePreparacion.CuitCliente);
+        //        OrdenDePreparacionitem.SubItems.Add(razonSocial); // Razón social cliente
 
-                ordenesPendientesListView.Items.Add(OrdenDePreparacionitem);
+        //        ordenesPendientesListView.Items.Add(OrdenDePreparacionitem);
 
 
-            }
-        }
+        //    }
+        //}
         private void mercaderiasAPrepList_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Habilita el botón solo si hay elementos seleccionados

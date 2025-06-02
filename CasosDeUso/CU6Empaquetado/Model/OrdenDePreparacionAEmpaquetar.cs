@@ -1,7 +1,7 @@
 ﻿using TPGrupoE.Almacenes;
-using TPGrupoE.CasoU_Orden_Preparacion;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion;
 
-namespace TPGrupoE.CasoU_EmpaquetadoOrdenes
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
     public class OrdenDePreparacionAEmpaquetar
     {
