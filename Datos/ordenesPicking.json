@@ -1,0 +1,16 @@
+[
+  {
+    "IdOrdenSeleccion": 1,
+    "Estado": "Pendiente",
+    "IdOrdenPreparacion": [
+      1006
+    ]
+  },
+  {
+    "IdOrdenSeleccion": 3,
+    "Estado": "Cumplida",
+    "IdOrdenPreparacion": [
+      1007
+    ]
+  }
+]
