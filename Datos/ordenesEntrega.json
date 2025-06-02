@@ -8,7 +8,7 @@
   },
   {
     "IdOrdenEntrega": 2002,
-    "Estado": "Pendiente",
+    "Estado": 0,
     "IdOrdenPreparacion": [ 1004, 1008 ]
   }
 
