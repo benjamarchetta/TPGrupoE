@@ -14,14 +14,14 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             get
             {
                 var OrdenesDePreparacion = new List<OrdenPreparacionEntidad>();
-                foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
+                foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesPreparacion)
                 {
                     OrdenesDePreparacion.Add(new OrdenPreparacionEntidad
                     {
-                        Id = OrdenDePreparacion.Id,
-                        CuitCliente = OrdenDePreparacion.CuitCliente,
+                        IdOrdenPreparacion = OrdenDePreparacion.IdOrdenPreparacion,
+                        IdCliente = OrdenDePreparacion.IdCliente,
                         Estado = OrdenDePreparacion.Estado,
-                        FechaDespacho = OrdenDePreparacion.FechaDespacho,
+                        FechaEntrega = OrdenDePreparacion.FechaEntrega,
                         PalletCerrado = OrdenDePreparacion.PalletCerrado,
                         productosOrden = OrdenDePreparacion.productosOrden,
                     });

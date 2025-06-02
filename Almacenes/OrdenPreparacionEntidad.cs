@@ -14,9 +14,20 @@ namespace TPGrupoE.Almacenes
         public int DniTransportista { get; set; }
         public EstadoOrdenPreparacion Estado { get; set; }
         public DateTime FechaEntrega { get; set; }
-
         public bool PalletCerrado { get; set; }
         public List<ProductoOrden> ProductoOrden { get; set; } = new();
 
+
+        
     }
+   // Ya hay un amacen para las órdenes de preparación, no es necesario crear otro.
+   /* public enum EstadoOrdenPreparacion
+    {
+        Pendiente,
+        EnPreparacion,
+        Seleccionada, // Nuevo estado para CU5
+        Preparada,
+        Despachada
+    }
+*/
 }
