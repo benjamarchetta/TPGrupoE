@@ -29,109 +29,26 @@
         private void InitializeComponent()
         {
             ordenesPreparacionEntregaLabel = new Label();
-            mercaderiasADespacharListView = new ListView();
-            fechaColumna = new ColumnHeader();
-            idOrdenColumna = new ColumnHeader();
-            idClienteColumna = new ColumnHeader();
-            columnHeader6 = new ColumnHeader();
-            cantidadColumna = new ColumnHeader();
-            columnHeader7 = new ColumnHeader();
-            borrarSeleccionButton = new Button();
-            label1 = new Label();
-            agregarButton = new Button();
             despacharButton = new Button();
-            ordenesPreparadasListView = new ListView();
-            columnHeader8 = new ColumnHeader();
-            columnHeader9 = new ColumnHeader();
-            columnHeader10 = new ColumnHeader();
-            columnHeader11 = new ColumnHeader();
-            columnHeader12 = new ColumnHeader();
-            columnHeader13 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            columnHeader1 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
+            TransportistasCombobox = new ComboBox();
+            label2 = new Label();
+            SeleccionarTransportistaButton = new Button();
+            label3 = new Label();
+            comboBox1 = new ComboBox();
+            button1 = new Button();
+            OrdenesADespacharListView = new ListView();
+            IdOrden = new ColumnHeader();
+            FechaEntrega = new ColumnHeader();
             SuspendLayout();
             // 
             // ordenesPreparacionEntregaLabel
             // 
             ordenesPreparacionEntregaLabel.AutoSize = true;
-            ordenesPreparacionEntregaLabel.Location = new Point(12, 9);
+            ordenesPreparacionEntregaLabel.Location = new Point(12, 125);
             ordenesPreparacionEntregaLabel.Name = "ordenesPreparacionEntregaLabel";
-            ordenesPreparacionEntregaLabel.Size = new Size(194, 15);
+            ordenesPreparacionEntregaLabel.Size = new Size(199, 15);
             ordenesPreparacionEntregaLabel.TabIndex = 0;
-            ordenesPreparacionEntregaLabel.Text = "Ordenes de preparación preparadas";
-            // 
-            // mercaderiasADespacharListView
-            // 
-            mercaderiasADespacharListView.Columns.AddRange(new ColumnHeader[] { columnHeader7, fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, columnHeader6, cantidadColumna });
-            mercaderiasADespacharListView.FullRowSelect = true;
-            mercaderiasADespacharListView.Location = new Point(12, 234);
-            mercaderiasADespacharListView.Name = "mercaderiasADespacharListView";
-            mercaderiasADespacharListView.Size = new Size(892, 155);
-            mercaderiasADespacharListView.TabIndex = 2;
-            mercaderiasADespacharListView.UseCompatibleStateImageBehavior = false;
-            mercaderiasADespacharListView.View = View.Details;
-            // 
-            // fechaColumna
-            // 
-            fechaColumna.Text = "Fecha de despacho";
-            fechaColumna.Width = 150;
-            // 
-            // idOrdenColumna
-            // 
-            idOrdenColumna.Text = "ID de Orden";
-            idOrdenColumna.Width = 150;
-            // 
-            // idClienteColumna
-            // 
-            idClienteColumna.Text = "CUIT cliente";
-            idClienteColumna.Width = 150;
-            // 
-            // columnHeader6
-            // 
-            columnHeader6.DisplayIndex = 4;
-            columnHeader6.Text = "Razón social";
-            columnHeader6.Width = 150;
-            // 
-            // cantidadColumna
-            // 
-            cantidadColumna.DisplayIndex = 5;
-            cantidadColumna.Text = "Cantidad de bultos";
-            cantidadColumna.Width = 150;
-            // 
-            // columnHeader7
-            // 
-            columnHeader7.Text = "Destino";
-            columnHeader7.Width = 150;
-            // 
-            // borrarSeleccionButton
-            // 
-            borrarSeleccionButton.Enabled = false;
-            borrarSeleccionButton.Location = new Point(754, 188);
-            borrarSeleccionButton.Name = "borrarSeleccionButton";
-            borrarSeleccionButton.Size = new Size(150, 23);
-            borrarSeleccionButton.TabIndex = 3;
-            borrarSeleccionButton.Text = "Borrar selección";
-            borrarSeleccionButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 216);
-            label1.Name = "label1";
-            label1.Size = new Size(137, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Mercaderías a despachar";
-            // 
-            // agregarButton
-            // 
-            agregarButton.Enabled = false;
-            agregarButton.Location = new Point(598, 188);
-            agregarButton.Name = "agregarButton";
-            agregarButton.Size = new Size(150, 23);
-            agregarButton.TabIndex = 6;
-            agregarButton.Text = "Agregar";
-            agregarButton.UseVisualStyleBackColor = true;
+            ordenesPreparacionEntregaLabel.Text = "Ordenes de preparación a despachar";
             // 
             // despacharButton
             // 
@@ -143,73 +60,99 @@
             despacharButton.Text = "Despachar";
             despacharButton.UseVisualStyleBackColor = true;
             // 
-            // ordenesPreparadasListView
+            // TransportistasCombobox
             // 
-            ordenesPreparadasListView.Columns.AddRange(new ColumnHeader[] { columnHeader8, columnHeader9, columnHeader10, columnHeader11, columnHeader12, columnHeader13, columnHeader2, columnHeader1 });
-            ordenesPreparadasListView.FullRowSelect = true;
-            ordenesPreparadasListView.Location = new Point(12, 27);
-            ordenesPreparadasListView.Name = "ordenesPreparadasListView";
-            ordenesPreparadasListView.Size = new Size(892, 155);
-            ordenesPreparadasListView.TabIndex = 8;
-            ordenesPreparadasListView.UseCompatibleStateImageBehavior = false;
-            ordenesPreparadasListView.View = View.Details;
+            TransportistasCombobox.DropDownHeight = 150;
+            TransportistasCombobox.FormattingEnabled = true;
+            TransportistasCombobox.IntegralHeight = false;
+            TransportistasCombobox.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
+            TransportistasCombobox.Location = new Point(12, 27);
+            TransportistasCombobox.Name = "TransportistasCombobox";
+            TransportistasCombobox.Size = new Size(233, 23);
+            TransportistasCombobox.TabIndex = 9;
             // 
-            // columnHeader8
+            // label2
             // 
-            columnHeader8.Text = "Fecha de despacho";
-            columnHeader8.Width = 115;
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(219, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Transportistas con Ordenes a Despachar:";
             // 
-            // columnHeader9
+            // SeleccionarTransportistaButton
             // 
-            columnHeader9.Text = "ID de Orden";
-            columnHeader9.Width = 85;
+            SeleccionarTransportistaButton.Location = new Point(293, 80);
+            SeleccionarTransportistaButton.Name = "SeleccionarTransportistaButton";
+            SeleccionarTransportistaButton.Size = new Size(126, 23);
+            SeleccionarTransportistaButton.TabIndex = 11;
+            SeleccionarTransportistaButton.Text = "Seleccionar";
+            SeleccionarTransportistaButton.UseVisualStyleBackColor = true;
             // 
-            // columnHeader10
+            // label3
             // 
-            columnHeader10.Text = "CUIT cliente";
-            columnHeader10.Width = 115;
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 62);
+            label3.Name = "label3";
+            label3.Size = new Size(44, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Cliente";
+            label3.Click += label3_Click;
             // 
-            // columnHeader11
+            // comboBox1
             // 
-            columnHeader11.Text = "Razón social";
-            columnHeader11.Width = 115;
+            comboBox1.DropDownHeight = 150;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.IntegralHeight = false;
+            comboBox1.Items.AddRange(new object[] { "DNI 39456294", "DNI 65320644", "DNI 21245675", "DNI 95435677" });
+            comboBox1.Location = new Point(12, 80);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(233, 23);
+            comboBox1.TabIndex = 13;
             // 
-            // columnHeader12
+            // button1
             // 
-            columnHeader12.Text = "SKU de producto";
-            columnHeader12.Width = 115;
+            button1.Location = new Point(206, 414);
+            button1.Name = "button1";
+            button1.Size = new Size(213, 23);
+            button1.TabIndex = 14;
+            button1.Text = "Despachar y Emitir Remito";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // columnHeader13
+            // OrdenesADespacharListView
             // 
-            columnHeader13.Text = "Tipo de producto";
-            columnHeader13.Width = 115;
+            OrdenesADespacharListView.Columns.AddRange(new ColumnHeader[] { IdOrden, FechaEntrega });
+            OrdenesADespacharListView.Location = new Point(12, 143);
+            OrdenesADespacharListView.Name = "OrdenesADespacharListView";
+            OrdenesADespacharListView.Size = new Size(407, 248);
+            OrdenesADespacharListView.TabIndex = 15;
+            OrdenesADespacharListView.UseCompatibleStateImageBehavior = false;
+            OrdenesADespacharListView.View = View.Details;
             // 
-            // columnHeader2
+            // IdOrden
             // 
-            columnHeader2.Text = "Pallet cerrado";
-            columnHeader2.Width = 115;
+            IdOrden.Text = "ID Orden Preparación";
+            IdOrden.Width = 190;
             // 
-            // columnHeader1
+            // FechaEntrega
             // 
-            columnHeader1.Text = "Cantidad";
-            columnHeader1.Width = 115;
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.DisplayIndex = 6;
-            columnHeader3.Text = "ColumnPrueba";
+            FechaEntrega.Text = "Fecha de Entrega";
+            FechaEntrega.Width = 150;
             // 
             // EmitirRemitoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(916, 426);
-            Controls.Add(ordenesPreparadasListView);
+            ClientSize = new Size(431, 449);
+            Controls.Add(OrdenesADespacharListView);
+            Controls.Add(button1);
+            Controls.Add(comboBox1);
+            Controls.Add(label3);
+            Controls.Add(SeleccionarTransportistaButton);
+            Controls.Add(label2);
+            Controls.Add(TransportistasCombobox);
             Controls.Add(despacharButton);
-            Controls.Add(agregarButton);
-            Controls.Add(label1);
-            Controls.Add(borrarSeleccionButton);
-            Controls.Add(mercaderiasADespacharListView);
             Controls.Add(ordenesPreparacionEntregaLabel);
             Name = "EmitirRemitoForm";
             Text = "Emitir remito";
@@ -221,26 +164,15 @@
         #endregion
 
         private Label ordenesPreparacionEntregaLabel;
-        private ListView mercaderiasADespacharListView;
-        private ColumnHeader fechaColumna;
-        private ColumnHeader idOrdenColumna;
-        private ColumnHeader cantidadColumna;
-        private ColumnHeader idClienteColumna;
-        private Button borrarSeleccionButton;
-        private Label label1;
-        private Button agregarButton;
-        private ColumnHeader columnHeader6;
-        private ColumnHeader columnHeader7;
         private Button despacharButton;
-        private ListView ordenesPreparadasListView;
-        private ColumnHeader columnHeader8;
-        private ColumnHeader columnHeader9;
-        private ColumnHeader columnHeader10;
-        private ColumnHeader columnHeader11;
-        private ColumnHeader columnHeader12;
-        private ColumnHeader columnHeader13;
-        private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader3;
+        private ComboBox TransportistasCombobox;
+        private Label label2;
+        private Button SeleccionarTransportistaButton;
+        private Label label3;
+        private ComboBox comboBox1;
+        private Button button1;
+        private ListView OrdenesADespacharListView;
+        private ColumnHeader IdOrden;
+        private ColumnHeader FechaEntrega;
     }
 }
