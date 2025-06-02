@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class OrdenPreparacionEntidad
+    //internal class OrdenPreparacionEntidad
+    public class OrdenPreparacionEntidad
     {
         public int IdOrdenPreparacion { get; set; } 
         public int IdDeposito { get; set; }
