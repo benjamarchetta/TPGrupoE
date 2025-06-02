@@ -11,7 +11,7 @@ namespace TPGrupoE
     {
         public MenuPrincipal()
         {
-            InitializeComponent(GetEmitirRemitoButton(), GetV(GetEmitirRemitoButton()), GetEmitirRemitoButton());
+            InitializeComponent();
         }
 
         ProcesarOrdenPreparacionForm ProcesarOrdenPreparacion = new ProcesarOrdenPreparacionForm();
