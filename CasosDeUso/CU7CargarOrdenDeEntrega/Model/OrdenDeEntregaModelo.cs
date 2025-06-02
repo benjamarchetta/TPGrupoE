@@ -16,20 +16,21 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
 
         public OrdenDeEntregaModelo()
         {
+
             OrdenesDePreparacion = new List<OrdenPreparacion>();
 
-            var ordenesPreparacionPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            var ordenesPreparacionEmpaquetadas = OrdenPreparacionAlmacen.BuscarOrdenesEmpaquetadas();
 
-            foreach (var ordenPreparacionPreparada in ordenesPreparacionPreparadas)
+            foreach (var ordenPreparacionEmpaquetada in ordenesPreparacionEmpaquetadas)
             {
-                var cliente = ClienteAlmacen.BuscarClientePorId(ordenPreparacionPreparada.IdCliente);
+                var cliente = ClienteAlmacen.BuscarClientePorId(ordenPreparacionEmpaquetada.IdCliente);
                 OrdenPreparacion ordenPreparacion = new OrdenPreparacion(
-                    ordenPreparacionPreparada.IdOrdenPreparacion,
+                    ordenPreparacionEmpaquetada.IdOrdenPreparacion,
                     cliente.Cuit,
                     cliente.RazonSocial,
-                    ordenPreparacionPreparada.DniTransportista,
-                    ordenPreparacionPreparada.Estado,
-                    ordenPreparacionPreparada.FechaEntrega
+                    ordenPreparacionEmpaquetada.DniTransportista,
+                    ordenPreparacionEmpaquetada.Estado,
+                    ordenPreparacionEmpaquetada.FechaEntrega
                     );
 
                 OrdenesDePreparacion.Add(ordenPreparacion);

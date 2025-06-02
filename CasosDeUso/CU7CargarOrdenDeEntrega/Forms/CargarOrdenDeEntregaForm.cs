@@ -56,6 +56,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
         private void ActualizarTabla()
         {
+            
             List<OrdenPreparacion> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();
@@ -70,7 +71,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
                 var item = new ListViewItem(new[]
                   {
                         orden.IdOrdenPreparacion.ToString(),
-                        orden.FechaEntrega.ToString(),
+                        orden.FechaEntrega.ToShortDateString(),
                     });
 
                 // Agregar el item al ListView
