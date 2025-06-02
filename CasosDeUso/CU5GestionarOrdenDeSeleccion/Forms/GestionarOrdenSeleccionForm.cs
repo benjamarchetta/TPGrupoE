@@ -112,18 +112,19 @@ namespace TPGrupoE.CasoU_Confirmar_Seleccion
           //  MessageBox.Show($"Productos a seleccionar:\n\n{detalles}", "Detalle de la Orden");
             confirmarSeleccionButton.Enabled = true;
 
-            detalleMercaderiaDataGridView.Rows.Clear();
-
+            detalleMercaderiaDataGridView.Clear();
+/*
             foreach (var p in productos)
             {
                 detalleMercaderiaDataGridView.Rows.Add(
                     p.IdProducto,
-                    p.Tipo, // o DescripcionProducto, si tu clase tiene esa propiedad
-                    p.Cantidad,
-                    p.PalletCerrado ? "Sí" : "No",
-                    p.Posicion ?? "N/A"
+
+                    p.PalletCerrado ? "Sí" : "No"
+
                 );
             }
+
+  */
             // Habilitar confirmación (podrías agregar un botón "Confirmar")
             // btnConfirmar.Enabled = true;
         }
