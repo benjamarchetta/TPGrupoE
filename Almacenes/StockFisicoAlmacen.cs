@@ -36,7 +36,30 @@ namespace TPGrupoE.Almacenes
         {
             return stock.FirstOrDefault(pc => pc.IdProducto == idProducto && pc.IdCliente == idCliente);
         }
+        /// Descuenta cantidad de producto desde sus posiciones (FIFO simple).
+        public static void DescontarProductoPorPosicion(int idProducto, int idCliente, int cantidadADescontar)
+        {
+            var stock = ObtenerStockPorId(idProducto, idCliente);
+            if (stock == null) return;
 
+            int cantidadRestante = cantidadADescontar;
+
+            var posicionesOrdenadas = stock.Posiciones
+                .Where(p => p.Cantidad > 0)
+                .OrderBy(p => p.Cantidad)
+                .ToList();
+
+            foreach (var posicion in posicionesOrdenadas)
+            {
+                if (cantidadRestante <= 0) break;
+
+                int cantidadTomada = Math.Min(posicion.Cantidad, cantidadRestante);
+                posicion.Cantidad -= cantidadTomada;
+                cantidadRestante -= cantidadTomada;
+            }
+        }
     }
+
+}
 
 }

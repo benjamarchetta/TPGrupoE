@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "XY-CCCDD", "TipoX", "150", "No", "XYZ" }, -1);
-            ListViewItem listViewItem2 = new ListViewItem(new string[] { "2025/05/25", "XX" }, -1);
-            ListViewItem listViewItem3 = new ListViewItem(new string[] { "2025/05/26", "XX" }, -1);
+            ListViewItem listViewItem4 = new ListViewItem(new string[] { "XY-CCCDD", "TipoX", "150", "No", "XYZ" }, -1);
+            ListViewItem listViewItem5 = new ListViewItem(new string[] { "2025/05/25", "XX" }, -1);
+            ListViewItem listViewItem6 = new ListViewItem(new string[] { "2025/05/26", "XX" }, -1);
             label1 = new Label();
             seleccionarMercaderiaButton = new Button();
             confirmarSeleccionButton = new Button();
-            verDetallesPreparacionListView = new ListView();
+            detalleMercaderiaDataGridView = new ListView();
             skuColumna = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
             cantidadColumna = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             label2 = new Label();
             fechaRecepcioncolumnHeader2 = new ColumnHeader();
             idOrdenColumnHeader1 = new ColumnHeader();
             ordenesSeleccionPendientesListView = new ListView();
             cancelarSeleccionButton = new Button();
+            VerDetallesButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -77,23 +78,28 @@
             confirmarSeleccionButton.Text = "Confirmar selección";
             confirmarSeleccionButton.UseVisualStyleBackColor = true;
             // 
-            // verDetallesPreparacionListView
+            // detalleMercaderiaDataGridView
             // 
-            verDetallesPreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumna, columnHeader2, cantidadColumna, columnHeader1, columnHeader3 });
-            verDetallesPreparacionListView.FullRowSelect = true;
-            verDetallesPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            verDetallesPreparacionListView.Location = new Point(12, 217);
-            verDetallesPreparacionListView.Name = "verDetallesPreparacionListView";
-            verDetallesPreparacionListView.Size = new Size(776, 175);
-            verDetallesPreparacionListView.TabIndex = 3;
-            verDetallesPreparacionListView.UseCompatibleStateImageBehavior = false;
-            verDetallesPreparacionListView.View = View.Details;
-            verDetallesPreparacionListView.SelectedIndexChanged += verDetallesPreparacionListView_SelectedIndexChanged;
+            detalleMercaderiaDataGridView.Columns.AddRange(new ColumnHeader[] { skuColumna, columnHeader2, cantidadColumna, columnHeader1, columnHeader3 });
+            detalleMercaderiaDataGridView.FullRowSelect = true;
+            detalleMercaderiaDataGridView.Items.AddRange(new ListViewItem[] { listViewItem4 });
+            detalleMercaderiaDataGridView.Location = new Point(12, 217);
+            detalleMercaderiaDataGridView.Name = "detalleMercaderiaDataGridView";
+            detalleMercaderiaDataGridView.Size = new Size(776, 175);
+            detalleMercaderiaDataGridView.TabIndex = 3;
+            detalleMercaderiaDataGridView.UseCompatibleStateImageBehavior = false;
+            detalleMercaderiaDataGridView.View = View.Details;
+            detalleMercaderiaDataGridView.SelectedIndexChanged += verDetallesPreparacionListView_SelectedIndexChanged;
             // 
             // skuColumna
             // 
             skuColumna.Text = "SKU de producto";
             skuColumna.Width = 155;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Tipo de producto";
+            columnHeader2.Width = 155;
             // 
             // cantidadColumna
             // 
@@ -104,11 +110,6 @@
             // 
             columnHeader1.Text = "Palet cerrado";
             columnHeader1.Width = 155;
-            // 
-            // columnHeader2
-            // 
-            columnHeader2.Text = "Tipo de producto";
-            columnHeader2.Width = 155;
             // 
             // columnHeader3
             // 
@@ -138,9 +139,9 @@
             // 
             ordenesSeleccionPendientesListView.CheckBoxes = true;
             ordenesSeleccionPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaRecepcioncolumnHeader2, idOrdenColumnHeader1 });
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
-            ordenesSeleccionPendientesListView.Items.AddRange(new ListViewItem[] { listViewItem2, listViewItem3 });
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            ordenesSeleccionPendientesListView.Items.AddRange(new ListViewItem[] { listViewItem5, listViewItem6 });
             ordenesSeleccionPendientesListView.Location = new Point(12, 27);
             ordenesSeleccionPendientesListView.MultiSelect = false;
             ordenesSeleccionPendientesListView.Name = "ordenesSeleccionPendientesListView";
@@ -159,14 +160,24 @@
             cancelarSeleccionButton.Text = "Cancelar selección";
             cancelarSeleccionButton.UseVisualStyleBackColor = true;
             // 
+            // VerDetallesButton
+            // 
+            VerDetallesButton.Location = new Point(348, 173);
+            VerDetallesButton.Name = "VerDetallesButton";
+            VerDetallesButton.Size = new Size(104, 23);
+            VerDetallesButton.TabIndex = 6;
+            VerDetallesButton.Text = "Ver Detalles";
+            VerDetallesButton.UseVisualStyleBackColor = true;
+            // 
             // GestionarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 444);
+            Controls.Add(VerDetallesButton);
             Controls.Add(cancelarSeleccionButton);
             Controls.Add(label2);
-            Controls.Add(verDetallesPreparacionListView);
+            Controls.Add(detalleMercaderiaDataGridView);
             Controls.Add(confirmarSeleccionButton);
             Controls.Add(seleccionarMercaderiaButton);
             Controls.Add(ordenesSeleccionPendientesListView);
@@ -183,7 +194,7 @@
         private Label label1;
         private Button seleccionarMercaderiaButton;
         private Button confirmarSeleccionButton;
-        private ListView verDetallesPreparacionListView;
+        private ListView detalleMercaderiaDataGridView;
         private ColumnHeader skuColumna;
         private ColumnHeader cantidadColumna;
         private Label label2;
@@ -194,5 +205,6 @@
         private Button cancelarSeleccionButton;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private Button VerDetallesButton;
     }
 }
