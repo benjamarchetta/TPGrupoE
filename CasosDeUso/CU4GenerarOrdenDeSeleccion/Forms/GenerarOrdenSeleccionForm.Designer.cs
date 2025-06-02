@@ -38,8 +38,6 @@
             generarOrdenButton = new Button();
             label2 = new Label();
             eliminarDeSeleccionButton = new Button();
-            label3 = new Label();
-            idOrdenTextBox = new TextBox();
             mercaderiasAPrepList = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
@@ -99,6 +97,7 @@
             agregarAOrdenButton.TabIndex = 2;
             agregarAOrdenButton.Text = "Agregar a orden de selección";
             agregarAOrdenButton.UseVisualStyleBackColor = true;
+            agregarAOrdenButton.Click += agregarAOrdenButton_Click;
             // 
             // generarOrdenButton
             // 
@@ -131,24 +130,6 @@
             eliminarDeSeleccionButton.UseVisualStyleBackColor = true;
             eliminarDeSeleccionButton.Click += eliminarDeSeleccionButton_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 480);
-            label3.Name = "label3";
-            label3.Size = new Size(138, 15);
-            label3.TabIndex = 7;
-            label3.Text = "ID de Orden de seleccion";
-            // 
-            // idOrdenTextBox
-            // 
-            idOrdenTextBox.Enabled = false;
-            idOrdenTextBox.Location = new Point(12, 498);
-            idOrdenTextBox.Name = "idOrdenTextBox";
-            idOrdenTextBox.Size = new Size(164, 23);
-            idOrdenTextBox.TabIndex = 8;
-            idOrdenTextBox.Text = "XXXXXX";
-            // 
             // mercaderiasAPrepList
             // 
             mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
@@ -159,6 +140,7 @@
             mercaderiasAPrepList.TabIndex = 9;
             mercaderiasAPrepList.UseCompatibleStateImageBehavior = false;
             mercaderiasAPrepList.View = View.Details;
+            mercaderiasAPrepList.SelectedIndexChanged += mercaderiasAPrepList_SelectedIndexChanged_1;
             // 
             // columnHeader1
             // 
@@ -183,7 +165,7 @@
             // estadoDeOrdenTextBox
             // 
             estadoDeOrdenTextBox.Enabled = false;
-            estadoDeOrdenTextBox.Location = new Point(182, 499);
+            estadoDeOrdenTextBox.Location = new Point(12, 499);
             estadoDeOrdenTextBox.Name = "estadoDeOrdenTextBox";
             estadoDeOrdenTextBox.Size = new Size(200, 23);
             estadoDeOrdenTextBox.TabIndex = 37;
@@ -192,7 +174,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(182, 480);
+            label12.Location = new Point(12, 481);
             label12.Name = "label12";
             label12.Size = new Size(92, 15);
             label12.TabIndex = 36;
@@ -206,8 +188,6 @@
             Controls.Add(estadoDeOrdenTextBox);
             Controls.Add(label12);
             Controls.Add(mercaderiasAPrepList);
-            Controls.Add(idOrdenTextBox);
-            Controls.Add(label3);
             Controls.Add(eliminarDeSeleccionButton);
             Controls.Add(label2);
             Controls.Add(generarOrdenButton);
@@ -232,8 +212,6 @@
         private Button generarOrdenButton;
         private Label label2;
         private Button eliminarDeSeleccionButton;
-        private Label label3;
-        private TextBox idOrdenTextBox;
         private ColumnHeader columnHeader3;
         private ListView mercaderiasAPrepList;
         private ColumnHeader columnHeader1;
@@ -242,5 +220,6 @@
         private ColumnHeader columnHeader5;
         private TextBox estadoDeOrdenTextBox;
         private Label label12;
+    
     }
 }
