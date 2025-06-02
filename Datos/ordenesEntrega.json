@@ -1,7 +1,7 @@
 [
   {
     "IdOrdenEntrega": 2001,
-    "Estado": "Cumplida",
+    "Estado": 1,
     "IdOrdenPreparacion": [
       1009
     ]

@@ -26,8 +26,35 @@
   <ItemGroup>
     <Folder Include="CasosDeUso\CU2MenuPrincipal\Model\" />
     <Folder Include="CasosDeUso\CU5GestionarOrdenDeSeleccion\Model\" />
-    <Folder Include="CasosDeUso\CU7CargarOrdenDeEntrega\Model\" />
+    <Folder Include="CasosDeUso\CU8EmitirRemito\Model\" />
     <Folder Include="Datos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Datos\clientes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\depositos.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\ordenesEntrega.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\ordenesPicking.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\ordenesPreparacion.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\productos.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\remitos.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datos\stockFisico.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

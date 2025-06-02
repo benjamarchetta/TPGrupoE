@@ -42,14 +42,4 @@ namespace TPGrupoE.Almacenes
         }
 
     }
-   // Ya hay un amacen para las órdenes de preparación, no es necesario crear otro.
-   /* public enum EstadoOrdenPreparacion
-    {
-        Pendiente,
-        EnPreparacion,
-        Seleccionada, // Nuevo estado para CU5
-        Preparada,
-        Despachada
-    }
-*/
 }

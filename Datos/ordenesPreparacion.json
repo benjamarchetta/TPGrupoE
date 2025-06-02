@@ -4,8 +4,8 @@
     "IdDeposito": 3,
     "IdCliente": 3,
     "DniTransportista": 30111222,
-    "Estado": "Pendiente",
-    "FechaEntrega": "2025-06-10",
+    "Estado": 0,
+    "FechaEntrega": "2025-06-10T14:18:16.6600073-03:00",
     "PalletCerrado": true,
     "ProductoOrden": [
       {
@@ -20,8 +20,8 @@
     "IdDeposito": 1,
     "IdCliente": 2,
     "DniTransportista": 30111223,
-    "Estado": "Seleccionada",
-    "FechaEntrega": "2025-06-11",
+    "Estado": 2,
+    "FechaEntrega": "2025-06-11T14:18:16.6600073-03:00",
     "PalletCerrado": true,
     "ProductoOrden": [
       {
@@ -36,8 +36,8 @@
     "IdDeposito": 4,
     "IdCliente": 4,
     "DniTransportista": 30111224,
-    "Estado": "Preparada",
-    "FechaEntrega": "2025-06-12",
+    "Estado": 4,
+    "FechaEntrega": "2025-06-12T14:18:16.6600073-03:00",
     "PalletCerrado": true,
     "ProductoOrden": [
       {
@@ -52,8 +52,8 @@
     "IdDeposito": 2,
     "IdCliente": 4,
     "DniTransportista": 30111225,
-    "Estado": "Preparada",
-    "FechaEntrega": "2025-06-13",
+    "Estado": 4,
+    "FechaEntrega": "2025-06-13T14:18:16.6600073-03:00",
     "PalletCerrado": true,
     "ProductoOrden": [
       {
@@ -68,8 +68,8 @@
     "IdDeposito": 3,
     "IdCliente": 3,
     "DniTransportista": 30111226,
-    "Estado": "Despachada",
-    "FechaEntrega": "2025-06-01",
+    "Estado": 5,
+    "FechaEntrega": "2025-06-01T14:18:16.6600073-03:00",
     "PalletCerrado": true,
     "ProductoOrden": [
       {
@@ -84,8 +84,8 @@
     "IdDeposito": 3,
     "IdCliente": 4,
     "DniTransportista": 30111227,
-    "Estado": "Pendiente",
-    "FechaEntrega": "2025-06-15",
+    "Estado": 0,
+    "FechaEntrega": "2025-06-15T14:18:16.6600073-03:00",
     "PalletCerrado": false,
     "ProductoOrden": [
       {
@@ -100,8 +100,8 @@
     "IdDeposito": 1,
     "IdCliente": 3,
     "DniTransportista": 30111228,
-    "Estado": "Seleccionada",
-    "FechaEntrega": "2025-06-16",
+    "Estado": 2,
+    "FechaEntrega": "2025-06-16T14:18:16.6600073-03:00",
     "PalletCerrado": false,
     "ProductoOrden": [
       {
@@ -116,8 +116,8 @@
     "IdDeposito": 3,
     "IdCliente": 2,
     "DniTransportista": 30111229,
-    "Estado": "Preparada",
-    "FechaEntrega": "2025-06-17",
+    "Estado": 4,
+    "FechaEntrega": "2025-06-17T14:18:16.6600073-03:00",
     "PalletCerrado": false,
     "ProductoOrden": [
       {
@@ -132,8 +132,8 @@
     "IdDeposito": 1,
     "IdCliente": 1,
     "DniTransportista": 30111230,
-    "Estado": "Empaquetada",
-    "FechaEntrega": "2025-06-18",
+    "Estado": 3,
+    "FechaEntrega": "2025-06-18T14:18:16.6600073-03:00",
     "PalletCerrado": false,
     "ProductoOrden": [
       {
