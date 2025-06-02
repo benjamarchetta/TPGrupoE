@@ -5,70 +5,62 @@ using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
 
-namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
-{
-    public class GestionOrdenSeleccionModel
-    {
-        public List<OrdenSeleccionEntidad> OrdenesPendientes { get; private set; }
-        public List<OrdenSeleccionEntidad> OrdenesSeleccionadas { get; private set; }
-        public List<DetalleOrdenSeleccion> DetalleMercaderia { get; private set; }
 
+namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
+
+{
+    internal class GestionOrdenSeleccionModel
+    {
+        public List<OrdenPickingEntidad> OrdenesDeSeleccion { get; private set; }
+        // carga json y filtra las órdenes de selección pendientes
         public GestionOrdenSeleccionModel()
         {
-            OrdenesPendientes = OrdenSeleccionAlmacen.ObtenerOrdenesPendientes();
-            OrdenesSeleccionadas = new List<OrdenSeleccionEntidad>();
-            DetalleMercaderia = new List<DetalleOrdenSeleccion>();
+            OrdenPickingAlmacen.LeerOS();
+            OrdenesDeSeleccion = OrdenPickingAlmacen.BuscarOrdenesPendientes();
         }
-
-        // Carga el detalle de productos de las órdenes seleccionadas
-        public void CargarDetalleMercaderia()
+        // Crea una nueva orden de selección con los IDs de las órdenes de preparación
+        public List<ProductoOrden> ObtenerDetalleProductos(int idOrdenSeleccion)
         {
-            DetalleMercaderia.Clear();
-            foreach (var orden in OrdenesSeleccionadas)
+            var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
+            var productos = new List<ProductoOrden>();
+
+            foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
             {
-                var detalles = OrdenPreparacionAlmacen.ObtenerDetallesPorOrden(orden.IDsOrdenesPreparacion);
-                DetalleMercaderia.AddRange(detalles);
+                var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
+                productos.AddRange(ordenPrep.ProductoOrden); // ya trae SKU, tipo, cantidad, etc.
             }
+
+            return productos;
         }
+        // Confirma la selección de la orden de picking y actualiza los estados de las órdenes de preparación y el stock físico
+        public void ConfirmarSeleccion(int idOrdenSeleccion)
+        { // Obtener la orden de picking y cambiar su estado
+            var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
+            if (ordenSeleccion == null) return;
+            // Cambiar estado a "Cumplida"
+            ordenSeleccion.Estado = EstadoOrdenSeleccion.Cumplida;
 
-        // Confirma la selección y actualiza estados
-        public bool ConfirmarSeleccion(string usuario)
-        {
-            try
+            // Iterar sobre cada ID de orden de preparación vinculada
+            foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
             {
-                // 1. Validar stock antes de confirmar
-                if (!StockAlmacen.ValidarStock(DetalleMercaderia))
-                    return false;
-
-                // 2. Actualizar estados
-                foreach (var orden in OrdenesSeleccionadas)
+                var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
+                if (ordenPrep == null) continue;
+                // Marcar la orden de preparación como "Seleccionada"
+                ordenPrep.Estado = EstadoOrdenPreparacion.Seleccionada;
+                // Descontar stock físico de cada producto
+                foreach (var producto in ordenPrep.ProductoOrden)
                 {
-                    orden.Estado = EstadoOrdenSeleccion.Cumplida;
-                    orden.FechaConfirmacion = DateTime.Now;
-                    orden.UsuarioConfirmacion = usuario;
-                    OrdenSeleccionAlmacen.Actualizar(orden);
-
-                    // 3. Actualizar órdenes de preparación
-                    foreach (var id in orden.IDsOrdenesPreparacion)
-                    {
-                        var op = OrdenPreparacionAlmacen.ObtenerOrdenPorId(id);
-                        op.Estado = EstadoOrdenPreparacion.Seleccionada;
-                        OrdenPreparacionAlmacen.Actualizar(op);
-                    }
+                    StockFisicoAlmacen.DescontarProductoPorPosicion(
+                        producto.IdProducto,
+                        ordenPrep.IdCliente,
+                        producto.Cantidad);
                 }
-
-                // 4. Dar de baja el stock (FIFO)
-                StockAlmacen.DarBajaStock(DetalleMercaderia);
-
-                return true;
             }
-            catch (Exception ex)
-            {
-                // Loggear error
-                return false;
-            }
+
+            // Grabar cambios en archivos
+            OrdenPickingAlmacen.GrabarOS();
+            OrdenPreparacionAlmacen.GrabarOP();
+            StockFisicoAlmacen.GrabarStock();
         }
     }
-
 }
-

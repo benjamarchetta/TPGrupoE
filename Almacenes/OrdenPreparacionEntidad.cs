@@ -20,7 +20,8 @@ namespace TPGrupoE.Almacenes
 
         
     }
-    public enum EstadoOrdenPreparacion
+   // Ya hay un amacen para las órdenes de preparación, no es necesario crear otro.
+   /* public enum EstadoOrdenPreparacion
     {
         Pendiente,
         EnPreparacion,
@@ -28,5 +29,5 @@ namespace TPGrupoE.Almacenes
         Preparada,
         Despachada
     }
-
+*/
 }
