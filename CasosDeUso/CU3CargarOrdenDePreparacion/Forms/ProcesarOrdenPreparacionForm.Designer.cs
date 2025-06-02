@@ -21,7 +21,7 @@
         }
 
         #region Windows Form Designer generated code
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -78,7 +78,6 @@
             idOrdenTextBox.Size = new Size(200, 23);
             idOrdenTextBox.TabIndex = 1;
             idOrdenTextBox.Text = "XX";
-            //idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
             // 
             // label2
             // 
@@ -105,7 +104,6 @@
             cargarOrdenButton.TabIndex = 10;
             cargarOrdenButton.Text = "Cargar orden de preparación";
             cargarOrdenButton.UseVisualStyleBackColor = true;
-           // cargarOrdenButton.Click += cargarOrdenButton_Click;
             // 
             // quitarProductoButton
             // 
@@ -116,7 +114,6 @@
             quitarProductoButton.TabIndex = 14;
             quitarProductoButton.Text = "Quitar producto de órden de preparación";
             quitarProductoButton.UseVisualStyleBackColor = true;
-           // quitarProductoButton.Click += quitarProductoButton_Click;
             // 
             // ordenDePreparacionListView
             // 
@@ -128,7 +125,6 @@
             ordenDePreparacionListView.TabIndex = 15;
             ordenDePreparacionListView.UseCompatibleStateImageBehavior = false;
             ordenDePreparacionListView.View = View.Details;
-            //ordenDePreparacionListView.SelectedIndexChanged += ordenDePreparacionListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -154,7 +150,6 @@
             razonSocialComboBox.Name = "razonSocialComboBox";
             razonSocialComboBox.Size = new Size(382, 23);
             razonSocialComboBox.TabIndex = 16;
-//            razonSocialComboBox.SelectedIndexChanged += razonSocialComboBox_SelectedIndexChanged;
             // 
             // label7
             // 
@@ -164,7 +159,6 @@
             label7.Size = new Size(129, 15);
             label7.TabIndex = 17;
             label7.Text = "Razón social del cliente";
-            //label7.Click += label7_Click;
             // 
             // label8
             // 
@@ -181,7 +175,6 @@
             cuitTextBox.Size = new Size(383, 23);
             cuitTextBox.TabIndex = 19;
             cuitTextBox.Text = "-";
-            //cuitTextBox.TextChanged += cuitTextBox_TextChanged;
             // 
             // productoComboBox
             // 
@@ -192,7 +185,6 @@
             productoComboBox.Name = "productoComboBox";
             productoComboBox.Size = new Size(382, 23);
             productoComboBox.TabIndex = 20;
-            //productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -220,7 +212,6 @@
             skuTextBox.Size = new Size(385, 23);
             skuTextBox.TabIndex = 23;
             skuTextBox.Text = "-";
-            //skuTextBox.TextChanged += skuTextBox_TextChanged;
             // 
             // cantidadEnStockTextBox
             // 
@@ -230,7 +221,6 @@
             cantidadEnStockTextBox.Size = new Size(385, 23);
             cantidadEnStockTextBox.TabIndex = 24;
             cantidadEnStockTextBox.Text = "-";
-            //cantidadEnStockTextBox.TextChanged += cantidadEnStockTextBox_TextChanged;
             // 
             // label9
             // 
@@ -250,7 +240,6 @@
             palletCerradoComboBox.Name = "palletCerradoComboBox";
             palletCerradoComboBox.Size = new Size(383, 23);
             palletCerradoComboBox.TabIndex = 26;
-            //palletCerradoComboBox.SelectedIndexChanged += palletCerradoComboBox_SelectedIndexChanged;
             // 
             // label10
             // 
@@ -277,8 +266,6 @@
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
-            //cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
-            //cantidadARetirarTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
             // 
             // agregarProductoButton
             // 
@@ -289,7 +276,6 @@
             agregarProductoButton.TabIndex = 30;
             agregarProductoButton.Text = "Agregar producto a órden de preparación";
             agregarProductoButton.UseVisualStyleBackColor = true;
-            //agregarProductoButton.Click += agregarProductoButton_Click;
             // 
             // label4
             // 
@@ -318,7 +304,6 @@
             dniTransportistaComboBox.Name = "dniTransportistaComboBox";
             dniTransportistaComboBox.Size = new Size(121, 23);
             dniTransportistaComboBox.TabIndex = 33;
-            //dniTransportistaComboBox.SelectedIndexChanged += dniTransportistaComboBox_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -382,7 +367,7 @@
             Controls.Add(label1);
             Name = "ProcesarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
-            //Load += ProcesarOrdenPreparacion_Load;
+            Load += ProcesarOrdenPreparacion_Load;
             ResumeLayout(false);
             PerformLayout();
         }
