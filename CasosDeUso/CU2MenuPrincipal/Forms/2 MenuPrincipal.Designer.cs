@@ -33,13 +33,15 @@
             gestionarOrdenSeleccionButton = new Button();
             generarOrdenEntregaButton = new Button();
             emitirRemitoButton = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // cargarOrdenPreparacionButton
             // 
-            cargarOrdenPreparacionButton.Location = new Point(25, 22);
+            cargarOrdenPreparacionButton.Location = new Point(29, 29);
+            cargarOrdenPreparacionButton.Margin = new Padding(3, 4, 3, 4);
             cargarOrdenPreparacionButton.Name = "cargarOrdenPreparacionButton";
-            cargarOrdenPreparacionButton.Size = new Size(230, 23);
+            cargarOrdenPreparacionButton.Size = new Size(263, 31);
             cargarOrdenPreparacionButton.TabIndex = 0;
             cargarOrdenPreparacionButton.Text = "Cargar orden de preparación";
             cargarOrdenPreparacionButton.UseVisualStyleBackColor = true;
@@ -47,9 +49,10 @@
             // 
             // generarOrdenSeleccionButton
             // 
-            generarOrdenSeleccionButton.Location = new Point(25, 57);
+            generarOrdenSeleccionButton.Location = new Point(29, 76);
+            generarOrdenSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             generarOrdenSeleccionButton.Name = "generarOrdenSeleccionButton";
-            generarOrdenSeleccionButton.Size = new Size(230, 23);
+            generarOrdenSeleccionButton.Size = new Size(263, 31);
             generarOrdenSeleccionButton.TabIndex = 1;
             generarOrdenSeleccionButton.Text = "Generar órden de selección";
             generarOrdenSeleccionButton.UseVisualStyleBackColor = true;
@@ -57,9 +60,10 @@
             // 
             // gestionarOrdenSeleccionButton
             // 
-            gestionarOrdenSeleccionButton.Location = new Point(25, 92);
+            gestionarOrdenSeleccionButton.Location = new Point(29, 123);
+            gestionarOrdenSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             gestionarOrdenSeleccionButton.Name = "gestionarOrdenSeleccionButton";
-            gestionarOrdenSeleccionButton.Size = new Size(230, 23);
+            gestionarOrdenSeleccionButton.Size = new Size(263, 31);
             gestionarOrdenSeleccionButton.TabIndex = 2;
             gestionarOrdenSeleccionButton.Text = "Gestionar órden de seleccion";
             gestionarOrdenSeleccionButton.UseVisualStyleBackColor = true;
@@ -67,9 +71,10 @@
             // 
             // generarOrdenEntregaButton
             // 
-            generarOrdenEntregaButton.Location = new Point(25, 127);
+            generarOrdenEntregaButton.Location = new Point(29, 221);
+            generarOrdenEntregaButton.Margin = new Padding(3, 4, 3, 4);
             generarOrdenEntregaButton.Name = "generarOrdenEntregaButton";
-            generarOrdenEntregaButton.Size = new Size(230, 23);
+            generarOrdenEntregaButton.Size = new Size(263, 31);
             generarOrdenEntregaButton.TabIndex = 3;
             generarOrdenEntregaButton.Text = "Generar órden de entrega";
             generarOrdenEntregaButton.UseVisualStyleBackColor = true;
@@ -77,24 +82,37 @@
             // 
             // emitirRemitoButton
             // 
-            emitirRemitoButton.Location = new Point(25, 162);
+            emitirRemitoButton.Location = new Point(29, 270);
+            emitirRemitoButton.Margin = new Padding(3, 4, 3, 4);
             emitirRemitoButton.Name = "emitirRemitoButton";
-            emitirRemitoButton.Size = new Size(230, 23);
+            emitirRemitoButton.Size = new Size(263, 31);
             emitirRemitoButton.TabIndex = 4;
             emitirRemitoButton.Text = "Emitir remito";
             emitirRemitoButton.UseVisualStyleBackColor = true;
             emitirRemitoButton.Click += EmitirRemitoButton_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(29, 172);
+            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(263, 31);
+            button1.TabIndex = 5;
+            button1.Text = "Empaquetar";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // MenuPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(280, 249);
+            ClientSize = new Size(320, 332);
+            Controls.Add(button1);
             Controls.Add(emitirRemitoButton);
             Controls.Add(generarOrdenEntregaButton);
             Controls.Add(gestionarOrdenSeleccionButton);
             Controls.Add(generarOrdenSeleccionButton);
             Controls.Add(cargarOrdenPreparacionButton);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MenuPrincipal";
             Text = "Menú Principal";
             Load += MenuPrincipal_Load;
@@ -108,5 +126,6 @@
         private Button gestionarOrdenSeleccionButton;
         private Button generarOrdenEntregaButton;
         private Button emitirRemitoButton;
+        private Button button1;
     }
 }

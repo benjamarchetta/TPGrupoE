@@ -40,32 +40,32 @@ namespace TPGrupoE.Almacenes
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesPendientes()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Pendiente);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Pendiente);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesEnPreparacion()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.EnPreparacion);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.EnPreparacion);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesSeleccionadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Seleccionada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Seleccionada);
         }
         public static List<OrdenPreparacionEntidad> BuscarOrdenesEmpaquetadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Empaquetada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Empaquetada);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesPreparadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Preparada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Preparada);
         }
 
         //VER SI NOS SIRVE AGREGAR BuscarOrdenesDespachadas (yo creo que no)
         public static OrdenPreparacionEntidad BuscarOrdenesPorId(int id)
         {
-            return ordenesPreparacion.FirstOrDefault(o => o.IdOrdenPreparacion == id);
+            return ordenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == id);
         }
 
         //COMENTO PARA VER MAS ADELANTE....
@@ -98,7 +98,7 @@ namespace TPGrupoE.Almacenes
             }
             else
             {
-                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
+                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(op => op.IdOrdenPreparacion) + 1;
             }
 
 
