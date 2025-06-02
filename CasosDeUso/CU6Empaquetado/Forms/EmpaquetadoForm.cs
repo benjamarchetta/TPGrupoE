@@ -4,19 +4,21 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasoU_Empaquetado;
-using TPGrupoE.CasoU_EmpaquetadoOrdenes;
-using TPGrupoE.ProductosOP;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
+using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
 
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     public partial class EmpaquetadoForm : Form
     {
+        /*
         public EmpaquetadoForm()
         {
             InitializeComponent();
@@ -104,5 +106,9 @@ namespace TPGrupoE.CasoU_Empaquetado
 
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }*/
     }
 }

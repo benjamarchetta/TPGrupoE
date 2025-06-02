@@ -1,3 +1,5 @@
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+
 namespace TPGrupoE
 {
     internal static class Program
@@ -11,9 +13,7 @@ namespace TPGrupoE
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuPrincipal());
-
-            
+            Application.Run(new MenuPrincipalGeneralForm());
         }
     }
 }

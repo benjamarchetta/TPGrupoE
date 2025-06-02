@@ -1,8 +1,8 @@
 ﻿
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     partial class EmpaquetadoForm
-    {
+    {/*
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -39,6 +39,18 @@ namespace TPGrupoE.CasoU_Empaquetado
             cantidadColumnaSelec = new ColumnHeader();
             SuspendLayout();
             // 
+            // idOrdenTextBox
+            // 
+            idOrdenTextBox.BackColor = SystemColors.InactiveCaption;
+            idOrdenTextBox.Enabled = false;
+            idOrdenTextBox.Location = new Point(176, 24);
+            idOrdenTextBox.Margin = new Padding(3, 4, 3, 4);
+            idOrdenTextBox.Name = "idOrdenTextBox";
+            idOrdenTextBox.Size = new Size(149, 27);
+            idOrdenTextBox.TabIndex = 1;
+            idOrdenTextBox.Text = "XX";
+            //idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -46,17 +58,8 @@ namespace TPGrupoE.CasoU_Empaquetado
             label2.Name = "label2";
             label2.Size = new Size(135, 20);
             label2.TabIndex = 2;
-            label2.Text = "Empaquetar Orden";
-            // 
-            // nroOrden
-            // 
-            nroOrden.BackColor = SystemColors.InactiveCaption;
-            nroOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            nroOrden.Location = new Point(171, 12);
-            nroOrden.Name = "nroOrden";
-            nroOrden.Size = new Size(48, 34);
-            nroOrden.TabIndex = 13;
-            nroOrden.Text = "000";
+            label2.Text = "Orden a Empaquetar";
+            //label2.Click += label2_Click;
             // 
             // empaquetarButton
             // 
@@ -68,7 +71,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             empaquetarButton.TabIndex = 14;
             empaquetarButton.Text = "Empaquetar";
             empaquetarButton.UseVisualStyleBackColor = true;
-            empaquetarButton.Click += empaquetarButton_Click;
+            //empaquetarButton.Click += empaquetarButton_Click;
             // 
             // productoAEmpaquetarListView
             // 
@@ -81,7 +84,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             productoAEmpaquetarListView.TabIndex = 15;
             productoAEmpaquetarListView.UseCompatibleStateImageBehavior = false;
             productoAEmpaquetarListView.View = View.Details;
-            productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
+            //productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -110,7 +113,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmpaquetadoForm";
             Text = "Empaquetado";
-            Load += Empaquetado_Load;
+            //Load += Empaquetado_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -128,5 +131,5 @@ namespace TPGrupoE.CasoU_Empaquetado
         private TextBox nroOrden;
         private TextBox textBox1; 
         private Label label2;
-    }
+    */}
 }
