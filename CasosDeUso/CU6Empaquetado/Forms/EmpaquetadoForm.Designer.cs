@@ -2,7 +2,7 @@
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     partial class EmpaquetadoForm
-    {
+    {/*
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -131,5 +131,5 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
         private TextBox nroOrden;
         private TextBox textBox1; 
         private Label label2;
-    }
+    */}
 }
