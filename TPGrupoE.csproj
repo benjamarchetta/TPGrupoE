@@ -28,6 +28,7 @@
     <Folder Include="CasosDeUso\CU5GestionarOrdenDeSeleccion\Model\" />
     <Folder Include="CasosDeUso\CU7CargarOrdenDeEntrega\Model\" />
     <Folder Include="CasosDeUso\CU8EmitirRemito\Model\" />
+    <Folder Include="Datos\" />
   </ItemGroup>
 
 </Project>

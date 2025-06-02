@@ -2,22 +2,134 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class OrdenPreparacionAlmacen
+    internal static class OrdenPreparacionAlmacen
     {
-        private static List<OrdenPreparacionEntidad> ordenesDePreparacion = new List<OrdenPreparacionEntidad>
+        private static List<OrdenPreparacionEntidad> ordenesPreparacion = new List<OrdenPreparacionEntidad>();
 
+        public static IReadOnlyCollection<OrdenPreparacionEntidad> OrdenesPreparacion => ordenesPreparacion.AsReadOnly();
+
+        public static void GrabarOP()
         {
-            /*
-            new OrdenPreparacionEntidad { IdOrdenPreparacion = 1001, IdCliente = 1, Estado = EstadoOrdenPreparacion.Pendiente, FechaEntrega = DateTime.Now.AddDays(5), PalletCerrado = false, productosOrden = new List<ProductoOrden> { new ProductoOrden { sku = "PROD001", TipoProducto = "x", Cantidad = 50 } } },
-            new OrdenPreparacionEntidad { IdOrdenPreparacion = 1002, IdCliente = 2, Estado = EstadoOrdenPreparacion.Pendiente, FechaEntrega = DateTime.Now.AddDays(4), PalletCerrado = false, productosOrden = new List<ProductoOrden> { new ProductoOrden { sku = "PROD003", TipoProducto = "y", Cantidad = 100 } } },
-            new OrdenPreparacionEntidad { IdOrdenPreparacion = 1003, IdCliente = 3, Estado = EstadoOrdenPreparacion.Pendiente, FechaEntrega = DateTime.Now.AddDays(1), PalletCerrado = false, productosOrden = new List<ProductoOrden> { new ProductoOrden { sku = "PROD002", TipoProducto = "g", Cantidad = 75 } } } 
-       */
-        };
+            var datosOP = JsonSerializer.Serialize(ordenesPreparacion);
 
-        public static IReadOnlyList<OrdenPreparacionEntidad> OrdenesDePreparacion = ordenesDePreparacion.AsReadOnly();
+            File.WriteAllText(@"Datos\ordenesPreparacion.json", datosOP);
+        }
+
+        public static void LeerOP()
+        {
+            if (!File.Exists(@"Datos\ordenesPreparacion.json"))
+            {
+                return;
+            }
+
+            var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
+
+            ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
+        }
+
+        //REVISAR SI NOS SIRVE AHORA
+        public static List<OrdenPreparacionEntidad> BuscarTodasLasOrdenes()
+        {
+            return ordenesPreparacion;
+        }
+
+        public static List<OrdenPreparacionEntidad> BuscarOrdenesPendientes()
+        {
+            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Pendiente);
+        }
+
+        public static List<OrdenPreparacionEntidad> BuscarOrdenesEnPreparacion()
+        {
+            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.EnPreparacion);
+        }
+
+        public static List<OrdenPreparacionEntidad> BuscarOrdenesSeleccionadas()
+        {
+            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Seleccionada);
+        }
+        public static List<OrdenPreparacionEntidad> BuscarOrdenesEmpaquetadas()
+        {
+            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Empaquetada);
+        }
+
+        public static List<OrdenPreparacionEntidad> BuscarOrdenesPreparadas()
+        {
+            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Preparada);
+        }
+
+        //VER SI NOS SIRVE AGREGAR BuscarOrdenesDespachadas (yo creo que no)
+        public static OrdenPreparacionEntidad BuscarOrdenesPorId(int id)
+        {
+            return ordenesPreparacion.FirstOrDefault(o => o.IdOrdenPreparacion == id);
+        }
+
+        //COMENTO PARA VER MAS ADELANTE....
+        /*
+        public static List<int> ObtenerTransportistasConOrdenesParaDespacho()
+        {
+
+            // Crear un HashSet para almacenar DNI únicos
+            HashSet<int> dniTransportistasUnicos = new HashSet<int>();
+
+            var ordenes = ObtenerOrdenesParaDespacho();
+
+            foreach (var o in ordenes)
+            {
+                dniTransportistasUnicos.Add(o.DNITransportista);
+            }
+
+            var transportistas = new List<int>(dniTransportistasUnicos);
+
+            return transportistas;
+        }
+        */
+
+        //VER SI HAY QUE ADAPTAR ESTA FUNCION
+        internal static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
+        {
+            if (OrdenPreparacionAlmacen.ordenesPreparacion.Count == 0)
+            {
+                nuevaOrden.IdOrdenPreparacion = 1;
+            }
+            else
+            {
+                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
+            }
+
+
+            ordenesPreparacion.Add(nuevaOrden);
+            return null; //sin errores.
+        }
+
+        //COMENTO POR AHORA PERO SEGURO NOS SIRVE MAS ADELANTE
+        /*
+        public static int CalcularCantidadReservada(int idDeposito, int idMercaderia, int idCliente)
+        {
+            // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
+            var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.PendienteDeSeleccion || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IDDeposito == idDeposito && o.IDCliente == idCliente);
+
+            int cantidadReservada = 0;
+
+
+            foreach (var o in ordenes)
+            {
+                // Buscar la mercaderia en la orden de preparacion
+                var mercaderiaOrden = o.MercaderiaOrden.Find(mo => mo.IDMercaderia == idMercaderia);
+
+                if (mercaderiaOrden != null)
+                {
+                    cantidadReservada += mercaderiaOrden.Cantidad;
+                }
+            }
+
+
+            return cantidadReservada;
+        }
+        */
     }
 }

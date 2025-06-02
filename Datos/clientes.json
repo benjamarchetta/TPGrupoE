@@ -1,0 +1,62 @@
+[
+  {
+    "IdCliente": 1,
+    "Cuit": "30-71509876-2",
+    "RazonSocial": "Frávega S.A.",
+    "Domicilio": "Av. Cabildo 3201, CABA"
+  },
+  {
+    "IdCliente": 2,
+    "Cuit": "30-68214355-9",
+    "RazonSocial": "Librería Papiro S.R.L.",
+    "Domicilio": "Calle Belgrano 554, Rosario"
+  },
+  {
+    "IdCliente": 3,
+    "Cuit": "33-12345678-3",
+    "RazonSocial": "Textiles Buenos Aires S.A.",
+    "Domicilio": "Av. Juan B. Justo 4300, CABA"
+  },
+  {
+    "IdCliente": 4,
+    "Cuit": "30-99887766-5",
+    "RazonSocial": "Electro Hogar S.R.L.",
+    "Domicilio": "Calle Mitre 780, Córdoba"
+  },
+  {
+    "IdCliente": 5,
+    "Cuit": "33-44556677-1",
+    "RazonSocial": "OfiMax Insumos de Oficina S.A.",
+    "Domicilio": "Ruta 9 km 45, Escobar"
+  },
+  {
+    "IdCliente": 6,
+    "Cuit": "30-11223344-6",
+    "RazonSocial": "Grupo Ferretería Integral",
+    "Domicilio": "Av. San Martín 3001, Mendoza"
+  },
+  {
+    "IdCliente": 7,
+    "Cuit": "30-33445566-7",
+    "RazonSocial": "Papelera La Esperanza SRL",
+    "Domicilio": "Calle Rivadavia 1120, CABA"
+  },
+  {
+    "IdCliente": 8,
+    "Cuit": "30-77665544-2",
+    "RazonSocial": "Cerámicas Argentinas S.A.",
+    "Domicilio": "Parque Industrial Pilar, Buenos Aires"
+  },
+  {
+    "IdCliente": 9,
+    "Cuit": "33-88990011-8",
+    "RazonSocial": "Comercial de Librería y Arte SRL",
+    "Domicilio": "Av. Pellegrini 2300, Rosario"
+  },
+  {
+    "IdCliente": 10,
+    "Cuit": "30-66778855-1",
+    "RazonSocial": "Logística Patagonia Express S.A.",
+    "Domicilio": "Ruta Nacional 3, Km 7, Ushuaia"
+  }
+]
