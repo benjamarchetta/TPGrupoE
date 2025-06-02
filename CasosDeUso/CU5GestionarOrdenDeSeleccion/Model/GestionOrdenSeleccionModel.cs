@@ -16,6 +16,8 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         public GestionOrdenSeleccionModel()
         {
             OrdenPickingAlmacen.LeerOS();
+            OrdenPreparacionAlmacen.LeerOP();     // FALTA
+            StockFisicoAlmacen.LeerStock();       // FALTA
             OrdenesDeSeleccion = OrdenPickingAlmacen.BuscarOrdenesPendientes();
         }
         // Crea una nueva orden de selección con los IDs de las órdenes de preparación
@@ -61,6 +63,12 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             OrdenPickingAlmacen.GrabarOS();
             OrdenPreparacionAlmacen.GrabarOP();
             StockFisicoAlmacen.GrabarStock();
+
+            OrdenPreparacionAlmacen.LeerOP(); // ❗Falta
+            StockFisicoAlmacen.LeerStock();   // ❗Falta
+                                              // Actualizar la lista de órdenes de selección pendientes
+            OrdenesDeSeleccion = OrdenPickingAlmacen.BuscarOrdenesPendientes();
+            
         }
     }
 }
