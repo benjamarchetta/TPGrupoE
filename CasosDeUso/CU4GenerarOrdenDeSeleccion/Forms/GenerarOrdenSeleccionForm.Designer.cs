@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "2025/05/25", "XX", "XXXX", "00000000000" }, -1);
-            ListViewItem listViewItem2 = new ListViewItem(new string[] { "2025/05/26", "XX", "XXXX", "11111111111" }, -1);
             label1 = new Label();
             ordenesPendientesListView = new ListView();
             fechaColumna = new ColumnHeader();
@@ -65,16 +63,13 @@
             ordenesPendientesListView.CheckBoxes = true;
             ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3 });
             ordenesPendientesListView.FullRowSelect = true;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem1.Tag = "";
-            listViewItem2.StateImageIndex = 0;
-            ordenesPendientesListView.Items.AddRange(new ListViewItem[] { listViewItem1, listViewItem2 });
             ordenesPendientesListView.Location = new Point(12, 27);
             ordenesPendientesListView.Name = "ordenesPendientesListView";
             ordenesPendientesListView.Size = new Size(776, 175);
             ordenesPendientesListView.TabIndex = 1;
             ordenesPendientesListView.UseCompatibleStateImageBehavior = false;
             ordenesPendientesListView.View = View.Details;
+            ordenesPendientesListView.SelectedIndexChanged += ordenesPendientesListView_SelectedIndexChanged;
             // 
             // fechaColumna
             // 

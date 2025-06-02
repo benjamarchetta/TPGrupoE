@@ -10,14 +10,11 @@ namespace TPGrupoE.Almacenes
     {
         private static List<ProductoEntidad> productos = new List<ProductoEntidad>()
         {
-            // Cliente 30-12345678-9 (2 productos)
-            new ProductoEntidad { Id = 1, CuitCliente = "30-12345678-9", sku = "PROD001", TipoProducto = "Electrónico", CantidadEnStock = 150, DescripcionMercaderia = "Teclados mecánicos", Ubicacion = "A1-25" },
-            new ProductoEntidad { Id = 2, CuitCliente = "30-12345678-9", sku = "PROD002", TipoProducto = "Electrónico", CantidadEnStock = 80, DescripcionMercaderia = "Mouse inalámbricos", Ubicacion = "A1-26" },
-    
-            // Cliente 33-98765432-1 (2 productos)
-            new ProductoEntidad { Id = 3, CuitCliente = "33-98765432-1", sku = "PROD003", TipoProducto = "Herramientas", CantidadEnStock = 200, DescripcionMercaderia = "Taladros profesionales", Ubicacion = "B2-10" },
-            new ProductoEntidad { Id = 4, CuitCliente = "33-98765432-1", sku = "PROD004", TipoProducto = "Herramientas", CantidadEnStock = 350, DescripcionMercaderia = "Juegos de llaves", Ubicacion = "B2-11" },
-    
+            new ProductoEntidad { IdProducto = 1, Sku = "PROD001", DescripcionProducto = "Teclados mecánicos"},
+            new ProductoEntidad { IdProducto = 2, Sku = "PROD002", DescripcionProducto = "Mouse inalámbricos"},
+            new ProductoEntidad { IdProducto = 3,  Sku = "PROD003", DescripcionProducto = "Taladros profesionales"},
+            new ProductoEntidad { IdProducto = 4,  Sku = "PROD004", DescripcionProducto = "Juegos de llaves"},
+    /*
             // Cliente 27-45678901-3 (2 productos)
             new ProductoEntidad { Id = 5, CuitCliente = "27-45678901-3", sku = "PROD005", TipoProducto = "Ferretería", CantidadEnStock = 500, DescripcionMercaderia = "Tornillos galvanizados", Ubicacion = "C3-15" },
             new ProductoEntidad { Id = 6, CuitCliente = "27-45678901-3", sku = "PROD006", TipoProducto = "Ferretería", CantidadEnStock = 120, DescripcionMercaderia = "Bisagras de acero", Ubicacion = "C3-16" },
@@ -49,6 +46,7 @@ namespace TPGrupoE.Almacenes
             new ProductoEntidad { Id = 20, CuitCliente = "27-67890123-7", sku = "PROD020", TipoProducto = "Papelería", CantidadEnStock = 500, DescripcionMercaderia = "Cajas de folios", Ubicacion = "I9-71" }
     
             // Cliente 20-90123456-8 (0 productos)
+    */
         };
 
         public static IReadOnlyList<ProductoEntidad> Productos = productos.AsReadOnly();

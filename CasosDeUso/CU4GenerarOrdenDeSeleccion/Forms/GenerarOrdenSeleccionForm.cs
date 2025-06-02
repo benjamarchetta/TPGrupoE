@@ -31,5 +31,10 @@ namespace TPGrupoE.CasoU_Procesar_Orden_de_Seleccion
         {
 
         }
+
+        private void ordenesPendientesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
