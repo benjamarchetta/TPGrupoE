@@ -78,6 +78,7 @@
             idOrdenTextBox.Size = new Size(200, 23);
             idOrdenTextBox.TabIndex = 1;
             idOrdenTextBox.Text = "XX";
+            idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
             // 
             // label2
             // 
@@ -114,11 +115,12 @@
             quitarProductoButton.TabIndex = 14;
             quitarProductoButton.Text = "Quitar producto de órden de preparación";
             quitarProductoButton.UseVisualStyleBackColor = true;
-            quitarProductoButton.Click += button3_Click;
+            quitarProductoButton.Click += quitarProductoButton_Click;
             // 
             // ordenDePreparacionListView
             // 
             ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, ubicacionColumnaPrep });
+            ordenDePreparacionListView.FullRowSelect = true;
             ordenDePreparacionListView.Location = new Point(12, 310);
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
             ordenDePreparacionListView.Size = new Size(776, 153);
@@ -177,7 +179,7 @@
             cuitTextBox.Name = "cuitTextBox";
             cuitTextBox.Size = new Size(383, 23);
             cuitTextBox.TabIndex = 19;
-            cuitTextBox.Text = "00000000000";
+            cuitTextBox.Text = "-";
             cuitTextBox.TextChanged += cuitTextBox_TextChanged;
             // 
             // productoComboBox
@@ -308,11 +310,13 @@
             // 
             // dniTransportistaComboBox
             // 
+            dniTransportistaComboBox.Enabled = false;
             dniTransportistaComboBox.FormattingEnabled = true;
             dniTransportistaComboBox.Location = new Point(12, 504);
             dniTransportistaComboBox.Name = "dniTransportistaComboBox";
             dniTransportistaComboBox.Size = new Size(121, 23);
             dniTransportistaComboBox.TabIndex = 33;
+            dniTransportistaComboBox.SelectedIndexChanged += dniTransportistaComboBox_SelectedIndexChanged;
             // 
             // label12
             // 
