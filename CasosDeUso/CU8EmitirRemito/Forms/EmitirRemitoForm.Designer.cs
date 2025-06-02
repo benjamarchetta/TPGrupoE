@@ -32,7 +32,7 @@
             ClienteLabel = new Label();
             TransportistaComboBox = new ComboBox();
             ClienteComboBox = new ComboBox();
-            Seleccionarbutton = new Button();
+            SeleccionarButton = new Button();
             EmitirRemitogroupBox = new GroupBox();
             EmitirRemitoListView = new ListView();
             IdOrdenPreparacion = new ColumnHeader();
@@ -77,14 +77,14 @@
             ClienteComboBox.Size = new Size(254, 23);
             ClienteComboBox.TabIndex = 3;
             // 
-            // Seleccionarbutton
+            // SeleccionarButton
             // 
-            Seleccionarbutton.Location = new Point(285, 64);
-            Seleccionarbutton.Name = "Seleccionarbutton";
-            Seleccionarbutton.Size = new Size(164, 41);
-            Seleccionarbutton.TabIndex = 4;
-            Seleccionarbutton.Text = "Seleccionar";
-            Seleccionarbutton.UseVisualStyleBackColor = true;
+            SeleccionarButton.Location = new Point(285, 64);
+            SeleccionarButton.Name = "SeleccionarButton";
+            SeleccionarButton.Size = new Size(164, 41);
+            SeleccionarButton.TabIndex = 4;
+            SeleccionarButton.Text = "Seleccionar";
+            SeleccionarButton.UseVisualStyleBackColor = true;
             // 
             // EmitirRemitogroupBox
             // 
@@ -148,7 +148,7 @@
             Controls.Add(VolverButton);
             Controls.Add(EmitirRemitoButton);
             Controls.Add(EmitirRemitogroupBox);
-            Controls.Add(Seleccionarbutton);
+            Controls.Add(SeleccionarButton);
             Controls.Add(ClienteComboBox);
             Controls.Add(TransportistaComboBox);
             Controls.Add(ClienteLabel);
@@ -166,7 +166,7 @@
         private Label ClienteLabel;
         private ComboBox TransportistaComboBox;
         private ComboBox ClienteComboBox;
-        private Button Seleccionarbutton;
+        private Button SeleccionarButton;
         private GroupBox EmitirRemitogroupBox;
         private ListView EmitirRemitoListView;
         private ColumnHeader IdOrdenPreparacion;

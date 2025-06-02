@@ -7,11 +7,19 @@ using TPGrupoE.Almacenes;
 
 namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
 {
-    internal class EmitirRemitoModel
+    public class EmitirRemitoModel
     {
+        // Guardo las órdenes filtradas según transportista y cliente
         public List<OrdenPreparacionEntidad> OrdenesFiltradas { get; private set; } = new();
 
-        // Llama a los métodos que cargan los datos desde los archivos JSON
+        // Guardo los transportistas como objetos para mostrar en ComboBox
+        public List<ComboBoxItem> Transportistas { get; private set; } = new();
+
+        public EmitirRemitoModel()
+        {
+            CargarTransportistas(); // Al iniciar el modelo cargo los transportistas disponibles
+        }
+
         public void CargarDatosIniciales()
         {
             ClienteAlmacen.LeerCliente();
@@ -20,80 +28,86 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
             RemitoAlmacen.LeerRemito();
         }
 
-        // Devuelve todos los clientes cargados (para poblar el ComboBox)
         public List<ClienteEntidad> ObtenerClientes()
         {
-            return ClienteAlmacen.Clientes.ToList();
+            return ClienteAlmacen.Clientes.ToList(); // Devuelvo todos los clientes del almacén
         }
 
-        // Devuelve los DNIs únicos de transportistas que tienen alguna OP
-        public List<int> ObtenerTransportistas()
+        public void CargarOrdenesPorTransportistaYCliente(int dni, int idCliente)
         {
-            return OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Select(op => op.DniTransportista)
-                .Distinct()
-                .ToList();
+            // Busco solo las OP que coinciden con transportista, cliente, que estén preparadas y tengan OE pendiente
+            OrdenesFiltradas = OrdenPreparacionAlmacen.OrdenesPreparacion
+                .Where(op =>
+                    op.DniTransportista == dni &&
+                    op.IdCliente == idCliente &&
+                    op.Estado == EstadoOrdenPreparacion.Preparada &&
+                    OrdenEntregaAlmacen.OrdenesEntrega.Any(oe => oe.IdOrdenPreparacion.Contains(op.IdOrdenPreparacion) && oe.Estado == EstadoOrdenEntrega.Pendiente)
+                ).ToList();
         }
 
-        // Filtra las OPs según transportista, cliente y estado "Preparada",
-        // y que además estén vinculadas a una OE en estado "Pendiente"
-        public List<OrdenPreparacionEntidad> BuscarOrdenesFiltradas(int dniTransportista, int idCliente)
+        public string EmitirRemito(int dniTransportista, int idCliente, List<int> idsOrdenes)
         {
-            var ordenesPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
-            var ordenesEntregaPendiente = OrdenEntregaAlmacen.BuscarOrdenesParaDespachar();
+            if (idsOrdenes.Count == 0)
+                return "No hay órdenes seleccionadas.";
 
-            // Buscamos los IDs de todas las OP que están vinculadas a OE pendientes
-            var idsEntregaPendientes = ordenesEntregaPendiente
-                .SelectMany(oe => oe.IdOrdenPreparacion)
-                .ToHashSet();
+            // Creo un nuevo ID de Remito
+            int nuevoId = RemitoAlmacen.Remitos.Count + 1;
 
-            // Ahora filtramos las OP que cumplen con todos los criterios
-            OrdenesFiltradas = ordenesPreparadas
-                .Where(op => op.DniTransportista == dniTransportista &&
-                             op.IdCliente == idCliente &&
-                             idsEntregaPendientes.Contains(op.IdOrdenPreparacion))
-                .ToList();
-
-            return OrdenesFiltradas;
-        }
-
-        // Emite un nuevo remito, cambia estados y guarda los cambios en disco
-        public string EmitirRemito(int idCliente, int dniTransportista, List<int> ordenesSeleccionadas)
-        {
-            // Crear y guardar el nuevo remito
-            var remito = new RemitoEntidad
+            RemitoEntidad remito = new()
             {
-                IDCliente = idCliente,
+                IdRemito = nuevoId,
                 DNITransportista = dniTransportista,
-                IDOrdenPreparacion = ordenesSeleccionadas
+                IDCliente = idCliente,
+                FechaEmision = DateTime.Now,
+                IDOrdenPreparacion = idsOrdenes
             };
 
-            RemitoAlmacen.NuevoRemito(remito);
+            // Agrego el nuevo remito al almacén
+            var lista = RemitoAlmacen.Remitos as List<RemitoEntidad>;
+            if (lista != null)
+                lista.Add(remito);
+
             RemitoAlmacen.GrabarRemito();
 
-            // Actualiza estado de cada OP a "Despachada"
-            foreach (var idOp in ordenesSeleccionadas)
+            // Actualizo estado de OP y OE
+            foreach (var id in idsOrdenes)
             {
-                var op = OrdenPreparacionAlmacen.OrdenesPreparacion.FirstOrDefault(o => o.IdOrdenPreparacion == idOp);
-                if (op != null) op.Estado = EstadoOrdenPreparacion.Despachada;
+                var orden = OrdenPreparacionAlmacen.OrdenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == id);
+                if (orden != null)
+                    orden.MarcarOpDespachada();
+
+                var entrega = OrdenEntregaAlmacen.OrdenesEntrega.FirstOrDefault(oe => oe.IdOrdenPreparacion.Contains(id));
+                if (entrega != null)
+                    entrega.Estado = EstadoOrdenEntrega.Cumplida;
             }
 
-            // Actualiza estado de OE a "Cumplida" si todas sus OP están despachadas
-            foreach (var oe in OrdenEntregaAlmacen.OrdenesEntrega)
-            {
-                if (ordenesSeleccionadas.All(id => oe.IdOrdenPreparacion.Contains(id)))
-                {
-                    oe.Estado = EstadoOrdenEntrega.Cumplida;
-                }
-            }
-
-            // Guardar cambios
             OrdenPreparacionAlmacen.GrabarOP();
             OrdenEntregaAlmacen.GrabarOE();
 
-            // Devuelvo el ID del remito generado como string con prefijo "R-"
-            return $"R-{remito.IdRemito}";
+            return nuevoId.ToString();
+        }
+
+        private void CargarTransportistas()
+        {
+            // Cargo solo transportistas de OP en estado 'Preparada', sin duplicar DNIs
+            Transportistas = OrdenPreparacionAlmacen.OrdenesPreparacion
+                .Where(op => op.Estado == EstadoOrdenPreparacion.Preparada)
+                .Select(op => op.DniTransportista)
+                .Distinct()
+                .Select(dni => new ComboBoxItem
+                {
+                    Text = $"DNI: {dni}",
+                    Value = dni
+                })
+                .ToList();
         }
     }
 
+    // Clase auxiliar para mostrar en ComboBox
+    public class ComboBoxItem
+    {
+        public string Text { get; set; } = "";
+        public int Value { get; set; }
+        public override string ToString() => Text;
+    }
 }
