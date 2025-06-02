@@ -1,0 +1,102 @@
+[
+    {
+        "IdProducto": 1,
+        "Sku": "MAT-ALM-001",
+        "DescripcionProducto": "Pack de cajas de cartón reforzado (50x50x50)"
+    },
+    {
+        "IdProducto": 2,
+        "Sku": "ELEC-CAB-003",
+        "DescripcionProducto": "Rollos de cable eléctrico 3x2.5mm"
+    },
+    {
+        "IdProducto": 3,
+        "Sku": "FER-HER-010",
+        "DescripcionProducto": "Cajas de herrajes para puertas corredizas"
+    },
+    {
+        "IdProducto": 4,
+        "Sku": "OFI-SILL-021",
+        "DescripcionProducto": "Sillas ergonómicas de oficina en caja"
+    },
+    {
+        "IdProducto": 5,
+        "Sku": "TEC-MON-107",
+        "DescripcionProducto": "Monitores LED 24'' en caja"
+    },
+    {
+        "IdProducto": 6,
+        "Sku": "CON-INS-042",
+        "DescripcionProducto": "Bultos de aislante térmico enrollado"
+    },
+    {
+        "IdProducto": 7,
+        "Sku": "LIM-HIG-015",
+        "DescripcionProducto": "Dispensadores de papel para baño (industrial)"
+    },
+    {
+        "IdProducto": 8,
+        "Sku": "SEG-CAM-004",
+        "DescripcionProducto": "Cámaras de seguridad IP listas para instalación"
+    },
+    {
+        "IdProducto": 9,
+        "Sku": "FER-TUB-099",
+        "DescripcionProducto": "Tubos galvanizados de 1.5 metros"
+    },
+    {
+        "IdProducto": 10,
+        "Sku": "OFI-MES-034",
+        "DescripcionProducto": "Escritorios de oficina desmontados en caja"
+    },
+    {
+        "IdProducto": 11,
+        "Sku": "TEC-IMP-008",
+        "DescripcionProducto": "Impresoras térmicas industriales"
+    },
+    {
+        "IdProducto": 12,
+        "Sku": "ALM-EST-050",
+        "DescripcionProducto": "Estanterías metálicas para depósitos (desarmadas)"
+    },
+    {
+      "IdProducto": 13,
+      "Sku": "EMB-FIL-023",
+      "DescripcionProducto": "Rollos de film stretch para embalaje industrial"
+    },
+    {
+        "IdProducto": 14,
+        "Sku": "CON-PIN-013",
+        "DescripcionProducto": "Baldes de pintura látex interior 20L"
+    },
+    {
+        "IdProducto": 15,
+        "Sku": "SEG-EQU-027",
+        "DescripcionProducto": "Kits de seguridad industrial (cascos, guantes, antiparras)"
+    },
+    {
+        "IdProducto": 16,
+        "Sku": "FER-CER-035",
+        "DescripcionProducto": "Cerraduras digitales para puertas metálicas"
+    },
+    {
+        "IdProducto": 17,
+        "Sku": "TEC-SRV-022",
+        "DescripcionProducto": "Servidores rackeables 2U embalados"
+    },
+    {
+        "IdProducto": 18,
+        "Sku": "MAT-CIN-090",
+        "DescripcionProducto": "Bobinas de cinta de embalar reforzada"
+    },
+    {
+        "IdProducto": 19,
+        "Sku": "ALM-CAR-062",
+        "DescripcionProducto": "Carros de traslado plegables industriales"
+    },
+    {
+        "IdProducto": 20,
+        "Sku": "TEC-TAB-099",
+        "DescripcionProducto": "Tablets industriales resistentes al agua y polvo"
+    }
+]
