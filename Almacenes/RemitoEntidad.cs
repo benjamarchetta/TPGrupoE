@@ -14,8 +14,5 @@ namespace TPGrupoE.Almacenes
         public int DNITransportista { get; set; }
         public List<int> IDOrdenPreparacion { get; set; }
 
-
-
-
     }
 }

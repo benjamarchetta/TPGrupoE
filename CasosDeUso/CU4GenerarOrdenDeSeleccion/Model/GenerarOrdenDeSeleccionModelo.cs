@@ -19,3 +19,4 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
 
     }
 }
+

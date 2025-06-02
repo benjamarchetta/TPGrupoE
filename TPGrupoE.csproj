@@ -25,11 +25,9 @@
 
   <ItemGroup>
     <Folder Include="CasosDeUso\CU2MenuPrincipal\Model\" />
-    <Folder Include="CasosDeUso\CU5GestionarOrdenDeSeleccion\Model\" />
-    <Folder Include="CasosDeUso\CU6Empaquetado\Forms\" />
-    <Folder Include="CasosDeUso\CU6Empaquetado\Model\" />
     <Folder Include="CasosDeUso\CU7CargarOrdenDeEntrega\Model\" />
     <Folder Include="CasosDeUso\CU8EmitirRemito\Model\" />
+    <Folder Include="Datos\" />
   </ItemGroup>
 
 </Project>

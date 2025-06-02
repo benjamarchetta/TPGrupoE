@@ -1,0 +1,11 @@
+[
+  {
+    "IdRemito": 3001,
+    "FechaEmision": "2025-06-02",
+    "IDCliente": 4,
+    "DNITransportista": 30111224,
+    "IDOrdenPreparacion": [
+      1003
+    ]
+  }
+]
