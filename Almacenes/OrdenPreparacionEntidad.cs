@@ -15,6 +15,5 @@ namespace TPGrupoE.Almacenes
         public bool PalletCerrado { get; set; }
         public List<ProductoOrdenEntidad> productosOrden { get; set; }
 
-        
     }
 }

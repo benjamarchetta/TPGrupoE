@@ -16,5 +16,10 @@ namespace TPGrupoE.Almacenes
         };
 
         public static IReadOnlyList<OrdenPreparacionEntidad> OrdenesDePreparacion = ordenesDePreparacion.AsReadOnly();
+
+        public static void AgregarOrdenDePreparacion (OrdenPreparacionEntidad ordenPreparacion)
+        {
+            ordenesDePreparacion.Add(ordenPreparacion);
+        }
     }
 }

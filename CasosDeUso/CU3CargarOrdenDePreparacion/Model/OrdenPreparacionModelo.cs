@@ -48,7 +48,8 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             }
         }
 
-        public static List<ProductoEntidad> Productos
+        
+        /*public static List<ProductoEntidad> Productos
         {
             get
             {
@@ -68,7 +69,54 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 }
                 return Productos;
             }
+        }*/
+
+        /*public static List<ProductoEntidad> Productos { get; private set; }
+
+        static OrdenPreparacionModelo()
+        {
+            // Inicializamos una vez al comienzo
+            Productos = ProductoAlmacen.Productos.Select(p => new ProductoEntidad
+            {
+                Id = p.Id,
+                CuitCliente = p.CuitCliente,
+                sku = p.sku,
+                TipoProducto = p.TipoProducto,
+                CantidadEnStock = p.CantidadEnStock,
+                DescripcionMercaderia = p.DescripcionMercaderia,
+                Ubicacion = p.Ubicacion,
+            }).ToList();
+        }*/
+
+        private static List<ProductoEntidad> productosCopia;
+
+        public static List<ProductoEntidad> Productos
+        {
+            get
+            {
+                if (productosCopia == null)
+                {
+                    productosCopia = new List<ProductoEntidad>();
+                    foreach (var producto in ProductoAlmacen.Productos)
+                    {
+                        productosCopia.Add(new ProductoEntidad
+                        {
+                            Id = producto.Id,
+                            CuitCliente = producto.CuitCliente,
+                            sku = producto.sku,
+                            TipoProducto = producto.TipoProducto,
+                            CantidadEnStock = producto.CantidadEnStock,
+                            DescripcionMercaderia = producto.DescripcionMercaderia,
+                            Ubicacion = producto.Ubicacion,
+                        });
+                    }
+                }
+
+                return productosCopia;
+            }
         }
+
+
 
         public static List<TransportistaEntidad> Transportistas
         {
@@ -84,6 +132,25 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                     });
                 }
                 return Transportistas;
+            }
+        }
+
+        public static List<ProductoOrdenEntidad> ProductosOrden
+        {
+            get
+            {
+                var ProductosOrden = new List<ProductoOrdenEntidad>();
+                foreach (var productoOrden in ProductoOrdenAlmacen.ProductosOrden)
+                {
+                    ProductosOrden.Add(new ProductoOrdenEntidad
+                    {
+                        Id = productoOrden.Id,
+                        sku = productoOrden.sku,
+                        TipoProducto = productoOrden.TipoProducto,
+                        Cantidad = productoOrden.Cantidad,
+                    });
+                }
+                return ProductosOrden;
             }
         }
     };

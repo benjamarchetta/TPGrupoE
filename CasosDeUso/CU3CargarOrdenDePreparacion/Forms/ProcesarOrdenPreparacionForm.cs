@@ -19,6 +19,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             InitializeComponent();
         }
 
+
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             palletCerradoComboBox.SelectedIndex = 0;
@@ -67,8 +68,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         }
 
-
-
         private void label7_Click(object sender, EventArgs e)
         {
 
@@ -83,7 +82,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         {
 
         }
-
 
         private void palletCerradoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -100,12 +98,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
             }
         }
-
-
-
-
-
-
 
         private void razonSocialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -159,7 +151,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             }
         }
 
-
         private void productoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             skuTextBox.Text = "-";
@@ -197,7 +188,18 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
-                        cantidadARetirarTextBox.Text = null;
+                        cantidadARetirarTextBox.Text = "";
+                        agregarProductoButton.Enabled = false;
+                    }
+                    else if ((cantidadARetirar == 0 && producto.CantidadEnStock == 0))
+                    {
+                        MessageBox.Show(
+                            $"No hay stock disponible del producto seleccionado.",
+                            "Advertencia",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                        cantidadARetirarTextBox.Text = "";
                         agregarProductoButton.Enabled = false;
                     }
                 }
@@ -207,7 +209,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         private void cantidadARetirarTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo numeros y borrar
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true; // bloquea la tecla
             }
@@ -221,13 +223,39 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         private void agregarProductoButton_Click(object sender, EventArgs e)
         {
+            if (productoComboBox.SelectedItem is ProductoEntidad producto)
+            {
+                string sku = producto.sku;
+                string nombreProducto = producto.DescripcionMercaderia;
+                int cantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
+
+                // Agregar prod a la lista
+                ListViewItem fila = ordenDePreparacionListView.Items.Add(sku);
+                fila.SubItems.Add(nombreProducto);
+                fila.SubItems.Add(cantidadARetirar.ToString());
+
+                // 🔽 Restar stock
+                producto.CantidadEnStock -= cantidadARetirar;
+                cantidadEnStockTextBox.Text = producto.CantidadEnStock.ToString();
+
+                cantidadARetirarTextBox.Text = "";
+
+                // Habilitar transportista
+                dniTransportistaComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+
+                agregarProductoButton.Enabled = false;
+            }
+
+            /*
             string sku = skuTextBox.Text;
-            string producto = productoComboBox.Text;
+            string nombreProducto = productoComboBox.Text;
             string cantidadARetirar = cantidadARetirarTextBox.Text;
 
             ListViewItem fila = ordenDePreparacionListView.Items.Add(sku); // primera columna
-            fila.SubItems.Add(producto);     // segunda 
+            fila.SubItems.Add(nombreProducto);     // segunda 
             fila.SubItems.Add(cantidadARetirar); //tercera
+
+            
 
             //Resta
             int resultado = int.Parse(cantidadEnStockTextBox.Text) - int.Parse(cantidadARetirarTextBox.Text); 
@@ -245,6 +273,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             {
                 dniTransportistaComboBox.Enabled = false;
             }
+            */
         }
         private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -255,7 +284,34 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         {
             foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
             {
+                string sku = item.Text;
+                int cantidadARetirada = int.Parse(item.SubItems[2].Text);
+
+                // BUSCAR el producto original por SKU y sumar stock
+                var producto = OrdenPreparacionModelo.Productos.FirstOrDefault(p => p.sku == sku);
+                if (producto != null)
+                {
+                    producto.CantidadEnStock += cantidadARetirada;
+                }
+
+                // Eliminar de la lista
                 ordenDePreparacionListView.Items.Remove(item);
+            }
+
+            // Actualizar textbox de stock si el producto sigue seleccionado
+            if (productoComboBox.SelectedItem is ProductoEntidad productoActual)
+            {
+                cantidadEnStockTextBox.Text = productoActual.CantidadEnStock.ToString();
+            }
+
+            // Habilitar/deshabilitar transportista
+            dniTransportistaComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+
+            /*foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
+            {
+                ordenDePreparacionListView.Items.Remove(item);
+                string cantidad = item.SubItems[2].Text;
+                cantidadEnStockTextBox.Text =  (int.Parse(cantidadEnStockTextBox.Text)+int.Parse(cantidad)).ToString();
                 if (ordenDePreparacionListView.Items.Count > 0)
                 {
                     dniTransportistaComboBox.Enabled = true;
@@ -264,17 +320,81 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 {
                     dniTransportistaComboBox.Enabled = false;
                 }
-            }
+            }*/
         }
 
         private void dniTransportistaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            cargarOrdenButton.Enabled = (dniTransportistaComboBox.SelectedIndex != -1);
         }
 
         private void idOrdenTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cargarOrdenButton_Click(object sender, EventArgs e)
+        {
+            // Generar nuevo ID de orden
+            int nuevoIdOrden = GenerarIdOrden();
+
+            // Crear lista de productos asociados a la orden
+            List<ProductoOrdenEntidad> productosAsociados = new List<ProductoOrdenEntidad>();
+
+            foreach (ListViewItem item in ordenDePreparacionListView.Items)
+            {
+                string sku = item.SubItems[0].Text;
+                string tipoProducto = item.SubItems[1].Text;
+                int cantidad = int.Parse(item.SubItems[2].Text);
+
+                ProductoOrdenEntidad productoOrden = new ProductoOrdenEntidad
+                {
+                    Id = nuevoIdOrden, // Todos los productos comparten el mismo ID de orden
+                    sku = sku,
+                    TipoProducto = tipoProducto,
+                    Cantidad = cantidad
+                };
+
+                // Agregamos al almacén de productos orden
+                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
+
+                // Y a la lista local para la orden
+                productosAsociados.Add(productoOrden);
+            }
+
+            // Crear la orden de preparación
+            OrdenPreparacionEntidad Orden = new OrdenPreparacionEntidad
+            {
+                Id = nuevoIdOrden,
+                CuitCliente = cuitTextBox.Text,
+                Estado = "En preparación",
+                FechaDespacho = DespachoDateTimePicker.Value,
+                PalletCerrado = palletCerradoComboBox.SelectedIndex == 1,
+                productosOrden = productosAsociados
+            };
+
+            // Agregar la orden al almacén
+            OrdenPreparacionAlmacen.AgregarOrdenDePreparacion(Orden);
+
+            MessageBox.Show("Orden de preparación cargada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Opcional: limpiar formulario
+            ordenDePreparacionListView.Items.Clear();
+            cantidadARetirarTextBox.Text = "";
+            productoComboBox.SelectedIndex = -1;
+            razonSocialComboBox.SelectedIndex = -1;
+            cuitTextBox.Text = "-";
+            skuTextBox.Text = "-";
+            cantidadEnStockTextBox.Text = "-";
+            dniTransportistaComboBox.SelectedIndex = -1;
+
+        }
+
+        private int GenerarIdOrden()
+        {
+            return OrdenPreparacionAlmacen.OrdenesDePreparacion.Count == 0
+                ? 1001
+                : OrdenPreparacionAlmacen.OrdenesDePreparacion.Max(o => o.Id) + 1;
         }
     }
 }
