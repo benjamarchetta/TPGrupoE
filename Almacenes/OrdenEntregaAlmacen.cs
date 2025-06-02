@@ -2,22 +2,60 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class OrdenEntregaAlmacen
+    internal static class OrdenEntregaAlmacen
     {
-        private static List<OrdenEntregaEntidad> ordenesEntrega = new List<OrdenEntregaEntidad>
-        {
-            new OrdenEntregaEntidad
-            {
-                IdOrdenEntrega = 1,
-                IdOrdenPreparacion = new List<int> { 1001, 1002 },
-                Estado = EstadoOrdenEntrega.Pendiente,
-            }
-        };
+        private static List<OrdenEntregaEntidad> ordenesEntrega = new List<OrdenEntregaEntidad>();
 
-        public static IReadOnlyList<OrdenEntregaEntidad> OrdenesEntrega => ordenesEntrega.AsReadOnly();
+        public static IReadOnlyCollection<OrdenEntregaEntidad> OrdenesEntrega => ordenesEntrega.AsReadOnly();
+
+        public static void GrabarOE()
+        {
+            var datosOE = JsonSerializer.Serialize(ordenesEntrega);
+
+            File.WriteAllText(@"Datos\ordenesEntrega.json", datosOE);
+        }
+
+        public static void LeerOE()
+        {
+            if (!File.Exists(@"Datos\ordenesEntrega.json"))
+            {
+                return;
+            }
+
+            var datosOE = File.ReadAllText(@"Datos\ordenesEntrega.json");
+
+            ordenesEntrega = JsonSerializer.Deserialize<List<OrdenEntregaEntidad>>(datosOE)!;
+        }
+
+        internal static string NuevaOE(OrdenEntregaEntidad nuevaOrden)
+        {
+            if (OrdenEntregaAlmacen.ordenesEntrega.Count == 0)
+            {
+                nuevaOrden.IdOrdenEntrega = 1;
+            }
+            else
+            {
+                nuevaOrden.IdOrdenEntrega = OrdenEntregaAlmacen.OrdenesEntrega.Max(oe => oe.IdOrdenEntrega) + 1;
+            }
+
+
+            ordenesEntrega.Add(nuevaOrden);
+            return null; //sin errores.
+        }
+
+        public static List<OrdenEntregaEntidad> BuscarOrdenesParaDespachar()
+        {
+            return ordenesEntrega.FindAll(o => o.Estado == EstadoOrdenEntrega.Pendiente);
+        }
+
+        public static OrdenEntregaEntidad BuscarOrdenPorId(int id)
+        {
+            return ordenesEntrega.FirstOrDefault(oe => oe.IdOrdenEntrega == id);
+        }
     }
 }
