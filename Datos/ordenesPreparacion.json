@@ -114,9 +114,9 @@
   {
     "IdOrdenPreparacion": 1008,
     "IdDeposito": 3,
-    "IdCliente": 2,
+    "IdCliente": 3,
     "DniTransportista": 30111229,
-    "Estado": 4,
+    "Estado": 3,
     "FechaEntrega": "2025-06-17T14:18:16.6600073-03:00",
     "PalletCerrado": false,
     "ProductoOrden": [

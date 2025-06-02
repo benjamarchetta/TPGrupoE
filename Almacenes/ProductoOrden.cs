@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    
     public class ProductoOrden
     {
         public int IdProducto { get; set; }
