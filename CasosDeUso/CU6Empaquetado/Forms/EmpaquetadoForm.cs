@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.Almacenes;
-using TP_CAI.Forms.Empaquetado.Model;
-using TP_CAI.Forms.OrdenDePreparacion.Model;
+using TPGrupoE.CasoU_Empaquetado;
+using TPGrupoE.CasoU_EmpaquetadoOrdenes;
+using TPGrupoE.ProductosOP;
 
 namespace TPGrupoE.CasoU_Empaquetado
 {
@@ -37,27 +38,27 @@ namespace TPGrupoE.CasoU_Empaquetado
             if (ordenDePreparacionAEmpaquetar == null)
             {
                 MessageBox.Show("No hay ordenes de preparacion para empaquetar");
-                OrdenesPreparacionListView.Items.Clear();
-                NroOrdenLabel.Text = "N/A";
+                ordenesDePreparacionListView.Items.Clear();
+                nroOrden.Text = "N/A";
                 return;
             }
 
-            NroOrdenLabel.Text = ordenDePreparacionAEmpaquetar.Id;
+            nroOrden.Text = ordenDePreparacionAEmpaquetar.Id;
 
-            List<Producto> productosOrden = ordenDePreparacionAEmpaquetar.Productos;
+            List<CasoU_EmpaquetadoOrdenes.ProductoAlmacen> productosOrden = ordenDePreparacionAEmpaquetar.Producto;
 
-            OrdenesPreparacionListView.Items.Clear();
+            ordenesDePreparacionListView.Items.Clear();
             foreach (var producto in productosOrden)
             {
                 var item = new ListViewItem(new[]
-                  {
-                        producto.Id.ToString(),
-                        producto.Descripcion,
-                        producto.Cantidad.ToString(),
-                    });
+                {
+                    producto.IdProducto.ToString(),
+                    producto.DescripcionProducto,
+                    producto.Cantidad.ToString(),
+                });
 
                 // Agregar el item al ListView
-                OrdenesPreparacionListView.Items.Add(item);
+                ordenesDePreparacionListView.Items.Add(item);
             }
         }
 
@@ -76,7 +77,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             // Verifica si el formulario principal ya está abierto
             foreach (Form form in Application.OpenForms)
             {
-                if (form is PantallaPrincipalForm)
+                if (form is MenuPrincipal)
                 {
                     form.Show(); // Muestra el formulario si está oculto
                     return;
@@ -84,8 +85,8 @@ namespace TPGrupoE.CasoU_Empaquetado
             }
 
             // Si no está abierto, crea una nueva instancia (solo si es necesario)
-            PantallaPrincipalForm pantallaPrincipalForm = new PantallaPrincipalForm();
-            pantallaPrincipalForm.Show();
+            MenuPrincipal pantallaPrincipalForm = new MenuPrincipal();
+            pantallaPrincipalForm.Show(); // Cambiar a usar la instancia creada
         }
 
         private void empaquetarButton_Click(object sender, EventArgs e)
@@ -103,9 +104,5 @@ namespace TPGrupoE.CasoU_Empaquetado
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

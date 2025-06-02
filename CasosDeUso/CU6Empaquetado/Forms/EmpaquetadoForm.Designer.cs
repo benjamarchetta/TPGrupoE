@@ -30,8 +30,8 @@ namespace TPGrupoE.CasoU_Empaquetado
 
         private void InitializeComponent()
         {
-            idOrdenTextBox = new TextBox();
             label2 = new Label();
+            nroOrden = new TextBox();
             empaquetarButton = new Button();
             productoAEmpaquetarListView = new ListView();
             skuColumnaSelec = new ColumnHeader();
@@ -39,28 +39,24 @@ namespace TPGrupoE.CasoU_Empaquetado
             cantidadColumnaSelec = new ColumnHeader();
             SuspendLayout();
             // 
-            // idOrdenTextBox
-            // 
-            idOrdenTextBox.BackColor = SystemColors.InactiveCaption;
-            idOrdenTextBox.Enabled = false;
-            idOrdenTextBox.Location = new Point(176, 24);
-            idOrdenTextBox.Margin = new Padding(3, 4, 3, 4);
-            idOrdenTextBox.Name = "idOrdenTextBox";
-            idOrdenTextBox.Size = new Size(149, 27);
-            idOrdenTextBox.TabIndex = 1;
-            idOrdenTextBox.Text = "XX";
-            idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = SystemColors.Control;
-            label2.Location = new Point(14, 27);
+            label2.Location = new Point(14, 22);
             label2.Name = "label2";
-            label2.Size = new Size(147, 20);
+            label2.Size = new Size(135, 20);
             label2.TabIndex = 2;
-            label2.Text = "Orden a Empaquetar";
-            label2.Click += label2_Click;
+            label2.Text = "Empaquetar Orden";
+            // 
+            // nroOrden
+            // 
+            nroOrden.BackColor = SystemColors.InactiveCaption;
+            nroOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            nroOrden.Location = new Point(171, 12);
+            nroOrden.Name = "nroOrden";
+            nroOrden.Size = new Size(48, 34);
+            nroOrden.TabIndex = 13;
+            nroOrden.Text = "000";
             // 
             // empaquetarButton
             // 
@@ -107,10 +103,10 @@ namespace TPGrupoE.CasoU_Empaquetado
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(911, 598);
-            Controls.Add(idOrdenTextBox);
-            Controls.Add(label2);
+            Controls.Add(nroOrden);
             Controls.Add(empaquetarButton);
             Controls.Add(productoAEmpaquetarListView);
+            Controls.Add(label2);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmpaquetadoForm";
             Text = "Empaquetado";
@@ -120,13 +116,17 @@ namespace TPGrupoE.CasoU_Empaquetado
         }
         #endregion
 
-        private TextBox idOrdenTextBox;
-        private Label label2;
+        private ListView ordenesDePreparacionListView;
+        private ColumnHeader IdProducto;
+        private ColumnHeader Descripcion;
+        private ColumnHeader CantidadProducto;
         private Button empaquetarButton;
         private ListView productoAEmpaquetarListView;
         private ColumnHeader skuColumnaSelec;
         private ColumnHeader descripcionColumnaPrep;
         private ColumnHeader cantidadColumnaSelec;
-
+        private TextBox nroOrden;
+        private TextBox textBox1; 
+        private Label label2;
     }
 }
