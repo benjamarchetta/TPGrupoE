@@ -3,6 +3,7 @@ using TPGrupoE.CasoU_Procesar_Orden_de_Seleccion;
 using TPGrupoE.CasoU_Confirmar_Seleccion;
 using TPGrupoE.CasoU_Generar_Orden_de_Entrega;
 using TP_Grupo_E._6_CasoU_Cumplir_Orden_de_Entrega;
+using TPGrupoE.CasoU_Empaquetado;
 
 namespace TPGrupoE
 {
@@ -10,7 +11,7 @@ namespace TPGrupoE
     {
         public MenuPrincipal()
         {
-            InitializeComponent();
+            InitializeComponent(GetEmitirRemitoButton(), GetV(GetEmitirRemitoButton()), GetEmitirRemitoButton());
         }
 
         ProcesarOrdenPreparacionForm ProcesarOrdenPreparacion = new ProcesarOrdenPreparacionForm();
@@ -19,6 +20,7 @@ namespace TPGrupoE
         GestionarOrdenSeleccionForm ConfirmarSeleccion = new GestionarOrdenSeleccionForm();
         CumplirOrdenEntregaForm CumplirOrdenEntrega = new CumplirOrdenEntregaForm();
         CumplirOrdenEntregaForm GenerarOrdenDespacho = new CumplirOrdenEntregaForm();
+        EmpaquetadoForm Empaquetado = new EmpaquetadoForm();
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
@@ -45,9 +47,15 @@ namespace TPGrupoE
             CumplirOrdenEntrega.ShowDialog();
         }
 
-        private void EmitirRemitoButton_Click(object sender, EventArgs e)
+        private void emitirRemitoButton_Click(object sender, EventArgs e)
         {
             EmitirRemito.ShowDialog();
+        }
+        private void empaquetarButton_Click(object sender, EventArgs e)
+        {
+            EmpaquetadoForm empaquetadoForm = new EmpaquetadoForm();
+            this.Hide();
+            empaquetadoForm.Show();
         }
     }
 }
