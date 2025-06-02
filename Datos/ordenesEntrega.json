@@ -5,5 +5,11 @@
     "IdOrdenPreparacion": [
       1009
     ]
+  },
+  {
+    "IdOrdenEntrega": 2002,
+    "Estado": 0,
+    "IdOrdenPreparacion": [ 1004, 1008 ]
   }
+
 ]
