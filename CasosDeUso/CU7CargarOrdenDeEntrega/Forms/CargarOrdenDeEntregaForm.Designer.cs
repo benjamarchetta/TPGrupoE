@@ -30,15 +30,13 @@
         {
             AgregarOrdenPreparacionButton = new Button();
             OrdenesEmpaquetadasListView = new ListView();
-            IdOrdenPicking = new ColumnHeader();
-            CantidadDeBultos = new ColumnHeader();
+            IdOrdenPreparacion = new ColumnHeader();
             FechaEntrega = new ColumnHeader();
             BorrarSelecciónButton = new Button();
             OrdenesEmpaquetadasGroupBox = new GroupBox();
             OrdenesEmpaquetadasALiberarGroupBox = new GroupBox();
             OrdenesEmpaquetadasALiberarListView = new ListView();
             IdOrdenPreparacionALiberar = new ColumnHeader();
-            CantidadBultosALiberar = new ColumnHeader();
             FechaEntregaPlanificada = new ColumnHeader();
             LiberarParaDespachoButton = new Button();
             OrdenesEmpaquetadasGroupBox.SuspendLayout();
@@ -59,8 +57,7 @@
             // OrdenesEmpaquetadasListView
             // 
             OrdenesEmpaquetadasListView.BackColor = SystemColors.ControlLightLight;
-            OrdenesEmpaquetadasListView.CheckBoxes = true;
-            OrdenesEmpaquetadasListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPicking, CantidadDeBultos, FechaEntrega });
+            OrdenesEmpaquetadasListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, FechaEntrega });
             OrdenesEmpaquetadasListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             OrdenesEmpaquetadasListView.FullRowSelect = true;
             OrdenesEmpaquetadasListView.GridLines = true;
@@ -68,21 +65,15 @@
             OrdenesEmpaquetadasListView.Location = new Point(12, 27);
             OrdenesEmpaquetadasListView.Margin = new Padding(2);
             OrdenesEmpaquetadasListView.Name = "OrdenesEmpaquetadasListView";
-            OrdenesEmpaquetadasListView.OwnerDraw = true;
             OrdenesEmpaquetadasListView.Size = new Size(529, 170);
             OrdenesEmpaquetadasListView.TabIndex = 6;
             OrdenesEmpaquetadasListView.UseCompatibleStateImageBehavior = false;
             OrdenesEmpaquetadasListView.View = View.Details;
             // 
-            // IdOrdenPicking
+            // IdOrdenPreparacion
             // 
-            IdOrdenPicking.Text = "N° Orden de Preparación";
-            IdOrdenPicking.Width = 180;
-            // 
-            // CantidadDeBultos
-            // 
-            CantidadDeBultos.Text = "Cantidad de bultos";
-            CantidadDeBultos.Width = 180;
+            IdOrdenPreparacion.Text = "N° Orden de Preparación";
+            IdOrdenPreparacion.Width = 180;
             // 
             // FechaEntrega
             // 
@@ -135,7 +126,7 @@
             // OrdenesEmpaquetadasALiberarListView
             // 
             OrdenesEmpaquetadasALiberarListView.BackColor = SystemColors.ControlLightLight;
-            OrdenesEmpaquetadasALiberarListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacionALiberar, CantidadBultosALiberar, FechaEntregaPlanificada });
+            OrdenesEmpaquetadasALiberarListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacionALiberar, FechaEntregaPlanificada });
             OrdenesEmpaquetadasALiberarListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             OrdenesEmpaquetadasALiberarListView.FullRowSelect = true;
             OrdenesEmpaquetadasALiberarListView.GridLines = true;
@@ -143,7 +134,6 @@
             OrdenesEmpaquetadasALiberarListView.Location = new Point(12, 29);
             OrdenesEmpaquetadasALiberarListView.Margin = new Padding(2);
             OrdenesEmpaquetadasALiberarListView.Name = "OrdenesEmpaquetadasALiberarListView";
-            OrdenesEmpaquetadasALiberarListView.OwnerDraw = true;
             OrdenesEmpaquetadasALiberarListView.Size = new Size(529, 129);
             OrdenesEmpaquetadasALiberarListView.TabIndex = 6;
             OrdenesEmpaquetadasALiberarListView.UseCompatibleStateImageBehavior = false;
@@ -154,11 +144,6 @@
             // 
             IdOrdenPreparacionALiberar.Text = "N° Orden Preparación";
             IdOrdenPreparacionALiberar.Width = 180;
-            // 
-            // CantidadBultosALiberar
-            // 
-            CantidadBultosALiberar.Text = "Cantidad de bultos";
-            CantidadBultosALiberar.Width = 180;
             // 
             // FechaEntregaPlanificada
             // 
@@ -188,6 +173,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "CargarOrdenDeEntregaForm";
             Text = "Cargar Orden de Entrega";
+            Load += OrdenEntregaForm_Load;
             OrdenesEmpaquetadasGroupBox.ResumeLayout(false);
             OrdenesEmpaquetadasALiberarGroupBox.ResumeLayout(false);
             ResumeLayout(false);
@@ -198,16 +184,14 @@
         //private Label pickingEnPreparacionGroupBox;
         private Button AgregarOrdenPreparacionButton;
         private ListView OrdenesEmpaquetadasListView;
-        private ColumnHeader IdOrdenPicking;
+        private ColumnHeader IdOrdenPreparacion;
         private ColumnHeader fechaDespachoOE;
-        private ColumnHeader CantidadDeBultos;
         private ColumnHeader FechaEntrega;
         private Button BorrarSelecciónButton;
         private GroupBox OrdenesEmpaquetadasGroupBox;
         private GroupBox OrdenesEmpaquetadasALiberarGroupBox;
         private ListView OrdenesEmpaquetadasALiberarListView;
         private ColumnHeader IdOrdenPreparacionALiberar;
-        private ColumnHeader CantidadBultosALiberar;
         private Button LiberarParaDespachoButton;
         private ColumnHeader FechaEntregaPlanificada;
     }
