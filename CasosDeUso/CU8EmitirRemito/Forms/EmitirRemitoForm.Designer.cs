@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
+﻿namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
 {
     partial class EmitirRemitoForm
     {

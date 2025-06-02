@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
-namespace TPGrupoE.CasoU_Orden_Preparacion
+namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
     public partial class ProcesarOrdenPreparacionForm : Form
     {
@@ -20,7 +23,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         }
 
 
-        private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
+       /* private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             palletCerradoComboBox.SelectedIndex = 0;
 
@@ -137,7 +140,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                     }
                 }
 
-                
+
             }
             else
             {
@@ -268,8 +271,9 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             {
                 dniTransportistaComboBox.Enabled = false;
             }
-            */
-        }
+            
+        }*/
+        /*
         private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             quitarProductoButton.Enabled = ordenDePreparacionListView.SelectedItems.Count > 0;
@@ -315,10 +319,10 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 {
                     dniTransportistaComboBox.Enabled = false;
                 }
-            }*/
-        }
+            }
+        }*/
 
-        private void dniTransportistaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+       /* private void dniTransportistaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             cargarOrdenButton.Enabled = (dniTransportistaComboBox.SelectedIndex != -1);
         }
@@ -390,6 +394,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             return OrdenPreparacionAlmacen.OrdenesDePreparacion.Count == 0
                 ? 1001
                 : OrdenPreparacionAlmacen.OrdenesDePreparacion.Max(o => o.IdOrdenPreparacion) + 1;
-        }
+        }*/
     }
 }

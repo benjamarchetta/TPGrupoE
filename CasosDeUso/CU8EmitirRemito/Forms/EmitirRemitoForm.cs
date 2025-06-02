@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+//using TPGrupoE.CasosDeUso.CU8EmitirRemito.Model;
+//using static TPGrupoE.CasosDeUso.CU8EmitirRemito.Model.EmitirRemitoModelo;
 
-namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
+namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
 {
     public partial class EmitirRemitoForm : Form
     {
