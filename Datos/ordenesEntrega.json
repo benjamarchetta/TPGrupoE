@@ -1,0 +1,15 @@
+[
+  {
+    "IdOrdenEntrega": 2001,
+    "Estado": 1,
+    "IdOrdenPreparacion": [
+      1009
+    ]
+  },
+  {
+    "IdOrdenEntrega": 2002,
+    "Estado": "Pendiente",
+    "IdOrdenPreparacion": [ 1004, 1008 ]
+  }
+
+]

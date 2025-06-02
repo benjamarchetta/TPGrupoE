@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.CasoU_Generar_Orden_de_Entrega
+﻿namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 {
     partial class CargarOrdenDeEntregaForm
     {
@@ -28,259 +28,171 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "OS25001", "20123456780 - Juan Soto", "SKU12345", "Producto de ejemplo", "8", "aledezma", "11/04/2025", "sdsf" }, -1, SystemColors.WindowText, SystemColors.ControlLightLight, new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0));
-            agregarPickingButton = new Button();
-            pickingEnPreparacionListView = new ListView();
-            idOrdenPicking = new ColumnHeader();
-            cuitCliente = new ColumnHeader();
-            skuProductoPicking = new ColumnHeader();
-            nombreProducto = new ColumnHeader();
-            productoCantidad = new ColumnHeader();
-            idUsuarioPicking = new ColumnHeader();
-            fechaEntrega = new ColumnHeader();
-            borrarSelecciónButton = new Button();
-            pickingEnPreparacionGroupBox = new GroupBox();
-            empaquetadoGroupBox = new GroupBox();
-            textBox1 = new TextBox();
-            cantidadBultosLabel = new Label();
-            pickingPreparadoListView = new ListView();
-            pickingNumero = new ColumnHeader();
-            cuitClienteName = new ColumnHeader();
-            skuProductoName = new ColumnHeader();
-            productoName = new ColumnHeader();
-            cantidadName = new ColumnHeader();
-            fechaEnvio = new ColumnHeader();
-            confirmarEmpaquetadoButton = new Button();
-            pickingEnPreparacionGroupBox.SuspendLayout();
-            empaquetadoGroupBox.SuspendLayout();
+            AgregarOrdenPreparacionButton = new Button();
+            OrdenesEmpaquetadasListView = new ListView();
+            IdOrdenPreparacion = new ColumnHeader();
+            FechaEntrega = new ColumnHeader();
+            BorrarSelecciónButton = new Button();
+            OrdenesEmpaquetadasGroupBox = new GroupBox();
+            OrdenesEmpaquetadasALiberarGroupBox = new GroupBox();
+            OrdenesEmpaquetadasALiberarListView = new ListView();
+            IdOrdenPreparacionALiberar = new ColumnHeader();
+            FechaEntregaPlanificada = new ColumnHeader();
+            LiberarParaDespachoButton = new Button();
+            OrdenesEmpaquetadasGroupBox.SuspendLayout();
+            OrdenesEmpaquetadasALiberarGroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // agregarPickingButton
+            // AgregarOrdenPreparacionButton
             // 
-            agregarPickingButton.Enabled = false;
-            agregarPickingButton.Location = new Point(1167, 234);
-            agregarPickingButton.Margin = new Padding(6, 7, 6, 7);
-            agregarPickingButton.Name = "agregarPickingButton";
-            agregarPickingButton.Size = new Size(230, 67);
-            agregarPickingButton.TabIndex = 3;
-            agregarPickingButton.Text = "Agregar";
-            agregarPickingButton.UseVisualStyleBackColor = true;
+            AgregarOrdenPreparacionButton.Enabled = false;
+            AgregarOrdenPreparacionButton.Location = new Point(281, 203);
+            AgregarOrdenPreparacionButton.Margin = new Padding(3, 4, 3, 4);
+            AgregarOrdenPreparacionButton.Name = "AgregarOrdenPreparacionButton";
+            AgregarOrdenPreparacionButton.Size = new Size(260, 36);
+            AgregarOrdenPreparacionButton.TabIndex = 3;
+            AgregarOrdenPreparacionButton.Text = "Agregar";
+            AgregarOrdenPreparacionButton.UseVisualStyleBackColor = true;
             // 
-            // pickingEnPreparacionListView
+            // OrdenesEmpaquetadasListView
             // 
-            pickingEnPreparacionListView.BackColor = SystemColors.ControlLightLight;
-            pickingEnPreparacionListView.CheckBoxes = true;
-            pickingEnPreparacionListView.Columns.AddRange(new ColumnHeader[] { idOrdenPicking, cuitCliente, skuProductoPicking, nombreProducto, productoCantidad, idUsuarioPicking, fechaEntrega });
-            pickingEnPreparacionListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pickingEnPreparacionListView.FullRowSelect = true;
-            pickingEnPreparacionListView.GridLines = true;
-            listViewItem1.Checked = true;
-            listViewItem1.StateImageIndex = 1;
-            pickingEnPreparacionListView.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            pickingEnPreparacionListView.LabelEdit = true;
-            pickingEnPreparacionListView.Location = new Point(22, 50);
-            pickingEnPreparacionListView.Name = "pickingEnPreparacionListView";
-            pickingEnPreparacionListView.OwnerDraw = true;
-            pickingEnPreparacionListView.Size = new Size(1375, 174);
-            pickingEnPreparacionListView.TabIndex = 6;
-            pickingEnPreparacionListView.UseCompatibleStateImageBehavior = false;
-            pickingEnPreparacionListView.View = View.Details;
+            OrdenesEmpaquetadasListView.BackColor = SystemColors.ControlLightLight;
+            OrdenesEmpaquetadasListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, FechaEntrega });
+            OrdenesEmpaquetadasListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasListView.FullRowSelect = true;
+            OrdenesEmpaquetadasListView.GridLines = true;
+            OrdenesEmpaquetadasListView.LabelEdit = true;
+            OrdenesEmpaquetadasListView.Location = new Point(12, 27);
+            OrdenesEmpaquetadasListView.Margin = new Padding(2);
+            OrdenesEmpaquetadasListView.Name = "OrdenesEmpaquetadasListView";
+            OrdenesEmpaquetadasListView.Size = new Size(529, 170);
+            OrdenesEmpaquetadasListView.TabIndex = 6;
+            OrdenesEmpaquetadasListView.UseCompatibleStateImageBehavior = false;
+            OrdenesEmpaquetadasListView.View = View.Details;
             // 
-            // idOrdenPicking
+            // IdOrdenPreparacion
             // 
-            idOrdenPicking.Text = "N°";
-            idOrdenPicking.Width = 140;
+            IdOrdenPreparacion.Text = "N° Orden de Preparación";
+            IdOrdenPreparacion.Width = 180;
             // 
-            // cuitCliente
+            // FechaEntrega
             // 
-            cuitCliente.Text = "CUIT - Razón social";
-            cuitCliente.Width = 300;
+            FechaEntrega.Text = "Fecha de entrega";
+            FechaEntrega.Width = 160;
             // 
-            // skuProductoPicking
+            // BorrarSelecciónButton
             // 
-            skuProductoPicking.Text = "SKU";
-            skuProductoPicking.Width = 160;
+            BorrarSelecciónButton.Enabled = false;
+            BorrarSelecciónButton.Location = new Point(12, 203);
+            BorrarSelecciónButton.Margin = new Padding(3, 4, 3, 4);
+            BorrarSelecciónButton.Name = "BorrarSelecciónButton";
+            BorrarSelecciónButton.Size = new Size(260, 36);
+            BorrarSelecciónButton.TabIndex = 7;
+            BorrarSelecciónButton.Text = "Borrar selección";
+            BorrarSelecciónButton.UseVisualStyleBackColor = true;
             // 
-            // nombreProducto
+            // OrdenesEmpaquetadasGroupBox
             // 
-            nombreProducto.Text = "Tipo producto";
-            nombreProducto.Width = 225;
+            OrdenesEmpaquetadasGroupBox.BackColor = SystemColors.Control;
+            OrdenesEmpaquetadasGroupBox.Controls.Add(OrdenesEmpaquetadasListView);
+            OrdenesEmpaquetadasGroupBox.Controls.Add(BorrarSelecciónButton);
+            OrdenesEmpaquetadasGroupBox.Controls.Add(AgregarOrdenPreparacionButton);
+            OrdenesEmpaquetadasGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasGroupBox.Location = new Point(11, 11);
+            OrdenesEmpaquetadasGroupBox.Margin = new Padding(2);
+            OrdenesEmpaquetadasGroupBox.Name = "OrdenesEmpaquetadasGroupBox";
+            OrdenesEmpaquetadasGroupBox.Padding = new Padding(2);
+            OrdenesEmpaquetadasGroupBox.Size = new Size(554, 255);
+            OrdenesEmpaquetadasGroupBox.TabIndex = 8;
+            OrdenesEmpaquetadasGroupBox.TabStop = false;
+            OrdenesEmpaquetadasGroupBox.Text = "Órdenes de preparación empaquetadas";
+            OrdenesEmpaquetadasGroupBox.Enter += pickingEnPreparacionGroupBox_Enter;
             // 
-            // productoCantidad
+            // OrdenesEmpaquetadasALiberarGroupBox
             // 
-            productoCantidad.Text = "Cantidad";
-            productoCantidad.Width = 125;
+            OrdenesEmpaquetadasALiberarGroupBox.BackColor = SystemColors.Control;
+            OrdenesEmpaquetadasALiberarGroupBox.Controls.Add(OrdenesEmpaquetadasALiberarListView);
+            OrdenesEmpaquetadasALiberarGroupBox.Controls.Add(LiberarParaDespachoButton);
+            OrdenesEmpaquetadasALiberarGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasALiberarGroupBox.Location = new Point(11, 287);
+            OrdenesEmpaquetadasALiberarGroupBox.Margin = new Padding(2);
+            OrdenesEmpaquetadasALiberarGroupBox.Name = "OrdenesEmpaquetadasALiberarGroupBox";
+            OrdenesEmpaquetadasALiberarGroupBox.Padding = new Padding(2);
+            OrdenesEmpaquetadasALiberarGroupBox.Size = new Size(554, 228);
+            OrdenesEmpaquetadasALiberarGroupBox.TabIndex = 9;
+            OrdenesEmpaquetadasALiberarGroupBox.TabStop = false;
+            OrdenesEmpaquetadasALiberarGroupBox.Text = "Mercaderías a liberar";
             // 
-            // idUsuarioPicking
+            // OrdenesEmpaquetadasALiberarListView
             // 
-            idUsuarioPicking.Text = "Seleccionada por";
-            idUsuarioPicking.Width = 180;
+            OrdenesEmpaquetadasALiberarListView.BackColor = SystemColors.ControlLightLight;
+            OrdenesEmpaquetadasALiberarListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacionALiberar, FechaEntregaPlanificada });
+            OrdenesEmpaquetadasALiberarListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasALiberarListView.FullRowSelect = true;
+            OrdenesEmpaquetadasALiberarListView.GridLines = true;
+            OrdenesEmpaquetadasALiberarListView.LabelEdit = true;
+            OrdenesEmpaquetadasALiberarListView.Location = new Point(12, 29);
+            OrdenesEmpaquetadasALiberarListView.Margin = new Padding(2);
+            OrdenesEmpaquetadasALiberarListView.Name = "OrdenesEmpaquetadasALiberarListView";
+            OrdenesEmpaquetadasALiberarListView.Size = new Size(529, 129);
+            OrdenesEmpaquetadasALiberarListView.TabIndex = 6;
+            OrdenesEmpaquetadasALiberarListView.UseCompatibleStateImageBehavior = false;
+            OrdenesEmpaquetadasALiberarListView.View = View.Details;
+            OrdenesEmpaquetadasALiberarListView.SelectedIndexChanged += pickingPreparadoListView_SelectedIndexChanged;
             // 
-            // fechaEntrega
+            // IdOrdenPreparacionALiberar
             // 
-            fechaEntrega.Text = "Fecha de despacho";
-            fechaEntrega.Width = 225;
+            IdOrdenPreparacionALiberar.Text = "N° Orden Preparación";
+            IdOrdenPreparacionALiberar.Width = 180;
             // 
-            // borrarSelecciónButton
+            // FechaEntregaPlanificada
             // 
-            borrarSelecciónButton.Enabled = false;
-            borrarSelecciónButton.Location = new Point(914, 234);
-            borrarSelecciónButton.Margin = new Padding(6, 7, 6, 7);
-            borrarSelecciónButton.Name = "borrarSelecciónButton";
-            borrarSelecciónButton.Size = new Size(230, 67);
-            borrarSelecciónButton.TabIndex = 7;
-            borrarSelecciónButton.Text = "Borrar selección";
-            borrarSelecciónButton.UseVisualStyleBackColor = true;
+            FechaEntregaPlanificada.Text = "Fecha de entrega";
+            FechaEntregaPlanificada.Width = 160;
             // 
-            // pickingEnPreparacionGroupBox
+            // LiberarParaDespachoButton
             // 
-            pickingEnPreparacionGroupBox.BackColor = SystemColors.Control;
-            pickingEnPreparacionGroupBox.Controls.Add(pickingEnPreparacionListView);
-            pickingEnPreparacionGroupBox.Controls.Add(borrarSelecciónButton);
-            pickingEnPreparacionGroupBox.Controls.Add(agregarPickingButton);
-            pickingEnPreparacionGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pickingEnPreparacionGroupBox.Location = new Point(26, 25);
-            pickingEnPreparacionGroupBox.Name = "pickingEnPreparacionGroupBox";
-            pickingEnPreparacionGroupBox.Size = new Size(1423, 315);
-            pickingEnPreparacionGroupBox.TabIndex = 8;
-            pickingEnPreparacionGroupBox.TabStop = false;
-            pickingEnPreparacionGroupBox.Text = "Órdenes de preparación seleccionadas";
-            pickingEnPreparacionGroupBox.Enter += pickingEnPreparacionGroupBox_Enter;
-            // 
-            // empaquetadoGroupBox
-            // 
-            empaquetadoGroupBox.BackColor = SystemColors.Control;
-            empaquetadoGroupBox.Controls.Add(textBox1);
-            empaquetadoGroupBox.Controls.Add(cantidadBultosLabel);
-            empaquetadoGroupBox.Controls.Add(pickingPreparadoListView);
-            empaquetadoGroupBox.Controls.Add(confirmarEmpaquetadoButton);
-            empaquetadoGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            empaquetadoGroupBox.Location = new Point(26, 346);
-            empaquetadoGroupBox.Name = "empaquetadoGroupBox";
-            empaquetadoGroupBox.Size = new Size(1423, 397);
-            empaquetadoGroupBox.TabIndex = 9;
-            empaquetadoGroupBox.TabStop = false;
-            empaquetadoGroupBox.Text = "Mercaderías a embalar";
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = SystemColors.ControlLight;
-            textBox1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(252, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(225, 39);
-            textBox1.TabIndex = 10;
-            // 
-            // cantidadBultosLabel
-            // 
-            cantidadBultosLabel.AutoSize = true;
-            cantidadBultosLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cantidadBultosLabel.Location = new Point(25, 52);
-            cantidadBultosLabel.Name = "cantidadBultosLabel";
-            cantidadBultosLabel.Size = new Size(221, 32);
-            cantidadBultosLabel.TabIndex = 9;
-            cantidadBultosLabel.Text = "Cantidad de bultos:";
-            // 
-            // pickingPreparadoListView
-            // 
-            pickingPreparadoListView.BackColor = SystemColors.ControlLightLight;
-            pickingPreparadoListView.Columns.AddRange(new ColumnHeader[] { pickingNumero, cuitClienteName, skuProductoName, productoName, cantidadName, fechaEnvio });
-            pickingPreparadoListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pickingPreparadoListView.FullRowSelect = true;
-            pickingPreparadoListView.GridLines = true;
-            pickingPreparadoListView.LabelEdit = true;
-            pickingPreparadoListView.Location = new Point(22, 116);
-            pickingPreparadoListView.Name = "pickingPreparadoListView";
-            pickingPreparadoListView.OwnerDraw = true;
-            pickingPreparadoListView.Size = new Size(1375, 201);
-            pickingPreparadoListView.TabIndex = 6;
-            pickingPreparadoListView.UseCompatibleStateImageBehavior = false;
-            pickingPreparadoListView.View = View.Details;
-            // 
-            // pickingNumero
-            // 
-            pickingNumero.Text = "N° O. Preparación";
-            pickingNumero.Width = 225;
-            // 
-            // cuitClienteName
-            // 
-            cuitClienteName.Text = "CUIT - Razón social";
-            cuitClienteName.Width = 300;
-            // 
-            // skuProductoName
-            // 
-            skuProductoName.Text = "SKU";
-            skuProductoName.Width = 160;
-            // 
-            // productoName
-            // 
-            productoName.Text = "Tipo de producto";
-            productoName.Width = 225;
-            // 
-            // cantidadName
-            // 
-            cantidadName.Text = "Cantidad";
-            cantidadName.Width = 125;
-            // 
-            // fechaEnvio
-            // 
-            fechaEnvio.Text = "Fecha de despacho";
-            fechaEnvio.Width = 225;
-            // 
-            // confirmarEmpaquetadoButton
-            // 
-            confirmarEmpaquetadoButton.BackColor = SystemColors.InactiveCaption;
-            confirmarEmpaquetadoButton.Enabled = false;
-            confirmarEmpaquetadoButton.ForeColor = SystemColors.ControlDark;
-            confirmarEmpaquetadoButton.Location = new Point(1077, 327);
-            confirmarEmpaquetadoButton.Margin = new Padding(6, 7, 6, 7);
-            confirmarEmpaquetadoButton.Name = "confirmarEmpaquetadoButton";
-            confirmarEmpaquetadoButton.Size = new Size(320, 67);
-            confirmarEmpaquetadoButton.TabIndex = 3;
-            confirmarEmpaquetadoButton.Text = "Embalar";
-            confirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
+            LiberarParaDespachoButton.BackColor = SystemColors.InactiveCaption;
+            LiberarParaDespachoButton.Enabled = false;
+            LiberarParaDespachoButton.ForeColor = SystemColors.ControlDark;
+            LiberarParaDespachoButton.Location = new Point(12, 164);
+            LiberarParaDespachoButton.Margin = new Padding(3, 4, 3, 4);
+            LiberarParaDespachoButton.Name = "LiberarParaDespachoButton";
+            LiberarParaDespachoButton.Size = new Size(529, 48);
+            LiberarParaDespachoButton.TabIndex = 3;
+            LiberarParaDespachoButton.Text = "Liberar para despacho";
+            LiberarParaDespachoButton.UseVisualStyleBackColor = false;
             // 
             // CargarOrdenDeEntregaForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1478, 755);
-            Controls.Add(empaquetadoGroupBox);
-            Controls.Add(pickingEnPreparacionGroupBox);
-            Margin = new Padding(6, 7, 6, 7);
+            ClientSize = new Size(584, 582);
+            Controls.Add(OrdenesEmpaquetadasALiberarGroupBox);
+            Controls.Add(OrdenesEmpaquetadasGroupBox);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CargarOrdenDeEntregaForm";
-            Text = "Confirmar embalaje";
-            pickingEnPreparacionGroupBox.ResumeLayout(false);
-            empaquetadoGroupBox.ResumeLayout(false);
-            empaquetadoGroupBox.PerformLayout();
+            Text = "Cargar Orden de Entrega";
+            Load += OrdenEntregaForm_Load;
+            OrdenesEmpaquetadasGroupBox.ResumeLayout(false);
+            OrdenesEmpaquetadasALiberarGroupBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         //private Label pickingEnPreparacionGroupBox;
-        private Button agregarPickingButton;
-        private ListView pickingEnPreparacionListView;
-        private ColumnHeader idOrdenPicking;
+        private Button AgregarOrdenPreparacionButton;
+        private ListView OrdenesEmpaquetadasListView;
+        private ColumnHeader IdOrdenPreparacion;
         private ColumnHeader fechaDespachoOE;
-        private ColumnHeader cuitCliente;
-        private ColumnHeader skuProductoPicking;
-        private ColumnHeader nombreProducto;
-        private ColumnHeader productoCantidad;
-        private ColumnHeader idUsuarioPicking;
-        private ColumnHeader fechaEntrega;
-        private Button borrarSelecciónButton;
-        private GroupBox pickingEnPreparacionGroupBox;
-        private GroupBox empaquetadoGroupBox;
-        private ListView pickingPreparadoListView;
-        private ColumnHeader pickingNumero;
-        private ColumnHeader cuitClienteName;
-        private ColumnHeader skuProductoName;
-        private ColumnHeader productoName;
-        private ColumnHeader cantidadName;
-        private Button confirmarEmpaquetadoButton;
-        private Label cantidadBultosLabel;
-        private TextBox textBox1;
-        private ColumnHeader fechaEnvio;
+        private ColumnHeader FechaEntrega;
+        private Button BorrarSelecciónButton;
+        private GroupBox OrdenesEmpaquetadasGroupBox;
+        private GroupBox OrdenesEmpaquetadasALiberarGroupBox;
+        private ListView OrdenesEmpaquetadasALiberarListView;
+        private ColumnHeader IdOrdenPreparacionALiberar;
+        private Button LiberarParaDespachoButton;
+        private ColumnHeader FechaEntregaPlanificada;
     }
 }

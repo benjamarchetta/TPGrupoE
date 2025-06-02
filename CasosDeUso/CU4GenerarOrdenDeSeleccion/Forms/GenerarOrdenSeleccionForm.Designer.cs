@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.CasoU_Procesar_Orden_de_Seleccion
+﻿namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
 {
     partial class GenerarOrdenSeleccionForm
     {
@@ -196,7 +196,7 @@
             Controls.Add(label1);
             Name = "GenerarOrdenSeleccionForm";
             Text = "Generar órden de selección";
-            Load += ProcesarOrdenSeleccionForm_Load;
+            //Load += ProcesarOrdenSeleccionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

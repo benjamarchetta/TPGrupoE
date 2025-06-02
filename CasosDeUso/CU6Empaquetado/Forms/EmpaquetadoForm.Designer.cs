@@ -1,8 +1,8 @@
 ﻿
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     partial class EmpaquetadoForm
-    {
+    {/*
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -30,8 +30,8 @@ namespace TPGrupoE.CasoU_Empaquetado
 
         private void InitializeComponent()
         {
-            idOrdenTextBox = new TextBox();
             label2 = new Label();
+            nroOrden = new TextBox();
             empaquetarButton = new Button();
             productoAEmpaquetarListView = new ListView();
             skuColumnaSelec = new ColumnHeader();
@@ -49,18 +49,17 @@ namespace TPGrupoE.CasoU_Empaquetado
             idOrdenTextBox.Size = new Size(149, 27);
             idOrdenTextBox.TabIndex = 1;
             idOrdenTextBox.Text = "XX";
-            idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
+            //idOrdenTextBox.TextChanged += idOrdenTextBox_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = SystemColors.Control;
-            label2.Location = new Point(14, 27);
+            label2.Location = new Point(14, 22);
             label2.Name = "label2";
-            label2.Size = new Size(147, 20);
+            label2.Size = new Size(135, 20);
             label2.TabIndex = 2;
             label2.Text = "Orden a Empaquetar";
-            label2.Click += label2_Click;
+            //label2.Click += label2_Click;
             // 
             // empaquetarButton
             // 
@@ -72,7 +71,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             empaquetarButton.TabIndex = 14;
             empaquetarButton.Text = "Empaquetar";
             empaquetarButton.UseVisualStyleBackColor = true;
-            empaquetarButton.Click += empaquetarButton_Click;
+            //empaquetarButton.Click += empaquetarButton_Click;
             // 
             // productoAEmpaquetarListView
             // 
@@ -85,7 +84,7 @@ namespace TPGrupoE.CasoU_Empaquetado
             productoAEmpaquetarListView.TabIndex = 15;
             productoAEmpaquetarListView.UseCompatibleStateImageBehavior = false;
             productoAEmpaquetarListView.View = View.Details;
-            productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
+            //productoAEmpaquetarListView.SelectedIndexChanged += productoAEmpaquetarListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -107,26 +106,30 @@ namespace TPGrupoE.CasoU_Empaquetado
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(911, 598);
-            Controls.Add(idOrdenTextBox);
-            Controls.Add(label2);
+            Controls.Add(nroOrden);
             Controls.Add(empaquetarButton);
             Controls.Add(productoAEmpaquetarListView);
+            Controls.Add(label2);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmpaquetadoForm";
             Text = "Empaquetado";
-            Load += Empaquetado_Load;
+            //Load += Empaquetado_Load;
             ResumeLayout(false);
             PerformLayout();
         }
         #endregion
 
-        private TextBox idOrdenTextBox;
-        private Label label2;
+        private ListView ordenesDePreparacionListView;
+        private ColumnHeader IdProducto;
+        private ColumnHeader Descripcion;
+        private ColumnHeader CantidadProducto;
         private Button empaquetarButton;
         private ListView productoAEmpaquetarListView;
         private ColumnHeader skuColumnaSelec;
         private ColumnHeader descripcionColumnaPrep;
         private ColumnHeader cantidadColumnaSelec;
-
-    }
+        private TextBox nroOrden;
+        private TextBox textBox1; 
+        private Label label2;
+    */}
 }

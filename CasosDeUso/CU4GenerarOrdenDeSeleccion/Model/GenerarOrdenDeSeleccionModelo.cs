@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
-namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
+
+namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
+internal class GenerarOrdenDeSeleccionModelo
 {
-    internal class GenerarOrdenDeSeleccionModelo
-    {
+    
         
         public string ObtenerRazonSocialPorCuit(string cuit)
         {
@@ -17,5 +19,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
         }
        
 
-    }
+    
 }
+

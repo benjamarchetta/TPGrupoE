@@ -20,17 +20,42 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\ordenesPreparacion.json", datosOP);
         }
 
+        
         public static void LeerOP()
         {
-            if (!File.Exists(@"Datos\ordenesPreparacion.json"))
-            {
-                return;
-            }
+            
+             if (!File.Exists(@"Datos\ordenesPreparacion.json"))
+             {
+                 return;
+             }
 
-            var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
+             var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
 
-            ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
+             ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
         }
+        
+        //public static void LeerOP()
+        //{
+        //    if (!File.Exists(@"Datos\ordenesPreparacion.json"))
+        //    {
+        //        MessageBox.Show("El archivo no existe.");
+        //        return;
+        //    }
+
+        //    var datos = File.ReadAllText(@"Datos\ordenesPreparacion.json");
+
+        //    MessageBox.Show($"Contenido crudo del archivo:\n{datos.Substring(0, Math.Min(datos.Length, 500))}");
+
+        //    try
+        //    {
+        //        ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
+        //        MessageBox.Show($"Cantidad deserializada: {ordenesPreparacion.Count}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al deserializar: " + ex.Message);
+        //    }
+        //}
 
         //REVISAR SI NOS SIRVE AHORA
         public static List<OrdenPreparacionEntidad> BuscarTodasLasOrdenes()
@@ -40,32 +65,32 @@ namespace TPGrupoE.Almacenes
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesPendientes()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Pendiente);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Pendiente);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesEnPreparacion()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.EnPreparacion);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.EnPreparacion);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesSeleccionadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Seleccionada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Seleccionada);
         }
         public static List<OrdenPreparacionEntidad> BuscarOrdenesEmpaquetadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Empaquetada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Empaquetada);
         }
 
         public static List<OrdenPreparacionEntidad> BuscarOrdenesPreparadas()
         {
-            return ordenesPreparacion.FindAll(o => o.Estado == EstadoOrdenPreparacion.Preparada);
+            return ordenesPreparacion.FindAll(op => op.Estado == EstadoOrdenPreparacion.Preparada);
         }
 
         //VER SI NOS SIRVE AGREGAR BuscarOrdenesDespachadas (yo creo que no)
         public static OrdenPreparacionEntidad BuscarOrdenesPorId(int id)
         {
-            return ordenesPreparacion.FirstOrDefault(o => o.IdOrdenPreparacion == id);
+            return ordenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == id);
         }
 
         //COMENTO PARA VER MAS ADELANTE....
@@ -98,7 +123,7 @@ namespace TPGrupoE.Almacenes
             }
             else
             {
-                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
+                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(op => op.IdOrdenPreparacion) + 1;
             }
 
 

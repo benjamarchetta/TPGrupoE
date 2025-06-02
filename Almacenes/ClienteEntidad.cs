@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.Almacenes
 {
-    internal class ClienteEntidad
+    public class ClienteEntidad
     {
         public int IdCliente { get; set; }
         public string Cuit { get; set; } = string.Empty;

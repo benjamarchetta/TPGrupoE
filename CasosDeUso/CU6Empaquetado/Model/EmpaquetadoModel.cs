@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasoU_EmpaquetadoOrdenes;
-using TPGrupoE.CasoU_Orden_Preparacion;
-using TPGrupoE_CU_OrdenPreparacion_Model;
+using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
+//using TPGrupoE_CU_OrdenPreparacion_Model;
 
-namespace TPGrupoE.CasoU_Empaquetado
+namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
 
-    internal class EmpaquetadoModel
+    internal class EmpaquetadoModelo
     {
+        /*
         public List<OrdenDePreparacionAEmpaquetar> OrdenesDePreparacionAEmpaquetar { get; private set; }
 
         private List<Almacenes.ProductoAlmacen> ProductosIniciales = new List<Almacenes.ProductoAlmacen>();
@@ -26,18 +26,18 @@ namespace TPGrupoE.CasoU_Empaquetado
             foreach (var ordenPreparacion in ordenesDePreparacionSeleccionadas)
             {
                 OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar = new OrdenDePreparacionAEmpaquetar();
-                ordenDePreparacionAEmpaquetar.Producto = new List<CasoU_EmpaquetadoOrdenes.ProductoAlmacen>(); // Fix: Initialize Producto as a List<ProductoAlmacen>  
+                ordenDePreparacionAEmpaquetar.Producto = new List<CasoU_EmpaquetadoOrdenes.ProductoAlmacen>(); 
 
                 ordenDePreparacionAEmpaquetar.Id = ordenPreparacion.IdOrdenPreparacion.ToString();
 
                 foreach (var productoOrden in ordenPreparacion.ProductoOrden)
                 {
-                    CasoU_EmpaquetadoOrdenes.ProductoAlmacen productoAAgregar = new CasoU_EmpaquetadoOrdenes.ProductoAlmacen(); // Fix: Declare productoAAgregar before using it  
+                    CasoU_EmpaquetadoOrdenes.ProductoAlmacen productoAAgregar = new CasoU_EmpaquetadoOrdenes.ProductoAlmacen();
 
-                    ProductoEntidad producto = Almacenes.ProductoAlmacen.ObtenerMercaderiaPorId(productoOrden.IdProducto);
+                    ProductoEntidad producto = Almacenes.ProductoAlmacen.BuscarProductoPorId(productoOrden.IdProducto);
 
                     productoAAgregar.IdProducto = producto.IdProducto.ToString();
-                    productoAAgregar.DescripcionProducto = ProductoOrden.DescripcionProducto; // Fix: Access DescripcionProducto using the type name ProductoOrden instead of an instance  
+                    productoAAgregar.DescripcionProducto = ProductoOrden.DescripcionProducto;
                     productoAAgregar.Cantidad = productoOrden.Cantidad;
 
                     ordenDePreparacionAEmpaquetar.Producto.Add(productoAAgregar);
@@ -59,6 +59,6 @@ namespace TPGrupoE.CasoU_Empaquetado
             ordenPreparacion.MarcarComoPreparada();
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
-        }
+        }*/
     }
 }
