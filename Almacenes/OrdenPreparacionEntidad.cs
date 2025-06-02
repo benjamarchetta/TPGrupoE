@@ -14,7 +14,6 @@ namespace TPGrupoE.Almacenes
         public int DniTransportista { get; set; }
         public EstadoOrdenPreparacion Estado { get; set; }
         public DateTime FechaEntrega { get; set; }
-
         public bool PalletCerrado { get; set; }
         public List<ProductoOrden> ProductoOrden { get; set; } = new();
 

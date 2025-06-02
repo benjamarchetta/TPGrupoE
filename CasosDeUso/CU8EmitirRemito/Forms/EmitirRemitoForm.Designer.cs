@@ -49,6 +49,7 @@
             columnHeader13 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
             SuspendLayout();
             // 
             // ordenesPreparacionEntregaLabel
@@ -62,7 +63,7 @@
             // 
             // mercaderiasADespacharListView
             // 
-            mercaderiasADespacharListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader6, cantidadColumna, columnHeader7 });
+            mercaderiasADespacharListView.Columns.AddRange(new ColumnHeader[] { columnHeader7, fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, columnHeader6, cantidadColumna });
             mercaderiasADespacharListView.FullRowSelect = true;
             mercaderiasADespacharListView.Location = new Point(12, 234);
             mercaderiasADespacharListView.Name = "mercaderiasADespacharListView";
@@ -88,11 +89,13 @@
             // 
             // columnHeader6
             // 
+            columnHeader6.DisplayIndex = 4;
             columnHeader6.Text = "Razón social";
             columnHeader6.Width = 150;
             // 
             // cantidadColumna
             // 
+            cantidadColumna.DisplayIndex = 5;
             cantidadColumna.Text = "Cantidad de bultos";
             cantidadColumna.Width = 150;
             // 
@@ -191,6 +194,11 @@
             columnHeader1.Text = "Cantidad";
             columnHeader1.Width = 115;
             // 
+            // columnHeader3
+            // 
+            columnHeader3.DisplayIndex = 6;
+            columnHeader3.Text = "ColumnPrueba";
+            // 
             // EmitirRemitoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -233,5 +241,6 @@
         private ColumnHeader columnHeader13;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader3;
     }
 }
