@@ -39,19 +39,6 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
         }
 
-        private void CargarOrdenesALista()
-        {
-            ordenDePreparacionListView.Items.Clear(); // Limpiar primero por si se vuelve a cargar
-
-            foreach (var orden in OrdenPreparacionModelo.OrdenesDePreparacion) // accedé a tu propiedad
-            {
-                ListViewItem item = new ListViewItem(orden.Id.ToString());
-                item.SubItems.Add(orden.CuitCliente);
-                item.SubItems.Add(orden.Estado);
-                item.SubItems.Add(orden.FechaDespacho.ToShortDateString()); // o .ToString()
-                ordenDePreparacionListView.Items.Add(item);
-            }
-        }
 
         private void cantidadARetirarTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -114,35 +101,43 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
 
             if (razonSocialComboBox.SelectedIndex != -1)
             {
-
+                // Buscar cliente por id y comprobar si tiene productos almacenados
+                int idClienteElegido;
+                bool tieneProductos = false;
                 string cuitCliente = cuitTextBox.Text;
 
-                //Comporbar si el cliente tiene productos almacenados
-                bool tieneProductos = false;
-                foreach (ProductoEntidad Producto in OrdenPreparacionModelo.Productos)
+                foreach (ClienteEntidad Cliente in OrdenPreparacionModelo.Clientes)
                 {
-                    if (Producto.CuitCliente == cuitCliente)
+                    if (Cliente.Cuit == cuitCliente)
                     {
-                        tieneProductos = true;
+                        idClienteElegido = Cliente.IdCliente;
+                        foreach (ProductoEntidad Producto in OrdenPreparacionModelo.Productos)
+                        {
+                            if (Producto.IdProducto == idClienteElegido)
+                            {
+                                tieneProductos = true;
+                                var productosDelCliente = OrdenPreparacionModelo.Productos.Where(p => p.IdProducto == idClienteElegido).ToList();
+
+                                productoComboBox.DataSource = productosDelCliente;
+                                productoComboBox.DisplayMember = "DescripcionMercaderia";
+                                productoComboBox.ValueMember = "IdCliente";
+                                productoComboBox.Enabled = true;
+                            }
+                        }
+                        if (tieneProductos == false)
+                        {
+                            MessageBox.Show("El cliente seleccionado no tiene productos almacenados. \n" +
+                                "No es posible crear una órden de preparación para este cliente.", "Advertencia",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            razonSocialComboBox.SelectedIndex = -1;
+                            cuitTextBox.Text = "-";
+                            productoComboBox.Enabled = false;
+                        }
                     }
                 }
-                if (tieneProductos == false)
-                {
-                    MessageBox.Show("El cliente seleccionado no tiene productos almacenados. \n" +
-                        "No es posible crear una órden de preparación para este cliente.", "Advertencia",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    razonSocialComboBox.SelectedIndex = -1;
-                    cuitTextBox.Text = "-";
-                    productoComboBox.Enabled = false;
-                }
 
-                var productosDelCliente = OrdenPreparacionModelo.Productos.Where(p => p.CuitCliente == cuitCliente).ToList();
-
-                productoComboBox.DataSource = productosDelCliente;
-                productoComboBox.DisplayMember = "DescripcionMercaderia";
-                productoComboBox.ValueMember = "CuitCliente";
-                productoComboBox.Enabled = true;
+                
             }
             else
             {
@@ -158,7 +153,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             // Mostrar sku de producto y cantidad en stock dsp de elegir el producto
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
-                skuTextBox.Text = producto.sku;
+                skuTextBox.Text = producto.Sku;
                 cantidadEnStockTextBox.Text = producto.CantidadEnStock.ToString();
             }
 
@@ -225,8 +220,8 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         {
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
-                string sku = producto.sku;
-                string nombreProducto = producto.DescripcionMercaderia;
+                string sku = producto.Sku;
+                string nombreProducto = producto.DescripcionProducto;
                 int cantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
 
                 // Agregar prod a la lista
@@ -339,7 +334,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             int nuevoIdOrden = GenerarIdOrden();
 
             // Crear lista de productos asociados a la orden
-            List<ProductoOrdenEntidad> productosAsociados = new List<ProductoOrdenEntidad>();
+            List<ProductoOrden> productosAsociados = new List<ProductoOrden>();
 
             foreach (ListViewItem item in ordenDePreparacionListView.Items)
             {
@@ -347,10 +342,10 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
                 string tipoProducto = item.SubItems[1].Text;
                 int cantidad = int.Parse(item.SubItems[2].Text);
 
-                ProductoOrdenEntidad productoOrden = new ProductoOrdenEntidad
+                ProductoOrden productoOrden = new ProductoOrden
                 {
-                    Id = nuevoIdOrden, // Todos los productos comparten el mismo ID de orden
-                    sku = sku,
+                    IdProducto = nuevoIdOrden, // Todos los productos comparten el mismo ID de orden
+                    Sku = sku,
                     TipoProducto = tipoProducto,
                     Cantidad = cantidad
                 };
@@ -365,8 +360,8 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
             // Crear la orden de preparación
             OrdenPreparacionEntidad Orden = new OrdenPreparacionEntidad
             {
-                Id = nuevoIdOrden,
-                CuitCliente = cuitTextBox.Text,
+                IdOrdenPreparacion = nuevoIdOrden,
+                IdCliente = cuitTextBox.Text,
                 Estado = "En preparación",
                 FechaDespacho = DespachoDateTimePicker.Value,
                 PalletCerrado = palletCerradoComboBox.SelectedIndex == 1,
@@ -394,7 +389,7 @@ namespace TPGrupoE.CasoU_Orden_Preparacion
         {
             return OrdenPreparacionAlmacen.OrdenesDePreparacion.Count == 0
                 ? 1001
-                : OrdenPreparacionAlmacen.OrdenesDePreparacion.Max(o => o.Id) + 1;
+                : OrdenPreparacionAlmacen.OrdenesDePreparacion.Max(o => o.IdOrdenPreparacion) + 1;
         }
     }
 }
