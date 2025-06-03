@@ -55,10 +55,12 @@
             agregarProductoButton = new Button();
             label4 = new Label();
             label5 = new Label();
-            dniTransportistaComboBox = new ComboBox();
             label12 = new Label();
             estadoDeOrdenTextBox = new TextBox();
             label13 = new Label();
+            dniTransportistaTextBox = new TextBox();
+            depositoComboBox = new ComboBox();
+            label11 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -104,6 +106,7 @@
             cargarOrdenButton.TabIndex = 10;
             cargarOrdenButton.Text = "Cargar orden de preparación";
             cargarOrdenButton.UseVisualStyleBackColor = true;
+            cargarOrdenButton.Click += cargarOrdenButton_Click;
             // 
             // quitarProductoButton
             // 
@@ -114,6 +117,7 @@
             quitarProductoButton.TabIndex = 14;
             quitarProductoButton.Text = "Quitar producto de órden de preparación";
             quitarProductoButton.UseVisualStyleBackColor = true;
+            quitarProductoButton.Click += quitarProductoButton_Click;
             // 
             // ordenDePreparacionListView
             // 
@@ -125,6 +129,7 @@
             ordenDePreparacionListView.TabIndex = 15;
             ordenDePreparacionListView.UseCompatibleStateImageBehavior = false;
             ordenDePreparacionListView.View = View.Details;
+            ordenDePreparacionListView.SelectedIndexChanged += ordenDePreparacionListView_SelectedIndexChanged;
             // 
             // skuColumnaSelec
             // 
@@ -150,6 +155,7 @@
             razonSocialComboBox.Name = "razonSocialComboBox";
             razonSocialComboBox.Size = new Size(382, 23);
             razonSocialComboBox.TabIndex = 16;
+            razonSocialComboBox.SelectedIndexChanged += razonSocialComboBox_SelectedIndexChanged;
             // 
             // label7
             // 
@@ -175,6 +181,7 @@
             cuitTextBox.Size = new Size(383, 23);
             cuitTextBox.TabIndex = 19;
             cuitTextBox.Text = "-";
+            cuitTextBox.TextChanged += cuitTextBox_TextChanged;
             // 
             // productoComboBox
             // 
@@ -185,6 +192,7 @@
             productoComboBox.Name = "productoComboBox";
             productoComboBox.Size = new Size(382, 23);
             productoComboBox.TabIndex = 20;
+            productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -212,6 +220,7 @@
             skuTextBox.Size = new Size(385, 23);
             skuTextBox.TabIndex = 23;
             skuTextBox.Text = "-";
+            skuTextBox.TextChanged += skuTextBox_TextChanged;
             // 
             // cantidadEnStockTextBox
             // 
@@ -221,6 +230,7 @@
             cantidadEnStockTextBox.Size = new Size(385, 23);
             cantidadEnStockTextBox.TabIndex = 24;
             cantidadEnStockTextBox.Text = "-";
+            cantidadEnStockTextBox.TextChanged += cantidadEnStockTextBox_TextChanged;
             // 
             // label9
             // 
@@ -240,6 +250,7 @@
             palletCerradoComboBox.Name = "palletCerradoComboBox";
             palletCerradoComboBox.Size = new Size(383, 23);
             palletCerradoComboBox.TabIndex = 26;
+            palletCerradoComboBox.SelectedIndexChanged += palletCerradoComboBox_SelectedIndexChanged;
             // 
             // label10
             // 
@@ -266,6 +277,7 @@
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
+            cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
             // 
             // agregarProductoButton
             // 
@@ -276,6 +288,7 @@
             agregarProductoButton.TabIndex = 30;
             agregarProductoButton.Text = "Agregar producto a órden de preparación";
             agregarProductoButton.UseVisualStyleBackColor = true;
+            agregarProductoButton.Click += agregarProductoButton_Click;
             // 
             // label4
             // 
@@ -289,21 +302,11 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 486);
+            label5.Location = new Point(218, 486);
             label5.Name = "label5";
             label5.Size = new Size(112, 15);
             label5.TabIndex = 32;
             label5.Text = "DNI de transportista";
-            // 
-            // dniTransportistaComboBox
-            // 
-            dniTransportistaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            dniTransportistaComboBox.Enabled = false;
-            dniTransportistaComboBox.FormattingEnabled = true;
-            dniTransportistaComboBox.Location = new Point(12, 504);
-            dniTransportistaComboBox.Name = "dniTransportistaComboBox";
-            dniTransportistaComboBox.Size = new Size(121, 23);
-            dniTransportistaComboBox.TabIndex = 33;
             // 
             // label12
             // 
@@ -332,15 +335,46 @@
             label13.TabIndex = 37;
             label13.Text = "Cuit del cliente";
             // 
+            // dniTransportistaTextBox
+            // 
+            dniTransportistaTextBox.Enabled = false;
+            dniTransportistaTextBox.Location = new Point(218, 504);
+            dniTransportistaTextBox.Name = "dniTransportistaTextBox";
+            dniTransportistaTextBox.Size = new Size(200, 23);
+            dniTransportistaTextBox.TabIndex = 39;
+            dniTransportistaTextBox.TextChanged += dniTransportistaTextBox_TextChanged;
+            dniTransportistaTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
+            // 
+            // depositoComboBox
+            // 
+            depositoComboBox.Enabled = false;
+            depositoComboBox.FormattingEnabled = true;
+            depositoComboBox.Location = new Point(13, 504);
+            depositoComboBox.Name = "depositoComboBox";
+            depositoComboBox.Size = new Size(200, 23);
+            depositoComboBox.TabIndex = 40;
+            depositoComboBox.SelectedIndexChanged += depositoComboBox_SelectedIndexChanged;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(12, 486);
+            label11.Name = "label11";
+            label11.Size = new Size(97, 15);
+            label11.TabIndex = 41;
+            label11.Text = "Depósito a retirar";
+            // 
             // ProcesarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(797, 597);
+            Controls.Add(label11);
+            Controls.Add(depositoComboBox);
+            Controls.Add(dniTransportistaTextBox);
             Controls.Add(label13);
             Controls.Add(estadoDeOrdenTextBox);
             Controls.Add(label12);
-            Controls.Add(dniTransportistaComboBox);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(agregarProductoButton);
@@ -401,9 +435,11 @@
         private Label label4;
         private ColumnHeader ubicacionColumnaPrep;
         private Label label5;
-        private ComboBox dniTransportistaComboBox;
         private Label label12;
         private TextBox estadoDeOrdenTextBox;
         private Label label13;
+        private TextBox dniTransportistaTextBox;
+        private ComboBox depositoComboBox;
+        private Label label11;
     }
 }

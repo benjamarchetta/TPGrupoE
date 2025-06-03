@@ -32,7 +32,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
         private void CargarCombos()
         {
             // Cargar clientes en ComboBox
-            ClienteComboBox.DataSource = _model.ObtenerClientes();
+           // ClienteComboBox.DataSource = _model.ObtenerClientes();
             ClienteComboBox.DisplayMember = "RazonSocial";
             ClienteComboBox.ValueMember = "IdCliente";
 

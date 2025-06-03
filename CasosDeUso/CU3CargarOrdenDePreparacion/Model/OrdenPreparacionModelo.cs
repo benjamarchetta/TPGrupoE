@@ -55,7 +55,23 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
             return Productos;
         }
     }
-    
+
+    /*public static List<StockFisicoEntidad> StockFisico
+    {
+        get
+        {
+            var StocksFisicos = new List<StockFisicoEntidad>();
+            foreach (var Stock in StockFisicoAlmacen.Stock)
+            {
+                Productos.Add(new ProductoEntidad
+                {
+                    
+                });
+            }
+            return StocksFisicos;
+        }
+    }*/
+
     /*public static List<OrdenPreparacionEntidad> OrdenesDePreparacion
     {
         get
