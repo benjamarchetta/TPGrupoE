@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TPGrupoE.Almacenes
+{
+    public class ProductoOrden
+    {
+        public int IdProducto { get; set; }
+        public int Cantidad { get; set; }
+        public bool PalletCerrado { get; set; }
+    }
+}

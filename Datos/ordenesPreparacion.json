@@ -1,0 +1,146 @@
+[
+  {
+    "IdOrdenPreparacion": 1001,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111222,
+    "Estado": 0,
+    "FechaEntrega": "2025-06-10T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 2,
+        "Cantidad": 30,
+        "PalletCerrado": true
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1002,
+    "IdDeposito": 1,
+    "IdCliente": 2,
+    "DniTransportista": 30111223,
+    "Estado": 2,
+    "FechaEntrega": "2025-06-11T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 18,
+        "Cantidad": 40,
+        "PalletCerrado": true
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1003,
+    "IdDeposito": 4,
+    "IdCliente": 4,
+    "DniTransportista": 30111224,
+    "Estado": 4,
+    "FechaEntrega": "2025-06-12T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 6,
+        "Cantidad": 20,
+        "PalletCerrado": true
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1004,
+    "IdDeposito": 2,
+    "IdCliente": 4,
+    "DniTransportista": 30111225,
+    "Estado": 4,
+    "FechaEntrega": "2025-06-13T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 10,
+        "Cantidad": 25,
+        "PalletCerrado": true
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1005,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111226,
+    "Estado": 5,
+    "FechaEntrega": "2025-06-01T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 9,
+        "Cantidad": 30,
+        "PalletCerrado": true
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1006,
+    "IdDeposito": 3,
+    "IdCliente": 4,
+    "DniTransportista": 30111227,
+    "Estado": 0,
+    "FechaEntrega": "2025-06-15T14:18:16.6600073-03:00",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 1,
+        "Cantidad": 40,
+        "PalletCerrado": false
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1007,
+    "IdDeposito": 1,
+    "IdCliente": 3,
+    "DniTransportista": 30111228,
+    "Estado": 2,
+    "FechaEntrega": "2025-06-16T14:18:16.6600073-03:00",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 8,
+        "Cantidad": 50,
+        "PalletCerrado": false
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1008,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111229,
+    "Estado": 3,
+    "FechaEntrega": "2025-06-17T14:18:16.6600073-03:00",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 15,
+        "Cantidad": 20,
+        "PalletCerrado": false
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1009,
+    "IdDeposito": 1,
+    "IdCliente": 1,
+    "DniTransportista": 30111230,
+    "Estado": 3,
+    "FechaEntrega": "2025-06-18T14:18:16.6600073-03:00",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 17,
+        "Cantidad": 25,
+        "PalletCerrado": false
+      }
+    ]
+  }
+]

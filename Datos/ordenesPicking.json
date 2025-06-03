@@ -1,0 +1,16 @@
+[
+  {
+    "IdOrdenSeleccion": 1,
+    "Estado": 0,
+    "IdOrdenPreparacion": [
+      1006
+    ]
+  },
+  {
+    "IdOrdenSeleccion": 3,
+    "Estado": 1,
+    "IdOrdenPreparacion": [
+      1007
+    ]
+  }
+]

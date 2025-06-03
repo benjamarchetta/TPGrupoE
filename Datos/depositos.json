@@ -1,0 +1,22 @@
+[
+  {
+    "IdDeposito": 1,
+    "CapacidadEstimadaPallets": 20000,
+    "Domicilio": "Camino del Buen Ayre 15400, Malvinas Argentinas, GBA"
+  },
+  {
+    "IdDeposito": 2,
+    "CapacidadEstimadaPallets": 15000,
+    "Domicilio": "Av. Circunvalación y Ovidio Lagos, Rosario, Santa Fe"
+  },
+  {
+    "IdDeposito": 3,
+    "CapacidadEstimadaPallets": 12000,
+    "Domicilio": "Av. La Voz del Interior 7800, Córdoba Capital"
+  },
+  {
+    "IdDeposito": 4,
+    "CapacidadEstimadaPallets": 8000,
+    "Domicilio": "Ruta Nacional 9, km 1283, San Miguel de Tucumán"
+  }
+]
