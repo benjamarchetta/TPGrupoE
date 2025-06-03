@@ -135,46 +135,17 @@ namespace TPGrupoE.Almacenes
         }
         */
 
-        //public static void ActualizarOrdenPreparacion(OrdenPreparacionEntidad ordenActualizada)
-        //{
-        //    var index = ordenesPreparacion.FindIndex(op => op.IdOrdenPreparacion == ordenActualizada.IdOrdenPreparacion);
-
-        //    if (index != -1)
-        //    {
-        //        ordenesPreparacion[index] = ordenActualizada;
-        //        GrabarOP();
-        //    }
-        //}
-        // MÉTODO CON DEBUG:
         public static void ActualizarOrdenPreparacion(OrdenPreparacionEntidad ordenActualizada)
         {
-            MessageBox.Show($"Buscando orden {ordenActualizada.IdOrdenPreparacion} en lista de {ordenesPreparacion.Count} órdenes", "Debug 1");
-
             var index = ordenesPreparacion.FindIndex(op => op.IdOrdenPreparacion == ordenActualizada.IdOrdenPreparacion);
 
             if (index != -1)
             {
-                MessageBox.Show($"Orden encontrada en índice {index}. Estado actual: {ordenesPreparacion[index].Estado}", "Debug 2");
-
                 ordenesPreparacion[index] = ordenActualizada;
-
-                MessageBox.Show($"Orden actualizada. Nuevo estado: {ordenesPreparacion[index].Estado}", "Debug 3");
-
-                var estadoAntesGrabar = ordenesPreparacion[index].Estado;
-
                 GrabarOP();
-
-                MessageBox.Show($"GrabarOP ejecutado. Estado antes de grabar: {estadoAntesGrabar}", "Debug 4");
-
-                LeerOP();
-                var ordenDespuesGrabar = ordenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == ordenActualizada.IdOrdenPreparacion);
-                MessageBox.Show($"Después de grabar y releer: Estado = {ordenDespuesGrabar?.Estado}", "Debug 5");
             }
-            else
-            {
-                MessageBox.Show("¡Orden NO encontrada en la lista!", "Error");
-            }
+        }
+       
         }
 
     }
-}
