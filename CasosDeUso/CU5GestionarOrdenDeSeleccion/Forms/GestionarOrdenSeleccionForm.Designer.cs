@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem4 = new ListViewItem(new string[] { "XY-CCCDD", "TipoX", "150", "No", "XYZ" }, -1);
-            ListViewItem listViewItem5 = new ListViewItem(new string[] { "2025/05/25", "XX" }, -1);
-            ListViewItem listViewItem6 = new ListViewItem(new string[] { "2025/05/26", "XX" }, -1);
             label1 = new Label();
             seleccionarMercaderiaButton = new Button();
             confirmarSeleccionButton = new Button();
@@ -82,14 +79,12 @@
             // 
             detalleProductosListView.Columns.AddRange(new ColumnHeader[] { skuColumna, columnHeader2, cantidadColumna, columnHeader1, columnHeader3 });
             detalleProductosListView.FullRowSelect = true;
-            detalleProductosListView.Items.AddRange(new ListViewItem[] { listViewItem4 });
             detalleProductosListView.Location = new Point(12, 217);
             detalleProductosListView.Name = "detalleProductosListView";
             detalleProductosListView.Size = new Size(776, 175);
             detalleProductosListView.TabIndex = 3;
             detalleProductosListView.UseCompatibleStateImageBehavior = false;
             detalleProductosListView.View = View.Details;
-            detalleProductosListView.SelectedIndexChanged += ordenesListView_SelectedIndexChanged;
             // 
             // skuColumna
             // 
@@ -139,9 +134,6 @@
             // 
             ordenesListView.CheckBoxes = true;
             ordenesListView.Columns.AddRange(new ColumnHeader[] { fechaRecepcioncolumnHeader2, idOrdenColumnHeader1 });
-            listViewItem5.StateImageIndex = 0;
-            listViewItem6.StateImageIndex = 0;
-            ordenesListView.Items.AddRange(new ListViewItem[] { listViewItem5, listViewItem6 });
             ordenesListView.Location = new Point(12, 27);
             ordenesListView.MultiSelect = false;
             ordenesListView.Name = "ordenesListView";
@@ -184,7 +176,7 @@
             Controls.Add(label1);
             Name = "GestionarOrdenSeleccionForm";
             Text = "Gestionar órden de selección";
-          //  Load += ConfirmarSeleccionForm_Load;
+            Load += GestionarOrdenSeleccionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

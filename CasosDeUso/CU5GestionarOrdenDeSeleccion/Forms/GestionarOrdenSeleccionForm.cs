@@ -10,7 +10,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
     public partial class GestionarOrdenSeleccionForm : Form
     {
         private GestionOrdenSeleccionModel _modelo;
-        private int idOrdenSeleccionActiva;
 
         public GestionarOrdenSeleccionForm()
         {
@@ -26,9 +25,11 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             ordenesListView.View = View.Details;
             ordenesListView.FullRowSelect = true;
             ordenesListView.MultiSelect = false;
+            ordenesListView.CheckBoxes = true;
             ordenesListView.Columns.Add("ID Orden", 100);
             ordenesListView.Columns.Add("Cliente", 200);
             ordenesListView.Columns.Add("Estado", 100);
+            ordenesListView.Columns.Add("Fecha Despacho", 150);
 
             // LISTVIEW DE PRODUCTOS
             detalleProductosListView.View = View.Details;
@@ -44,6 +45,9 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             VerDetallesButton.Text = "Seleccionar mercadería";
             VerDetallesButton.Enabled = false;
             confirmarSeleccionButton.Enabled = false;
+
+            // EVENTO
+            ordenesListView.ItemCheck += ordenesListView_ItemCheck;
         }
 
         private void CargarDatosIniciales()
@@ -58,55 +62,68 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
             foreach (var orden in _modelo.OrdenesDeSeleccion)
             {
-                var clienteNombre = "N/A";
-                var primerIdPrep = orden.IdOrdenPreparacion.FirstOrDefault();
-                var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(primerIdPrep);
+                string clienteNombre = "N/A";
+                DateTime? fechaMasProxima = null;
 
-                if (ordenPrep != null)
+                foreach (var idOP in orden.IdOrdenPreparacion)
                 {
-                    var cliente = ClienteAlmacen.BuscarClientePorId(ordenPrep.IdCliente);
-                    if (cliente != null) clienteNombre = cliente.RazonSocial;
+                    var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOP);
+                    if (ordenPrep != null)
+                    {
+                        // Busco el cliente
+                        var cliente = ClienteAlmacen.BuscarClientePorId(ordenPrep.IdCliente);
+                        if (cliente != null) clienteNombre = cliente.RazonSocial;
+
+                        // Comparo fechas para guardar la más próxima
+                        if (fechaMasProxima == null || ordenPrep.FechaEntrega < fechaMasProxima)
+                        {
+                            fechaMasProxima = ordenPrep.FechaEntrega;
+                        }
+                    }
                 }
+
+                // Si no encontré fecha, dejo un texto por defecto
+                string fechaDespachoTexto = fechaMasProxima?.ToString("dd/MM/yyyy") ?? "Sin fecha";
 
                 var item = new ListViewItem(orden.IdOrdenSeleccion.ToString());
                 item.SubItems.Add(clienteNombre);
                 item.SubItems.Add(orden.Estado.ToString());
+                item.SubItems.Add(fechaDespachoTexto);
                 item.Tag = orden.IdOrdenSeleccion;
 
                 ordenesListView.Items.Add(item);
             }
         }
 
-        private void ordenesListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void ordenesListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            VerDetallesButton.Enabled = ordenesListView.SelectedItems.Count > 0;
+            BeginInvoke((MethodInvoker)delegate
+            {
+                VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0;
+            });
         }
 
         private void VerDetallesButton_Click(object sender, EventArgs e)
         {
-            if (ordenesListView.SelectedItems.Count == 0) return;
-
-            var item = ordenesListView.SelectedItems[0];
-            idOrdenSeleccionActiva = (int)item.Tag;
-
-            var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccionActiva);
-            if (productos.Count == 0)
-            {
-                MessageBox.Show("No se encontraron productos para esta orden.");
-                return;
-            }
+            if (ordenesListView.CheckedItems.Count == 0) return;
 
             detalleProductosListView.Items.Clear();
 
-            foreach (var p in productos)
+            foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
-                var fila = new ListViewItem(p.IdProducto.ToString());
-               // fila.SubItems.Add(p.Tipo);
-                fila.SubItems.Add(p.Cantidad.ToString());
-                fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No");
-               // fila.SubItems.Add(p.Posicion ?? "N/A");
+                int idOrdenSeleccion = (int)item.Tag;
+                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);
 
-                detalleProductosListView.Items.Add(fila);
+                foreach (var p in productos)
+                {
+                    var fila = new ListViewItem(p.IdProducto.ToString());
+                    fila.SubItems.Add("N/D"); // Si no tenés tipo, podés completar después
+                    fila.SubItems.Add(p.Cantidad.ToString());
+                    fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No");
+                    fila.SubItems.Add("Auto"); // Podés reemplazar con ubicación si la traés del stock
+
+                    detalleProductosListView.Items.Add(fila);
+                }
             }
 
             confirmarSeleccionButton.Enabled = true;
@@ -114,14 +131,44 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
         private void confirmarSeleccionButton_Click(object sender, EventArgs e)
         {
-            _modelo.ConfirmarSeleccion(idOrdenSeleccionActiva);
-            MessageBox.Show("Orden de selección confirmada correctamente.");
+            if (ordenesListView.CheckedItems.Count == 0) return;
 
-            detalleProductosListView.Items.Clear();
-            confirmarSeleccionButton.Enabled = false;
-            VerDetallesButton.Enabled = false;
+            var ids = new List<int>();
+            foreach (ListViewItem item in ordenesListView.CheckedItems)
+            {
+                ids.Add((int)item.Tag);
+            }
 
-            CargarDatosIniciales();
+            var mensaje = "¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n" +
+                          string.Join(", ", ids.Select(id => $"OS-{id:D5}"));
+
+            var result = MessageBox.Show(mensaje, "Confirmar selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                foreach (var id in ids)
+                {
+                    _modelo.ConfirmarSeleccion(id);
+                }
+
+                MessageBox.Show("Órdenes de selección confirmadas correctamente.");
+
+                detalleProductosListView.Items.Clear();
+                confirmarSeleccionButton.Enabled = false;
+                VerDetallesButton.Enabled = false;
+
+                CargarDatosIniciales();
+            }
+        }
+
+        private void GestionarOrdenSeleccionForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
+
+
+
+
+
 }

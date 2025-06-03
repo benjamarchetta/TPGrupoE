@@ -9,47 +9,85 @@ using TPGrupoE.Almacenes;
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 
 {
+    
     internal class GestionOrdenSeleccionModel
     {
+
         public List<OrdenPickingEntidad> OrdenesDeSeleccion { get; private set; }
-        // carga json y filtra las órdenes de selección pendientes
+       
+        
+       /* 
+        public static List<OrdenPickingEntidad> Ordenes
+        {
+            get
+            {
+                var Ordenes = new List<OrdenPickingEntidad>();
+                foreach (var Orden in OrdenPickingAlmacen.OrdenesPicking)
+                {
+                    Ordenes.Add(new OrdenPickingEntidad
+                    {     
+                      
+                        IdOrdenSeleccion = Orden.IdOrdenSeleccion,
+                        EstadoOrdenSeleccion=Orden.EstadoOrdenSeleccion,
+                        IdOrdenPreparacion=Orden.IdOrdenPreparacion,
+                     
+                    });
+                }
+                return Ordenes;
+            }
+        }
+       */
         public GestionOrdenSeleccionModel()
         {
             OrdenPickingAlmacen.LeerOS();
-            OrdenPreparacionAlmacen.LeerOP();     // FALTA
-            StockFisicoAlmacen.LeerStock();       // FALTA
-            OrdenesDeSeleccion = OrdenPickingAlmacen.BuscarOrdenesPendientes();
+            OrdenPreparacionAlmacen.LeerOP();
+            StockFisicoAlmacen.LeerStock();
+
+            // Filtra órdenes de selección pendientes
+            OrdenesDeSeleccion = OrdenPickingAlmacen
+                .BuscarOrdenesPendientes()
+                .ToList();
+
+            // Mensaje para mostrar cuántas se cargaron
+            MessageBox.Show($"Se encontraron {OrdenesDeSeleccion.Count} órdenes de selección pendientes.");
         }
-        // Crea una nueva orden de selección con los IDs de las órdenes de preparación
+
+        // Devuelve el detalle de productos de una orden de selección
         public List<ProductoOrden> ObtenerDetalleProductos(int idOrdenSeleccion)
         {
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             var productos = new List<ProductoOrden>();
 
+            if (ordenSeleccion == null) return productos;
+
             foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
             {
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
-                productos.AddRange(ordenPrep.ProductoOrden); // ya trae SKU, tipo, cantidad, etc.
+                if (ordenPrep != null)
+                {
+                    productos.AddRange(ordenPrep.ProductoOrden);
+                }
             }
 
             return productos;
         }
-        // Confirma la selección de la orden de picking y actualiza los estados de las órdenes de preparación y el stock físico
+
+        // Confirma una orden de selección, actualiza estados y descuenta stock
         public void ConfirmarSeleccion(int idOrdenSeleccion)
-        { // Obtener la orden de picking y cambiar su estado
+        {
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             if (ordenSeleccion == null) return;
+
             // Cambiar estado a "Cumplida"
             ordenSeleccion.Estado = EstadoOrdenSeleccion.Cumplida;
 
-            // Iterar sobre cada ID de orden de preparación vinculada
             foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
             {
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
                 if (ordenPrep == null) continue;
-                // Marcar la orden de preparación como "Seleccionada"
+
                 ordenPrep.Estado = EstadoOrdenPreparacion.Seleccionada;
-                // Descontar stock físico de cada producto
+
                 foreach (var producto in ordenPrep.ProductoOrden)
                 {
                     StockFisicoAlmacen.DescontarProductoPorPosicion(
@@ -59,16 +97,26 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 }
             }
 
-            // Grabar cambios en archivos
+            // Guardar los cambios en los archivos
             OrdenPickingAlmacen.GrabarOS();
             OrdenPreparacionAlmacen.GrabarOP();
             StockFisicoAlmacen.GrabarStock();
 
-            OrdenPreparacionAlmacen.LeerOP(); // ❗Falta
-            StockFisicoAlmacen.LeerStock();   // ❗Falta
-                                              // Actualizar la lista de órdenes de selección pendientes
-            OrdenesDeSeleccion = OrdenPickingAlmacen.BuscarOrdenesPendientes();
-            
+            // Volver a leer los datos actualizados
+            OrdenPreparacionAlmacen.LeerOP();
+            StockFisicoAlmacen.LeerStock();
+
+            // Actualizar lista de pendientes en memoria
+            OrdenesDeSeleccion = OrdenPickingAlmacen
+                .BuscarOrdenesPendientes()
+                
+                .ToList();
         }
     }
+
+
+
+
+
+
 }
