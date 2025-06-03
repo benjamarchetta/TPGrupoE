@@ -21,25 +21,33 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
         {
             InitializeComponent();
             _model.CargarDatosIniciales();
-            CargarCombos();
+            _model.CargarTransportistas();
+            CargarComboTransportistas();
 
             // Eventos
+            TransportistaComboBox.SelectedIndexChanged += TransportistaComboBox_SelectedIndexChanged;
             SeleccionarButton.Click += SeleccionarButton_Click;
             EmitirRemitoButton.Click += EmitirRemitoButton_Click;
             VolverButton.Click += VolverButton_Click;
         }
 
-        private void CargarCombos()
+        private void CargarComboTransportistas()
         {
-            // Cargar clientes en ComboBox
-           // ClienteComboBox.DataSource = _model.ObtenerClientes();
-            ClienteComboBox.DisplayMember = "RazonSocial";
-            ClienteComboBox.ValueMember = "IdCliente";
-
-            // Cargar transportistas en ComboBox
             TransportistaComboBox.DataSource = _model.Transportistas;
             TransportistaComboBox.DisplayMember = "Text";
             TransportistaComboBox.ValueMember = "Value";
+        }
+
+        private void TransportistaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TransportistaComboBox.SelectedItem is ComboBoxItem item)
+            {
+                int dni = item.Value;
+                var clientes = _model.ObtenerClientesDeTransportista(dni);
+                ClienteComboBox.DataSource = clientes;
+                ClienteComboBox.DisplayMember = "RazonSocial";
+                ClienteComboBox.ValueMember = "IdCliente";
+            }
         }
 
         private void SeleccionarButton_Click(object sender, EventArgs e)
@@ -53,6 +61,12 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
             int dni = (int)TransportistaComboBox.SelectedValue;
 
             _model.CargarOrdenesPorTransportistaYCliente(dni, idCliente);
+
+            if (_model.OrdenesFiltradas.Count == 0)
+            {
+                MessageBox.Show("No hay ninguna orden para despachar el día de hoy.");
+                return;
+            }
 
             foreach (var op in _model.OrdenesFiltradas)
             {
@@ -92,13 +106,13 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
             {
                 var idRemito = _model.EmitirRemito(dni, idCliente, seleccionados);
                 MessageBox.Show($"Remito generado con éxito. ID: {idRemito}");
-                SeleccionarButton.PerformClick(); // refresco la lista
+                SeleccionarButton.PerformClick();
             }
         }
 
         private void VolverButton_Click(object sender, EventArgs e)
         {
-            this.Close(); // O volver al menú principal
+            this.Close();
         }
     }
 }

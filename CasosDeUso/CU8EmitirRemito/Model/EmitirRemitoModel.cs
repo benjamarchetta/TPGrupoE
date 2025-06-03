@@ -14,6 +14,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
 
         public override string ToString() => Text;
     }
+
     public class EmitirRemitoModel
     {
         public List<OrdenPreparacionEntidad> OrdenesFiltradas { get; private set; } = new();
@@ -27,13 +28,10 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
             RemitoAlmacen.LeerRemito();
         }
 
-        public void CargarTransportistasDisponibles()
+        public void CargarTransportistas()
         {
+            // Mostrar todos los transportistas con OP cargadas
             Transportistas = OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Where(op => op.Estado == EstadoOrdenPreparacion.Preparada &&
-                             op.FechaEntrega.Date == DateTime.Today &&
-                             OrdenEntregaAlmacen.OrdenesEntrega.Any(oe => oe.IdOrdenPreparacion.Contains(op.IdOrdenPreparacion) &&
-                                                                           oe.Estado == EstadoOrdenEntrega.Pendiente))
                 .Select(op => op.DniTransportista)
                 .Distinct()
                 .Select(dni => new ComboBoxItem { Text = $"DNI: {dni}", Value = dni })
@@ -43,9 +41,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
         public List<ClienteEntidad> ObtenerClientesDeTransportista(int dni)
         {
             var clientesConOP = OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Where(op => op.DniTransportista == dni &&
-                             op.Estado == EstadoOrdenPreparacion.Preparada &&
-                             op.FechaEntrega.Date == DateTime.Today)
+                .Where(op => op.DniTransportista == dni)
                 .Select(op => op.IdCliente)
                 .Distinct()
                 .ToList();
