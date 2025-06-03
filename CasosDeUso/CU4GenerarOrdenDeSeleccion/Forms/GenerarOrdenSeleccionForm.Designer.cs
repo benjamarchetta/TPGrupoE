@@ -43,8 +43,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            estadoDeOrdenTextBox = new TextBox();
-            label12 = new Label();
+            btnRestaurarEstado = new Button();
             SuspendLayout();
             // 
             // label1
@@ -67,7 +66,6 @@
             ordenesPendientesListView.TabIndex = 1;
             ordenesPendientesListView.UseCompatibleStateImageBehavior = false;
             ordenesPendientesListView.View = View.Details;
-            ordenesPendientesListView.SelectedIndexChanged += ordenesPendientesListView_SelectedIndexChanged;
             // 
             // fechaColumna
             // 
@@ -102,13 +100,13 @@
             // generarOrdenButton
             // 
             generarOrdenButton.Enabled = false;
-            generarOrdenButton.Location = new Point(604, 498);
+            generarOrdenButton.Location = new Point(604, 481);
             generarOrdenButton.Name = "generarOrdenButton";
             generarOrdenButton.Size = new Size(184, 23);
             generarOrdenButton.TabIndex = 4;
             generarOrdenButton.Text = "Generar órden de selección";
             generarOrdenButton.UseVisualStyleBackColor = true;
-            generarOrdenButton.Click += button2_Click;
+            generarOrdenButton.Click += generarOrdenButton_Click;
             // 
             // label2
             // 
@@ -140,7 +138,6 @@
             mercaderiasAPrepList.TabIndex = 9;
             mercaderiasAPrepList.UseCompatibleStateImageBehavior = false;
             mercaderiasAPrepList.View = View.Details;
-            mercaderiasAPrepList.SelectedIndexChanged += mercaderiasAPrepList_SelectedIndexChanged_1;
             // 
             // columnHeader1
             // 
@@ -162,31 +159,22 @@
             columnHeader5.Text = "CUIT Cliente";
             columnHeader5.Width = 195;
             // 
-            // estadoDeOrdenTextBox
+            // btnRestaurarEstado
             // 
-            estadoDeOrdenTextBox.Enabled = false;
-            estadoDeOrdenTextBox.Location = new Point(12, 499);
-            estadoDeOrdenTextBox.Name = "estadoDeOrdenTextBox";
-            estadoDeOrdenTextBox.Size = new Size(200, 23);
-            estadoDeOrdenTextBox.TabIndex = 37;
-            estadoDeOrdenTextBox.Text = "En preparación";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(12, 481);
-            label12.Name = "label12";
-            label12.Size = new Size(92, 15);
-            label12.TabIndex = 36;
-            label12.Text = "Estado de órden";
+            btnRestaurarEstado.Location = new Point(41, 500);
+            btnRestaurarEstado.Name = "btnRestaurarEstado";
+            btnRestaurarEstado.Size = new Size(75, 23);
+            btnRestaurarEstado.TabIndex = 10;
+            btnRestaurarEstado.Text = "Restaurar ";
+            btnRestaurarEstado.UseVisualStyleBackColor = true;
+            btnRestaurarEstado.Click += btnRestaurarEstado_Click;
             // 
             // GenerarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
-            Controls.Add(estadoDeOrdenTextBox);
-            Controls.Add(label12);
+            Controls.Add(btnRestaurarEstado);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
             Controls.Add(label2);
@@ -196,7 +184,7 @@
             Controls.Add(label1);
             Name = "GenerarOrdenSeleccionForm";
             Text = "Generar órden de selección";
-            //Load += ProcesarOrdenSeleccionForm_Load;
+            Load += GenerarOrdenSeleccionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,8 +206,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private TextBox estadoDeOrdenTextBox;
-        private Label label12;
-    
+        private Button btnRestaurarEstado;
     }
 }
