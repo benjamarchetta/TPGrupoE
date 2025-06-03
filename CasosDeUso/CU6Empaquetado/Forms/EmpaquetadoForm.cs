@@ -37,7 +37,7 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MercaderiaAEmpaquetarGroupBox.Location = new Point(22, 25);
             MercaderiaAEmpaquetarGroupBox.Name = "MercaderiaAEmpaquetarGroupBox";
-            MercaderiaAEmpaquetarGroupBox.Size = new Size(540, 419);
+            MercaderiaAEmpaquetarGroupBox.Size = new Size(858, 419);
             MercaderiaAEmpaquetarGroupBox.TabIndex = 0;
             MercaderiaAEmpaquetarGroupBox.TabStop = false;
             MercaderiaAEmpaquetarGroupBox.Text = "Mercadería a Empaquetar";
@@ -48,7 +48,7 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             listView1.GridLines = true;
             listView1.Location = new Point(17, 35);
             listView1.Name = "listView1";
-            listView1.Size = new Size(502, 360);
+            listView1.Size = new Size(792, 360);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -71,9 +71,9 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             // ConfirmarEmpaquetadoButton
             // 
             ConfirmarEmpaquetadoButton.BackColor = SystemColors.Highlight;
-            ConfirmarEmpaquetadoButton.Location = new Point(302, 461);
+            ConfirmarEmpaquetadoButton.Location = new Point(461, 516);
             ConfirmarEmpaquetadoButton.Name = "ConfirmarEmpaquetadoButton";
-            ConfirmarEmpaquetadoButton.Size = new Size(260, 48);
+            ConfirmarEmpaquetadoButton.Size = new Size(370, 48);
             ConfirmarEmpaquetadoButton.TabIndex = 1;
             ConfirmarEmpaquetadoButton.Text = "Confirmar Empaquetado";
             ConfirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
@@ -81,16 +81,16 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             // VolverMenuPrincipalButton
             // 
             VolverMenuPrincipalButton.BackColor = Color.White;
-            VolverMenuPrincipalButton.Location = new Point(22, 461);
+            VolverMenuPrincipalButton.Location = new Point(39, 516);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(260, 48);
+            VolverMenuPrincipalButton.Size = new Size(381, 48);
             VolverMenuPrincipalButton.TabIndex = 2;
             VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = false;
             // 
             // EmpaquetadoForm
             // 
-            ClientSize = new Size(606, 521);
+            ClientSize = new Size(938, 804);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(ConfirmarEmpaquetadoButton);
             Controls.Add(MercaderiaAEmpaquetarGroupBox);
