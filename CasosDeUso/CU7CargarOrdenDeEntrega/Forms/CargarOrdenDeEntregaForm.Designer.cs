@@ -46,7 +46,7 @@
             OrdenesEmpaquetadasALiberarGroupBox.Margin = new Padding(2);
             OrdenesEmpaquetadasALiberarGroupBox.Name = "OrdenesEmpaquetadasALiberarGroupBox";
             OrdenesEmpaquetadasALiberarGroupBox.Padding = new Padding(2);
-            OrdenesEmpaquetadasALiberarGroupBox.Size = new Size(554, 453);
+            OrdenesEmpaquetadasALiberarGroupBox.Size = new Size(539, 453);
             OrdenesEmpaquetadasALiberarGroupBox.TabIndex = 9;
             OrdenesEmpaquetadasALiberarGroupBox.TabStop = false;
             OrdenesEmpaquetadasALiberarGroupBox.Text = "Mercaderías a liberar para despacho";
@@ -59,29 +59,28 @@
             OrdenesEmpaquetadasListView.GridLines = true;
             OrdenesEmpaquetadasListView.Location = new Point(12, 38);
             OrdenesEmpaquetadasListView.Margin = new Padding(2);
+            OrdenesEmpaquetadasListView.MultiSelect = false;
             OrdenesEmpaquetadasListView.Name = "OrdenesEmpaquetadasListView";
-            OrdenesEmpaquetadasListView.Size = new Size(529, 393);
+            OrdenesEmpaquetadasListView.Size = new Size(511, 393);
             OrdenesEmpaquetadasListView.TabIndex = 6;
             OrdenesEmpaquetadasListView.UseCompatibleStateImageBehavior = false;
-            OrdenesEmpaquetadasListView.MultiSelect = false;
             OrdenesEmpaquetadasListView.View = View.Details;
             // 
             // IdOrdenPreparacion
             // 
             IdOrdenPreparacion.Text = "N° Orden de Preparación";
-            IdOrdenPreparacion.Width = 180;
+            IdOrdenPreparacion.Width = 250;
             // 
             // FechaEntrega
             // 
             FechaEntrega.Text = "Fecha de entrega";
-            FechaEntrega.Width = 160;
+            FechaEntrega.Width = 250;
             // 
             // LiberarParaDespachoButton
             // 
             LiberarParaDespachoButton.BackColor = SystemColors.Highlight;
-            LiberarParaDespachoButton.Enabled = true;
             LiberarParaDespachoButton.ForeColor = SystemColors.ActiveCaptionText;
-            LiberarParaDespachoButton.Location = new Point(305, 484);
+            LiberarParaDespachoButton.Location = new Point(290, 484);
             LiberarParaDespachoButton.Margin = new Padding(3, 4, 3, 4);
             LiberarParaDespachoButton.Name = "LiberarParaDespachoButton";
             LiberarParaDespachoButton.Size = new Size(260, 48);
@@ -104,7 +103,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 566);
+            ClientSize = new Size(564, 566);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(OrdenesEmpaquetadasALiberarGroupBox);
             Controls.Add(LiberarParaDespachoButton);

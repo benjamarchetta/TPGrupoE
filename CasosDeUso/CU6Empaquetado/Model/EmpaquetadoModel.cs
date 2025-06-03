@@ -4,46 +4,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
-//using TPGrupoE_CU_OrdenPreparacion_Model;
+using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
+//using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
 
-    internal class EmpaquetadoModelo
+    internal partial class EmpaquetadoModel
     {
-        /*
         public List<OrdenDePreparacionAEmpaquetar> OrdenesDePreparacionAEmpaquetar { get; private set; }
 
-        private List<Almacenes.ProductoAlmacen> ProductosIniciales = new List<Almacenes.ProductoAlmacen>();
+        private List<Producto> ProductosIniciales = new List<Producto>();
 
         public EmpaquetadoModel()
         {
-            ProductosIniciales = new List<Almacenes.ProductoAlmacen>();
+            ProductosIniciales = new List<Producto>();
             OrdenesDePreparacionAEmpaquetar = new List<OrdenDePreparacionAEmpaquetar>();
-            var ordenesDePreparacionSeleccionadas = OrdenPreparacionAlmacen.ObtenerOrdenesSeleccionadas();
+            var ordenesDePreparacionSeleccionadas = OrdenPreparacionAlmacen.BuscarOrdenesSeleccionadas();
 
             foreach (var ordenPreparacion in ordenesDePreparacionSeleccionadas)
             {
                 OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar = new OrdenDePreparacionAEmpaquetar();
-                ordenDePreparacionAEmpaquetar.Producto = new List<CasoU_EmpaquetadoOrdenes.ProductoAlmacen>(); 
-
+                ordenDePreparacionAEmpaquetar.Producto = [];
                 ordenDePreparacionAEmpaquetar.Id = ordenPreparacion.IdOrdenPreparacion.ToString();
 
                 foreach (var productoOrden in ordenPreparacion.ProductoOrden)
                 {
-                    CasoU_EmpaquetadoOrdenes.ProductoAlmacen productoAAgregar = new CasoU_EmpaquetadoOrdenes.ProductoAlmacen();
 
-                    ProductoEntidad producto = Almacenes.ProductoAlmacen.BuscarProductoPorId(productoOrden.IdProducto);
-
-                    productoAAgregar.IdProducto = producto.IdProducto.ToString();
-                    productoAAgregar.DescripcionProducto = ProductoOrden.DescripcionProducto;
+                    StockFisicoEntidad stock = StockFisicoAlmacen.ObtenerStockPorId(productoOrden.IdProducto);
+                    ProductoEntidad producto = ProductoAlmacen.BuscarProductoPorId(productoOrden.IdProducto);
+                    Producto productoAAgregar = new Producto();
+                    productoAAgregar.IdProducto = stock.IdProducto.ToString();
                     productoAAgregar.Cantidad = productoOrden.Cantidad;
-
-                    ordenDePreparacionAEmpaquetar.Producto.Add(productoAAgregar);
+                    productoAAgregar.DescripcionProducto = producto.DescripcionProducto;
+                    ordenDePreparacionAEmpaquetar.Productos.Add(productoAAgregar);
                 }
 
                 OrdenesDePreparacionAEmpaquetar.Add(ordenDePreparacionAEmpaquetar);
+
             }
         }
 
@@ -54,11 +52,12 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
                 return;
             }
 
-            var ordenPreparacion = OrdenPreparacionAlmacen.ObtenerOrdenPorId(int.Parse(orden.Id));
+            var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(int.Parse(orden.Id));
 
-            ordenPreparacion.MarcarComoPreparada();
+            ordenPreparacion.MarcarOpEmpaquetada();
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
-        }*/
+        }
+
     }
 }

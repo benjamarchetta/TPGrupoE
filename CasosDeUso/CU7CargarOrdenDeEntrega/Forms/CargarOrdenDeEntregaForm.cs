@@ -36,7 +36,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
             _ordenDeEntregaModel.CrearOrdenEntrega();
             MessageBox.Show("Se registró correctamente la orden de entrega.");
-            ActualizarTabla(); 
+            ActualizarTabla();
         }
 
         //Carga la nueva orden de entrega en OrdenEntregaAlmacen
@@ -47,7 +47,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
         private void ActualizarTabla()
         {
-            
+
             List<OrdenPreparacion> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();

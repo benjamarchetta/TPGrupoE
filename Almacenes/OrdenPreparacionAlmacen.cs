@@ -19,8 +19,8 @@ namespace TPGrupoE.Almacenes
 
             File.WriteAllText(@"Datos\ordenesPreparacion.json", datosOP);
         }
-
         
+
         public static void LeerOP()
         {
             
@@ -142,8 +142,10 @@ namespace TPGrupoE.Almacenes
             if (index != -1)
             {
                 ordenesPreparacion[index] = ordenActualizada;
-                GrabarOP(); 
+                GrabarOP();
             }
         }
+       
+        }
+
     }
-}

@@ -10,13 +10,74 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
 internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benja haga un pull
 {
-    /*
-    public static List<OrdenPreparacionEntidad> OrdenesDePreparacion
+    
+    
+
+    public static List<ClienteEntidad> Clientes
+    {
+        get
+        {
+            ClienteAlmacen.LeerCliente();
+            var copia = new List<ClienteEntidad>();
+            foreach (var cliente in ClienteAlmacen.Clientes)
+            {
+                copia.Add(new ClienteEntidad
+                {
+                    IdCliente = cliente.IdCliente,
+                    Cuit = cliente.Cuit,
+                    RazonSocial = cliente.RazonSocial,
+                    Domicilio = cliente.Domicilio,
+                });
+            }
+            return copia;
+
+        }
+    }
+
+    public static List<ProductoEntidad> Productos
+    {
+        get
+        {
+            var Productos = new List<ProductoEntidad>();
+            foreach (var Producto in ProductoAlmacen.Productos)
+            {
+                Productos.Add(new ProductoEntidad
+                {
+                    IdProducto = Producto.IdProducto,
+                    //CuitCliente = Producto.CuitCliente,
+                    Sku = Producto.Sku,
+                    //TipoProducto = Producto.TipoProducto,
+                    //CantidadEnStock = Producto.CantidadEnStock,
+                    DescripcionProducto= Producto.DescripcionProducto,
+                    //Ubicacion = Producto.Ubicacion,
+                });
+            }
+            return Productos;
+        }
+    }
+
+    /*public static List<StockFisicoEntidad> StockFisico
+    {
+        get
+        {
+            var StocksFisicos = new List<StockFisicoEntidad>();
+            foreach (var Stock in StockFisicoAlmacen.Stock)
+            {
+                Productos.Add(new ProductoEntidad
+                {
+                    
+                });
+            }
+            return StocksFisicos;
+        }
+    }*/
+
+    /*public static List<OrdenPreparacionEntidad> OrdenesDePreparacion
     {
         get
         {
             var OrdenesDePreparacion = new List<OrdenPreparacionEntidad>();
-            foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
+            foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesPreparacion)
             {
                 OrdenesDePreparacion.Add(new OrdenPreparacionEntidad
                 {
@@ -31,48 +92,9 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
             return OrdenesDePreparacion;
         }
     }
+    */
 
-    public static List<ClienteEntidad> Clientes
-    {
-        get
-        {
-            var Clientes = new List<ClienteEntidad>();
-            foreach (var Cliente in ClienteAlmacen.Clientes)
-            {
-                Clientes.Add(new ClienteEntidad
-                {
-                    Cuit = Cliente.Cuit,
-                    RazonSocial = Cliente.RazonSocial,
-                    Domicilio = Cliente.Domicilio,
-                });
-            }
-            return Clientes;
-        }
-    }
-
-    public static List<ProductoEntidad> Productos
-    {
-        get
-        {
-            var Productos = new List<ProductoEntidad>();
-            foreach (var Producto in ProductoAlmacen.Productos)
-            {
-                Productos.Add(new ProductoEntidad
-                {
-                    Id = Producto.Id,
-                    CuitCliente = Producto.CuitCliente,
-                    sku = Producto.sku,
-                    TipoProducto = Producto.TipoProducto,
-                    CantidadEnStock = Producto.CantidadEnStock,
-                    DescripcionMercaderia = Producto.DescripcionMercaderia,
-                    Ubicacion = Producto.Ubicacion,
-                });
-            }
-            return Productos;
-        }
-    }
-
-    public static List<TransportistaEntidad> Transportistas
+    /*public static List<TransportistaEntidad> Transportistas
     {
         get
         {

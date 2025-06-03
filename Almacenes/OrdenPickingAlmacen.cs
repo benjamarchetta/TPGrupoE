@@ -12,6 +12,10 @@ namespace TPGrupoE.Almacenes
         private static List<OrdenPickingEntidad> ordenesPicking= new List<OrdenPickingEntidad>();
 
         public static IReadOnlyCollection<OrdenPickingEntidad> OrdenesPicking => ordenesPicking.AsReadOnly();
+        public static IReadOnlyCollection<OrdenPickingEntidad> ObtenerTodas()
+        {
+            return ordenesPicking.AsReadOnly();
+        }
 
         public static void GrabarOS()
         {
@@ -32,7 +36,7 @@ namespace TPGrupoE.Almacenes
             ordenesPicking = JsonSerializer.Deserialize<List<OrdenPickingEntidad>>(datosOS)!;
         }
 
-        internal static string NuevaOS(OrdenPickingEntidad nuevaOrden)
+        internal static string? NuevaOS(OrdenPickingEntidad nuevaOrden)
         {
             if (OrdenPickingAlmacen.ordenesPicking.Count == 0)
             {
