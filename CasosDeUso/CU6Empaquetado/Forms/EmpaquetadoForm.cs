@@ -13,7 +13,7 @@ using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
+using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModel;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
