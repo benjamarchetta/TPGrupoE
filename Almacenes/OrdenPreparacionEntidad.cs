@@ -16,7 +16,7 @@ namespace TPGrupoE.Almacenes
         public DateTime FechaEntrega { get; set; }
         public bool PalletCerrado { get; set; }
         public List<ProductoOrden> ProductoOrden { get; set; } = new();
-
+            
         public void MarcarOpEnPreparacion()
         {
             this.Estado = EstadoOrdenPreparacion.EnPreparacion;
