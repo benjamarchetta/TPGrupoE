@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using static TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model.OrdenDeEntregaModelo;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 
 namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
@@ -41,7 +41,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
         {
             if (OrdenesDePreparacion.Count == 0)
             {
-                return "Debe haber al menos una orden de preparacion para crear una orden de entrega";
+                return "No hay ninguna orden empaquetada para liberar al Sector Despacho";
             }
 
             return null;
