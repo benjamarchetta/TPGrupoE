@@ -11,9 +11,8 @@ namespace TPGrupoE
         [STAThread]
         static void Main()
         {
-
-                // To customize application configuration such as set high DPI settings or default font,
-                // see https://aka.ms/applicationconfiguration.
+            try
+            {
                 ApplicationConfiguration.Initialize();
 
                 ClienteAlmacen.LeerCliente();
@@ -23,7 +22,9 @@ namespace TPGrupoE
                 OrdenPickingAlmacen.LeerOS();
                 OrdenEntregaAlmacen.LeerOE();
                 ProductoAlmacen.LeerProducto();
+
                 Application.Run(new MenuPrincipalGeneralForm());
+
                 ClienteAlmacen.GrabarCliente();
                 DepositosAlmacen.GrabarDeposito();
                 StockFisicoAlmacen.GrabarStock();
@@ -32,6 +33,11 @@ namespace TPGrupoE
                 OrdenEntregaAlmacen.GrabarOE();
                 ProductoAlmacen.GrabarProducto();
                 RemitoAlmacen.GrabarRemito();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al iniciar la aplicación: " + ex.Message);
+            }
         }
         //esto es para hacer un nuevo commit
     }
