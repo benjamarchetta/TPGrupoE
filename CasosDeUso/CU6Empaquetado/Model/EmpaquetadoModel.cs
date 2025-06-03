@@ -25,19 +25,19 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
             foreach (var ordenPreparacion in ordenesDePreparacionSeleccionadas)
             {
                 OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar = new OrdenDePreparacionAEmpaquetar();
-                ordenDePreparacionAEmpaquetar.Producto = [];
-                ordenDePreparacionAEmpaquetar.Id = ordenPreparacion.IdOrdenPreparacion.ToString();
+                //ordenDePreparacionAEmpaquetar.Producto = [];
+                //ordenDePreparacionAEmpaquetar.Id = ordenPreparacion.IdOrdenPreparacion.ToString();
 
                 foreach (var productoOrden in ordenPreparacion.ProductoOrden)
                 {
 
-                    StockFisicoEntidad stock = StockFisicoAlmacen.ObtenerStockPorId(productoOrden.IdProducto);
+                    //StockFisicoEntidad stock = StockFisicoAlmacen.ObtenerStockPorId(productoOrden.IdProducto);
                     ProductoEntidad producto = ProductoAlmacen.BuscarProductoPorId(productoOrden.IdProducto);
-                    Producto productoAAgregar = new Producto();
-                    productoAAgregar.IdProducto = stock.IdProducto.ToString();
-                    productoAAgregar.Cantidad = productoOrden.Cantidad;
-                    productoAAgregar.DescripcionProducto = producto.DescripcionProducto;
-                    ordenDePreparacionAEmpaquetar.Productos.Add(productoAAgregar);
+                    //Producto productoAAgregar = new Producto();
+                    //productoAAgregar.IdProducto = stock.IdProducto.ToString();
+                    //productoAAgregar.Cantidad = productoOrden.Cantidad;
+                    //productoAAgregar.DescripcionProducto = producto.DescripcionProducto;
+                    //ordenDePreparacionAEmpaquetar.Productos.Add(productoAAgregar);
                 }
 
                 OrdenesDePreparacionAEmpaquetar.Add(ordenDePreparacionAEmpaquetar);
@@ -52,9 +52,9 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
                 return;
             }
 
-            var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(int.Parse(orden.Id));
+            //var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(int.Parse(orden.IdPreparacion));
 
-            ordenPreparacion.MarcarOpEmpaquetada();
+            //ordenPreparacion.MarcarOpEmpaquetada();
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
         }
