@@ -140,7 +140,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
             }
 
-            // 1. Obtener stock físico del cliente seleccionado
+            // 1. Obtener stock físico del cliente seleccionadoo
             var stockDelCliente = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado).Where(s => s.IdCliente == idClienteSeleccionado).ToList();
 
             //stockDelCliente = StockFisicoAlmacen.Stock.Where(s => s.IdCliente == idClienteSeleccionado)
