@@ -34,10 +34,12 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             ClienteAlmacen.LeerCliente();
+            groupBox1.SendToBack();
             id = GenerarIdOrden() - 1009;
             idOrdenTextBox.Text = id.ToString();
             palletCerradoComboBox.SelectedIndex = 0;
             depositoComboBox.SelectedIndex = -1;
+            despachoDateTimePicker.MinDate = DateTime.Now;
 
             //Razon Social cmbobox
             razonSocialComboBox.SelectedIndexChanged -= razonSocialComboBox_SelectedIndexChanged;
@@ -274,7 +276,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
                 // Sumar todas las cantidades de las posiciones
                 int cantidadEnStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
-                string posiciones= "";
+                string posiciones = "";
                 foreach (var posicion in stockProducto.Posiciones)
                 {
                     posiciones = string.Join(", ", stockProducto.Posiciones.Select(p => p.Posicion));
@@ -307,7 +309,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     fila.SubItems.Add(CantidadARetirar.ToString());
                     fila.SubItems.Add(posiciones);
                 }
-                
+
 
                 // Restar stock
                 int cantidadRestante = CantidadARetirar;
@@ -446,15 +448,24 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 IdCliente = idClienteSeleccionado,
                 DniTransportista = int.Parse(dniTransportistaTextBox.Text),
                 Estado = EstadoOrdenPreparacion.EnPreparacion,
-                FechaEntrega = DespachoDateTimePicker.Value,
+                FechaEntrega = despachoDateTimePicker.Value,
                 PalletCerrado = pallet,
                 ProductoOrden = productosAsociados,
             };
 
             // Agregar la orden al almacén
             OrdenPreparacionAlmacen.NuevaOrdenPreparacion(Orden);
-
-            MessageBox.Show("Orden de preparación cargada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string Pallet;
+            if (palletCerrado)
+            {
+                Pallet = "Si";
+            }
+            else
+            {
+                Pallet = "No";
+            }
+            MessageBox.Show("Orden de preparación cargada correctamente. \nID de órden: " + id + "\nID de depósito: " + idDepositoSeleccionado + "\nID de cliente: " + idClienteSeleccionado +
+                "\nDNI de transportista: " + dniTransportistaTextBox.Text + "\nPallet cerrado: " + Pallet, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Limpiar formulario
             ordenDePreparacionListView.Items.Clear();
@@ -494,7 +505,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }
             cargarOrdenButton.Enabled = dniTransportistaTextBox.Text.Length == 8;
         }
-        
+
         private void dniTransportistaTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo numeros y borrar
@@ -502,7 +513,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 e.Handled = true;
             }
-            
+
         }
 
 
@@ -549,8 +560,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 idDepositoSeleccionado = deposito.IdDeposito;
             }
-            
-                dniTransportistaTextBox.Enabled = depositoComboBox.SelectedIndex != -1;
+
+            dniTransportistaTextBox.Enabled = depositoComboBox.SelectedIndex != -1;
             if (dniTransportistaTextBox.Text.Length == 8 && depositoComboBox.SelectedIndex != -1)
             {
                 cargarOrdenButton.Enabled = true;
@@ -560,8 +571,29 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
-            principalGeneralForm.Show();
+        }
+
+        private void ProcesarOrdenPreparacionForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ordenDePreparacionListView.Items.Count > 0)
+            {
+                DialogResult resultado = MessageBox.Show(
+                    "Si sale se eliminarán los productos ingresados. \n ¿Salir?",
+                    "Advertencia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (resultado == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+                    principalGeneralForm.Show();
+                }
+            }
         }
     }
 }

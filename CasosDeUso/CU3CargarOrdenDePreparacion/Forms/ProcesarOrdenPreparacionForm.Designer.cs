@@ -31,12 +31,13 @@
             label1 = new Label();
             idOrdenTextBox = new TextBox();
             label2 = new Label();
-            DespachoDateTimePicker = new DateTimePicker();
+            despachoDateTimePicker = new DateTimePicker();
             cargarOrdenButton = new Button();
             quitarProductoButton = new Button();
             ordenDePreparacionListView = new ListView();
             skuColumnaSelec = new ColumnHeader();
             cantidadColumnaSelec = new ColumnHeader();
+            posicionesColumna = new ColumnHeader();
             razonSocialComboBox = new ComboBox();
             label7 = new Label();
             label8 = new Label();
@@ -61,7 +62,7 @@
             depositoComboBox = new ComboBox();
             label11 = new Label();
             button1 = new Button();
-            posicionesColumna = new ColumnHeader();
+            groupBox1 = new GroupBox();
             SuspendLayout();
             // 
             // label1
@@ -91,12 +92,13 @@
             label2.TabIndex = 2;
             label2.Text = "Fecha de despacho de orden";
             // 
-            // DespachoDateTimePicker
+            // despachoDateTimePicker
             // 
-            DespachoDateTimePicker.Location = new Point(12, 27);
-            DespachoDateTimePicker.Name = "DespachoDateTimePicker";
-            DespachoDateTimePicker.Size = new Size(382, 23);
-            DespachoDateTimePicker.TabIndex = 3;
+            despachoDateTimePicker.Location = new Point(12, 27);
+            despachoDateTimePicker.MinDate = new DateTime(2025, 6, 4, 0, 0, 0, 0);
+            despachoDateTimePicker.Name = "despachoDateTimePicker";
+            despachoDateTimePicker.Size = new Size(382, 23);
+            despachoDateTimePicker.TabIndex = 3;
             // 
             // cargarOrdenButton
             // 
@@ -141,6 +143,11 @@
             // 
             cantidadColumnaSelec.Text = "Cantidad a retirar";
             cantidadColumnaSelec.Width = 257;
+            // 
+            // posicionesColumna
+            // 
+            posicionesColumna.Text = "Posiciones";
+            posicionesColumna.Width = 257;
             // 
             // razonSocialComboBox
             // 
@@ -372,16 +379,20 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // posicionesColumna
+            // groupBox1
             // 
-            posicionesColumna.Text = "Posiciones";
-            posicionesColumna.Width = 257;
+            groupBox1.Location = new Point(7, 136);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(782, 100);
+            groupBox1.TabIndex = 43;
+            groupBox1.TabStop = false;
             // 
             // ProcesarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(797, 645);
+            Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(label11);
             Controls.Add(depositoComboBox);
@@ -409,12 +420,13 @@
             Controls.Add(ordenDePreparacionListView);
             Controls.Add(quitarProductoButton);
             Controls.Add(cargarOrdenButton);
-            Controls.Add(DespachoDateTimePicker);
+            Controls.Add(despachoDateTimePicker);
             Controls.Add(label2);
             Controls.Add(idOrdenTextBox);
             Controls.Add(label1);
             Name = "ProcesarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
+            FormClosing += ProcesarOrdenPreparacionForm_FormClosing;
             Load += ProcesarOrdenPreparacion_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -425,7 +437,7 @@
         private Label label1;
         private TextBox idOrdenTextBox;
         private Label label2;
-        private DateTimePicker DespachoDateTimePicker;
+        private DateTimePicker despachoDateTimePicker;
         private Button cargarOrdenButton;
         private Button quitarProductoButton;
         private ListView ordenDePreparacionListView;
@@ -456,5 +468,6 @@
         private Label label11;
         private Button button1;
         private ColumnHeader posicionesColumna;
+        private GroupBox groupBox1;
     }
 }
