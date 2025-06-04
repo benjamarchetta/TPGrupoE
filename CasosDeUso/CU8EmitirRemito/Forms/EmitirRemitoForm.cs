@@ -113,6 +113,8 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
         private void VolverButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+            principalGeneralForm.Show();
         }
     }
 }

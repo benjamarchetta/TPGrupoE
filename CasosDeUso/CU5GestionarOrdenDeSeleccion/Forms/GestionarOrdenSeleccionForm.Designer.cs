@@ -152,11 +152,11 @@
             // 
             // volverAlMenuButton
             // 
-            volverAlMenuButton.Location = new Point(36, 409);
+            volverAlMenuButton.Location = new Point(12, 409);
             volverAlMenuButton.Name = "volverAlMenuButton";
-            volverAlMenuButton.Size = new Size(115, 23);
+            volverAlMenuButton.Size = new Size(157, 23);
             volverAlMenuButton.TabIndex = 7;
-            volverAlMenuButton.Text = "Volver al Menu";
+            volverAlMenuButton.Text = "Volver al menú principal";
             volverAlMenuButton.UseVisualStyleBackColor = true;
             volverAlMenuButton.Click += volverAlMenuButton_Click;
             // 
