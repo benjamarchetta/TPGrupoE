@@ -13,6 +13,7 @@ using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
@@ -296,7 +297,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 cantidadEnStockTextBox.Text = nuevoStock.ToString();
 
                 cantidadARetirarTextBox.Text = "";
-                dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+                depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
                 agregarProductoButton.Enabled = false;
             }
 
@@ -353,7 +354,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }
 
             // Habilitar transportista
-            dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
 
             foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
             {
@@ -362,11 +363,11 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 cantidadEnStockTextBox.Text = (int.Parse(cantidadEnStockTextBox.Text) + int.Parse(cantidad)).ToString();
                 if (ordenDePreparacionListView.Items.Count > 0)
                 {
-                    dniTransportistaTextBox.Enabled = true;
+                    depositoComboBox.Enabled = true;
                 }
                 else
                 {
-                    dniTransportistaTextBox.Enabled = false;
+                    depositoComboBox.Enabled = false;
                 }
             }
 
@@ -449,18 +450,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void dniTransportistaTextBox_TextChanged(object sender, EventArgs e)
         {
             string texto = dniTransportistaTextBox.Text;
-
-            // Comprobar si son 8 dígitos 
-            if (texto.Length == 8)
-            {
-                cargarOrdenButton.Enabled = true;
-            }
-            else
-            {
-                cargarOrdenButton.Enabled = false;
-            }
+            cargarOrdenButton.Enabled = dniTransportistaTextBox.Text.Length == 8;
         }
-        //
+        
         private void dniTransportistaTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo numeros y borrar
@@ -468,6 +460,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 e.Handled = true;
             }
+            
         }
 
 
@@ -514,6 +507,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 idDepositoSeleccionado = deposito.IdDeposito;
             }
+            
+                dniTransportistaTextBox.Enabled = depositoComboBox.SelectedIndex != -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
