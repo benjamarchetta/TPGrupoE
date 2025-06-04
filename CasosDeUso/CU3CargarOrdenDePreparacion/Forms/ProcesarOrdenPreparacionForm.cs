@@ -27,12 +27,15 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private int idClienteSeleccionado = -1;
         private int idDepositoSeleccionado;
         bool palletCerrado = false;
+        int id;
 
 
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             ClienteAlmacen.LeerCliente();
+            id = GenerarIdOrden() - 1009;
+            idOrdenTextBox.Text = id.ToString();
             palletCerradoComboBox.SelectedIndex = 0;
             depositoComboBox.SelectedIndex = -1;
 
@@ -385,7 +388,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private void cargarOrdenButton_Click(object sender, EventArgs e)
         {
-            int nuevoIdOrden = GenerarIdOrden();
+            int nuevoIdOrden = id;
 
             // Crear lista de productos asociados a la orden
             List<ProductoOrden> productosAsociados = new List<ProductoOrden>();
@@ -394,8 +397,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             foreach (ListViewItem item in ordenDePreparacionListView.Items)
             {
                 string sku = item.SubItems[0].Text;
-                string tipoProducto = item.SubItems[1].Text;
-                int cantidad = int.Parse(item.SubItems[2].Text);
+                //string tipoProducto = item.SubItems[1].Text;
+                int cantidad = int.Parse(item.SubItems[1].Text);
 
                 if (palletCerradoComboBox.SelectedIndex == 1)
                 {
@@ -416,8 +419,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             // Crear la orden de preparación
             OrdenPreparacionEntidad Orden = new OrdenPreparacionEntidad
             {
-                IdOrdenPreparacion = nuevoIdOrden,
-                IdDeposito = idDepositoSeleccionado, //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                IdOrdenPreparacion = id,
+                IdDeposito = idDepositoSeleccionado,
                 IdCliente = idClienteSeleccionado,
                 DniTransportista = int.Parse(dniTransportistaTextBox.Text),
                 Estado = EstadoOrdenPreparacion.EnPreparacion,
@@ -443,13 +446,14 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+            idOrdenTextBox.Text = (GenerarIdOrden() - 1009).ToString();
 
         }
 
         private int GenerarIdOrden()
         {
             return OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0
-                ? 1001
+                ? 1
                 : OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
         }
 
