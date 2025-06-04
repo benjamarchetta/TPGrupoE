@@ -274,17 +274,40 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
                 // Sumar todas las cantidades de las posiciones
                 int cantidadEnStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
-
-                //string posicion = stockProducto
+                string posiciones= "";
+                foreach (var posicion in stockProducto.Posiciones)
+                {
+                    posiciones = string.Join(", ", stockProducto.Posiciones.Select(p => p.Posicion));
+                }
 
                 string Sku = producto.Sku;
-                //string ubicacion = posicion;
                 int CantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
 
+                ListViewItem filaExistente = null;
+                foreach (ListViewItem item in ordenDePreparacionListView.Items)
+                {
+                    if (item.Text == Sku)
+                    {
+                        filaExistente = item;
+                        break;
+                    }
+                }
+
                 // Agregar prod a la lista
-                ListViewItem Fila = ordenDePreparacionListView.Items.Add(Sku);
-                //Fila.SubItems.Add(ubicacion);
-                Fila.SubItems.Add(CantidadARetirar.ToString());
+                if (filaExistente != null)
+                {
+                    // Ya existe: sumamos las cantidades
+                    int cantidadAnterior = int.Parse(filaExistente.SubItems[1].Text);
+                    filaExistente.SubItems[1].Text = (cantidadAnterior + CantidadARetirar).ToString();
+                }
+                else
+                {
+                    // No existe: lo agregamos
+                    ListViewItem fila = ordenDePreparacionListView.Items.Add(Sku);
+                    fila.SubItems.Add(CantidadARetirar.ToString());
+                    fila.SubItems.Add(posiciones);
+                }
+                
 
                 // Restar stock
                 int cantidadRestante = CantidadARetirar;
@@ -297,7 +320,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     cantidadRestante -= descontar;
                 }
 
-                // Actualizar el textbox con el nuevo stock total
+                // Actualizar el textbox con el nuevo stock
                 int nuevoStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
                 cantidadEnStockTextBox.Text = nuevoStock.ToString();
 
@@ -358,7 +381,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 }
             }
 
-            // Habilitar transportista
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
             dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
             cargarOrdenButton.Enabled = ordenDePreparacionListView.Items.Count > 0;
@@ -367,7 +389,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
             {
                 ordenDePreparacionListView.Items.Remove(item);
-                string cantidad = item.SubItems[2].Text;
+                string cantidad = item.SubItems[1].Text;
                 cantidadEnStockTextBox.Text = (int.Parse(cantidadEnStockTextBox.Text) + int.Parse(cantidad)).ToString();
                 if (ordenDePreparacionListView.Items.Count > 0)
                 {

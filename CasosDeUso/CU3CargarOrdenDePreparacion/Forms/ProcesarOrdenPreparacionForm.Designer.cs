@@ -61,6 +61,7 @@
             depositoComboBox = new ComboBox();
             label11 = new Label();
             button1 = new Button();
+            posicionesColumna = new ColumnHeader();
             SuspendLayout();
             // 
             // label1
@@ -121,7 +122,7 @@
             // 
             // ordenDePreparacionListView
             // 
-            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec });
+            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, posicionesColumna });
             ordenDePreparacionListView.FullRowSelect = true;
             ordenDePreparacionListView.Location = new Point(12, 310);
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
@@ -134,12 +135,12 @@
             // skuColumnaSelec
             // 
             skuColumnaSelec.Text = "SKU de producto";
-            skuColumnaSelec.Width = 386;
+            skuColumnaSelec.Width = 257;
             // 
             // cantidadColumnaSelec
             // 
             cantidadColumnaSelec.Text = "Cantidad a retirar";
-            cantidadColumnaSelec.Width = 386;
+            cantidadColumnaSelec.Width = 257;
             // 
             // razonSocialComboBox
             // 
@@ -371,6 +372,11 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // posicionesColumna
+            // 
+            posicionesColumna.Text = "Posiciones";
+            posicionesColumna.Width = 257;
+            // 
             // ProcesarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -449,5 +455,6 @@
         private ComboBox depositoComboBox;
         private Label label11;
         private Button button1;
+        private ColumnHeader posicionesColumna;
     }
 }
