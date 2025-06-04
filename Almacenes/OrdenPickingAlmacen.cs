@@ -61,6 +61,7 @@ namespace TPGrupoE.Almacenes
         {
             return ordenesPicking.FirstOrDefault(os => os.IdOrdenSeleccion == id);
         }
+
     }
 
 }

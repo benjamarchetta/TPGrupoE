@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            seleccionarMercaderiaButton = new Button();
             confirmarSeleccionButton = new Button();
             detalleProductosListView = new ListView();
             skuColumna = new ColumnHeader();
@@ -43,6 +42,7 @@
             ordenesListView = new ListView();
             cancelarSeleccionButton = new Button();
             VerDetallesButton = new Button();
+            volverAlMenuButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -54,21 +54,10 @@
             label1.TabIndex = 0;
             label1.Text = "Órdenes de selección pendientes";
             // 
-            // seleccionarMercaderiaButton
-            // 
-            seleccionarMercaderiaButton.Enabled = false;
-            seleccionarMercaderiaButton.Location = new Point(458, 173);
-            seleccionarMercaderiaButton.Name = "seleccionarMercaderiaButton";
-            seleccionarMercaderiaButton.Size = new Size(162, 23);
-            seleccionarMercaderiaButton.TabIndex = 1;
-            seleccionarMercaderiaButton.Text = "Seleccionar mercadería";
-            seleccionarMercaderiaButton.UseVisualStyleBackColor = true;
-            seleccionarMercaderiaButton.Click += VerDetallesButton_Click;
-            // 
             // confirmarSeleccionButton
             // 
             confirmarSeleccionButton.Enabled = false;
-            confirmarSeleccionButton.Location = new Point(626, 398);
+            confirmarSeleccionButton.Location = new Point(626, 409);
             confirmarSeleccionButton.Name = "confirmarSeleccionButton";
             confirmarSeleccionButton.Size = new Size(162, 23);
             confirmarSeleccionButton.TabIndex = 2;
@@ -154,24 +143,34 @@
             // 
             // VerDetallesButton
             // 
-            VerDetallesButton.Location = new Point(348, 173);
+            VerDetallesButton.Location = new Point(419, 173);
             VerDetallesButton.Name = "VerDetallesButton";
-            VerDetallesButton.Size = new Size(104, 23);
+            VerDetallesButton.Size = new Size(171, 23);
             VerDetallesButton.TabIndex = 6;
-            VerDetallesButton.Text = "Ver Detalles";
+            VerDetallesButton.Text = "Seleccionar Mercaderia";
             VerDetallesButton.UseVisualStyleBackColor = true;
+            // 
+            // volverAlMenuButton
+            // 
+            volverAlMenuButton.Location = new Point(36, 409);
+            volverAlMenuButton.Name = "volverAlMenuButton";
+            volverAlMenuButton.Size = new Size(115, 23);
+            volverAlMenuButton.TabIndex = 7;
+            volverAlMenuButton.Text = "Volver al Menu";
+            volverAlMenuButton.UseVisualStyleBackColor = true;
+            volverAlMenuButton.Click += volverAlMenuButton_Click;
             // 
             // GestionarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 444);
+            Controls.Add(volverAlMenuButton);
             Controls.Add(VerDetallesButton);
             Controls.Add(cancelarSeleccionButton);
             Controls.Add(label2);
             Controls.Add(detalleProductosListView);
             Controls.Add(confirmarSeleccionButton);
-            Controls.Add(seleccionarMercaderiaButton);
             Controls.Add(ordenesListView);
             Controls.Add(label1);
             Name = "GestionarOrdenSeleccionForm";
@@ -184,7 +183,6 @@
         #endregion
 
         private Label label1;
-        private Button seleccionarMercaderiaButton;
         private Button confirmarSeleccionButton;
         private ListView detalleProductosListView;
         private ColumnHeader skuColumna;
@@ -198,5 +196,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private Button VerDetallesButton;
+        private Button volverAlMenuButton;
     }
 }

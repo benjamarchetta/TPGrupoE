@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
@@ -17,6 +18,8 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             _modelo = new GestionOrdenSeleccionModel();
             ConfigurarControles();
             CargarDatosIniciales();
+            VerDetallesButton.Click += VerDetallesButton_Click;
+            confirmarSeleccionButton.Click += confirmarSeleccionButton_Click;
         }
 
         private void ConfigurarControles()
@@ -50,6 +53,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             ordenesListView.ItemCheck += ordenesListView_ItemCheck;
         }
 
+
         private void CargarDatosIniciales()
         {
             ordenesListView.Items.Clear();
@@ -65,16 +69,15 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                 string clienteNombre = "N/A";
                 DateTime? fechaMasProxima = null;
 
+                // Buscar cliente y la fecha de despacho más próxima
                 foreach (var idOP in orden.IdOrdenPreparacion)
                 {
                     var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOP);
                     if (ordenPrep != null)
                     {
-                        // Busco el cliente
                         var cliente = ClienteAlmacen.BuscarClientePorId(ordenPrep.IdCliente);
                         if (cliente != null) clienteNombre = cliente.RazonSocial;
 
-                        // Comparo fechas para guardar la más próxima
                         if (fechaMasProxima == null || ordenPrep.FechaEntrega < fechaMasProxima)
                         {
                             fechaMasProxima = ordenPrep.FechaEntrega;
@@ -82,7 +85,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                     }
                 }
 
-                // Si no encontré fecha, dejo un texto por defecto
+                // Si no se encuentra fecha, mostrar "Sin fecha"
                 string fechaDespachoTexto = fechaMasProxima?.ToString("dd/MM/yyyy") ?? "Sin fecha";
 
                 var item = new ListViewItem(orden.IdOrdenSeleccion.ToString());
@@ -94,9 +97,10 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                 ordenesListView.Items.Add(item);
             }
         }
-
         private void ordenesListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            // Habilitar el botón si hay al menos una orden seleccionada
+
             BeginInvoke((MethodInvoker)delegate
             {
                 VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0;
@@ -107,20 +111,21 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
         {
             if (ordenesListView.CheckedItems.Count == 0) return;
 
-            detalleProductosListView.Items.Clear();
+            detalleProductosListView.Items.Clear(); // Limpiar el ListView de productos
 
+            // Iterar sobre las órdenes seleccionadas
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
-                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);
-
+                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);  // Obtener los productos
+                                                                                    // Agregar los productos al ListView
                 foreach (var p in productos)
                 {
                     var fila = new ListViewItem(p.IdProducto.ToString());
-                    fila.SubItems.Add("N/D"); // Si no tenés tipo, podés completar después
+                    fila.SubItems.Add("N/D"); // Si no tienes tipo, ponlo como "N/D"
                     fila.SubItems.Add(p.Cantidad.ToString());
                     fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No");
-                    fila.SubItems.Add("Auto"); // Podés reemplazar con ubicación si la traés del stock
+                    fila.SubItems.Add("Auto"); // Aquí puedes poner la ubicación si la tienes del stock
 
                     detalleProductosListView.Items.Add(fila);
                 }
@@ -128,7 +133,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
             confirmarSeleccionButton.Enabled = true;
         }
-
         private void confirmarSeleccionButton_Click(object sender, EventArgs e)
         {
             if (ordenesListView.CheckedItems.Count == 0) return;
@@ -164,6 +168,13 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
         private void GestionarOrdenSeleccionForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void volverAlMenuButton_Click(object sender, EventArgs e)
+        {
+            var menuForm = new MenuPrincipalGeneralForm();
+            menuForm.Show(); // Abre el menú principal
+            this.Close(); // Cierra el formulario actual
         }
     }
 
