@@ -10,6 +10,7 @@ namespace TPGrupoE.Almacenes
     {
         public int IdOrdenSeleccion { get; set; }
         public EstadoOrdenSeleccion Estado { get; set; }
+       
         public List<int> IdOrdenPreparacion { get; set; } = new();
 
     }

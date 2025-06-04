@@ -11,6 +11,10 @@ namespace TPGrupoE.Almacenes
         public int IdOrdenEntrega { get; set; }
         public EstadoOrdenEntrega Estado { get; set; }
         public List<int> IdOrdenPreparacion { get; set; } = new ();
-        
+        public void MarcarComoCumplida()
+        {
+            this.Estado = EstadoOrdenEntrega.Cumplida;
+        }
+
     }
 }

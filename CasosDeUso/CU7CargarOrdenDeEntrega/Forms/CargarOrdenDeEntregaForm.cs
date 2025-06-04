@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
 using static TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model.OrdenDeEntregaModelo;
 
@@ -20,16 +21,6 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
         {
             InitializeComponent();
             _ordenDeEntregaModel = new OrdenDeEntregaModelo();
-        }
-
-        private void pickingEnPreparacionGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pickingPreparadoListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         //Es la acción que genera la órden de entrega
@@ -45,7 +36,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
             _ordenDeEntregaModel.CrearOrdenEntrega();
             MessageBox.Show("Se registró correctamente la orden de entrega.");
-            ActualizarTabla(); //Revisar que es o de donde viene
+            ActualizarTabla();
         }
 
         //Carga la nueva orden de entrega en OrdenEntregaAlmacen
@@ -56,7 +47,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
         private void ActualizarTabla()
         {
-            
+
             List<OrdenPreparacion> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();
@@ -78,10 +69,9 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
                 OrdenesEmpaquetadasListView.Items.Add(item);
             }
         }
-    }
 
-/*
-        private void VolverAlMenu()
+
+        private void VolverAlMenuPrincipal()
         {
             // Solo oculta el formulario actual
             this.Hide();
@@ -90,7 +80,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
             // Verifica si el formulario principal ya está abierto
             foreach (Form form in Application.OpenForms)
             {
-                if (form is PantallaPrincipalForm)
+                if (form is MenuPrincipalGeneralForm)
                 {
                     form.Show(); // Muestra el formulario si está oculto
                     return;
@@ -98,19 +88,19 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
             }
 
             // Si no está abierto, crea una nueva instancia (solo si es necesario)
-            PantallaPrincipalForm pantallaPrincipalForm = new PantallaPrincipalForm();
-            pantallaPrincipalForm.Show();
+            MenuPrincipalGeneralForm menuPrincipalForm = new MenuPrincipalGeneralForm();
+            menuPrincipalForm.Show();
         }
 
-        private void VolverAlMenuButton_Click(object sender, EventArgs e)
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
         {
-            VolverAlMenu();
+            VolverAlMenuPrincipal();
         }
 
-        private void OrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void CargarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            VolverAlMenu();
+            VolverAlMenuPrincipal();
         }
     }
-*/
+
 }

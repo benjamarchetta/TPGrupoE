@@ -13,6 +13,7 @@ namespace TPGrupoE.Almacenes
 
         public static IReadOnlyCollection<StockFisicoEntidad> Stock => stock.AsReadOnly();
 
+
         public static void GrabarStock()
         {
             var datosStock = JsonSerializer.Serialize(stock);
@@ -58,8 +59,12 @@ namespace TPGrupoE.Almacenes
                 cantidadRestante -= cantidadTomada;
             }
         }
-    }
 
+        public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
+        {
+            return stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
+        }
+    }
 }
 
 

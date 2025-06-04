@@ -9,106 +9,96 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.Almacenes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
-using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModelo;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModel;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     public partial class EmpaquetadoForm : Form
     {
-        /*
-        public EmpaquetadoForm()
+        private void InitializeComponent()
         {
-            InitializeComponent();
-        }
-
-        private EmpaquetadoModel _empaquetadoModel;
-        private OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar;
-
-        private void Empaquetado_Load(object sender, EventArgs e)
-        {
-            PasarALaSiguienteOrden();
-        }
-
-        private void PasarALaSiguienteOrden()
-        {
-            List<OrdenDePreparacionAEmpaquetar> ordenes = _empaquetadoModel.OrdenesDePreparacionAEmpaquetar;
-            ordenDePreparacionAEmpaquetar = ordenes.FirstOrDefault();
-
-            if (ordenDePreparacionAEmpaquetar == null)
-            {
-                MessageBox.Show("No hay ordenes de preparacion para empaquetar");
-                OrdenesPreparacionListView.Items.Clear();
-                NroOrdenLabel.Text = "N/A";
-                return;
-            }
-
-            NroOrdenLabel.Text = ordenDePreparacionAEmpaquetar.Id;
-
-            List<Producto> productosOrden = ordenDePreparacionAEmpaquetar.Productos;
-
-            OrdenesPreparacionListView.Items.Clear();
-            foreach (var producto in productosOrden)
-            {
-                var item = new ListViewItem(new[]
-                  {
-                        producto.Id.ToString(),
-                        producto.Descripcion,
-                        producto.Cantidad.ToString(),
-                    });
-
-                // Agregar el item al ListView
-                OrdenesPreparacionListView.Items.Add(item);
-            }
-        }
-
-        private void GenerarOrdenButton_Click(object sender, EventArgs e)
-        {
-            _empaquetadoModel.MarcarOrdenComoEmpaquetada(ordenDePreparacionAEmpaquetar);
-            PasarALaSiguienteOrden();
-        }
-
-        private void VolverAlMenu()
-        {
-            // Solo oculta el formulario actual
-            this.Hide();
-
-            // Mostrar el formulario de menú principal
-            // Verifica si el formulario principal ya está abierto
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form is PantallaPrincipalForm)
-                {
-                    form.Show(); // Muestra el formulario si está oculto
-                    return;
-                }
-            }
-
-            // Si no está abierto, crea una nueva instancia (solo si es necesario)
-            PantallaPrincipalForm pantallaPrincipalForm = new PantallaPrincipalForm();
-            pantallaPrincipalForm.Show();
-        }
-
-        private void empaquetarButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void idOrdenTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void productoAEmpaquetarListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            MercaderiaAEmpaquetarGroupBox = new GroupBox();
+            listView1 = new System.Windows.Forms.ListView();
+            IdProducto = new ColumnHeader();
+            DescripcionProducto = new ColumnHeader();
+            CantidadAEmpaquetar = new ColumnHeader();
+            ConfirmarEmpaquetadoButton = new System.Windows.Forms.Button();
+            VolverMenuPrincipalButton = new System.Windows.Forms.Button();
+            MercaderiaAEmpaquetarGroupBox.SuspendLayout();
+            SuspendLayout();
+            // 
+            // MercaderiaAEmpaquetarGroupBox
+            // 
+            MercaderiaAEmpaquetarGroupBox.Controls.Add(listView1);
+            MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            MercaderiaAEmpaquetarGroupBox.Location = new Point(22, 25);
+            MercaderiaAEmpaquetarGroupBox.Name = "MercaderiaAEmpaquetarGroupBox";
+            MercaderiaAEmpaquetarGroupBox.Size = new Size(858, 419);
+            MercaderiaAEmpaquetarGroupBox.TabIndex = 0;
+            MercaderiaAEmpaquetarGroupBox.TabStop = false;
+            MercaderiaAEmpaquetarGroupBox.Text = "Mercadería a Empaquetar";
+            // 
+            // listView1
+            // 
+            listView1.Columns.AddRange(new ColumnHeader[] { IdProducto, DescripcionProducto, CantidadAEmpaquetar });
+            listView1.GridLines = true;
+            listView1.Location = new Point(17, 35);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(792, 360);
+            listView1.TabIndex = 0;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
+            // 
+            // IdProducto
+            // 
+            IdProducto.Text = "Id Producto";
+            IdProducto.Width = 120;
+            // 
+            // DescripcionProducto
+            // 
+            DescripcionProducto.Text = "Descripcion del producto";
+            DescripcionProducto.Width = 200;
+            // 
+            // CantidadAEmpaquetar
+            // 
+            CantidadAEmpaquetar.Text = "Cantidad a empaquetar";
+            CantidadAEmpaquetar.Width = 180;
+            // 
+            // ConfirmarEmpaquetadoButton
+            // 
+            ConfirmarEmpaquetadoButton.BackColor = SystemColors.Highlight;
+            ConfirmarEmpaquetadoButton.Location = new Point(461, 516);
+            ConfirmarEmpaquetadoButton.Name = "ConfirmarEmpaquetadoButton";
+            ConfirmarEmpaquetadoButton.Size = new Size(370, 48);
+            ConfirmarEmpaquetadoButton.TabIndex = 1;
+            ConfirmarEmpaquetadoButton.Text = "Confirmar Empaquetado";
+            ConfirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
+            // 
+            // VolverMenuPrincipalButton
+            // 
+            VolverMenuPrincipalButton.BackColor = Color.White;
+            VolverMenuPrincipalButton.Location = new Point(39, 516);
+            VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
+            VolverMenuPrincipalButton.Size = new Size(381, 48);
+            VolverMenuPrincipalButton.TabIndex = 2;
+            VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
+            VolverMenuPrincipalButton.UseVisualStyleBackColor = false;
+            // 
+            // EmpaquetadoForm
+            // 
+            ClientSize = new Size(938, 804);
+            Controls.Add(VolverMenuPrincipalButton);
+            Controls.Add(ConfirmarEmpaquetadoButton);
+            Controls.Add(MercaderiaAEmpaquetarGroupBox);
+            Name = "EmpaquetadoForm";
+            Text = "Confirmar Empaquetado";
+            MercaderiaAEmpaquetarGroupBox.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }*/
-    }
+    } 
 }

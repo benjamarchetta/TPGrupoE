@@ -131,5 +131,13 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
         private TextBox nroOrden;
         private TextBox textBox1; 
         private Label label2;
-    */}
+    */
+        private GroupBox MercaderiaAEmpaquetarGroupBox;
+        private ListView listView1;
+        private ColumnHeader IdProducto;
+        private ColumnHeader DescripcionProducto;
+        private ColumnHeader CantidadAEmpaquetar;
+        private Button ConfirmarEmpaquetadoButton;
+        private Button VolverMenuPrincipalButton;
+    }
 }
