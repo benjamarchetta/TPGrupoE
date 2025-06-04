@@ -1,4 +1,4 @@
-﻿namespace TPGrupoE.ProductosOP
+﻿namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP
 {
     public class ProductoOP
     {
