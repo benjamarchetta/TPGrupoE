@@ -278,6 +278,7 @@
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
             cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
+            cantidadARetirarTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
             // 
             // agregarProductoButton
             // 
@@ -343,7 +344,7 @@
             dniTransportistaTextBox.Size = new Size(200, 23);
             dniTransportistaTextBox.TabIndex = 39;
             dniTransportistaTextBox.TextChanged += dniTransportistaTextBox_TextChanged;
-            dniTransportistaTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
+            dniTransportistaTextBox.KeyPress += dniTransportistaTextBox_KeyPress;
             // 
             // depositoComboBox
             // 
