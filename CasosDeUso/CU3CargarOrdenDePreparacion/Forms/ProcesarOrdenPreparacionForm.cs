@@ -249,7 +249,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void cantidadARetirarTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo numeros y borrar
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -429,6 +429,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             skuTextBox.Text = "-";
             cantidadEnStockTextBox.Text = "-";
             dniTransportistaTextBox.Text = "";
+            razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+            palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
 
         }
 
@@ -443,8 +446,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             string texto = dniTransportistaTextBox.Text;
 
-            // Comprobar si son 9 dígitos 
-            if (texto.Length == 9)
+            // Comprobar si son 8 dígitos 
+            if (texto.Length == 8)
             {
                 cargarOrdenButton.Enabled = true;
             }
@@ -457,7 +460,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void dniTransportistaTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo numeros y borrar
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
