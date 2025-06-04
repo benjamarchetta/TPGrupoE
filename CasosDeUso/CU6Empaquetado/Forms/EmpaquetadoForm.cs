@@ -44,7 +44,7 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
                 return;
             }
 
-            //IdOrdenPreparacion.Text = ordenDePreparacionAEmpaquetar.IdOrdenPreparacion;
+            NumeroOrdenPreparacionLabel.Text = ordenDePreparacionAEmpaquetar.IdOrdenPreparacion;
 
             List<ProductoOP> productosOP = ordenDePreparacionAEmpaquetar.ProductosOP;
 
