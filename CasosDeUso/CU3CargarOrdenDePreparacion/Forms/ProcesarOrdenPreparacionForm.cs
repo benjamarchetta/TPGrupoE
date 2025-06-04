@@ -25,6 +25,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private int idClienteSeleccionado = -1;
         private int idDepositoSeleccionado;
+        bool palletCerrado = false;
+        
 
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private void palletCerradoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
+            palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
 
             var stockFiltrado = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado);
 
@@ -139,9 +141,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }
 
             // 1. Obtener stock físico del cliente seleccionado
-            var stockDelCliente = StockFisicoAlmacen.Stock
-                .Where(s => s.IdCliente == idClienteSeleccionado)
-                .ToList();
+            var stockDelCliente = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado).Where(s => s.IdCliente == idClienteSeleccionado).ToList();
+
+            //stockDelCliente = StockFisicoAlmacen.Stock.Where(s => s.IdCliente == idClienteSeleccionado)
+            //.ToList();
 
             // 2. Obtener los IdDeposito únicos
             var idsDepositos = stockDelCliente
@@ -159,6 +162,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             depositoComboBox.DataSource = depositosDelCliente;
             depositoComboBox.DisplayMember = "Domicilio";
             depositoComboBox.ValueMember = "IdDeposito";
+            depositoComboBox.SelectedIndex = -1;
 
         }
 

@@ -62,7 +62,7 @@ namespace TPGrupoE.Almacenes
 
         public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
         {
-            return stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
+            return Stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
         }
     }
 }

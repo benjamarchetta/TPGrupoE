@@ -348,6 +348,7 @@
             // 
             // depositoComboBox
             // 
+            depositoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             depositoComboBox.Enabled = false;
             depositoComboBox.FormattingEnabled = true;
             depositoComboBox.Location = new Point(13, 504);

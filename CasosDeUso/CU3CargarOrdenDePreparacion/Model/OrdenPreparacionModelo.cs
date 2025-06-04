@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
@@ -53,6 +54,25 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 });
             }
             return Productos;
+        }
+    }
+
+    public static List<StockFisicoEntidad> Stock
+    {
+        get
+        {
+            var StockFisico = new List<StockFisicoEntidad>();
+            foreach (var stockFisico in StockFisicoAlmacen.Stock)
+            {
+                StockFisico.Add(new StockFisicoEntidad
+                {
+                    IdCliente = stockFisico.IdCliente,
+                    IdProducto = stockFisico.IdProducto,
+                    PalletCerrado = stockFisico.PalletCerrado,
+                    Posiciones = stockFisico.Posiciones,
+                });
+            }
+            return StockFisico;
         }
     }
 
