@@ -26,7 +26,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private int idClienteSeleccionado = -1;
         private int idDepositoSeleccionado;
         bool palletCerrado = false;
-        
+
 
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
@@ -509,12 +509,18 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private void depositoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             if (depositoComboBox.SelectedItem is DepositoEntidad deposito)
             {
                 idDepositoSeleccionado = deposito.IdDeposito;
             }
         }
-    
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+            principalGeneralForm.Show();
+        }
     }
 }

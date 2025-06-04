@@ -44,6 +44,7 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             btnRestaurarEstado = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -100,7 +101,7 @@
             // generarOrdenButton
             // 
             generarOrdenButton.Enabled = false;
-            generarOrdenButton.Location = new Point(604, 481);
+            generarOrdenButton.Location = new Point(414, 500);
             generarOrdenButton.Name = "generarOrdenButton";
             generarOrdenButton.Size = new Size(184, 23);
             generarOrdenButton.TabIndex = 4;
@@ -161,7 +162,7 @@
             // 
             // btnRestaurarEstado
             // 
-            btnRestaurarEstado.Location = new Point(41, 500);
+            btnRestaurarEstado.Location = new Point(12, 500);
             btnRestaurarEstado.Name = "btnRestaurarEstado";
             btnRestaurarEstado.Size = new Size(75, 23);
             btnRestaurarEstado.TabIndex = 10;
@@ -169,11 +170,22 @@
             btnRestaurarEstado.UseVisualStyleBackColor = true;
             btnRestaurarEstado.Click += btnRestaurarEstado_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(604, 500);
+            button1.Name = "button1";
+            button1.Size = new Size(184, 23);
+            button1.TabIndex = 11;
+            button1.Text = "Volver al menú principal";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // GenerarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
+            Controls.Add(button1);
             Controls.Add(btnRestaurarEstado);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
@@ -207,5 +219,6 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private Button btnRestaurarEstado;
+        private Button button1;
     }
 }

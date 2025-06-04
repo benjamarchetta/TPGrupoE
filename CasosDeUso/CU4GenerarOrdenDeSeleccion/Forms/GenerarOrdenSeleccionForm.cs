@@ -345,6 +345,13 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 MessageBox.Show($"Error al restaurar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+            principalGeneralForm.Show();
+        }
     }
 }
 

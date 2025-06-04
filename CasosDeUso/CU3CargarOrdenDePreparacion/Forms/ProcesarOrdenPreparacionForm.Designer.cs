@@ -61,6 +61,7 @@
             dniTransportistaTextBox = new TextBox();
             depositoComboBox = new ComboBox();
             label11 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -100,7 +101,7 @@
             // cargarOrdenButton
             // 
             cargarOrdenButton.Enabled = false;
-            cargarOrdenButton.Location = new Point(617, 562);
+            cargarOrdenButton.Location = new Point(443, 610);
             cargarOrdenButton.Name = "cargarOrdenButton";
             cargarOrdenButton.Size = new Size(168, 23);
             cargarOrdenButton.TabIndex = 10;
@@ -366,11 +367,22 @@
             label11.TabIndex = 41;
             label11.Text = "Depósito a retirar";
             // 
+            // button1
+            // 
+            button1.Location = new Point(617, 610);
+            button1.Name = "button1";
+            button1.Size = new Size(168, 23);
+            button1.TabIndex = 42;
+            button1.Text = "Volver al menú principal";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // ProcesarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(797, 597);
+            ClientSize = new Size(797, 645);
+            Controls.Add(button1);
             Controls.Add(label11);
             Controls.Add(depositoComboBox);
             Controls.Add(dniTransportistaTextBox);
@@ -443,5 +455,6 @@
         private TextBox dniTransportistaTextBox;
         private ComboBox depositoComboBox;
         private Label label11;
+        private Button button1;
     }
 }
