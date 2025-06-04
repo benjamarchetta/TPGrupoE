@@ -31,8 +31,10 @@
         private void InitializeComponent()
         {
             MercaderiaAEmpaquetarGroupBox = new GroupBox();
+            NroOrdenPreparacionTextBox = new TextBox();
+            NumeroOrdenPreparacionLabel = new Label();
             MercaderiasALiberarParaDespachoListView = new ListView();
-            IdOrdenPreparacion = new ColumnHeader();
+            IdProducto = new ColumnHeader();
             DescripcionProducto = new ColumnHeader();
             CantidadAEmpaquetar = new ColumnHeader();
             ConfirmarEmpaquetadoButton = new Button();
@@ -43,6 +45,8 @@
             // MercaderiaAEmpaquetarGroupBox
             // 
             MercaderiaAEmpaquetarGroupBox.BackColor = SystemColors.Control;
+            MercaderiaAEmpaquetarGroupBox.Controls.Add(NroOrdenPreparacionTextBox);
+            MercaderiaAEmpaquetarGroupBox.Controls.Add(NumeroOrdenPreparacionLabel);
             MercaderiaAEmpaquetarGroupBox.Controls.Add(MercaderiasALiberarParaDespachoListView);
             MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MercaderiaAEmpaquetarGroupBox.Location = new Point(21, 20);
@@ -54,24 +58,43 @@
             MercaderiaAEmpaquetarGroupBox.TabStop = false;
             MercaderiaAEmpaquetarGroupBox.Text = "Mercaderías a liberar para despacho";
             // 
+            // NroOrdenPreparacionTextBox
+            // 
+            NroOrdenPreparacionTextBox.BackColor = SystemColors.Control;
+            NroOrdenPreparacionTextBox.BorderStyle = BorderStyle.None;
+            NroOrdenPreparacionTextBox.Location = new Point(25, 42);
+            NroOrdenPreparacionTextBox.Name = "NroOrdenPreparacionTextBox";
+            NroOrdenPreparacionTextBox.Size = new Size(273, 32);
+            NroOrdenPreparacionTextBox.TabIndex = 8;
+            NroOrdenPreparacionTextBox.Text = "N° Orden Preparación:";
+            // 
+            // NumeroOrdenPreparacionLabel
+            // 
+            NumeroOrdenPreparacionLabel.AutoSize = true;
+            NumeroOrdenPreparacionLabel.Location = new Point(295, 42);
+            NumeroOrdenPreparacionLabel.Name = "NumeroOrdenPreparacionLabel";
+            NumeroOrdenPreparacionLabel.Size = new Size(77, 32);
+            NumeroOrdenPreparacionLabel.TabIndex = 7;
+            NumeroOrdenPreparacionLabel.Text = "12345";
+            // 
             // MercaderiasALiberarParaDespachoListView
             // 
             MercaderiasALiberarParaDespachoListView.BackColor = SystemColors.ControlLightLight;
-            MercaderiasALiberarParaDespachoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, DescripcionProducto, CantidadAEmpaquetar });
+            MercaderiasALiberarParaDespachoListView.Columns.AddRange(new ColumnHeader[] { IdProducto, DescripcionProducto, CantidadAEmpaquetar });
             MercaderiasALiberarParaDespachoListView.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             MercaderiasALiberarParaDespachoListView.GridLines = true;
-            MercaderiasALiberarParaDespachoListView.Location = new Point(22, 70);
+            MercaderiasALiberarParaDespachoListView.Location = new Point(22, 99);
             MercaderiasALiberarParaDespachoListView.Margin = new Padding(4);
             MercaderiasALiberarParaDespachoListView.Name = "MercaderiasALiberarParaDespachoListView";
-            MercaderiasALiberarParaDespachoListView.Size = new Size(955, 724);
+            MercaderiasALiberarParaDespachoListView.Size = new Size(955, 695);
             MercaderiasALiberarParaDespachoListView.TabIndex = 6;
             MercaderiasALiberarParaDespachoListView.UseCompatibleStateImageBehavior = false;
             MercaderiasALiberarParaDespachoListView.View = View.Details;
             // 
-            // IdOrdenPreparacion
+            // IdProducto
             // 
-            IdOrdenPreparacion.Text = "N° Orden de Preparacion";
-            IdOrdenPreparacion.Width = 320;
+            IdProducto.Text = "Id Producto";
+            IdProducto.Width = 320;
             // 
             // DescripcionProducto
             // 
@@ -121,16 +144,19 @@
             FormClosing += EmpaquetadoForm_FormClosing;
             Load += EmpaquetadoForm_Load;
             MercaderiaAEmpaquetarGroupBox.ResumeLayout(false);
+            MercaderiaAEmpaquetarGroupBox.PerformLayout();
             ResumeLayout(false);
         }
         #endregion
 
         private GroupBox MercaderiaAEmpaquetarGroupBox;
         private ListView MercaderiasALiberarParaDespachoListView;
-        private ColumnHeader IdOrdenPreparacion;
+        private ColumnHeader IdProducto;
         private ColumnHeader DescripcionProducto;
         private ColumnHeader CantidadAEmpaquetar;
         private Button ConfirmarEmpaquetadoButton;
         private Button VolverMenuPrincipalButton;
+        private Label NumeroOrdenPreparacionLabel;
+        private TextBox NroOrdenPreparacionTextBox;
     }
 }
