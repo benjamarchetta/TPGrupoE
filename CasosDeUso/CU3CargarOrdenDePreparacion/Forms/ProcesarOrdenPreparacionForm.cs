@@ -272,23 +272,25 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 // Sumar todas las cantidades de las posiciones
                 int cantidadEnStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
 
+                //string posicion = stockProducto
+
                 string Sku = producto.Sku;
-                string NombreProducto = producto.DescripcionProducto;
+                //string ubicacion = posicion;
                 int CantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
 
                 // Agregar prod a la lista
                 ListViewItem Fila = ordenDePreparacionListView.Items.Add(Sku);
-                Fila.SubItems.Add(NombreProducto);
+                //Fila.SubItems.Add(ubicacion);
                 Fila.SubItems.Add(CantidadARetirar.ToString());
 
                 // Restar stock
                 int cantidadRestante = CantidadARetirar;
-                foreach (var posicion in stockProducto.Posiciones)
+                foreach (var Posicion in stockProducto.Posiciones)
                 {
                     if (cantidadRestante == 0) break;
 
-                    int descontar = Math.Min(posicion.Cantidad, cantidadRestante);
-                    posicion.Cantidad -= descontar;
+                    int descontar = Math.Min(Posicion.Cantidad, cantidadRestante);
+                    Posicion.Cantidad -= descontar;
                     cantidadRestante -= descontar;
                 }
 
@@ -305,12 +307,12 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
 
+
         }
 
         private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             quitarProductoButton.Enabled = ordenDePreparacionListView.SelectedItems.Count > 0;
-            cargarOrdenButton.Enabled = ordenDePreparacionListView.SelectedItems.Count > 0;
             razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
         }
@@ -320,7 +322,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
             {
                 string sku = item.Text;
-                int cantidadARetirada = int.Parse(item.SubItems[2].Text);
+                int cantidadARetirada = int.Parse(item.SubItems[1].Text);
 
 
                 // BUSCAR el producto original por SKU y sumar stock
@@ -355,6 +357,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
             // Habilitar transportista
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+            dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+            cargarOrdenButton.Enabled = ordenDePreparacionListView.Items.Count > 0;
+
 
             foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
             {
@@ -374,6 +379,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+            depositoComboBox.SelectedIndex = -1;
 
         }
 
@@ -450,6 +456,16 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void dniTransportistaTextBox_TextChanged(object sender, EventArgs e)
         {
             string texto = dniTransportistaTextBox.Text;
+            if (dniTransportistaTextBox.Text == "0")
+            {
+                MessageBox.Show(
+                            $"Entrada inválida. Ingrese un número positivo.",
+                            "Advertencia",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                dniTransportistaTextBox.Clear();
+            }
             cargarOrdenButton.Enabled = dniTransportistaTextBox.Text.Length == 8;
         }
         
@@ -509,6 +525,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }
             
                 dniTransportistaTextBox.Enabled = depositoComboBox.SelectedIndex != -1;
+            if (dniTransportistaTextBox.Text.Length == 8 && depositoComboBox.SelectedIndex != -1)
+            {
+                cargarOrdenButton.Enabled = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

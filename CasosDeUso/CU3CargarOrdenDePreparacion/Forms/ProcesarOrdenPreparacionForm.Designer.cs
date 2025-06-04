@@ -37,7 +37,6 @@
             ordenDePreparacionListView = new ListView();
             skuColumnaSelec = new ColumnHeader();
             cantidadColumnaSelec = new ColumnHeader();
-            ubicacionColumnaPrep = new ColumnHeader();
             razonSocialComboBox = new ComboBox();
             label7 = new Label();
             label8 = new Label();
@@ -122,7 +121,7 @@
             // 
             // ordenDePreparacionListView
             // 
-            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, ubicacionColumnaPrep });
+            ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec });
             ordenDePreparacionListView.FullRowSelect = true;
             ordenDePreparacionListView.Location = new Point(12, 310);
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
@@ -135,17 +134,12 @@
             // skuColumnaSelec
             // 
             skuColumnaSelec.Text = "SKU de producto";
-            skuColumnaSelec.Width = 257;
+            skuColumnaSelec.Width = 386;
             // 
             // cantidadColumnaSelec
             // 
             cantidadColumnaSelec.Text = "Cantidad a retirar";
-            cantidadColumnaSelec.Width = 257;
-            // 
-            // ubicacionColumnaPrep
-            // 
-            ubicacionColumnaPrep.Text = "Ubicación";
-            ubicacionColumnaPrep.Width = 257;
+            cantidadColumnaSelec.Width = 386;
             // 
             // razonSocialComboBox
             // 
@@ -447,7 +441,6 @@
         private TextBox cantidadARetirarTextBox;
         private Button agregarProductoButton;
         private Label label4;
-        private ColumnHeader ubicacionColumnaPrep;
         private Label label5;
         private Label label12;
         private TextBox estadoDeOrdenTextBox;
