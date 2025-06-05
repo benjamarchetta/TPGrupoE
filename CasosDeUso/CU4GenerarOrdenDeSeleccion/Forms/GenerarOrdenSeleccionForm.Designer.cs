@@ -159,26 +159,8 @@
             // 
             columnHeader5.Text = "CUIT Cliente";
             columnHeader5.Width = 195;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(604, 500);
-            button1.Name = "button1";
-            button1.Size = new Size(184, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Volver al menú principal";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // Volveralmenubutton1
-            // 
-            Volveralmenubutton1.Location = new Point(154, 500);
-            Volveralmenubutton1.Name = "Volveralmenubutton1";
-            Volveralmenubutton1.Size = new Size(173, 23);
-            Volveralmenubutton1.TabIndex = 11;
-            Volveralmenubutton1.Text = "Volver al menu";
-            Volveralmenubutton1.UseVisualStyleBackColor = true;
-            Volveralmenubutton1.Click += Volveralmenubutton1_Click;
+          
+          
             // 
             // GenerarOrdenSeleccionForm
             // 
