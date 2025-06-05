@@ -32,6 +32,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         private void GenerarOrdenSeleccionForm_Load(object sender, EventArgs e)
         {
 
+            OrdenPreparacionAlmacen.LeerOP();
             CargarOrdenesPendientes();
             HabilitarBotones();
         }
