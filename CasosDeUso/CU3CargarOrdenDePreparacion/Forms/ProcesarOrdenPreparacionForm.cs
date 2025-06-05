@@ -436,8 +436,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     PalletCerrado = pallet,
                 };
 
-                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
                 productosAsociados.Add(productoOrden);
+                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
+                
             }
 
             // Crear la orden de preparación
@@ -480,7 +481,20 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
             idOrdenTextBox.Text = (GenerarIdOrden() - 1009).ToString();
+            
+            OrdenPreparacionAlmacen.GrabarOP();
+            /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
+            foreach (OrdenPreparacionEntidad entidad in ordenes)
+            {
+                string mensaje = $"ID: {entidad.IdOrdenPreparacion}\n" +
+                                 $"Cliente: {entidad.IdCliente}\n" +
+                                 $"DNI T: {entidad.DniTransportista}"+
+                                 $"DNI T: {entidad.IdDeposito}"+
+                                 $"Fecha: {entidad.FechaEntrega}\n" +
+                                 $"Estado: {entidad.Estado}\n";
 
+                MessageBox.Show(mensaje, "Orden de Preparación");
+            }*/
         }
 
         private int GenerarIdOrden()
@@ -593,6 +607,11 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
                     principalGeneralForm.Show();
                 }
+            }
+            else
+            {
+                MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+                principalGeneralForm.Show();
             }
         }
     }
