@@ -118,20 +118,44 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             {
                 int idOrdenSeleccion = (int)item.Tag;
                 var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);  // Obtener los productos
-                                                                                    // Agregar los productos al ListView
+
+                // Agregar los productos al ListView
                 foreach (var p in productos)
                 {
-                    var fila = new ListViewItem(p.IdProducto.ToString());
-                    fila.SubItems.Add("N/D"); // Si no tienes tipo, ponlo como "N/D"
-                    fila.SubItems.Add(p.Cantidad.ToString());
-                    fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No");
-                    fila.SubItems.Add("Auto"); // Aquí puedes poner la ubicación si la tienes del stock
+                    // Obtener el SKU del producto desde el almacén de productos
+                    var productoEntidad = ProductoAlmacen.BuscarProductoPorId(p.IdProducto);  // Buscar el producto por ID
+                    string sku = productoEntidad != null ? productoEntidad.Sku : "No disponible"; // Obtener el SKU
+
+                    var fila = new ListViewItem(sku); // Agregar SKU
+                    fila.SubItems.Add("N/D"); // Tipo (Este campo debe ser modificado si tienes un campo `Tipo` en `ProductoOrden`)
+
+                    // Si no tienes un campo `Tipo` en `ProductoOrden`, podrías agregar algo como esto:
+                    // fila.SubItems.Add(p.Tipo); // Si tu modelo tiene un campo 'Tipo', descomenta esta línea
+
+                    fila.SubItems.Add(p.Cantidad.ToString()); // Cantidad
+                    fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No"); // Pallet Cerrado
+
+                    // Obtener la ubicación del producto (usamos la función `ObtenerUbicacion` para obtener las posiciones desde el stock)
+                    var ubicacion = ObtenerUbicacion(p.IdProducto); // Obtener ubicación desde StockFisicoAlmacen
+                    fila.SubItems.Add(ubicacion); // Ubicación
 
                     detalleProductosListView.Items.Add(fila);
                 }
             }
 
             confirmarSeleccionButton.Enabled = true;
+        }
+
+        // Función para obtener la ubicación de un producto desde el stock
+        private string ObtenerUbicacion(int idProducto)
+        {
+            var stock = StockFisicoAlmacen.ObtenerStockPorId(idProducto);
+            if (stock != null && stock.Posiciones.Count > 0)
+            {
+                // Unir las posiciones disponibles por ", " si el producto tiene más de una
+                return string.Join(", ", stock.Posiciones.Select(p => p.Posicion));
+            }
+            return "Sin ubicación"; // Si no hay ubicación disponible
         }
         private void confirmarSeleccionButton_Click(object sender, EventArgs e)
         {
