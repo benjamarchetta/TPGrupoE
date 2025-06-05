@@ -138,13 +138,35 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             if (ordenesListView.CheckedItems.Count == 0) return;
 
             var ids = new List<int>();
+            var detallesOrdenes = new List<string>();
+            var totalProductos = 0;
+
+            // Recopilar información sobre las órdenes seleccionadas
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 ids.Add((int)item.Tag);
+
+                var productos = _modelo.ObtenerDetalleProductos((int)item.Tag);
+                totalProductos += productos.Count;
+
+                // Mostrar un resumen de las órdenes (hasta 3 por ejemplo)
+                if (detallesOrdenes.Count < 3)
+                {
+                    var orden = $"OS-{item.Tag:D5} - {productos.Count} productos";
+                    detallesOrdenes.Add(orden);
+                }
             }
 
-            var mensaje = "¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n" +
-                          string.Join(", ", ids.Select(id => $"OS-{id:D5}"));
+            // Si hay más de 3 órdenes seleccionadas, agregar un mensaje diciendo que hay más
+            if (detallesOrdenes.Count == 3)
+            {
+                detallesOrdenes.Add("Y más...");
+            }
+
+            // Crear el mensaje con el detalle de las órdenes
+            var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" +
+                          string.Join("\n", detallesOrdenes) + "\n\n" +
+                          $"Total de productos seleccionados: {totalProductos}";
 
             var result = MessageBox.Show(mensaje, "Confirmar selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

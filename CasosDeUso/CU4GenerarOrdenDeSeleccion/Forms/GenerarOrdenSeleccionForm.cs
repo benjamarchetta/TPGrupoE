@@ -341,11 +341,13 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             }
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
             MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
             principalGeneralForm.Show();
+
         }
     }
 }
