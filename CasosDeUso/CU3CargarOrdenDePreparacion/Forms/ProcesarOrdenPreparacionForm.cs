@@ -190,6 +190,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             skuTextBox.Text = "-";
             cantidadEnStockTextBox.Text = "-";
+            cantidadARetirarTextBox.Clear();
 
             // Mostrar sku de producto y cantidad en stock dsp de elegir el producto
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
@@ -463,7 +464,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 IdDeposito = idDepositoSeleccionado,
                 IdCliente = idClienteSeleccionado,
                 DniTransportista = int.Parse(dniTransportistaTextBox.Text),
-                Estado = EstadoOrdenPreparacion.EnPreparacion,
+                Estado = EstadoOrdenPreparacion.Pendiente,
                 FechaEntrega = despachoDateTimePicker.Value,
                 PalletCerrado = pallet,
                 ProductoOrden = productosAsociados,
