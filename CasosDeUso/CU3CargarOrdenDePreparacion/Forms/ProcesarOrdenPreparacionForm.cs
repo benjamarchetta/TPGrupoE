@@ -110,9 +110,12 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     cuitTextBox.Text = Cliente.Cuit;
 
                     // Buscar si tiene productos almacenados
-                    var productosDelCliente = OrdenPreparacionModelo.Productos
-                        .Where(p => p.IdProducto == idClienteSeleccionado)
-                        .ToList();
+                    var productosDelCliente = OrdenPreparacionModelo.Stock
+                    .Where(p => p.IdCliente == idClienteSeleccionado && p.PalletCerrado == palletCerrado)
+                    .Select(p => p.IdProducto)
+                    .Distinct()
+                    .ToList();
+
 
                     if (productosDelCliente.Count == 0)
                     {
@@ -129,9 +132,20 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                         productoComboBox.Enabled = false;
                         return;
                     }
+                   
+                    // Obtener las descripciones
+                    var productosConDescripcion = OrdenPreparacionModelo.Productos
+                        .Where(prod => productosDelCliente.Contains(prod.IdProducto))
+                        .ToList();
+
+                    // 2. Obtener los IdProducto únicos del stock
+                    var idsProductos = productosConDescripcion.Select(s => s.IdProducto).Distinct().ToList();
+
+                    // 3. Buscar los productos con esas IDs en la lista general de productos
+                   var ProductosDelCliente = OrdenPreparacionModelo.Productos .Where(prod => idsProductos.Contains(prod.IdProducto)).ToList();
 
                     // Si tiene productos
-                    productoComboBox.DataSource = productosDelCliente;
+                    productoComboBox.DataSource = ProductosDelCliente;
                     productoComboBox.DisplayMember = "DescripcionProducto";
                     productoComboBox.ValueMember = "IdProducto";
                     productoComboBox.Enabled = true;
@@ -176,22 +190,24 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             skuTextBox.Text = "-";
             cantidadEnStockTextBox.Text = "-";
+            cantidadARetirarTextBox.Clear();
 
             // Mostrar sku de producto y cantidad en stock dsp de elegir el producto
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
                 skuTextBox.Text = producto.Sku;
-                foreach (StockFisicoEntidad stock in StockFisicoAlmacen.Stock)
-                {
-                    if (producto.IdProducto == stock.IdProducto)
-                    {
-                        // Sumar todas las cantidades de las posiciones 0000000000000000000000-------00000000
-                        int cantidadTotal = stock.Posiciones.Sum(pos => pos.Cantidad);
-                        cantidadEnStockTextBox.Text = cantidadTotal.ToString();
-                        break;
-                    }
-                }
 
+                // Filtrar por producto y cliente
+                var stockClienteProducto = StockFisicoAlmacen.Stock
+                    .Where(s => s.IdProducto == producto.IdProducto && s.IdCliente == idClienteSeleccionado && s.PalletCerrado == palletCerrado)
+                    .ToList();
+
+                // Sumar todas las posiciones de ese producto para ese cliente
+                int cantidadTotal = stockClienteProducto
+                    .SelectMany(s => s.Posiciones)
+                    .Sum(p => p.Cantidad);
+
+                cantidadEnStockTextBox.Text = cantidadTotal.ToString();
             }
 
 
@@ -436,8 +452,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     PalletCerrado = pallet,
                 };
 
-                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
                 productosAsociados.Add(productoOrden);
+                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
+                
             }
 
             // Crear la orden de preparación
@@ -447,7 +464,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 IdDeposito = idDepositoSeleccionado,
                 IdCliente = idClienteSeleccionado,
                 DniTransportista = int.Parse(dniTransportistaTextBox.Text),
-                Estado = EstadoOrdenPreparacion.EnPreparacion,
+                Estado = EstadoOrdenPreparacion.Pendiente,
                 FechaEntrega = despachoDateTimePicker.Value,
                 PalletCerrado = pallet,
                 ProductoOrden = productosAsociados,
@@ -480,7 +497,20 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
             idOrdenTextBox.Text = (GenerarIdOrden() - 1009).ToString();
+            
+            OrdenPreparacionAlmacen.GrabarOP();
+            /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
+            foreach (OrdenPreparacionEntidad entidad in ordenes)
+            {
+                string mensaje = $"ID: {entidad.IdOrdenPreparacion}\n" +
+                                 $"Cliente: {entidad.IdCliente}\n" +
+                                 $"DNI T: {entidad.DniTransportista}"+
+                                 $"DNI T: {entidad.IdDeposito}"+
+                                 $"Fecha: {entidad.FechaEntrega}\n" +
+                                 $"Estado: {entidad.Estado}\n";
 
+                MessageBox.Show(mensaje, "Orden de Preparación");
+            }*/
         }
 
         private int GenerarIdOrden()
@@ -593,6 +623,11 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
                     principalGeneralForm.Show();
                 }
+            }
+            else
+            {
+                MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
+                principalGeneralForm.Show();
             }
         }
     }

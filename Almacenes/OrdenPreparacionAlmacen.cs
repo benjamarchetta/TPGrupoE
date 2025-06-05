@@ -33,7 +33,27 @@ namespace TPGrupoE.Almacenes
 
              ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
         }
-        
+
+       /* public static int CalcularCantidadReservada(int idDeposito, int idProducto, int idCliente)
+        {
+            // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
+            var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.Pendiente || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IdDeposito == idDeposito && o.IdCliente == idCliente);
+
+            int cantidadReservada = 0;
+
+
+            foreach (var o in ordenes)
+            {
+                // Buscar la mercaderia en la orden de preparacion
+                var productosOrden = o.ProductoOrden.Find(prods => prods.IdProducto == idProducto);
+
+                if (productosOrden != null)
+                {
+                    cantidadReservada += productosOrden.Cantidad;
+                }
+            }
+            return cantidadReservada;
+        }*/
 
         //REVISAR SI NOS SIRVE AHORA
         public static List<OrdenPreparacionEntidad> BuscarTodasLasOrdenes()
