@@ -43,7 +43,6 @@
             columnHeader2 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            btnRestaurarEstado = new Button();
             button1 = new Button();
             SuspendLayout();
             // 
@@ -131,6 +130,7 @@
             // 
             // mercaderiasAPrepList
             // 
+            mercaderiasAPrepList.CheckBoxes = true;
             mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
             mercaderiasAPrepList.FullRowSelect = true;
             mercaderiasAPrepList.Location = new Point(12, 268);
@@ -160,16 +160,6 @@
             columnHeader5.Text = "CUIT Cliente";
             columnHeader5.Width = 195;
             // 
-            // btnRestaurarEstado
-            // 
-            btnRestaurarEstado.Location = new Point(12, 500);
-            btnRestaurarEstado.Name = "btnRestaurarEstado";
-            btnRestaurarEstado.Size = new Size(75, 23);
-            btnRestaurarEstado.TabIndex = 10;
-            btnRestaurarEstado.Text = "Restaurar ";
-            btnRestaurarEstado.UseVisualStyleBackColor = true;
-            btnRestaurarEstado.Click += btnRestaurarEstado_Click;
-            // 
             // button1
             // 
             button1.Location = new Point(604, 500);
@@ -186,7 +176,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
             Controls.Add(button1);
-            Controls.Add(btnRestaurarEstado);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
             Controls.Add(label2);
@@ -218,7 +207,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private Button btnRestaurarEstado;
         private Button button1;
     }
 }
