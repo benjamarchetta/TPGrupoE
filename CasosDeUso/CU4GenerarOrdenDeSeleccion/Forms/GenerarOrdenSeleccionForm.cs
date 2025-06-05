@@ -93,12 +93,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         }
 
 
-        // ... tus métodos existentes ...
-
-        // AGREGAR ESTE MÉTODO QUE FALTA:
-
-
-
         private void agregarAOrdenButton_Click(object sender, EventArgs e)
         {
             try
@@ -106,7 +100,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 // 1. Obtener órdenes seleccionadas
                 var ordenesSeleccionadas = new List<OrdenPreparacionEntidad>();
 
-                foreach (ListViewItem item in ordenesPendientesListView.SelectedItems)
+                foreach (ListViewItem item in ordenesPendientesListView.CheckedItems)
                 {
                     if (item.Tag is OrdenPreparacionEntidad orden)
                     {
@@ -121,14 +115,14 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                     return;
                 }
 
-                // 3. Solo mover a mercaderías (SIN cambiar estado)
+                // 3. Solo mover a mercaderías
                 foreach (var orden in ordenesSeleccionadas)
                 {
                     AgregarProductosAMercaderias(orden);
                 }
 
                 // 4. Remover de la lista de arriba (pero no cambiar estado en BD)
-                foreach (ListViewItem item in ordenesPendientesListView.SelectedItems.Cast<ListViewItem>().ToList())
+                foreach (ListViewItem item in ordenesPendientesListView.CheckedItems.Cast<ListViewItem>().ToList())
                 {
                     ordenesPendientesListView.Items.Remove(item);
                 }
@@ -169,7 +163,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 // 1. Obtener mercaderías seleccionadas
                 var mercaderiasSeleccionadas = new List<ListViewItem>();
 
-                foreach (ListViewItem item in mercaderiasAPrepList.SelectedItems)
+                foreach (ListViewItem item in mercaderiasAPrepList.CheckedItems)
                 {
                     mercaderiasSeleccionadas.Add(item);
                 }
