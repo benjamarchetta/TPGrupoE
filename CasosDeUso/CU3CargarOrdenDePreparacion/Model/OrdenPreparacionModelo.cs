@@ -72,6 +72,32 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                     Posiciones = stockFisico.Posiciones,
                 });
             }
+            OrdenPreparacionAlmacen.LeerOP();
+            // Restar cantidades según las ordenes ya registradas
+            foreach (var orden in OrdenPreparacionAlmacen.OrdenesPreparacion)
+            {
+                foreach (var productoOrden in orden.ProductoOrden)
+                {
+                    var stockCliente = StockFisico.FirstOrDefault(s =>
+                        s.IdCliente == orden.IdCliente &&
+                        s.IdProducto == productoOrden.IdProducto);
+
+                    if (stockCliente == null) continue;
+
+                    int cantidadARestar = productoOrden.Cantidad;
+
+                    // Restar de las posiciones, de forma secuencial
+                    foreach (var pos in stockCliente.Posiciones)
+                    {
+                        if (cantidadARestar <= 0) break;
+
+                        int aDescontar = Math.Min(pos.Cantidad, cantidadARestar);
+                        pos.Cantidad -= aDescontar;
+                        cantidadARestar -= aDescontar;
+                    }
+                }
+            }
+
             return StockFisico;
         }
     }
