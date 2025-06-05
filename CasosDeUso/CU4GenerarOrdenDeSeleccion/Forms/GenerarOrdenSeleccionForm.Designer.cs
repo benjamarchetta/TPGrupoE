@@ -43,7 +43,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            button1 = new Button();
+
             SuspendLayout();
             // 
             // label1
@@ -159,23 +159,15 @@
             // 
             columnHeader5.Text = "CUIT Cliente";
             columnHeader5.Width = 195;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(604, 500);
-            button1.Name = "button1";
-            button1.Size = new Size(184, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Volver al menú principal";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+          
+          
             // 
             // GenerarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
-            Controls.Add(button1);
+
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
             Controls.Add(label2);
@@ -207,6 +199,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private Button button1;
+
     }
 }
