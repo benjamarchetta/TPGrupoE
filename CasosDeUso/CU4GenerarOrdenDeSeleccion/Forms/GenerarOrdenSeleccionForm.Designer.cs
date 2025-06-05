@@ -44,6 +44,7 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             btnRestaurarEstado = new Button();
+            Volveralmenubutton1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -169,11 +170,22 @@
             btnRestaurarEstado.UseVisualStyleBackColor = true;
             btnRestaurarEstado.Click += btnRestaurarEstado_Click;
             // 
+            // Volveralmenubutton1
+            // 
+            Volveralmenubutton1.Location = new Point(154, 500);
+            Volveralmenubutton1.Name = "Volveralmenubutton1";
+            Volveralmenubutton1.Size = new Size(173, 23);
+            Volveralmenubutton1.TabIndex = 11;
+            Volveralmenubutton1.Text = "Volver al menu";
+            Volveralmenubutton1.UseVisualStyleBackColor = true;
+            Volveralmenubutton1.Click += Volveralmenubutton1_Click;
+            // 
             // GenerarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
+            Controls.Add(Volveralmenubutton1);
             Controls.Add(btnRestaurarEstado);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
@@ -207,5 +219,6 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private Button btnRestaurarEstado;
+        private Button Volveralmenubutton1;
     }
 }
