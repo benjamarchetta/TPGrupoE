@@ -1,22 +1,26 @@
-(Empieza con el menú principal)
-
 Caso: Cargar una órden de Preparacion (OP) de pallet cerrado.
 
-1- Presionar el boton "Cargar Órden de Preparación" en la pantalla "Menú principal".
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Cargar Órden de Preparación".
 2- Presionar el filtro de calendario "Fecha de despacho de orden" y seleccionar la fecha del día de hoy.
 3- Presionar el desplegable de "Pallet Cerrado" y seleccionar "Si"
-4- Presionar el desplegable de Razon social del cliente y seleccionar la opcion "Electro Hogar S.R.L"
+4- Presionar el desplegable de "Razon social del cliente" y seleccionar la opcion "Electro Hogar S.R.L"
 5- Presionar el desplegable Depósito a retirar y seleccionar "Av. Circunvalación y Ovidio Lagos, Rosario, Santa Fe"
 6- Presionar el desplegable de Producto y seleccionar "Estanterías metálicas para depósitos (desarmadas)"
-7- Ingresar cantidad de pallets a retirar "16"
-8- Presionar el boton "Agregar producto a órden de preparacion"
-9- Ingresar el DNI de transportista "23456712"
-10- Presionar el boton "Cargar órden de preparación"
-11- Presionar el boton "Aceptar" de la ventana llamada Éxito: "Orden de preparación cargada correctamente..."
+7- Ingresar en el campo "Cantidad de pallets a retirar" el número "100"
+8- Presionar el botón "Agregar producto a órden de preparacion"
+9- Ingresar en el campo "DNI de transportista" el número "23456712"
+10- Presionar el botón "Cargar órden de preparación"
+11- Presionar el botón "Aceptar" de la ventana "Éxito: "Orden de preparación cargada correctamente..."
+12- Presionar el botón "Volver al menú principal"
 12- Cerrar el sistema presionando la "X"
 
+(Termina cerrando el programa)
+
 Verificaciones:
-13- En el Archivo ordenesPreparacion.json la ultima linea debe ser:
+
+13- En el Archivo "ordenesPreparacion.json" la ultima línea debe ser:
 {
   "IdOrdenPreparacion": xxxx,
   "IdDeposito": 2,
@@ -28,9 +32,10 @@ Verificaciones:
   "ProductoOrden": [
     {
       "IdProducto": 2,
-      "Cantidad": 16,
+      "Cantidad": 100,
       "PalletCerrado": true
     }
   ]
 }
-(Termina cerrando el programa)
+
+
