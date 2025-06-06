@@ -349,6 +349,13 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             principalGeneralForm.Show();
 
         }
+
+        private void menubutton_Click(object sender, EventArgs e)
+        {
+            var menuForm = new MenuPrincipalGeneralForm();
+            menuForm.Show(); // Abre el menú principal
+            this.Close(); // Cierra el formulario actual
+        }
     }
 }
 
