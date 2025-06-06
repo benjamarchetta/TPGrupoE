@@ -1,0 +1,36 @@
+(Empieza con el menú principal)
+
+Caso: Cargar una órden de Preparacion (OP) de pallet cerrado.
+
+1- Presionar el boton "Cargar Órden de Preparación" en la pantalla "Menú principal".
+2- Presionar el filtro de calendario "Fecha de despacho de orden" y seleccionar la fecha del día de hoy.
+3- Presionar el desplegable de "Pallet Cerrado" y seleccionar "Si"
+4- Presionar el desplegable de Razon social del cliente y seleccionar la opcion "Electro Hogar S.R.L"
+5- Presionar el desplegable Depósito a retirar y seleccionar "Av. Circunvalación y Ovidio Lagos, Rosario, Santa Fe"
+6- Presionar el desplegable de Producto y seleccionar "Estanterías metálicas para depósitos (desarmadas)"
+7- Ingresar cantidad de pallets a retirar "16"
+8- Presionar el boton "Agregar producto a órden de preparacion"
+9- Ingresar el DNI de transportista "23456712"
+10- Presionar el boton "Cargar órden de preparación"
+11- Presionar el boton "Aceptar" de la ventana llamada Éxito: "Orden de preparación cargada correctamente..."
+12- Cerrar el sistema presionando la "X"
+
+Verificaciones:
+13- En el Archivo ordenesPreparacion.json la ultima linea debe ser:
+{
+  "IdOrdenPreparacion": xxxx,
+  "IdDeposito": 2,
+  "IdCliente": 4,
+  "DniTransportista": 23456712,
+  "Estado": 0,
+  "FechaEntrega": "xxxxxxxx",
+  "PalletCerrado": true,
+  "ProductoOrden": [
+    {
+      "IdProducto": 2,
+      "Cantidad": 16,
+      "PalletCerrado": true
+    }
+  ]
+}
+(Termina cerrando el programa)

@@ -1,0 +1,51 @@
+Caso: Cargar orden de Preparacion con varios productos.
+
+1- Presionar el boton "Cargar Orden de Preparacion" del menú principal.
+2- Presionar el calendario y seleccionar la fecha del día de hoy.
+3- Presionar el desplegable de pallet cerrado y seleccionar "No"
+4- Presionar el desplegable de Razon social del cliente y seleccionar la opcion "Electro Hogar S.R.L"
+5- Presionar el desplegable de Depósito a retirar y seleccionar "Camino del Buen Ayre 15400, Malvinas Argentinas, GBA"
+6- Presionar el desplegable de Producto y seleccionar "Heladera No frost Inverter"
+7- Ingresar cantidad de productos a retirar "2"
+8- Presionar el boton "Agregar producto a órden de preparacion"
+9- Presionar el desplegable de Producto y seleccionar "Cocina industrial 4 hornallas "
+10- Ingresar cantidad de productos a retirar "7" (MAYOR AL STOCK DISPONIBLE)
+11- Presionar el boton "Aceptar" de la ventana Advertencia: "La cantidad ingresada supera el stock disponible (5)"
+12- Ingresar cantidad de productos a retirar "2"
+13- Presionar el boton "Agregar producto a órden de preparacion"
+14- Presionar el desplegable de Producto y seleccionar "Aire Acondicionado frío calor 3500 frigorías"
+15- Ingresar cantidad de productos a retirar "7"
+16- Presionar el boton "Agregar producto a órden de preparacion"
+17- Ingresar el DNI de transportista "75301245"
+18- Presionar el boton "Cargar órden de preparación"
+19- Presionar el boton "Aceptar" de la ventana llamada Éxito: "Orden de preparación cargada correctamente"
+20- Cerrar el sistema presionando la "X"
+
+Verificaciones:
+21- En el Archivo ordenesPreparacion.json la ultima linea debe ser:
+{
+  "IdOrdenPreparacion": xxxxx,
+  "IdDeposito": 1,
+  "IdCliente": 4,
+  "DniTransportista": 75301245,
+  "Estado": 0,
+  "FechaEntrega": "xxxxx",
+  "PalletCerrado": false,
+  "ProductoOrden": [
+    {
+      "IdProducto": 23,
+      "Cantidad": 2,
+      "PalletCerrado": false
+    },
+    {
+      "IdProducto": 32,
+      "Cantidad": 2,
+      "PalletCerrado": false
+    },
+    {
+      "IdProducto": 36,
+      "Cantidad": 7,
+      "PalletCerrado": false
+    }
+  ]
+}

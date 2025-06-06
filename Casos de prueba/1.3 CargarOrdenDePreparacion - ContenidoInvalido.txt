@@ -1,0 +1,35 @@
+Caso: No permitir que se cargue una orden de preparación con campos incompletos
+
+1- Presionar el boton "Cargar Orden de Preparacion" del menú principal.
+2- Presionar el calendario y seleccionar la fecha del día de hoy.
+3- Presionar el desplegable de pallet cerrado y seleccionar "No"
+4- Presionar el desplegable de Razon social del cliente y seleccionar la opcion "Frávega S.A"
+5- Presionar el desplegable Depósito a retirar y seleccionar "Av. La Voz del Interior 7800, Córdoba Capital"
+6- Presionar el desplegable de Producto y seleccionar "Smart Watch Xiaomi S3"
+7- Ingresar cantidad de productos a retirar "15"
+8- Presionar el boton "Agregar producto a órden de preparacion"
+9- Ingresar el DNI de transportista "7561230420"(9 o mas caracteres)
+10- Ingresar el DNI de transportista "41253"(6 caracteres)
+11- Ingresar el DNI de transportista "79461028"(8 caracteres)
+12- Presionar el boton "Cargar órden de preparación"
+13- Presionar el boton "Aceptar" de la ventana llamada Éxito: "Orden de preparación cargada correctamente"
+14- Cerrar el sistema presionando la "X"
+
+Verificaciones:
+15- En el Archivo ordenesPreparacion.json la ultima linea debe ser:
+{
+    "IdOrdenPreparacion": XXXX,
+    "IdDeposito": 3
+    "IdCliente": 1,
+    "DniTransportista": 79461028,
+    "Estado": 0,
+    "FechaEntrega": "xxxxx",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 41,
+        "Cantidad": 15,
+        "PalletCerrado": false
+      }
+    ]
+  }
