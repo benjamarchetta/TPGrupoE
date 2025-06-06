@@ -10,6 +10,7 @@ namespace TPGrupoE.Almacenes
     {
         public int IdDeposito { get; set; }
         public string Posicion { get; set; } = string.Empty;
+        public bool PalletCerrado { get; set; }
         public int Cantidad { get; set; }
     }
 }
