@@ -14,6 +14,7 @@ using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
@@ -29,16 +30,15 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         bool palletCerrado = false;
         int id;
 
-
-
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             ClienteAlmacen.LeerCliente();
             groupBox1.SendToBack();
             id = GenerarIdOrden() - 1009;
-            idOrdenTextBox.Text = id.ToString();
-            palletCerradoComboBox.SelectedIndex = 0;
+            palletCerradoComboBox.SelectedIndex = -1;
+            palletCerradoComboBox.Enabled = false;
             depositoComboBox.SelectedIndex = -1;
+            productoComboBox.SelectedIndex = -1;
             despachoDateTimePicker.MinDate = DateTime.Now;
 
             //Razon Social cmbobox
@@ -48,30 +48,22 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             razonSocialComboBox.ValueMember = "Cuit";
             razonSocialComboBox.SelectedIndex = -1;
             razonSocialComboBox.SelectedIndexChanged += razonSocialComboBox_SelectedIndexChanged;
-
-            palletCerradoComboBox_SelectedIndexChanged(sender, e);
         }
 
         private void palletCerradoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
 
-            var stockFiltrado = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado);
+           /* var productosFiltrados = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado);
 
-            var idsClientesConStock = stockFiltrado
+            var idsClientesConStock = productosFiltrados
                 .Select(s => s.IdCliente)
                 .Distinct()
                 .ToList();
 
             var clientesFiltrados = OrdenPreparacionModelo.Clientes
                 .Where(c => idsClientesConStock.Contains(c.IdCliente))
-                .ToList();
-
-            // Mostrar en razon social combobox
-            razonSocialComboBox.DataSource = clientesFiltrados;
-            razonSocialComboBox.DisplayMember = "RazonSocial";
-            razonSocialComboBox.ValueMember = "IdCliente";
-            razonSocialComboBox.SelectedIndex = -1;
+                .ToList();*/
 
             if (palletCerrado)
             {
@@ -84,38 +76,51 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 ordenDePreparacionListView.Columns[1].Text = "Cantidad";
             }
 
-            // Limpiar campos 
-            razonSocialComboBox.Enabled = true;
-            productoComboBox.DataSource = null;
-            productoComboBox.Enabled = false;
-            cuitTextBox.Text = "-";
-        }
-
-        private void razonSocialComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Mostrar cuit del cliente elegido
-            if (razonSocialComboBox.SelectedItem is ClienteEntidad cliente)
+            if (razonSocialComboBox.SelectedItem is ClienteEntidad Cliente && razonSocialComboBox.SelectedIndex != -1)
             {
-                cuitTextBox.Text = cliente.Cuit;
-                //Habilitar producto dsp de elegir cliente
-                productoComboBox.Enabled = (razonSocialComboBox.SelectedIndex != -1);
-            }
+                // Mostrar CUIT
+                cuitTextBox.Text = Cliente.Cuit;
+                idClienteSeleccionado = Cliente.IdCliente;
 
-            if (razonSocialComboBox.SelectedIndex != -1)
-            {
-                if (razonSocialComboBox.SelectedItem is ClienteEntidad Cliente)
-                {
-                    // Guardar el ID del cliente seleccionado en la variable de clase
-                    idClienteSeleccionado = Cliente.IdCliente;
-                    cuitTextBox.Text = Cliente.Cuit;
 
-                    // Buscar si tiene productos almacenados
-                    var productosDelCliente = OrdenPreparacionModelo.Stock
-                    .Where(p => p.IdCliente == idClienteSeleccionado && p.PalletCerrado == palletCerrado)
+                // Filtrar el stock del cliente según si tiene posiciones con el palletCerrado elegido
+                var depositosFiltrados = OrdenPreparacionModelo.Stock
+                    .Where(s => s.IdCliente == Cliente.IdCliente)
+                    .SelectMany(s => s.Posiciones)
+                    .Where(p => p.PalletCerrado == palletCerrado) // 🔴 filtro por PalletCerrado
+                    .Select(p => p.IdDeposito)
+                    .Distinct()
+                    .ToList();
+
+                // Obtener los depósitos válidos con esa condición
+                var depositosAMostrar = OrdenPreparacionModelo.Depositos
+                    .Where(d => depositosFiltrados.Contains(d.IdDeposito))
+                    .ToList();
+
+                // Asignar al ComboBox
+                depositoComboBox.DataSource = depositosAMostrar;
+                depositoComboBox.DisplayMember = "Domicilio";
+                depositoComboBox.ValueMember = "IdDeposito";
+                depositoComboBox.SelectedIndex = -1;
+                depositoComboBox.Enabled = true;
+
+                // Asegurarse de que productoComboBox esté deshabilitado inicialmente
+                productoComboBox.DataSource = null;
+                productoComboBox.Enabled = false;
+
+                /*
+                var productosDelCliente = OrdenPreparacionModelo.Stock
+                    .Where(p => p.IdCliente == idClienteSeleccionado)
                     .Select(p => p.IdProducto)
                     .Distinct()
                     .ToList();
 
+                // Buscar si tiene productos almacenados
+                    productosDelCliente = OrdenPreparacionModelo.Stock
+                    .Where(p => p.IdCliente == idClienteSeleccionado)
+                    .Select(p => p.IdProducto)
+                    .Distinct()
+                    .ToList();
 
                     if (productosDelCliente.Count == 0)
                     {
@@ -148,18 +153,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     productoComboBox.DataSource = ProductosDelCliente;
                     productoComboBox.DisplayMember = "DescripcionProducto";
                     productoComboBox.ValueMember = "IdProducto";
-                    productoComboBox.Enabled = true;
-                }
-                else
-                {
-                    productoComboBox.DataSource = null;
-                    productoComboBox.Enabled = false;
-                }
-
-
-
+                    productoComboBox.Enabled = true;*/
             }
-
+            /*
             // 1. Obtener stock físico del cliente seleccionadoo
             var stockDelCliente = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado).Where(s => s.IdCliente == idClienteSeleccionado).ToList();
 
@@ -174,46 +170,120 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 .ToList();
 
             // 3. Filtrar los depósitos según esos IDs
-            var depositosDelCliente = DepositosAlmacen.Depositos
+            var DepositosDelCliente = DepositosAlmacen.Depositos
                 .Where(d => idsDepositos.Contains(d.IdDeposito))
-                .ToList();
+                .ToList();*/
 
-            // 4. Asignar como DataSource al ComboBox
-            depositoComboBox.DataSource = depositosDelCliente;
-            depositoComboBox.DisplayMember = "Domicilio";
-            depositoComboBox.ValueMember = "IdDeposito";
-            depositoComboBox.SelectedIndex = -1;
+            //razonSocialComboBox.Enabled = true;
+            //productoComboBox.DataSource = null;
+            //productoComboBox.Enabled = false;
+        }
+
+        private void razonSocialComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (razonSocialComboBox.SelectedItem is ClienteEntidad cliente)
+            {
+                cuitTextBox.Text = cliente.Cuit;
+                palletCerradoComboBox.Enabled = (razonSocialComboBox.SelectedIndex != -1);
+            }
 
         }
 
-        private void productoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void depositoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            skuTextBox.Text = "-";
-            cantidadEnStockTextBox.Text = "-";
-            cantidadARetirarTextBox.Clear();
 
-            // Mostrar sku de producto y cantidad en stock dsp de elegir el producto
-            if (productoComboBox.SelectedItem is ProductoEntidad producto)
+            if (depositoComboBox.SelectedItem is DepositoEntidad deposito)
             {
-                skuTextBox.Text = producto.Sku;
+                idDepositoSeleccionado = deposito.IdDeposito;
 
-                // Filtrar por producto y cliente
-                var stockClienteProducto = StockFisicoAlmacen.Stock
-                    .Where(s => s.IdProducto == producto.IdProducto && s.IdCliente == idClienteSeleccionado && s.PalletCerrado == palletCerrado)
+                // Obtener los IDs de producto filtrados por pallet, cliente y depósito
+                var idsProductosFiltrados = StockFisicoAlmacen
+                    .FiltrarPorPalletCerrado(palletCerrado)
+                    .Where(stock =>
+                        stock.IdCliente == idClienteSeleccionado &&
+                        stock.Posiciones.Any(pos => pos.IdDeposito == idDepositoSeleccionado)
+                    )
+                    .Select(stock => stock.IdProducto)
+                    .Distinct()
                     .ToList();
 
-                // Sumar todas las posiciones de ese producto para ese cliente
-                int cantidadTotal = stockClienteProducto
-                    .SelectMany(s => s.Posiciones)
-                    .Sum(p => p.Cantidad);
+                // Obtener las entidades ProductoEntidad correspondientes
+                var productosFiltrados = OrdenPreparacionModelo.Productos
+                    .Where(p => idsProductosFiltrados.Contains(p.IdProducto))
+                    .ToList();
 
-                cantidadEnStockTextBox.Text = cantidadTotal.ToString();
+                // Asignar como fuente del ComboBox
+                productoComboBox.DataSource = productosFiltrados;
+                productoComboBox.DisplayMember = "DescripcionProducto";
+                productoComboBox.ValueMember = "IdProducto";
+                productoComboBox.SelectedIndex = -1; 
+                productoComboBox.Enabled = depositoComboBox.SelectedIndex != -1;
+
+
+                // Filtrar los productos del cliente que están en ese depósito
+                //var productosEnDeposito = productosFiltrados
+                //  .Where(s => s.Posiciones.Any(p => p.IdDeposito == idDepositoSeleccionado))
+                //.Select(s => s.IdProducto)
+                //.Distinct()
+                //.ToList();
+
+                // (Opcional) Si tenés lista de productos con nombre, lo podés hacer así:
+                //var productosFiltrados = OrdenPreparacionModelo.Productos
+                //  .Where(p => productosEnDeposito.Contains(p.IdProducto))
+                //.ToList();
+
+
+
+                //var productosAMostrar = productosFiltrados
+                //  .Where(p => productosFiltrados.Contains(p.IdProducto))
+                //.ToList();
             }
 
+            dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+        }
 
-            //Habilitar cantidad al elegir producto
-            cantidadARetirarTextBox.Enabled = (productoComboBox.SelectedIndex != -1);
 
+        private void productoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
+
+            if (productoComboBox.SelectedItem is ProductoEntidad productoSeleccionado)
+            {
+                // Mostrar el SKU
+                skuTextBox.Text = productoSeleccionado.Sku;
+
+                // Buscar TODAS las entradas de stock para ese cliente y producto
+                var stockDelProducto = OrdenPreparacionModelo.Stock
+                    .Where(s =>
+                        s.IdCliente == idClienteSeleccionado &&
+                        s.IdProducto == productoSeleccionado.IdProducto
+                    )
+                    .ToList();
+
+                // Sumar cantidades disponibles filtrando por depósito y palletCerrado
+                var cantidadDisponible = stockDelProducto
+                    .SelectMany(s => s.Posiciones)
+                    .Where(p =>
+                        p.IdDeposito == idDepositoSeleccionado &&
+                        p.PalletCerrado == palletCerrado
+                    )
+                    .Sum(p => p.Cantidad);
+                if (cantidadDisponible > 0)
+                {
+                    cantidadEnStockTextBox.Text = cantidadDisponible.ToString();
+                }
+                else
+                {
+                    cantidadEnStockTextBox.Text = "0";
+                }
+            }
+            else
+            {
+                skuTextBox.Text = string.Empty;
+                cantidadEnStockTextBox.Text = string.Empty;
+            }
+
+            cantidadARetirarTextBox.Enabled = productoComboBox.SelectedIndex != -1;
 
         }
 
@@ -222,19 +292,27 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             if (productoComboBox.SelectedItem is ProductoEntidad producto && !string.IsNullOrEmpty(cantidadARetirarTextBox.Text) &&
             int.TryParse(cantidadARetirarTextBox.Text, out int cantidadARetirar))
             {
-                // Buscar el stock del producto seleccionado
-                var stockProducto = StockFisicoAlmacen.Stock
-                    .FirstOrDefault(stock => stock.IdProducto == producto.IdProducto);
+                // Buscar TODAS las entradas de stock para ese cliente y producto
+                var stockDelProducto = OrdenPreparacionModelo.Stock
+                    .Where(s =>
+                        s.IdCliente == idClienteSeleccionado &&
+                        s.IdProducto == producto.IdProducto
+                    )
+                    .ToList();
 
-                if (stockProducto != null)
-                {
-                    // Sumar todas las cantidades de las posiciones
-                    int cantidadEnStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
+                // Sumar cantidades disponibles filtrando por depósito y palletCerrado
+                var cantidadDisponible = stockDelProducto
+                    .SelectMany(s => s.Posiciones)
+                    .Where(p =>
+                        p.IdDeposito == idDepositoSeleccionado &&
+                        p.PalletCerrado == palletCerrado
+                    )
+                    .Sum(p => p.Cantidad);
 
-                    if (cantidadARetirar > cantidadEnStock)
+                    if (cantidadARetirar > cantidadDisponible)
                     {
                         MessageBox.Show(
-                            $"La cantidad ingresada supera el stock disponible ({cantidadEnStock}).",
+                            $"La cantidad ingresada supera el stock disponible ({cantidadDisponible}).",
                             "Advertencia",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
@@ -257,18 +335,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     {
                         agregarProductoButton.Enabled = true;
                     }
-                }
-                else
-                {
-                    MessageBox.Show(
-                        "No se encontró stock para el producto seleccionado.",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                    cantidadARetirarTextBox.Text = "";
-                    agregarProductoButton.Enabled = false;
-                }
             }
         }
 
@@ -286,79 +352,94 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
-                // Buscar el stock físico del producto seleccionado
+                // Buscar stock para el cliente, producto y depósito seleccionado
                 var stockProducto = StockFisicoAlmacen.Stock
-                    .FirstOrDefault(stock => stock.IdProducto == producto.IdProducto);
+                    .Where(stock =>
+                        stock.IdCliente == idClienteSeleccionado &&
+                        stock.IdProducto == producto.IdProducto
+                    )
+                    .SelectMany(stock => stock.Posiciones)
+                    .Where(p =>
+                        p.IdDeposito == idDepositoSeleccionado &&
+                        p.PalletCerrado == palletCerrado
+                    )
+                    .ToList();
 
-                // Sumar todas las cantidades de las posiciones
-                int cantidadEnStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
-                string posiciones = "";
-                foreach (var posicion in stockProducto.Posiciones)
+                if (!stockProducto.Any())
                 {
-                    posiciones = string.Join(", ", stockProducto.Posiciones.Select(p => p.Posicion));
+                    MessageBox.Show("No hay stock disponible con ese filtro.");
+                    return;
                 }
+
+                int cantidadEnStock = stockProducto.Sum(p => p.Cantidad);
+                string posiciones = string.Join(", ", stockProducto.Select(p => p.Posicion));
 
                 string Sku = producto.Sku;
                 int CantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
 
-                ListViewItem filaExistente = null;
-                foreach (ListViewItem item in ordenDePreparacionListView.Items)
+                if (CantidadARetirar > cantidadEnStock)
                 {
-                    if (item.Text == Sku)
-                    {
-                        filaExistente = item;
-                        break;
-                    }
+                    MessageBox.Show("No hay suficiente stock disponible.");
+                    return;
                 }
 
-                // Agregar prod a la lista
+                // Buscar si ya existe el producto en la lista
+                ListViewItem filaExistente = ordenDePreparacionListView.Items
+                    .Cast<ListViewItem>()
+                    .FirstOrDefault(item => item.Text == Sku);
+
+                // Agregar o actualizar fila en la lista
                 if (filaExistente != null)
                 {
-                    // Ya existe: sumamos las cantidades
                     int cantidadAnterior = int.Parse(filaExistente.SubItems[1].Text);
                     filaExistente.SubItems[1].Text = (cantidadAnterior + CantidadARetirar).ToString();
                 }
                 else
                 {
-                    // No existe: lo agregamos
-                    ListViewItem fila = ordenDePreparacionListView.Items.Add(Sku);
-                    fila.SubItems.Add(CantidadARetirar.ToString());
-                    fila.SubItems.Add(posiciones);
+                    filaExistente = ordenDePreparacionListView.Items.Add(Sku);
+                    filaExistente.SubItems.Add(CantidadARetirar.ToString());
+                    filaExistente.SubItems.Add(posiciones);
                 }
 
-
-                // Restar stock
+                // Restar stock y registrar de dónde se retiró
                 int cantidadRestante = CantidadARetirar;
-                foreach (var Posicion in stockProducto.Posiciones)
+                var posicionesUtilizadas = new List<(string posicion, int cantidad, bool pallet)>();
+
+                foreach (var Posicion in stockProducto
+                         .OrderByDescending(p => p.Cantidad))
                 {
                     if (cantidadRestante == 0) break;
 
                     int descontar = Math.Min(Posicion.Cantidad, cantidadRestante);
                     Posicion.Cantidad -= descontar;
                     cantidadRestante -= descontar;
+
+                    posicionesUtilizadas.Add((Posicion.Posicion, descontar, palletCerrado));
                 }
 
-                // Actualizar el textbox con el nuevo stock
-                int nuevoStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
+                // Guardar info en el Tag del item para poder reponer proporcionalmente
+                if (filaExistente.Tag is List<(string, int, bool)> existentes)
+                {
+                    existentes.AddRange(posicionesUtilizadas);
+                }
+                else
+                {
+                    filaExistente.Tag = posicionesUtilizadas;
+                }
+
+                // Actualizar el TextBox con el nuevo stock
+                int nuevoStock = stockProducto.Sum(p => p.Cantidad);
                 cantidadEnStockTextBox.Text = nuevoStock.ToString();
 
                 cantidadARetirarTextBox.Text = "";
-                depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
                 agregarProductoButton.Enabled = false;
+
+                // Activar/desactivar controles según la lógica
+                depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+                razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+                palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+                dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
             }
-
-            razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
-
-
-        }
-
-        private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            quitarProductoButton.Enabled = ordenDePreparacionListView.SelectedItems.Count > 0;
-            razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
         }
 
         private void quitarProductoButton_Click(object sender, EventArgs e)
@@ -368,62 +449,67 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 string sku = item.Text;
                 int cantidadARetirada = int.Parse(item.SubItems[1].Text);
 
-
-                // BUSCAR el producto original por SKU y sumar stock
+                // Buscar el producto que se está quitando
                 var producto = OrdenPreparacionModelo.Productos.FirstOrDefault(p => p.Sku == sku);
-                if (producto != null)
-                {
-                    // Buscar el stock físico del producto
-                    var stockProducto = StockFisicoAlmacen.Stock
-                        .FirstOrDefault(s => s.IdProducto == producto.IdProducto);
+                if (producto == null) continue;
 
-                    if (stockProducto != null)
+                // Seleccionar este producto en el ComboBox
+                productoComboBox.SelectedItem = productoComboBox.Items
+                    .Cast<ProductoEntidad>()
+                    .FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+
+                // Buscar el stock físico específico (cliente + producto)
+                var stockProducto = StockFisicoAlmacen.Stock
+                    .FirstOrDefault(s =>
+                        s.IdProducto == producto.IdProducto &&
+                        s.IdCliente == idClienteSeleccionado);
+
+                if (stockProducto != null)
+                {
+                    // Recuperar las posiciones originales desde el Tag del item
+                    if (item.Tag is List<(string posicion, int cantidad, bool palletCerrado)> posicionesUsadas)
                     {
-                        // Agregar nuevamente el stock a la primera posición (o distribuir si preferís)
-                        if (stockProducto.Posiciones.Count > 0)
+                        // Restaurar stock a las posiciones originales
+                        foreach (var (posicion, cantidad, palletCerradoUsado) in posicionesUsadas)
                         {
-                            stockProducto.Posiciones[0].Cantidad += cantidadARetirada;
+                            var posicionOriginal = stockProducto.Posiciones.FirstOrDefault(p =>
+                                p.Posicion == posicion &&
+                                p.PalletCerrado == palletCerradoUsado);
+
+                            if (posicionOriginal != null)
+                            {
+                                posicionOriginal.Cantidad += cantidad;
+                            }
                         }
                     }
 
-                    // Actualizar cantidadEnStockTextBox si el producto sigue seleccionado
-                    if (productoComboBox.SelectedItem is ProductoEntidad ProductoActual &&
-                        ProductoActual.Sku == sku)
-                    {
-                        int nuevoStock = stockProducto.Posiciones.Sum(p => p.Cantidad);
-                        cantidadEnStockTextBox.Text = nuevoStock.ToString();
-                    }
+                    // Calcular nuevo stock para mostrar
+                    var stockActual = stockProducto.Posiciones
+                        .Where(p =>
+                            p.IdDeposito == idDepositoSeleccionado &&
+                            p.PalletCerrado == palletCerrado)
+                        .Sum(p => p.Cantidad);
 
-                    // Eliminar de la lista
-                    ordenDePreparacionListView.Items.Remove(item);
+                    cantidadEnStockTextBox.Text = stockActual.ToString();
                 }
-            }
 
-            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
-            dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
-            cargarOrdenButton.Enabled = ordenDePreparacionListView.Items.Count > 0;
-
-
-            foreach (ListViewItem item in ordenDePreparacionListView.SelectedItems)
-            {
+                // Eliminar el item de la lista
                 ordenDePreparacionListView.Items.Remove(item);
-                string cantidad = item.SubItems[1].Text;
-                cantidadEnStockTextBox.Text = (int.Parse(cantidadEnStockTextBox.Text) + int.Parse(cantidad)).ToString();
-                if (ordenDePreparacionListView.Items.Count > 0)
-                {
-                    depositoComboBox.Enabled = true;
-                }
-                else
-                {
-                    depositoComboBox.Enabled = false;
-                }
             }
 
+            // Actualizar estados de controles
+            bool hayItems = ordenDePreparacionListView.Items.Count > 0;
+            depositoComboBox.Enabled = !hayItems;
+            dniTransportistaTextBox.Enabled = hayItems;
+            cargarOrdenButton.Enabled = hayItems;
+            razonSocialComboBox.Enabled = !hayItems;
+            palletCerradoComboBox.Enabled = !hayItems;
+        }
+        private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            quitarProductoButton.Enabled = ordenDePreparacionListView.SelectedItems.Count > 0;
             razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
-            depositoComboBox.SelectedIndex = -1;
-
+            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
         }
 
         private void cargarOrdenButton_Click(object sender, EventArgs e)
@@ -495,8 +581,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             dniTransportistaTextBox.Text = "";
             razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
-            idOrdenTextBox.Text = (GenerarIdOrden() - 1009).ToString();
+            depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             
             OrdenPreparacionAlmacen.GrabarOP();
             /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
@@ -544,58 +629,15 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 e.Handled = true;
             }
 
-        }
-
-
-
-
-
-        private void idOrdenTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void cuitTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void cantidadEnStockTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void skuTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void depositoComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            if (depositoComboBox.SelectedItem is DepositoEntidad deposito)
-            {
-                idDepositoSeleccionado = deposito.IdDeposito;
-            }
-
-            dniTransportistaTextBox.Enabled = depositoComboBox.SelectedIndex != -1;
-            if (dniTransportistaTextBox.Text.Length == 8 && depositoComboBox.SelectedIndex != -1)
+            if (dniTransportistaTextBox.Text.Length == 8)
             {
                 cargarOrdenButton.Enabled = true;
             }
+            else
+            {
+                cargarOrdenButton.Enabled = false;
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -629,6 +671,40 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
                 principalGeneralForm.Show();
             }
+        }
+
+
+        private void idOrdenTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void cuitTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+        private void cantidadEnStockTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void skuTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
