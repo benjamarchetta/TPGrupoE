@@ -8,7 +8,7 @@ namespace TPGrupoE.Almacenes
 {
     public enum EstadoOrdenSeleccion
     {
-        Pendiente,
-        Cumplida
+        Pendiente, 
+        Cumplida 
     }
 }

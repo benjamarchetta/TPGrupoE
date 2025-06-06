@@ -42,11 +42,11 @@
             OrdenesEmpaquetadasALiberarGroupBox.BackColor = SystemColors.Control;
             OrdenesEmpaquetadasALiberarGroupBox.Controls.Add(OrdenesEmpaquetadasListView);
             OrdenesEmpaquetadasALiberarGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            OrdenesEmpaquetadasALiberarGroupBox.Location = new Point(11, 11);
-            OrdenesEmpaquetadasALiberarGroupBox.Margin = new Padding(2);
+            OrdenesEmpaquetadasALiberarGroupBox.Location = new Point(10, 8);
+            OrdenesEmpaquetadasALiberarGroupBox.Margin = new Padding(2, 2, 2, 2);
             OrdenesEmpaquetadasALiberarGroupBox.Name = "OrdenesEmpaquetadasALiberarGroupBox";
-            OrdenesEmpaquetadasALiberarGroupBox.Padding = new Padding(2);
-            OrdenesEmpaquetadasALiberarGroupBox.Size = new Size(539, 453);
+            OrdenesEmpaquetadasALiberarGroupBox.Padding = new Padding(2, 2, 2, 2);
+            OrdenesEmpaquetadasALiberarGroupBox.Size = new Size(472, 340);
             OrdenesEmpaquetadasALiberarGroupBox.TabIndex = 9;
             OrdenesEmpaquetadasALiberarGroupBox.TabStop = false;
             OrdenesEmpaquetadasALiberarGroupBox.Text = "Mercaderías a liberar para despacho";
@@ -55,13 +55,13 @@
             // 
             OrdenesEmpaquetadasListView.BackColor = SystemColors.ControlLightLight;
             OrdenesEmpaquetadasListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, FechaEntrega });
-            OrdenesEmpaquetadasListView.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasListView.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             OrdenesEmpaquetadasListView.GridLines = true;
-            OrdenesEmpaquetadasListView.Location = new Point(12, 38);
-            OrdenesEmpaquetadasListView.Margin = new Padding(2);
+            OrdenesEmpaquetadasListView.Location = new Point(10, 28);
+            OrdenesEmpaquetadasListView.Margin = new Padding(2, 2, 2, 2);
             OrdenesEmpaquetadasListView.MultiSelect = false;
             OrdenesEmpaquetadasListView.Name = "OrdenesEmpaquetadasListView";
-            OrdenesEmpaquetadasListView.Size = new Size(511, 393);
+            OrdenesEmpaquetadasListView.Size = new Size(448, 296);
             OrdenesEmpaquetadasListView.TabIndex = 6;
             OrdenesEmpaquetadasListView.UseCompatibleStateImageBehavior = false;
             OrdenesEmpaquetadasListView.View = View.Details;
@@ -69,21 +69,20 @@
             // IdOrdenPreparacion
             // 
             IdOrdenPreparacion.Text = "N° Orden de Preparación";
-            IdOrdenPreparacion.Width = 250;
+            IdOrdenPreparacion.Width = 480;
             // 
             // FechaEntrega
             // 
             FechaEntrega.Text = "Fecha de entrega";
-            FechaEntrega.Width = 250;
+            FechaEntrega.Width = 460;
             // 
             // LiberarParaDespachoButton
             // 
             LiberarParaDespachoButton.BackColor = SystemColors.Highlight;
             LiberarParaDespachoButton.ForeColor = SystemColors.ActiveCaptionText;
-            LiberarParaDespachoButton.Location = new Point(290, 484);
-            LiberarParaDespachoButton.Margin = new Padding(3, 4, 3, 4);
+            LiberarParaDespachoButton.Location = new Point(254, 363);
             LiberarParaDespachoButton.Name = "LiberarParaDespachoButton";
-            LiberarParaDespachoButton.Size = new Size(260, 48);
+            LiberarParaDespachoButton.Size = new Size(228, 36);
             LiberarParaDespachoButton.TabIndex = 3;
             LiberarParaDespachoButton.Text = "Liberar para despacho";
             LiberarParaDespachoButton.UseVisualStyleBackColor = false;
@@ -91,9 +90,10 @@
             // 
             // VolverMenuPrincipalButton
             // 
-            VolverMenuPrincipalButton.Location = new Point(11, 484);
+            VolverMenuPrincipalButton.Location = new Point(10, 363);
+            VolverMenuPrincipalButton.Margin = new Padding(3, 2, 3, 2);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(260, 48);
+            VolverMenuPrincipalButton.Size = new Size(228, 36);
             VolverMenuPrincipalButton.TabIndex = 10;
             VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
@@ -101,13 +101,12 @@
             // 
             // CargarOrdenDeEntregaForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(564, 566);
+            ClientSize = new Size(494, 408);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(OrdenesEmpaquetadasALiberarGroupBox);
             Controls.Add(LiberarParaDespachoButton);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "CargarOrdenDeEntregaForm";
             Text = "Cargar Orden de Entrega";
             FormClosing += CargarOrdenEntregaForm_FormClosing;

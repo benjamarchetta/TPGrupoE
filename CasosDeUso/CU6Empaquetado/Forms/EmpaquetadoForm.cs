@@ -10,95 +10,232 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
-using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static TPGrupoE.CasosDeUso.CU6Empaquetado.Model.EmpaquetadoModel;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     public partial class EmpaquetadoForm : Form
     {
-        private void InitializeComponent()
-        {
-            MercaderiaAEmpaquetarGroupBox = new GroupBox();
-            listView1 = new System.Windows.Forms.ListView();
-            IdProducto = new ColumnHeader();
-            DescripcionProducto = new ColumnHeader();
-            CantidadAEmpaquetar = new ColumnHeader();
-            ConfirmarEmpaquetadoButton = new System.Windows.Forms.Button();
-            VolverMenuPrincipalButton = new System.Windows.Forms.Button();
-            MercaderiaAEmpaquetarGroupBox.SuspendLayout();
-            SuspendLayout();
-            // 
-            // MercaderiaAEmpaquetarGroupBox
-            // 
-            MercaderiaAEmpaquetarGroupBox.Controls.Add(listView1);
-            MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            MercaderiaAEmpaquetarGroupBox.Location = new Point(22, 25);
-            MercaderiaAEmpaquetarGroupBox.Name = "MercaderiaAEmpaquetarGroupBox";
-            MercaderiaAEmpaquetarGroupBox.Size = new Size(858, 419);
-            MercaderiaAEmpaquetarGroupBox.TabIndex = 0;
-            MercaderiaAEmpaquetarGroupBox.TabStop = false;
-            MercaderiaAEmpaquetarGroupBox.Text = "Mercadería a Empaquetar";
-            // 
-            // listView1
-            // 
-            listView1.Columns.AddRange(new ColumnHeader[] { IdProducto, DescripcionProducto, CantidadAEmpaquetar });
-            listView1.GridLines = true;
-            listView1.Location = new Point(17, 35);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(792, 360);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
-            // 
-            // IdProducto
-            // 
-            IdProducto.Text = "Id Producto";
-            IdProducto.Width = 120;
-            // 
-            // DescripcionProducto
-            // 
-            DescripcionProducto.Text = "Descripcion del producto";
-            DescripcionProducto.Width = 200;
-            // 
-            // CantidadAEmpaquetar
-            // 
-            CantidadAEmpaquetar.Text = "Cantidad a empaquetar";
-            CantidadAEmpaquetar.Width = 180;
-            // 
-            // ConfirmarEmpaquetadoButton
-            // 
-            ConfirmarEmpaquetadoButton.BackColor = SystemColors.Highlight;
-            ConfirmarEmpaquetadoButton.Location = new Point(461, 516);
-            ConfirmarEmpaquetadoButton.Name = "ConfirmarEmpaquetadoButton";
-            ConfirmarEmpaquetadoButton.Size = new Size(370, 48);
-            ConfirmarEmpaquetadoButton.TabIndex = 1;
-            ConfirmarEmpaquetadoButton.Text = "Confirmar Empaquetado";
-            ConfirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
-            // 
-            // VolverMenuPrincipalButton
-            // 
-            VolverMenuPrincipalButton.BackColor = Color.White;
-            VolverMenuPrincipalButton.Location = new Point(39, 516);
-            VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(381, 48);
-            VolverMenuPrincipalButton.TabIndex = 2;
-            VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
-            VolverMenuPrincipalButton.UseVisualStyleBackColor = false;
-            // 
-            // EmpaquetadoForm
-            // 
-            ClientSize = new Size(938, 804);
-            Controls.Add(VolverMenuPrincipalButton);
-            Controls.Add(ConfirmarEmpaquetadoButton);
-            Controls.Add(MercaderiaAEmpaquetarGroupBox);
-            Name = "EmpaquetadoForm";
-            Text = "Confirmar Empaquetado";
-            MercaderiaAEmpaquetarGroupBox.ResumeLayout(false);
-            ResumeLayout(false);
+        private EmpaquetadoModel _empaquetadoModel;
+        private OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar;
 
+        public EmpaquetadoForm()
+        {
+            InitializeComponent();
+            _empaquetadoModel = new EmpaquetadoModel();
         }
-    } 
+
+        private void EmpaquetadoForm_Load(object sender, EventArgs e)
+        {
+            PasarALaSiguienteOrden();
+        }
+
+        private void PasarALaSiguienteOrden()
+        {
+            List<OrdenDePreparacionAEmpaquetar> ordenes = _empaquetadoModel.OrdenesDePreparacionAEmpaquetar;
+            ordenDePreparacionAEmpaquetar = ordenes.FirstOrDefault();
+
+            if (ordenDePreparacionAEmpaquetar == null)
+            {
+                MessageBox.Show("No hay ordenes de preparacion para empaquetar");
+                MercaderiasALiberarParaDespachoListView.Items.Clear();
+                return;
+            }
+
+            NumeroOrdenPreparacionLabel.Text = ordenDePreparacionAEmpaquetar.IdOrdenPreparacion;
+
+            List<ProductoOP> productosOP = ordenDePreparacionAEmpaquetar.ProductosOP;
+
+            MercaderiasALiberarParaDespachoListView.Items.Clear();
+            foreach (var producto in productosOP)
+            {
+                var item = new ListViewItem(new[]
+                  {
+                        producto.Id.ToString(),
+                        producto.Descripcion,
+                        producto.Cantidad.ToString(),
+                    });
+
+                // Agregar el item al ListView
+                MercaderiasALiberarParaDespachoListView.Items.Add(item);
+            }
+        }
+
+        private void ConfirmarEmpaquetadoButton_Click(object sender, EventArgs e)
+        {
+            _empaquetadoModel.MarcarOrdenComoEmpaquetada(ordenDePreparacionAEmpaquetar);
+            PasarALaSiguienteOrden();
+        }
+
+        private void VolverAlMenuPrincipal()
+        {
+            // Solo oculta el formulario actual
+            this.Hide();
+
+            // Mostrar el formulario de menú principal
+            // Verifica si el formulario principal ya está abierto
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show(); // Muestra el formulario si está oculto
+                    return;
+                }
+            }
+
+            // Si no está abierto, crea una nueva instancia (solo si es necesario)
+            MenuPrincipalGeneralForm pantallaPrincipalForm = new MenuPrincipalGeneralForm();
+            pantallaPrincipalForm.Show();
+        }
+
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
+        {
+
+            VolverAlMenuPrincipal();
+        }
+
+
+
+        private void EmpaquetadoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
+
+        /*
+        public partial class GestionOrdenSeleccionForm : Form
+        {
+            private GestionOrdenSeleccionModel _gestionOrdenSeleccionModel;
+            public GestionOrdenSeleccionForm()
+            {
+                InitializeComponent();
+                _gestionOrdenSeleccionModel = new GestionOrdenSeleccionModel();
+            }
+
+            private void GestionOrdenSeleccionForm_Load(object sender, EventArgs e)
+            {
+                ActualizarOrdenesDeSeleccion();
+            }
+
+            private void ActualizarOrdenesDeSeleccion()
+            {
+                OrdenesSeleccionPendientesListView.Items.Clear();
+                List<OrdenSeleccion> ordenes = _gestionOrdenSeleccionModel.OrdenesDeSeleccion;
+
+                if (ordenes.Count == 0)
+                {
+                    MessageBox.Show("Actualmente no hay ordenes de seleccion pendientes.");
+                }
+
+                foreach (var orden in ordenes)
+                {
+                    var item = new ListViewItem(new[]
+                      {
+                        orden.Id.ToString(),
+                    });
+
+                    OrdenesSeleccionPendientesListView.Items.Add(item);
+                }
+            }
+            private void VerItemsButton_Click(object sender, EventArgs e)
+            {
+                ItemsASeleccionarListView.Items.Clear();
+                int idOrdenSeleccionada = ObtenerIdOrden();
+
+                if (idOrdenSeleccionada == -1)
+                {
+                    return;
+                }
+
+                List<Producto> productos = _gestionOrdenSeleccionModel.ObtenerProductosDeOrden(idOrdenSeleccionada);
+                foreach (var producto in productos)
+                {
+                    var item = new ListViewItem(new[]
+                      {
+                        producto.Ubicacion,
+                        producto.Cantidad.ToString(),
+                        producto.IdProducto,
+                        producto.DescripcionProducto,
+                    });
+
+                    ItemsASeleccionarListView.Items.Add(item);
+                }
+            }
+
+            private void ResetearFormulario()
+            {
+                ItemsASeleccionarListView.Items.Clear();
+            }
+
+            private int ObtenerIdOrden()
+            {
+                string idOrdenSeleccionada = "";
+
+                // Verificar si hay elementos seleccionados en el ListView
+                if (OrdenesSeleccionPendientesListView.SelectedItems.Count > 0)
+                {
+                    // Obtener el primer item seleccionado
+                    ListViewItem selectedItem = OrdenesSeleccionPendientesListView.SelectedItems[0];
+
+                    // Obtener el valor del ID (en este caso, asumimos que está en la primera columna)
+                    idOrdenSeleccionada = selectedItem.SubItems[0].Text;
+
+                }
+                else
+                {
+                    MessageBox.Show("No se ha seleccionado ninguna orden. Por favor seleccione una");
+                    return -1;
+                }
+
+                return int.Parse(idOrdenSeleccionada);
+            }
+
+            private void MarcarComoSeleccionadaButton_Click(object sender, EventArgs e)
+            {
+                int idOrdenSeleccionada = ObtenerIdOrden();
+
+                if (idOrdenSeleccionada == -1)
+                {
+                    return;
+                }
+
+                _gestionOrdenSeleccionModel.MarcarOrdenComoSeleccionada(idOrdenSeleccionada);
+                MessageBox.Show("Se seleccionó correctamente la orden de selección ID " + idOrdenSeleccionada);
+                ActualizarOrdenesDeSeleccion();
+                ResetearFormulario();
+            }
+
+            private void VolverAlMenu()
+            {
+                // Solo oculta el formulario actual
+                this.Hide();
+
+                // Mostrar el formulario de menú principal
+                // Verifica si el formulario principal ya está abierto
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form is PantallaPrincipalForm)
+                    {
+                        form.Show(); // Muestra el formulario si está oculto
+                        return;
+                    }
+                }
+
+                // Si no está abierto, crea una nueva instancia (solo si es necesario)
+                PantallaPrincipalForm pantallaPrincipalForm = new PantallaPrincipalForm();
+                pantallaPrincipalForm.Show();
+            }
+
+            private void VolverButton_Click(object sender, EventArgs e)
+            {
+                VolverAlMenu();
+            }
+
+            private void GestionOrdenSeleccionForm_FormClosing(object sender, FormClosingEventArgs e)
+            {
+                VolverAlMenu();
+            }
+        }*/
+    }
 }

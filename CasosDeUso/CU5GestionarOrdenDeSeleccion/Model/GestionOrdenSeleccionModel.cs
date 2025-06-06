@@ -7,36 +7,11 @@ using TPGrupoE.Almacenes;
 
 
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
-
 {
-    
     internal class GestionOrdenSeleccionModel
     {
-
         public List<OrdenPickingEntidad> OrdenesDeSeleccion { get; private set; }
-       
-        
-       /* 
-        public static List<OrdenPickingEntidad> Ordenes
-        {
-            get
-            {
-                var Ordenes = new List<OrdenPickingEntidad>();
-                foreach (var Orden in OrdenPickingAlmacen.OrdenesPicking)
-                {
-                    Ordenes.Add(new OrdenPickingEntidad
-                    {     
-                      
-                        IdOrdenSeleccion = Orden.IdOrdenSeleccion,
-                        EstadoOrdenSeleccion=Orden.EstadoOrdenSeleccion,
-                        IdOrdenPreparacion=Orden.IdOrdenPreparacion,
-                     
-                    });
-                }
-                return Ordenes;
-            }
-        }
-       */
+
         public GestionOrdenSeleccionModel()
         {
             OrdenPickingAlmacen.LeerOS();
@@ -49,7 +24,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 .ToList();
 
             // Mensaje para mostrar cuántas se cargaron
-            MessageBox.Show($"Se encontraron {OrdenesDeSeleccion.Count} órdenes de selección pendientes.");
+            // MessageBox.Show($"Se encontraron {OrdenesDeSeleccion.Count} órdenes de selección pendientes.");
         }
 
         // Devuelve el detalle de productos de una orden de selección
@@ -78,7 +53,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             if (ordenSeleccion == null) return;
 
-            // Cambiar estado a "Cumplida"
+            // Cambiar estado de la orden de selección a "Cumplida"
             ordenSeleccion.Estado = EstadoOrdenSeleccion.Cumplida;
 
             foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
@@ -86,10 +61,12 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
                 if (ordenPrep == null) continue;
 
+                // Cambiar estado de las órdenes de preparación a "Seleccionada"
                 ordenPrep.Estado = EstadoOrdenPreparacion.Seleccionada;
 
                 foreach (var producto in ordenPrep.ProductoOrden)
                 {
+                    // Descontar productos de stock según FIFO
                     StockFisicoAlmacen.DescontarProductoPorPosicion(
                         producto.IdProducto,
                         ordenPrep.IdCliente,
@@ -106,17 +83,10 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             OrdenPreparacionAlmacen.LeerOP();
             StockFisicoAlmacen.LeerStock();
 
-            // Actualizar lista de pendientes en memoria
+            // Actualizar lista de órdenes de selección pendientes
             OrdenesDeSeleccion = OrdenPickingAlmacen
                 .BuscarOrdenesPendientes()
-                
                 .ToList();
         }
     }
-
-
-
-
-
-
 }

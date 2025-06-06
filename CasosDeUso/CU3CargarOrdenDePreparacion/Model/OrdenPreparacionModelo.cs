@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
@@ -53,6 +54,51 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 });
             }
             return Productos;
+        }
+    }
+
+    public static List<StockFisicoEntidad> Stock
+    {
+        get
+        {
+            var StockFisico = new List<StockFisicoEntidad>();
+            foreach (var stockFisico in StockFisicoAlmacen.Stock)
+            {
+                StockFisico.Add(new StockFisicoEntidad
+                {
+                    IdCliente = stockFisico.IdCliente,
+                    IdProducto = stockFisico.IdProducto,
+                    PalletCerrado = stockFisico.PalletCerrado,
+                    Posiciones = stockFisico.Posiciones,
+                });
+            }
+            OrdenPreparacionAlmacen.LeerOP();
+            // Restar cantidades según las ordenes ya registradas
+            foreach (var orden in OrdenPreparacionAlmacen.OrdenesPreparacion)
+            {
+                foreach (var productoOrden in orden.ProductoOrden)
+                {
+                    var stockCliente = StockFisico.FirstOrDefault(s =>
+                        s.IdCliente == orden.IdCliente &&
+                        s.IdProducto == productoOrden.IdProducto);
+
+                    if (stockCliente == null) continue;
+
+                    int cantidadARestar = productoOrden.Cantidad;
+
+                    // Restar de las posiciones, de forma secuencial
+                    foreach (var pos in stockCliente.Posiciones)
+                    {
+                        if (cantidadARestar <= 0) break;
+
+                        int aDescontar = Math.Min(pos.Cantidad, cantidadARestar);
+                        pos.Cantidad -= aDescontar;
+                        cantidadARestar -= aDescontar;
+                    }
+                }
+            }
+
+            return StockFisico;
         }
     }
 

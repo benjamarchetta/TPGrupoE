@@ -33,14 +33,14 @@ namespace TPGrupoE.Almacenes
             stock = JsonSerializer.Deserialize<List<StockFisicoEntidad>>(datosStock)!;
         }
 
-        public static StockFisicoEntidad ObtenerStockPorId(int idProducto, int idCliente)
+        public static StockFisicoEntidad ObtenerStockPorId(int idProducto)
         {
-            return stock.FirstOrDefault(pc => pc.IdProducto == idProducto && pc.IdCliente == idCliente);
+            return stock.FirstOrDefault(pc => pc.IdProducto == idProducto);
         }
         /// Descuenta cantidad de producto desde sus posiciones (FIFO simple).
         public static void DescontarProductoPorPosicion(int idProducto, int idCliente, int cantidadADescontar)
         {
-            var stock = ObtenerStockPorId(idProducto, idCliente);
+            var stock = ObtenerStockPorId(idProducto);
             if (stock == null) return;
 
             int cantidadRestante = cantidadADescontar;
@@ -62,7 +62,7 @@ namespace TPGrupoE.Almacenes
 
         public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
         {
-            return stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
+            return Stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
         }
     }
 }

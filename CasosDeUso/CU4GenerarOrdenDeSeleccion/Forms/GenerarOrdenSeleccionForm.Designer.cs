@@ -43,7 +43,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            btnRestaurarEstado = new Button();
+            menubutton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -100,7 +100,7 @@
             // generarOrdenButton
             // 
             generarOrdenButton.Enabled = false;
-            generarOrdenButton.Location = new Point(604, 481);
+            generarOrdenButton.Location = new Point(414, 486);
             generarOrdenButton.Name = "generarOrdenButton";
             generarOrdenButton.Size = new Size(184, 23);
             generarOrdenButton.TabIndex = 4;
@@ -130,6 +130,7 @@
             // 
             // mercaderiasAPrepList
             // 
+            mercaderiasAPrepList.CheckBoxes = true;
             mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
             mercaderiasAPrepList.FullRowSelect = true;
             mercaderiasAPrepList.Location = new Point(12, 268);
@@ -159,22 +160,22 @@
             columnHeader5.Text = "CUIT Cliente";
             columnHeader5.Width = 195;
             // 
-            // btnRestaurarEstado
+            // menubutton
             // 
-            btnRestaurarEstado.Location = new Point(41, 500);
-            btnRestaurarEstado.Name = "btnRestaurarEstado";
-            btnRestaurarEstado.Size = new Size(75, 23);
-            btnRestaurarEstado.TabIndex = 10;
-            btnRestaurarEstado.Text = "Restaurar ";
-            btnRestaurarEstado.UseVisualStyleBackColor = true;
-            btnRestaurarEstado.Click += btnRestaurarEstado_Click;
+            menubutton.Location = new Point(604, 486);
+            menubutton.Name = "menubutton";
+            menubutton.Size = new Size(184, 23);
+            menubutton.TabIndex = 10;
+            menubutton.Text = "Volver al Menu Principal";
+            menubutton.UseVisualStyleBackColor = true;
+            menubutton.Click += menubutton_Click;
             // 
             // GenerarOrdenSeleccionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 533);
-            Controls.Add(btnRestaurarEstado);
+            Controls.Add(menubutton);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
             Controls.Add(label2);
@@ -206,6 +207,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private Button btnRestaurarEstado;
+        private Button menubutton;
     }
 }

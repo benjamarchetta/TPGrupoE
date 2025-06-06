@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
-//using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
@@ -14,30 +15,30 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
     {
         public List<OrdenDePreparacionAEmpaquetar> OrdenesDePreparacionAEmpaquetar { get; private set; }
 
-        private List<Producto> ProductosIniciales = new List<Producto>();
+        private List<ProductoOP> ProductosIniciales = new List<ProductoOP>();
 
         public EmpaquetadoModel()
         {
-            ProductosIniciales = new List<Producto>();
+            ProductosIniciales = new List<ProductoOP>();
             OrdenesDePreparacionAEmpaquetar = new List<OrdenDePreparacionAEmpaquetar>();
             var ordenesDePreparacionSeleccionadas = OrdenPreparacionAlmacen.BuscarOrdenesSeleccionadas();
 
             foreach (var ordenPreparacion in ordenesDePreparacionSeleccionadas)
             {
                 OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar = new OrdenDePreparacionAEmpaquetar();
-                //ordenDePreparacionAEmpaquetar.Producto = [];
-                //ordenDePreparacionAEmpaquetar.Id = ordenPreparacion.IdOrdenPreparacion.ToString();
+                ordenDePreparacionAEmpaquetar.ProductosOP = [];
+                ordenDePreparacionAEmpaquetar.IdOrdenPreparacion = ordenPreparacion.IdOrdenPreparacion.ToString();
 
                 foreach (var productoOrden in ordenPreparacion.ProductoOrden)
                 {
 
-                    //StockFisicoEntidad stock = StockFisicoAlmacen.ObtenerStockPorId(productoOrden.IdProducto);
+                    StockFisicoEntidad stock = StockFisicoAlmacen.ObtenerStockPorId(productoOrden.IdProducto);
                     ProductoEntidad producto = ProductoAlmacen.BuscarProductoPorId(productoOrden.IdProducto);
-                    //Producto productoAAgregar = new Producto();
-                    //productoAAgregar.IdProducto = stock.IdProducto.ToString();
-                    //productoAAgregar.Cantidad = productoOrden.Cantidad;
-                    //productoAAgregar.DescripcionProducto = producto.DescripcionProducto;
-                    //ordenDePreparacionAEmpaquetar.Productos.Add(productoAAgregar);
+                    ProductoOP productoAAgregar = new ProductoOP();
+                    productoAAgregar.Id = stock.IdProducto.ToString();
+                    productoAAgregar.Cantidad = productoOrden.Cantidad;
+                    productoAAgregar.Descripcion = producto.DescripcionProducto;
+                    ordenDePreparacionAEmpaquetar.ProductosOP.Add(productoAAgregar);
                 }
 
                 OrdenesDePreparacionAEmpaquetar.Add(ordenDePreparacionAEmpaquetar);
@@ -52,9 +53,9 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
                 return;
             }
 
-            //var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(int.Parse(orden.IdPreparacion));
+            var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(int.Parse(orden.IdOrdenPreparacion));
 
-            //ordenPreparacion.MarcarOpEmpaquetada();
+            ordenPreparacion.MarcarOpEmpaquetada();
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
         }
