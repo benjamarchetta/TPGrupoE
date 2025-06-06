@@ -68,7 +68,6 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 {
                     IdCliente = stockFisico.IdCliente,
                     IdProducto = stockFisico.IdProducto,
-                    PalletCerrado = stockFisico.PalletCerrado,
                     Posiciones = stockFisico.Posiciones,
                 });
             }
@@ -99,6 +98,26 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
             }
 
             return StockFisico;
+        }
+    }
+
+    public static List<DepositoEntidad> Depositos
+    {
+        get
+        {
+            DepositosAlmacen.LeerDeposito();
+            var depositos = new List<DepositoEntidad>();
+            foreach (var deposito in DepositosAlmacen.Depositos)
+            {
+                depositos.Add(new DepositoEntidad
+                {
+                    IdDeposito = deposito.IdDeposito,
+                    Domicilio = deposito.Domicilio,
+                    CapacidadEstimadaPallets = deposito.CapacidadEstimadaPallets,
+                });
+            }
+            return depositos;
+
         }
     }
 

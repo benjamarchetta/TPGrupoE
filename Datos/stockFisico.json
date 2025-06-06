@@ -1,392 +1,422 @@
 [
-    {
-        "IdCliente": 4,
-        "IdProducto": 1,
+  {
+    "IdCliente": 4,
+    "IdProducto": 1,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "16-41-2",
+        "PalletCerrado": true,
+        "Cantidad": 86
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "11-18-4",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "16-41-2",
-                "Cantidad": 86
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "11-18-4",
-                "Cantidad": 38
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "19-57-3",
-                "Cantidad": 85
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 2,
+        "Cantidad": 38
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "19-57-3",
         "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "17-54-3",
-                "Cantidad": 8
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "4-46-3",
-                "Cantidad": 87
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "1-53-4",
-                "Cantidad": 57
-            }
-        ]
-    },
-    {
-        "IdCliente": 2,
-        "IdProducto": 3,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "20-27-3",
-                "Cantidad": 41
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "4-38-4",
-                "Cantidad": 46
-            }
-        ]
-    },
-    {
-        "IdCliente": 2,
-        "IdProducto": 4,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "14-50-3",
-                "Cantidad": 41
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "4-41-4",
-                "Cantidad": 30
-            },
-            {
-                "IdDeposito": 4,
-                "Posicion": "13-25-3",
-                "Cantidad": 77
-            }
-        ]
-    },
-    {
-        "IdCliente": 1,
-        "IdProducto": 5,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "14-11-1",
-                "Cantidad": 51
-            }
-        ]
-    },
-    {
-        "IdCliente": 4,
-        "IdProducto": 6,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "1-41-4",
-                "Cantidad": 75
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "18-27-3",
-                "Cantidad": 33
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 7,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "1-39-4",
-                "Cantidad": 20
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "12-56-5",
-                "Cantidad": 30
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "4-35-1",
-                "Cantidad": 16
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 8,
+        "Cantidad": 85
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 2,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "17-54-3",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 1,
-                "Posicion": "1-58-2",
-                "Cantidad": 83
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "7-8-1",
-                "Cantidad": 91
-            },
-            {
-                "IdDeposito": 4,
-                "Posicion": "3-24-2",
-                "Cantidad": 43
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 9,
+        "Cantidad": 8
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "4-46-3",
         "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "19-59-5",
-                "Cantidad": 73
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "6-26-5",
-                "Cantidad": 96
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "4-55-4",
-                "Cantidad": 82
-            }
-        ]
-    },
-    {
-        "IdCliente": 4,
-        "IdProducto": 10,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 2,
-                "Posicion": "6-7-3",
-                "Cantidad": 95
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "10-13-2",
-                "Cantidad": 67
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 11,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 1,
-                "Posicion": "2-36-2",
-                "Cantidad": 32
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "20-49-5",
-                "Cantidad": 67
-            }
-        ]
-    },
-    {
-        "IdCliente": 4,
-        "IdProducto": 12,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 2,
-                "Posicion": "12-29-3",
-                "Cantidad": 100
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "13-53-5",
-                "Cantidad": 15
-            }
-        ]
-    },
-    {
-        "IdCliente": 4,
-        "IdProducto": 13,
+        "Cantidad": 87
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "1-53-4",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "14-7-3",
-                "Cantidad": 17
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "4-33-5",
-                "Cantidad": 43
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 14,
+        "Cantidad": 57
+      }
+    ]
+  },
+  {
+    "IdCliente": 2,
+    "IdProducto": 3,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "20-27-3",
         "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "17-46-2",
-                "Cantidad": 91
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "7-2-3",
-                "Cantidad": 7
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "1-55-5",
-                "Cantidad": 12
-            }
-        ]
-    },
-    {
-        "IdCliente": 2,
-        "IdProducto": 15,
+        "Cantidad": 41
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "4-38-4",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "14-19-4",
-                "Cantidad": 18
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "4-57-3",
-                "Cantidad": 95
-            },
-            {
-                "IdDeposito": 4,
-                "Posicion": "3-28-5",
-                "Cantidad": 32
-            }
-        ]
-    },
-    {
-        "IdCliente": 3,
-        "IdProducto": 16,
-        "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "16-50-5",
-                "Cantidad": 51
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "1-6-1",
-                "Cantidad": 32
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "11-2-1",
-                "Cantidad": 34
-            }
-        ]
-    },
-    {
-        "IdCliente": 1,
-        "IdProducto": 17,
+        "Cantidad": 46
+      }
+    ]
+  },
+  {
+    "IdCliente": 2,
+    "IdProducto": 4,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "14-50-3",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 1,
-                "Posicion": "18-19-3",
-                "Cantidad": 48
-            },
-            {
-                "IdDeposito": 2,
-                "Posicion": "1-48-1",
-                "Cantidad": 33
-            }
-        ]
-    },
-    {
-        "IdCliente": 2,
-        "IdProducto": 18,
+        "Cantidad": 41
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "4-41-4",
         "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 4,
-                "Posicion": "20-56-5",
-                "Cantidad": 13
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "2-1-2",
-                "Cantidad": 23
-            },
-            {
-                "IdDeposito": 1,
-                "Posicion": "3-8-3",
-                "Cantidad": 69
-            }
-        ]
-    },
-    {
-        "IdCliente": 1,
-        "IdProducto": 19,
+        "Cantidad": 30
+      },
+      {
+        "IdDeposito": 4,
+        "Posicion": "13-25-3",
+        "PalletCerrado": true,
+        "Cantidad": 77
+      }
+    ]
+  },
+  {
+    "IdCliente": 1,
+    "IdProducto": 5,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "14-11-1",
         "PalletCerrado": false,
-        "Posiciones": [
-            {
-                "IdDeposito": 3,
-                "Posicion": "14-31-1",
-                "Cantidad": 35
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "4-4-2",
-                "Cantidad": 72
-            }
-        ]
-    },
-    {
-        "IdCliente": 2,
-        "IdProducto": 20,
+        "Cantidad": 51
+      }
+    ]
+  },
+  {
+    "IdCliente": 4,
+    "IdProducto": 6,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "1-41-4",
         "PalletCerrado": true,
-        "Posiciones": [
-            {
-                "IdDeposito": 2,
-                "Posicion": "11-8-1",
-                "Cantidad": 48
-            },
-            {
-                "IdDeposito": 4,
-                "Posicion": "7-57-4",
-                "Cantidad": 81
-            },
-            {
-                "IdDeposito": 3,
-                "Posicion": "15-22-1",
-                "Cantidad": 35
-            }
-        ]
-    }
+        "Cantidad": 75
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "18-27-3",
+        "PalletCerrado": false,
+        "Cantidad": 33
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 7,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "1-39-4",
+        "PalletCerrado": true,
+        "Cantidad": 20
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "12-56-5",
+        "PalletCerrado": false,
+        "Cantidad": 30
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "4-35-1",
+        "PalletCerrado": true,
+        "Cantidad": 16
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 8,
+    "Posiciones": [
+      {
+        "IdDeposito": 1,
+        "Posicion": "1-58-2",
+        "PalletCerrado": false,
+        "Cantidad": 83
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "7-8-1",
+        "PalletCerrado": true,
+        "Cantidad": 91
+      },
+      {
+        "IdDeposito": 4,
+        "Posicion": "3-24-2",
+        "PalletCerrado": false,
+        "Cantidad": 43
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 9,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "19-59-5",
+        "PalletCerrado": true,
+        "Cantidad": 73
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "6-26-5",
+        "PalletCerrado": false,
+        "Cantidad": 96
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "4-55-4",
+        "PalletCerrado": true,
+        "Cantidad": 82
+      }
+    ]
+  },
+  {
+    "IdCliente": 4,
+    "IdProducto": 10,
+    "Posiciones": [
+      {
+        "IdDeposito": 2,
+        "Posicion": "6-7-3",
+        "PalletCerrado": false,
+        "Cantidad": 95
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "10-13-2",
+        "PalletCerrado": true,
+        "Cantidad": 67
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 11,
+    "Posiciones": [
+      {
+        "IdDeposito": 1,
+        "Posicion": "2-36-2",
+        "PalletCerrado": true,
+        "Cantidad": 32
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "20-49-5",
+        "PalletCerrado": false,
+        "Cantidad": 67
+      }
+    ]
+  },
+  {
+    "IdCliente": 4,
+    "IdProducto": 12,
+    "Posiciones": [
+      {
+        "IdDeposito": 2,
+        "Posicion": "12-29-3",
+        "PalletCerrado": false,
+        "Cantidad": 100
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "13-53-5",
+        "PalletCerrado": true,
+        "Cantidad": 15
+      }
+    ]
+  },
+  {
+    "IdCliente": 4,
+    "IdProducto": 13,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "14-7-3",
+        "PalletCerrado": true,
+        "Cantidad": 17
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "4-33-5",
+        "PalletCerrado": false,
+        "Cantidad": 43
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 14,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "17-46-2",
+        "PalletCerrado": false,
+        "Cantidad": 91
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "7-2-3",
+        "PalletCerrado": true,
+        "Cantidad": 7
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "1-55-5",
+        "PalletCerrado": false,
+        "Cantidad": 12
+      }
+    ]
+  },
+  {
+    "IdCliente": 2,
+    "IdProducto": 15,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "14-19-4",
+        "PalletCerrado": true,
+        "Cantidad": 18
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "4-57-3",
+        "PalletCerrado": false,
+        "Cantidad": 95
+      },
+      {
+        "IdDeposito": 4,
+        "Posicion": "3-28-5",
+        "PalletCerrado": true,
+        "Cantidad": 32
+      }
+    ]
+  },
+  {
+    "IdCliente": 3,
+    "IdProducto": 16,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "16-50-5",
+        "PalletCerrado": false,
+        "Cantidad": 51
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "1-6-1",
+        "PalletCerrado": true,
+        "Cantidad": 32
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "11-2-1",
+        "PalletCerrado": false,
+        "Cantidad": 34
+      }
+    ]
+  },
+  {
+    "IdCliente": 1,
+    "IdProducto": 17,
+    "Posiciones": [
+      {
+        "IdDeposito": 1,
+        "Posicion": "18-19-3",
+        "PalletCerrado": true,
+        "Cantidad": 48
+      },
+      {
+        "IdDeposito": 2,
+        "Posicion": "1-48-1",
+        "PalletCerrado": false,
+        "Cantidad": 33
+      }
+    ]
+  },
+  {
+    "IdCliente": 2,
+    "IdProducto": 18,
+    "Posiciones": [
+      {
+        "IdDeposito": 4,
+        "Posicion": "20-56-5",
+        "PalletCerrado": false,
+        "Cantidad": 13
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "2-1-2",
+        "PalletCerrado": true,
+        "Cantidad": 23
+      },
+      {
+        "IdDeposito": 1,
+        "Posicion": "3-8-3",
+        "PalletCerrado": false,
+        "Cantidad": 69
+      }
+    ]
+  },
+  {
+    "IdCliente": 1,
+    "IdProducto": 19,
+    "Posiciones": [
+      {
+        "IdDeposito": 3,
+        "Posicion": "14-31-1",
+        "PalletCerrado": true,
+        "Cantidad": 35
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "4-4-2",
+        "PalletCerrado": false,
+        "Cantidad": 72
+      }
+    ]
+  },
+  {
+    "IdCliente": 2,
+    "IdProducto": 20,
+    "Posiciones": [
+      {
+        "IdDeposito": 2,
+        "Posicion": "11-8-1",
+        "PalletCerrado": false,
+        "Cantidad": 48
+      },
+      {
+        "IdDeposito": 4,
+        "Posicion": "7-57-4",
+        "PalletCerrado": true,
+        "Cantidad": 81
+      },
+      {
+        "IdDeposito": 3,
+        "Posicion": "15-22-1",
+        "PalletCerrado": true,
+        "Cantidad": 35
+      }
+    ]
+  }
 ]
