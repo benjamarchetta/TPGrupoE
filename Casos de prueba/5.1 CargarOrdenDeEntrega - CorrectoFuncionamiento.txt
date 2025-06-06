@@ -1,0 +1,11 @@
+﻿Caso: Cargar orden de entrega correctamente
+
+1- Presionar el boton "Cargar orden de entrega" del menú principal.
+2- Presionar el botón "Liberar para despacho"
+3- Presionar el botón "Aceptar" de la ventana de Éxito: "Se registro correctamente la orden de entrega"
+4- Presionar el botón "Aceptar" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
+5- Cerrar el sistema presionando la "X"
+
+Verificaciones:
+
+

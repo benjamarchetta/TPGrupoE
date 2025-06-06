@@ -1,0 +1,33 @@
+Caso: Cargar orden de Preparacion con un solo producto.
+
+1- Presionar el boton "Cargar Orden de Preparacion" del menú principal.
+2- Presionar el calendario y seleccionar la fecha del día de hoy.
+3- Presionar el desplegable de pallet cerrado y seleccionar "No"
+4- Presionar el desplegable de Razon social del cliente y seleccionar la opcion "Electro Hogar S.R.L"
+5- Presionar el desplegable Depósito a retirar y seleccionar "Ruta Nacional 9, km 1283, San Miguel de Tucumán"
+6- Presionar el desplegable de Producto y seleccionar "Rollos de film stretch para embajale industrial"
+7- Ingresar cantidad de productos a retirar "15"
+8- Presionar el boton "Agregar producto a órden de preparacion"
+9- Ingresar el DNI de transportista "79456123"
+10- Presionar el boton "Cargar órden de preparación"
+11- Presionar el boton "Aceptar" de la ventana llamada Éxito: "Orden de preparación cargada correctamente"
+12- Cerrar el sistema presionando la "X"
+
+Verificaciones:
+13- En el Archivo ordenesPreparacion.json la ultima linea debe ser:
+{
+  "IdOrdenPreparacion": xxxx,
+  "IdDeposito": 4,
+  "IdCliente": 4,
+  "DniTransportista": 79456123,
+  "Estado": 0,
+  "FechaEntrega": "xxxxxx",
+  "PalletCerrado": false,
+  "ProductoOrden": [
+    {
+      "IdProducto": 4,
+      "Cantidad": 15,
+      "PalletCerrado": false
+    }
+  ]
+}
