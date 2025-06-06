@@ -20,6 +20,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             CargarDatosIniciales();
             VerDetallesButton.Click += VerDetallesButton_Click;
             confirmarSeleccionButton.Click += confirmarSeleccionButton_Click;
+            cancelarSeleccionButton.Click += cancelarSeleccionButton_Click;
         }
 
         private void ConfigurarControles()
@@ -39,7 +40,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             detalleProductosListView.FullRowSelect = true;
             detalleProductosListView.MultiSelect = false;
             detalleProductosListView.Columns.Add("SKU", 100);
-            detalleProductosListView.Columns.Add("Tipo", 100);
+            detalleProductosListView.Columns.Add("Descripción", 100);
             detalleProductosListView.Columns.Add("Cantidad", 100);
             detalleProductosListView.Columns.Add("Pallet Cerrado", 120);
             detalleProductosListView.Columns.Add("Ubicación", 100);
@@ -104,6 +105,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             BeginInvoke((MethodInvoker)delegate
             {
                 VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0;
+                cancelarSeleccionButton.Enabled = ordenesListView.CheckedItems.Count > 0; // Habilitar el botón cancelar
             });
         }
 
@@ -125,13 +127,11 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                     // Obtener el SKU del producto desde el almacén de productos
                     var productoEntidad = ProductoAlmacen.BuscarProductoPorId(p.IdProducto);  // Buscar el producto por ID
                     string sku = productoEntidad != null ? productoEntidad.Sku : "No disponible"; // Obtener el SKU
+                    string descripcion = productoEntidad != null ? productoEntidad.DescripcionProducto : "Sin descripción";
 
                     var fila = new ListViewItem(sku); // Agregar SKU
-                    fila.SubItems.Add("N/D"); // Tipo (Este campo debe ser modificado si tienes un campo `Tipo` en `ProductoOrden`)
-
-                    // Si no tienes un campo `Tipo` en `ProductoOrden`, podrías agregar algo como esto:
-                    // fila.SubItems.Add(p.Tipo); // Si tu modelo tiene un campo 'Tipo', descomenta esta línea
-
+                    fila.SubItems.Add(descripcion); // Agregar Descripción (de ProductoEntidad)
+                  
                     fila.SubItems.Add(p.Cantidad.ToString()); // Cantidad
                     fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No"); // Pallet Cerrado
 
@@ -144,6 +144,8 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             }
 
             confirmarSeleccionButton.Enabled = true;
+            cancelarSeleccionButton.Enabled = true;
+
         }
 
         // Función para obtener la ubicación de un producto desde el stock
@@ -153,9 +155,9 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             if (stock != null && stock.Posiciones.Count > 0)
             {
                 // Unir las posiciones disponibles por ", " si el producto tiene más de una
-                return string.Join(", ", stock.Posiciones.Select(p => p.Posicion));
+                return string.Join(", ", stock.Posiciones.Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
             }
-            return "Sin ubicación"; // Si no hay ubicación disponible
+            return "Sin ubicación"; // Si no hay ubicaciones
         }
         private void confirmarSeleccionButton_Click(object sender, EventArgs e)
         {
@@ -222,6 +224,27 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             menuForm.Show(); // Abre el menú principal
             this.Close(); // Cierra el formulario actual
         }
+
+
+        private void cancelarSeleccionButton_Click(object sender, EventArgs e)
+        {
+            // Deseleccionar todos los ítems en ordenesListView
+            foreach (ListViewItem item in ordenesListView.CheckedItems)
+            {
+                item.Checked = false;  // Desmarcar la orden seleccionada
+            }
+
+            // Limpiar el detalle de productos en el ListView
+            detalleProductosListView.Items.Clear();
+
+            // Deshabilitar el botón "Confirmar selección" y "Cancelar selección"
+            confirmarSeleccionButton.Enabled = false;
+            cancelarSeleccionButton.Enabled = false;
+
+            // Habilitar el botón "Ver Detalles" si se ha desmarcado alguna orden
+            VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0; // Solo habilitar si hay alguna orden seleccionada
+        }
+
     }
 
 
