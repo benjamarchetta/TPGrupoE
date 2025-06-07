@@ -34,7 +34,7 @@ Verificaciones:
 }
 
 15- En el Archivo "ordenesPreparacion.json" se actualiza la línea correspondiente a las órden de preparación
-1001:
+1001, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
 
 {
  "IdOrdenPreparacion": 1001,
