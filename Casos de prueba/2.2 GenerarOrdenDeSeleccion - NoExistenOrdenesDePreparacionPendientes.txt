@@ -1,0 +1,11 @@
+﻿Caso: Generar orden de selección - No existen órdenes de preparación pendientes
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el botón "Generar Órden de Selección"
+2- Se muestra la ventana de "Aviso: No hay ordenes de preparación pendientes"
+3- Presionar el botón "Aceptar" de la ventana de "Aviso"
+4- Presionar el botón "Volver al menú principal"
+5- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
