@@ -1,4 +1,5 @@
-﻿Caso: Cargar orden de entrega para liberar productos empaquetados hacia despacho, pero no existen OP en estado "Empaquetada"
+﻿Caso: Cargar orden de entrega para liberar productos empaquetados hacia despacho,
+pero no existen OP en estado "Empaquetada"
 
 (Empieza con la pantalla "Menú principal")
 

@@ -1,0 +1,13 @@
+﻿Caso: Emitir remito para despachar productos preparados
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Emitir remito"
+2- Presionar el desplegable de "Transportistas con Ordenes a Despachar" y seleccionar "DNI: 30111226"
+3- Presionar el desplegable de "Cliente" y seleccionar "Electro Hogar S.R.L."
+4- Presionar el botón "Buscar productos para despachar"
+5- Presionar el botón "Aceptar" de la ventana de Aviso: "No hay ninguna orden para despachar el día de hoy"
+6- Presionar el botón "Volver al menú principal"
+7- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)

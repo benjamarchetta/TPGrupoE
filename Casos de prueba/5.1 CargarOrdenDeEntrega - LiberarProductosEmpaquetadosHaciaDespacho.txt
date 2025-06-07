@@ -14,16 +14,16 @@
 (Termina cerrando el programa)
 
 Verificaciones:
-9- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaEmision
+9- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
 se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
   {
     "IdOrdenEntrega": xxxx,
     "Estado": 0,
-    "FechaEmision": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
     "IdOrdenPreparacion": [
       1008, 1009
     ]
-  },
+  }
 
 10- En el Archivo "ordenesPreparacion.json" se actualizan las líneas correspondientes a las órdenes de preparación
 1008 y 1009, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
