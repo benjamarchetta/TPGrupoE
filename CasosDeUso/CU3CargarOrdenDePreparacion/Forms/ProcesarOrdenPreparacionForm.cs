@@ -436,7 +436,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 // Buscar si ya existe el producto en la lista
                 ListViewItem filaExistente = ordenDePreparacionListView.Items
                     .Cast<ListViewItem>()
-                    .FirstOrDefault(item => item.Text == Sku);
+                    .FirstOrDefault(item => item.Text == Sku)!;
 
                 // Agregar o actualizar fila en la lista
                 if (filaExistente != null)
@@ -584,6 +584,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 ProductoOrden productoOrden = new ProductoOrden
                 {
                     IdProducto = idClienteSeleccionado,
+                    IdDeposito = idDepositoSeleccionado,
+                    IdCliente = idClienteSeleccionado,
                     Cantidad = cantidad,
                     PalletCerrado = pallet,
                 };
