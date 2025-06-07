@@ -1,0 +1,48 @@
+﻿Caso: Confirmar empaquetado de una órden de preparación (OP) seleccionada
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Empaquetar"
+2- Presionar el botón "Confirmar Empaquetado" del "N° Orden de Preparacion: 1002"
+3- Presionar el botón "Confirmar Empaquetado" del "N° Orden de Preparacion: 1007". Se muestra la ventana de 
+"Aviso: No hay ordenes de preparación para empaquetar"
+3- Presionar el botón "Aceptar" de la ventana de "Aviso"
+4- Presionar el botón "Volver al menú principal"
+5- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
+
+Verificaciones:
+6- En el Archivo "ordenesPreparacion.json" se actualizan las líneas correspondientes a las órdenes de preparación
+1002 y 1007:
+
+"IdOrdenPreparacion": 1002,
+"IdDeposito": 1,
+"IdCliente": 2,
+"DniTransportista": 30111223,
+"Estado": 3,
+"FechaEntrega": "2025-06-11T14:18:16.6600073-03:00",
+"PalletCerrado": true,
+"ProductoOrden": [
+    {
+    "IdProducto": 18,
+    "Cantidad": 40,
+    "PalletCerrado": true
+    }
+
+[...]
+
+"IdOrdenPreparacion": 1007,
+"IdDeposito": 1,
+"IdCliente": 3,
+"DniTransportista": 30111228,
+"Estado": 3,
+"FechaEntrega": "2025-06-16T14:18:16.6600073-03:00",
+"PalletCerrado": false,
+"ProductoOrden": [
+    {
+    "IdProducto": 8,
+    "Cantidad": 50,
+    "PalletCerrado": false
+    }
+]

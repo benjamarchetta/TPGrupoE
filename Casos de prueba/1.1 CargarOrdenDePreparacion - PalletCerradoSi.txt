@@ -4,9 +4,9 @@ Caso: Cargar una órden de Preparacion (OP) de pallet cerrado.
 
 1- Presionar el boton "Cargar Órden de Preparación".
 2- Presionar el filtro de calendario "Fecha de despacho de orden" y seleccionar la fecha del día de hoy.
-3- Presionar el desplegable de "Pallet Cerrado" y seleccionar "Si"
-4- Presionar el desplegable de "Razon social del cliente" y seleccionar la opcion "Electro Hogar S.R.L"
-5- Presionar el desplegable "Depósito a retirar "y seleccionar "Av. Circunvalación y Ovidio Lagos, Rosario, Santa Fe"
+3- Presionar el desplegable de "Razon social del cliente" y seleccionar la opcion "Electro Hogar S.R.L"
+4- Presionar el desplegable de "Pallet Cerrado" y seleccionar "Si"
+5- Presionar el desplegable "Depósito a retirar" y seleccionar "Av. Circunvalación y Ovidio Lagos, Rosario, Santa Fe"
 6- Presionar el desplegable de Producto y seleccionar "Estanterías metálicas para depósitos (desarmadas)"
 7- Ingresar en el campo "Cantidad de pallets a retirar" el número "100"
 8- Presionar el botón "Agregar producto a órden de preparacion"
