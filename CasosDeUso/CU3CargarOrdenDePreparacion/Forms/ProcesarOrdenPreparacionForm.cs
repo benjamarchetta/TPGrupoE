@@ -107,6 +107,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 // Asegurarse de que productoComboBox esté deshabilitado inicialmente
                 productoComboBox.DataSource = null;
                 productoComboBox.Enabled = false;
+                ActualizarDepositosYProductos();
 
                 /*
                 var productosDelCliente = OrdenPreparacionModelo.Stock
@@ -185,9 +186,48 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 cuitTextBox.Text = cliente.Cuit;
                 palletCerradoComboBox.Enabled = (razonSocialComboBox.SelectedIndex != -1);
+                ActualizarDepositosYProductos();
             }
 
         }
+
+        private void ActualizarDepositosYProductos()
+{
+            if (palletCerrado)
+            {
+                palletCerradoComboBox.SelectedIndex = 1;
+            }
+            else
+            {
+                palletCerradoComboBox.SelectedIndex = 0;
+            }
+    if (razonSocialComboBox.SelectedItem is ClienteEntidad Cliente)
+            {
+                idClienteSeleccionado = Cliente.IdCliente;
+
+                var depositosFiltrados = OrdenPreparacionModelo.Stock
+                    .Where(s => s.IdCliente == Cliente.IdCliente)
+                    .SelectMany(s => s.Posiciones)
+                    .Where(p => p.PalletCerrado == palletCerrado)
+                    .Select(p => p.IdDeposito)
+                    .Distinct()
+                    .ToList();
+
+                var depositosAMostrar = OrdenPreparacionModelo.Depositos
+                    .Where(d => depositosFiltrados.Contains(d.IdDeposito))
+                    .ToList();
+
+                depositoComboBox.DataSource = depositosAMostrar;
+                depositoComboBox.DisplayMember = "Domicilio";
+                depositoComboBox.ValueMember = "IdDeposito";
+                depositoComboBox.SelectedIndex = -1;
+                depositoComboBox.Enabled = true;
+
+                productoComboBox.DataSource = null;
+                productoComboBox.Enabled = false;
+            }
+}
+
 
         private void depositoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
