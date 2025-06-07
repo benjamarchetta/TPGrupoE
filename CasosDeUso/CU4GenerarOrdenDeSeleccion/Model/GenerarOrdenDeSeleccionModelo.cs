@@ -25,7 +25,6 @@ internal class GenerarOrdenDeSeleccionModelo
     {
         if (!clientesCargados)
         {
-            ClienteAlmacen.LeerCliente();
             clientesCargados = true;
         }
     }

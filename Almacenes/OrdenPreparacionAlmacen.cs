@@ -21,7 +21,7 @@ namespace TPGrupoE.Almacenes
         }
         
 
-        public static void LeerOP()
+        static OrdenPreparacionAlmacen()
         {
             
              if (!File.Exists(@"Datos\ordenesPreparacion.json"))

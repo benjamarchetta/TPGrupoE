@@ -19,7 +19,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\depositos.json", datosDeposito);
         }
 
-        public static void LeerDeposito()
+        static DepositosAlmacen()
         {
             if (!File.Exists(@"Datos\depositos.json"))
             {

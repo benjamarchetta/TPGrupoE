@@ -14,10 +14,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 
         public GestionOrdenSeleccionModel()
         {
-            OrdenPickingAlmacen.LeerOS();
-            OrdenPreparacionAlmacen.LeerOP();
-            StockFisicoAlmacen.LeerStock();
-
             // Filtra órdenes de selección pendientes
             OrdenesDeSeleccion = OrdenPickingAlmacen
                 .BuscarOrdenesPendientes()
@@ -80,8 +76,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             StockFisicoAlmacen.GrabarStock();
 
             // Volver a leer los datos actualizados
-            OrdenPreparacionAlmacen.LeerOP();
-            StockFisicoAlmacen.LeerStock();
 
             // Actualizar lista de órdenes de selección pendientes
             OrdenesDeSeleccion = OrdenPickingAlmacen

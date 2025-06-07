@@ -32,7 +32,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
-            ClienteAlmacen.LeerCliente();
             groupBox1.SendToBack();
             id = GenerarIdOrden() - 1009;
             palletCerradoComboBox.SelectedIndex = -1;

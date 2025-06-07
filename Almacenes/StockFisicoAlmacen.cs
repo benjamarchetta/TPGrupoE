@@ -22,7 +22,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\stockFisico.json", datosStock);
         }
 
-        public static void LeerStock()
+        static StockFisicoAlmacen()
         {
             if (!File.Exists(@"Datos\stockFisico.json"))
             {

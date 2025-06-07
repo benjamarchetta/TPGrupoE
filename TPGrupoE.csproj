@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CasosDeUso\CU2MenuPrincipal\Model\**" />
+    <EmbeddedResource Remove="CasosDeUso\CU2MenuPrincipal\Model\**" />
+    <None Remove="CasosDeUso\CU2MenuPrincipal\Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -24,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CasosDeUso\CU2MenuPrincipal\Model\" />
     <Folder Include="CasosDeUso\CU5GestionarOrdenDeSeleccion\Model\" />
     <Folder Include="Datos\" />
   </ItemGroup>

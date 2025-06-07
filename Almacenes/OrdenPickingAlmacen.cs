@@ -24,7 +24,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\ordenPicking.json", datosOS);
         }
 
-        public static void LeerOS()
+        static OrdenPickingAlmacen()
         {
             if (!File.Exists(@"Datos\ordenPicking.json"))
             {

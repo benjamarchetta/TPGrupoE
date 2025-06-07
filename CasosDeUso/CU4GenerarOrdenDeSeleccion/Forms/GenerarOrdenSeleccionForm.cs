@@ -31,8 +31,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
 
         private void GenerarOrdenSeleccionForm_Load(object sender, EventArgs e)
         {
-
-            OrdenPreparacionAlmacen.LeerOP();
             CargarOrdenesPendientes();
             HabilitarBotones();
         }
@@ -42,8 +40,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                // Cargar datos del archivo
-                OrdenPreparacionAlmacen.LeerOP();
                 var ordenesPendientes = GenerarOrdenDeSeleccionModelo.BuscarOrdenesPendientes();
 
                 //DEBUG: Verificar cuántas órdenes se cargaron en total
@@ -227,8 +223,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                OrdenPreparacionAlmacen.LeerOP(); // Recargar desde archivo
-
                 // 1. Validar que haya mercaderías para confirmar
                 if (mercaderiasAPrepList.Items.Count == 0)
                 {
@@ -272,7 +266,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 }
 
                 // 4. Guardar la nueva Orden de Picking
-                OrdenPickingAlmacen.LeerOS(); // Leer existentes
                 OrdenPickingAlmacen.NuevaOS(nuevaOrdenPicking); // Agregar nueva
                 OrdenPickingAlmacen.GrabarOS(); // Guardar en JSON
 
@@ -307,8 +300,6 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                // Leer todas las órdenes
-                OrdenPreparacionAlmacen.LeerOP();
                 var todasLasOrdenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
 
                 // Cambiar todas las órdenes "En Preparación" de vuelta a "Pendiente"

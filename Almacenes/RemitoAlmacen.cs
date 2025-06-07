@@ -22,7 +22,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\remitos.json", datosRemito);
         }
 
-        public static void LeerRemito()
+        static RemitoAlmacen()
         {
             if (!File.Exists(@"Datos\remitos.json"))
             {

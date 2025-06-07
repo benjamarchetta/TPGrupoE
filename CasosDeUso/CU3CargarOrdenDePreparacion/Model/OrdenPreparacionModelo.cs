@@ -18,7 +18,6 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
     {
         get
         {
-            ClienteAlmacen.LeerCliente();
             var copia = new List<ClienteEntidad>();
             foreach (var cliente in ClienteAlmacen.Clientes)
             {
@@ -71,7 +70,6 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                     Posiciones = stockFisico.Posiciones,
                 });
             }
-            OrdenPreparacionAlmacen.LeerOP();
             // Restar cantidades según las ordenes ya registradas
             foreach (var orden in OrdenPreparacionAlmacen.OrdenesPreparacion)
             {
@@ -105,7 +103,6 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
     {
         get
         {
-            DepositosAlmacen.LeerDeposito();
             var depositos = new List<DepositoEntidad>();
             foreach (var deposito in DepositosAlmacen.Depositos)
             {

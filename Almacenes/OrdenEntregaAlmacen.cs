@@ -21,7 +21,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\ordenesEntrega.json", datosOE);
         }
 
-        public static void LeerOE()
+        static OrdenEntregaAlmacen()
         {
             if (!File.Exists(@"Datos\ordenesEntrega.json"))
             {

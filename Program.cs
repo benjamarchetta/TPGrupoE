@@ -15,14 +15,6 @@ namespace TPGrupoE
             {
                 ApplicationConfiguration.Initialize();
 
-                ClienteAlmacen.LeerCliente();
-                DepositosAlmacen.LeerDeposito();
-                StockFisicoAlmacen.LeerStock();
-                OrdenPreparacionAlmacen.LeerOP();
-                OrdenPickingAlmacen.LeerOS();
-                OrdenEntregaAlmacen.LeerOE();
-                ProductoAlmacen.LeerProducto();
-
                 Application.Run(new MenuPrincipalGeneralForm());
 
                 ClienteAlmacen.GrabarCliente();

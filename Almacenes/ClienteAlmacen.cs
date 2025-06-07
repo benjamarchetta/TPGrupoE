@@ -13,13 +13,7 @@ namespace TPGrupoE.Almacenes
 
         public static IReadOnlyCollection<ClienteEntidad> Clientes => clientes.AsReadOnly();
 
-        public static void GrabarCliente()
-        {
-            var datosCliente = JsonSerializer.Serialize(clientes);
-            File.WriteAllText(@"Datos\clientes.json", datosCliente);
-        }
-
-        public static void LeerCliente()
+        static ClienteAlmacen()
         {
 
             if (!File.Exists(@"Datos\clientes.json"))
@@ -31,6 +25,14 @@ namespace TPGrupoE.Almacenes
 
             clientes = JsonSerializer.Deserialize<List<ClienteEntidad>>(datosCliente)!;
         }
+
+        public static void GrabarCliente()
+        {
+            var datosCliente = JsonSerializer.Serialize(clientes);
+            File.WriteAllText(@"Datos\clientes.json", datosCliente);
+        }
+
+
 
         public static ClienteEntidad BuscarClientePorId(int id)
         {

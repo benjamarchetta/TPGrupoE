@@ -20,7 +20,7 @@ namespace TPGrupoE.Almacenes
             File.WriteAllText(@"Datos\productos.json", datosProducto);
         }
 
-        public static void LeerProducto()
+        static ProductoAlmacen()
         {
             if (!File.Exists(@"Datos\productos.json"))
             {
