@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            idOrdenTextBox = new TextBox();
             label2 = new Label();
             despachoDateTimePicker = new DateTimePicker();
             cargarOrdenButton = new Button();
@@ -55,8 +53,6 @@
             agregarProductoButton = new Button();
             label4 = new Label();
             label5 = new Label();
-            label12 = new Label();
-            estadoDeOrdenTextBox = new TextBox();
             label13 = new Label();
             dniTransportistaTextBox = new TextBox();
             depositoComboBox = new ComboBox();
@@ -64,24 +60,6 @@
             button1 = new Button();
             groupBox1 = new GroupBox();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 544);
-            label1.Name = "label1";
-            label1.Size = new Size(70, 15);
-            label1.TabIndex = 0;
-            label1.Text = "ID de Orden";
-            // 
-            // idOrdenTextBox
-            // 
-            idOrdenTextBox.Enabled = false;
-            idOrdenTextBox.Location = new Point(12, 562);
-            idOrdenTextBox.Name = "idOrdenTextBox";
-            idOrdenTextBox.Size = new Size(200, 23);
-            idOrdenTextBox.TabIndex = 1;
-            idOrdenTextBox.Text = "XX";
             // 
             // label2
             // 
@@ -103,7 +81,7 @@
             // cargarOrdenButton
             // 
             cargarOrdenButton.Enabled = false;
-            cargarOrdenButton.Location = new Point(443, 610);
+            cargarOrdenButton.Location = new Point(443, 545);
             cargarOrdenButton.Name = "cargarOrdenButton";
             cargarOrdenButton.Size = new Size(168, 23);
             cargarOrdenButton.TabIndex = 10;
@@ -127,6 +105,7 @@
             ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, posicionesColumna });
             ordenDePreparacionListView.FullRowSelect = true;
             ordenDePreparacionListView.Location = new Point(12, 310);
+            ordenDePreparacionListView.MultiSelect = false;
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
             ordenDePreparacionListView.Size = new Size(776, 153);
             ordenDePreparacionListView.TabIndex = 15;
@@ -154,7 +133,7 @@
             razonSocialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             razonSocialComboBox.DropDownWidth = 383;
             razonSocialComboBox.FormattingEnabled = true;
-            razonSocialComboBox.Location = new Point(12, 86);
+            razonSocialComboBox.Location = new Point(12, 79);
             razonSocialComboBox.Name = "razonSocialComboBox";
             razonSocialComboBox.Size = new Size(382, 23);
             razonSocialComboBox.TabIndex = 16;
@@ -163,7 +142,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(12, 68);
+            label7.Location = new Point(12, 61);
             label7.Name = "label7";
             label7.Size = new Size(129, 15);
             label7.TabIndex = 17;
@@ -179,7 +158,7 @@
             // cuitTextBox
             // 
             cuitTextBox.Enabled = false;
-            cuitTextBox.Location = new Point(400, 86);
+            cuitTextBox.Location = new Point(400, 79);
             cuitTextBox.Name = "cuitTextBox";
             cuitTextBox.Size = new Size(383, 23);
             cuitTextBox.TabIndex = 19;
@@ -191,16 +170,16 @@
             productoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             productoComboBox.Enabled = false;
             productoComboBox.FormattingEnabled = true;
-            productoComboBox.Location = new Point(12, 154);
+            productoComboBox.Location = new Point(400, 174);
             productoComboBox.Name = "productoComboBox";
-            productoComboBox.Size = new Size(382, 23);
+            productoComboBox.Size = new Size(385, 23);
             productoComboBox.TabIndex = 20;
             productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 136);
+            label3.Location = new Point(400, 156);
             label3.Name = "label3";
             label3.Size = new Size(56, 15);
             label3.TabIndex = 21;
@@ -209,7 +188,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(400, 136);
+            label6.Location = new Point(400, 200);
             label6.Name = "label6";
             label6.Size = new Size(99, 15);
             label6.TabIndex = 22;
@@ -218,9 +197,9 @@
             // skuTextBox
             // 
             skuTextBox.Enabled = false;
-            skuTextBox.Location = new Point(400, 154);
+            skuTextBox.Location = new Point(400, 218);
             skuTextBox.Name = "skuTextBox";
-            skuTextBox.Size = new Size(385, 23);
+            skuTextBox.Size = new Size(188, 23);
             skuTextBox.TabIndex = 23;
             skuTextBox.Text = "-";
             skuTextBox.TextChanged += skuTextBox_TextChanged;
@@ -228,9 +207,9 @@
             // cantidadEnStockTextBox
             // 
             cantidadEnStockTextBox.Enabled = false;
-            cantidadEnStockTextBox.Location = new Point(400, 198);
+            cantidadEnStockTextBox.Location = new Point(594, 218);
             cantidadEnStockTextBox.Name = "cantidadEnStockTextBox";
-            cantidadEnStockTextBox.Size = new Size(385, 23);
+            cantidadEnStockTextBox.Size = new Size(191, 23);
             cantidadEnStockTextBox.TabIndex = 24;
             cantidadEnStockTextBox.Text = "-";
             cantidadEnStockTextBox.TextChanged += cantidadEnStockTextBox_TextChanged;
@@ -238,7 +217,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(400, 180);
+            label9.Location = new Point(589, 200);
             label9.Name = "label9";
             label9.Size = new Size(102, 15);
             label9.TabIndex = 25;
@@ -249,16 +228,16 @@
             palletCerradoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             palletCerradoComboBox.FormattingEnabled = true;
             palletCerradoComboBox.Items.AddRange(new object[] { "No", "Sí" });
-            palletCerradoComboBox.Location = new Point(400, 26);
+            palletCerradoComboBox.Location = new Point(12, 127);
             palletCerradoComboBox.Name = "palletCerradoComboBox";
-            palletCerradoComboBox.Size = new Size(383, 23);
+            palletCerradoComboBox.Size = new Size(385, 23);
             palletCerradoComboBox.TabIndex = 26;
             palletCerradoComboBox.SelectedIndexChanged += palletCerradoComboBox_SelectedIndexChanged;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(400, 8);
+            label10.Location = new Point(12, 108);
             label10.Name = "label10";
             label10.Size = new Size(79, 15);
             label10.TabIndex = 27;
@@ -267,7 +246,7 @@
             // cantidadARetirarLabel
             // 
             cantidadARetirarLabel.AutoSize = true;
-            cantidadARetirarLabel.Location = new Point(12, 180);
+            cantidadARetirarLabel.Location = new Point(12, 200);
             cantidadARetirarLabel.Name = "cantidadARetirarLabel";
             cantidadARetirarLabel.Size = new Size(98, 15);
             cantidadARetirarLabel.TabIndex = 28;
@@ -276,7 +255,7 @@
             // cantidadARetirarTextBox
             // 
             cantidadARetirarTextBox.Enabled = false;
-            cantidadARetirarTextBox.Location = new Point(12, 198);
+            cantidadARetirarTextBox.Location = new Point(12, 218);
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
@@ -286,7 +265,7 @@
             // agregarProductoButton
             // 
             agregarProductoButton.Enabled = false;
-            agregarProductoButton.Location = new Point(534, 242);
+            agregarProductoButton.Location = new Point(534, 258);
             agregarProductoButton.Name = "agregarProductoButton";
             agregarProductoButton.Size = new Size(251, 26);
             agregarProductoButton.TabIndex = 30;
@@ -306,34 +285,16 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(218, 486);
+            label5.Location = new Point(12, 527);
             label5.Name = "label5";
             label5.Size = new Size(112, 15);
             label5.TabIndex = 32;
             label5.Text = "DNI de transportista";
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(218, 544);
-            label12.Name = "label12";
-            label12.Size = new Size(92, 15);
-            label12.TabIndex = 34;
-            label12.Text = "Estado de órden";
-            // 
-            // estadoDeOrdenTextBox
-            // 
-            estadoDeOrdenTextBox.Enabled = false;
-            estadoDeOrdenTextBox.Location = new Point(218, 563);
-            estadoDeOrdenTextBox.Name = "estadoDeOrdenTextBox";
-            estadoDeOrdenTextBox.Size = new Size(200, 23);
-            estadoDeOrdenTextBox.TabIndex = 35;
-            estadoDeOrdenTextBox.Text = "Pendiente";
-            // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(400, 68);
+            label13.Location = new Point(400, 61);
             label13.Name = "label13";
             label13.Size = new Size(86, 15);
             label13.TabIndex = 37;
@@ -342,7 +303,7 @@
             // dniTransportistaTextBox
             // 
             dniTransportistaTextBox.Enabled = false;
-            dniTransportistaTextBox.Location = new Point(218, 504);
+            dniTransportistaTextBox.Location = new Point(12, 545);
             dniTransportistaTextBox.Name = "dniTransportistaTextBox";
             dniTransportistaTextBox.Size = new Size(200, 23);
             dniTransportistaTextBox.TabIndex = 39;
@@ -354,16 +315,16 @@
             depositoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             depositoComboBox.Enabled = false;
             depositoComboBox.FormattingEnabled = true;
-            depositoComboBox.Location = new Point(13, 504);
+            depositoComboBox.Location = new Point(12, 174);
             depositoComboBox.Name = "depositoComboBox";
-            depositoComboBox.Size = new Size(200, 23);
+            depositoComboBox.Size = new Size(382, 23);
             depositoComboBox.TabIndex = 40;
             depositoComboBox.SelectedIndexChanged += depositoComboBox_SelectedIndexChanged;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(12, 486);
+            label11.Location = new Point(11, 156);
             label11.Name = "label11";
             label11.Size = new Size(97, 15);
             label11.TabIndex = 41;
@@ -371,7 +332,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(617, 610);
+            button1.Location = new Point(617, 545);
             button1.Name = "button1";
             button1.Size = new Size(168, 23);
             button1.TabIndex = 42;
@@ -381,7 +342,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Location = new Point(7, 136);
+            groupBox1.Location = new Point(8, 156);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(782, 100);
             groupBox1.TabIndex = 43;
@@ -391,15 +352,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(797, 645);
+            ClientSize = new Size(797, 580);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(label11);
             Controls.Add(depositoComboBox);
             Controls.Add(dniTransportistaTextBox);
             Controls.Add(label13);
-            Controls.Add(estadoDeOrdenTextBox);
-            Controls.Add(label12);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(agregarProductoButton);
@@ -422,8 +381,6 @@
             Controls.Add(cargarOrdenButton);
             Controls.Add(despachoDateTimePicker);
             Controls.Add(label2);
-            Controls.Add(idOrdenTextBox);
-            Controls.Add(label1);
             Name = "ProcesarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
             FormClosing += ProcesarOrdenPreparacionForm_FormClosing;
@@ -433,9 +390,6 @@
         }
 
         #endregion
-
-        private Label label1;
-        private TextBox idOrdenTextBox;
         private Label label2;
         private DateTimePicker despachoDateTimePicker;
         private Button cargarOrdenButton;
@@ -460,8 +414,6 @@
         private Button agregarProductoButton;
         private Label label4;
         private Label label5;
-        private Label label12;
-        private TextBox estadoDeOrdenTextBox;
         private Label label13;
         private TextBox dniTransportistaTextBox;
         private ComboBox depositoComboBox;

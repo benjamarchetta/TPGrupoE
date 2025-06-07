@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
 namespace TPGrupoE.Almacenes
 {
@@ -59,10 +60,11 @@ namespace TPGrupoE.Almacenes
                 cantidadRestante -= cantidadTomada;
             }
         }
-
         public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
         {
-            return Stock.Where(s => s.PalletCerrado == palletCerrado).ToList();            
+            return OrdenPreparacionModelo.Stock
+                .Where(stock => stock.Posiciones.Any(p => p.PalletCerrado == palletCerrado))
+                .ToList();
         }
     }
 }

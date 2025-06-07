@@ -1,0 +1,64 @@
+Caso: Emitir remito para despachar productos preparados
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Emitir remito"
+2- Presionar el desplegable de "Transportistas con Ordenes a Despachar" y seleccionar "DNI: 30111224"
+3- Presionar el desplegable de "Cliente" y seleccionar "Electro Hogar S.R.L."
+4- Presionar el botón "Buscar productos para despachar"
+5- Seleccionar el CheckBox de "N° Orden de Preparacion: 1003"
+6- Presionar el botón "Despachar y Emitir Remito"
+7- Presionar el botón "Aceptar" de la ventana de "Confirmar Emision"
+8- Presionar el botón "Aceptar" de la ventana de "Éxito: Remito Generado"
+9- Presionar el botón "Volver al menú principal"
+10- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
+
+Verificaciones:
+
+11- En el archivo "remitos.json" considerando que, los campos IdRemito y FechaEmision
+se completarán según el Id que corresponda, y la fecha del día de la prueba, validar que la ultima fila sea:
+
+{
+    "IdRemito": xxxx,
+    "FechaEmision": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "IDCliente": 4,
+    "DNITransportista": 30111224,
+    "IDOrdenPreparacion": [
+    1003
+    ]
+}
+
+12- En el Archivo "ordenesPreparacion.json" se actualizan la línea correspondiente a la órden de preparación
+1003, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
+
+{
+    "IdOrdenPreparacion": 1003,
+    "IdDeposito": 4,
+    "IdCliente": 4,
+    "DniTransportista": 30111224,
+    "Estado": 5,
+    "FechaEntrega": "2025-06-12T14:18:16.6600073-03:00", 
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+        {
+        "IdProducto": 6,
+        "Cantidad": 20,
+        "PalletCerrado": true
+        }
+    ]
+}
+
+13- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
+se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
+  {
+    "IdOrdenEntrega": xxxx,
+    "Estado": 1,
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
+    "IdOrdenPreparacion": [
+      1003
+    ]
+  }
+

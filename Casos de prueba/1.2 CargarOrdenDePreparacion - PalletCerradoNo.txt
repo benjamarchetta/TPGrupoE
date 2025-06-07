@@ -1,0 +1,40 @@
+Caso: Cargar una órden de Preparacion (OP) sin pallet cerrado.
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Cargar Órden de Preparación".
+2- Presionar el filtro de calendario "Fecha de despacho de orden" y seleccionar la fecha del día de hoy.
+3- Presionar el desplegable de "Razon social del cliente" y seleccionar la opcion "Electro Hogar S.R.L"
+4- Presionar el desplegable de "Pallet Cerrado" y seleccionar "No"
+5- Presionar el desplegable "Depósito a retirar" y seleccionar "Av. La Voz del Interior 7800, Córdoba Capital"
+6- Presionar el desplegable de Producto y seleccionar "Pack de cajas de cartón reforzado (50x50x50)"
+7- Ingresar en el campo "Cantidad a retirar" el número "40" (MAYOR AL STOCK DISPONIBLE PARA ESE CLIENTE, PRODUCTO Y DEPOSITO)
+8- Presionar el boton "Aceptar" de la ventana "Advertencia: La cantidad ingresada supera el stock disponible (38)"
+9- Ingresar en el campo "Cantidad a retirar" el número "38" 
+10- Presionar el botón "Agregar producto a órden de preparacion"
+11- Ingresar en el campo "DNI de transportista" el número "23456712"
+12- Presionar el botón "Cargar órden de preparación"
+13- Presionar el botón "Aceptar" de la ventana "Éxito: "Orden de preparación cargada correctamente..."
+14- Presionar el botón "Volver al menú principal"
+15- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
+
+Verificaciones:
+16- En el Archivo "ordenesPreparacion.json" la ultima linea debe ser:
+{
+  "IdOrdenPreparacion": xxxx,
+  "IdDeposito": 3,
+  "IdCliente": 4,
+  "DniTransportista": 23456712,
+  "Estado": 0,
+  "FechaEntrega": "xxxxxx",
+  "PalletCerrado": false,
+  "ProductoOrden": [
+    {
+      "IdProducto": 1,
+      "Cantidad": 38,
+      "PalletCerrado": false
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+Caso: Generar orden de selección correctamente
+
+1- Presionar el boton "Generar Órden de Selección" del menú principal.
+2- Presionar el botón "Agregar a orden de selección"
+3- Presionar el botón "Aceptar" de la ventana de Aviso: "Seleccione al menos una orden"
+4- Seleccionar la orden con fecha a despachar "10/06/2025" (Fecha de hoy) de la tabla Ordenes de preparacion pendientes.
+5- Presionar el botón "Agregar a orden de selección"
+6- Seleccionar la orden con fecha a despachar "15/06/2025" (Fecha futura) de la tabla Ordenes de preparacion pendientes.
+7- Presionar el botón "Agregar a orden de selección"
+8- Presionar el botón "Eliminar de orden de selección"
+9- Presionar el botón "Aceptar" de la ventana Aviso: Selecciona al menos una mercadería para eliminar".
+10-Seleccionar la orden con fecha a despachar "15/06/2025" (Fecha futura) de la tabla de mercaderias a preparar
+11-Presionar el botón "Eliminar de orden de selección"
+12-Presionar el botón "Aceptar" de la ventana de Éxito: "Se eliminaron 1 mercaderias y se devolvieron 1 ordenes"
+10-Presionar el botón "Generar órden de selección"
+11-Presionar el boton "Aceptar" de la ventana llamada Orden Generada
+12-Cerrar el sistema presionando la "X"
+
+Verificaciones:
+13-En el Archivo ordenesPicking.json la ultima linea debe verse:
+{
+  "IdOrdenSeleccion":3 ,
+  "Estado": 1,
+  "IdOrdenPreparacion": [
+    1001
+  ]
+}
+14- En el Archivo de OrdenesPreparacion.Json la primera linea debe verse 
+ {"IdOrdenPreparacion": 1001,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111222,
+    "Estado": 1,
+    "FechaEntrega": "2025-06-10T14:18:16.6600073-03:00",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 2,
+        "Cantidad": 30,
+        "PalletCerrado": true
+      }
+ }

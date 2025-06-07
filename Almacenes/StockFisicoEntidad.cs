@@ -10,7 +10,6 @@ namespace TPGrupoE.Almacenes
     {
         public int IdCliente { get; set; }
         public int IdProducto{ get; set; }
-        public bool PalletCerrado { get; set; }
         public List<PosicionesPorDeposito> Posiciones { get; set; } = [];
     }
 }
