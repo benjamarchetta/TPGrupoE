@@ -20,7 +20,7 @@ Verificaciones:
 "IdDeposito": 1,
 "IdCliente": 2,
 "DniTransportista": 30111223,
-"Estado": 4,
+"Estado": 3,
 "FechaEntrega": "2025-06-11T14:18:16.6600073-03:00",
 "PalletCerrado": true,
 "ProductoOrden": [
@@ -36,7 +36,7 @@ Verificaciones:
 "IdDeposito": 1,
 "IdCliente": 3,
 "DniTransportista": 30111228,
-"Estado": 4,
+"Estado": 3,
 "FechaEntrega": "2025-06-16T14:18:16.6600073-03:00",
 "PalletCerrado": false,
 "ProductoOrden": [

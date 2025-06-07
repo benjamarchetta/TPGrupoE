@@ -3,11 +3,61 @@
 (Empieza con la pantalla "Menú principal")
 
 1- Presionar el boton "Cargar Orden de Entrega".
-2- Presionar el botón "Liberar para despacho"
-3- Presionar el botón "Aceptar" de la ventana de Éxito: "Se registro correctamente la orden de entrega"
-4- Presionar el botón "Aceptar" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
-5- Cerrar el sistema presionando la "X"
+2- Presionar el CheckBox de "N° Orden de Preparacion: 1008"
+3- Presionar el CheckBox de "N° Orden de Preparacion: 1009"
+4- Presionar el botón "Liberar para despacho"
+5- Presionar el botón "OK" de la ventana de Éxito: "Se registro correctamente la orden de entrega"
+6- Presionar el botón "OK" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
+7- Presionar el botón "Volver al menú principal"
+8- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
 
 Verificaciones:
+9- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaEmision
+se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
+  {
+    "IdOrdenEntrega": xxxx,
+    "Estado": 0,
+    "FechaEmision": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
+    "IdOrdenPreparacion": [
+      1008, 1009
+    ]
+  },
 
-
+10- En el Archivo "ordenesPreparacion.json" se actualizan las líneas correspondientes a las órdenes de preparación
+1008 y 1009, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
+  {
+    "IdOrdenPreparacion": 1008,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111229,
+    "Estado": 4,
+    "FechaEntrega": "2025-06-17T14:18:16.6600073-03:00",
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 15,
+        "Cantidad": 20,
+        "PalletCerrado": false
+      }
+    ]
+  },
+  {
+    "IdOrdenPreparacion": 1009,
+    "IdDeposito": 1,
+    "IdCliente": 1,
+    "DniTransportista": 30111230,
+    "Estado": 4,
+    "FechaEntrega": "2025-06-18T14:18:16.6600073-03:00",
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 17,
+        "Cantidad": 25,
+        "PalletCerrado": false
+      }
+    ]
+  }
