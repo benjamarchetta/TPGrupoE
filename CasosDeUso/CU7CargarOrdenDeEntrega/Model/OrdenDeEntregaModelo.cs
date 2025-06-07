@@ -11,7 +11,6 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
 {
     internal partial class OrdenDeEntregaModelo
     {
-
         public List<OrdenPreparacion> OrdenesDePreparacion { get; private set; }
 
         public OrdenDeEntregaModelo()

@@ -24,8 +24,11 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         }
 
         // Devuelve el detalle de productos de una orden de selección
-        public List<ProductoOrden> ObtenerDetalleProductos(int idOrdenSeleccion)
+        public List<DetalleProductoModel> ObtenerDetalleProductos(int idOrdenSeleccion)
         {
+            return null; //TODO: implementar este método.
+
+            /*
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             var productos = new List<ProductoOrden>();
 
@@ -40,7 +43,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 }
             }
 
-            return productos;
+            return productos;*/
         }
 
         // Confirma una orden de selección, actualiza estados y descuenta stock
@@ -81,6 +84,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             OrdenesDeSeleccion = OrdenPickingAlmacen
                 .BuscarOrdenesPendientes()
                 .ToList();
-        }
+        }        
     }
 }

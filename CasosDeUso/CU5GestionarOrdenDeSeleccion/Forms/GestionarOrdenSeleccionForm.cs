@@ -119,24 +119,17 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
-                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);  // Obtener los productos
-
                 // Agregar los productos al ListView
-                foreach (var p in productos)
+                foreach (var producto in _modelo.ObtenerDetalleProductos(idOrdenSeleccion))
                 {
                     // Obtener el SKU del producto desde el almacén de productos
-                    var productoEntidad = ProductoAlmacen.BuscarProductoPorId(p.IdProducto);  // Buscar el producto por ID
-                    string sku = productoEntidad != null ? productoEntidad.Sku : "No disponible"; // Obtener el SKU
-                    string descripcion = productoEntidad != null ? productoEntidad.DescripcionProducto : "Sin descripción";
-
-                    var fila = new ListViewItem(sku); // Agregar SKU
-                    fila.SubItems.Add(descripcion); // Agregar Descripción (de ProductoEntidad)
-                  
-                    fila.SubItems.Add(p.Cantidad.ToString()); // Cantidad
-                    fila.SubItems.Add(p.PalletCerrado ? "Sí" : "No"); // Pallet Cerrado
+                    var fila = new ListViewItem(producto.Sku); // Agregar SKU
+                    fila.SubItems.Add(producto.DescripcionProducto); // Agregar Descripción (de ProductoEntidad)                  
+                    fila.SubItems.Add(producto.Cantidad.ToString()); // Cantidad
+                    fila.SubItems.Add(producto.PalletCerrado ? "Sí" : "No"); // Pallet Cerrado
 
                     // Obtener la ubicación del producto (usamos la función `ObtenerUbicacion` para obtener las posiciones desde el stock)
-                    var ubicacion = ObtenerUbicacion(p.IdProducto); // Obtener ubicación desde StockFisicoAlmacen
+                    var ubicacion = ObtenerUbicacion(producto.IdProducto); // Obtener ubicación desde StockFisicoAlmacen
                     fila.SubItems.Add(ubicacion); // Ubicación
 
                     detalleProductosListView.Items.Add(fila);
