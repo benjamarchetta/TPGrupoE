@@ -11,17 +11,17 @@ Caso: Cargar una órden de Preparacion (OP) sin pallet cerrado.
 7- Ingresar en el campo "Cantidad a retirar" el número "40" (MAYOR AL STOCK DISPONIBLE PARA ESE CLIENTE, PRODUCTO Y DEPOSITO)
 8- Presionar el boton "Aceptar" de la ventana "Advertencia: La cantidad ingresada supera el stock disponible (38)"
 9- Ingresar en el campo "Cantidad a retirar" el número "38" 
-8- Presionar el botón "Agregar producto a órden de preparacion"
-9- Ingresar en el campo "DNI de transportista" el número "23456712"
-10- Presionar el botón "Cargar órden de preparación"
-11- Presionar el botón "Aceptar" de la ventana "Éxito: "Orden de preparación cargada correctamente..."
-12- Presionar el botón "Volver al menú principal"
-13- Cerrar el sistema presionando la "X"
+10- Presionar el botón "Agregar producto a órden de preparacion"
+11- Ingresar en el campo "DNI de transportista" el número "23456712"
+12- Presionar el botón "Cargar órden de preparación"
+13- Presionar el botón "Aceptar" de la ventana "Éxito: "Orden de preparación cargada correctamente..."
+14- Presionar el botón "Volver al menú principal"
+15- Cerrar el sistema presionando la "X"
 
 (Termina cerrando el programa)
 
 Verificaciones:
-14- En el Archivo "ordenesPreparacion.json" la ultima linea debe ser:
+16- En el Archivo "ordenesPreparacion.json" la ultima linea debe ser:
 {
   "IdOrdenPreparacion": xxxx,
   "IdDeposito": 3,

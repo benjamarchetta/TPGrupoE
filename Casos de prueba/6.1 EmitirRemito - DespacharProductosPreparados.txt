@@ -7,17 +7,17 @@ Caso: Emitir remito para despachar productos preparados
 3- Presionar el desplegable de "Cliente" y seleccionar "Electro Hogar S.R.L."
 4- Presionar el botón "Buscar productos para despachar"
 5- Seleccionar el CheckBox de "N° Orden de Preparacion: 1003"
-5- Presionar el botón "Despachar y Emitir Remito"
-6- Presionar el botón "Aceptar" de la ventana de "Confirmar Emision"
-7- Presionar el botón "Aceptar" de la ventana de "Éxito: Remito Generado"
-8- Presionar el botón "Volver al menú principal"
-9- Cerrar el sistema presionando la "X"
+6- Presionar el botón "Despachar y Emitir Remito"
+7- Presionar el botón "Aceptar" de la ventana de "Confirmar Emision"
+8- Presionar el botón "Aceptar" de la ventana de "Éxito: Remito Generado"
+9- Presionar el botón "Volver al menú principal"
+10- Cerrar el sistema presionando la "X"
 
 (Termina cerrando el programa)
 
 Verificaciones:
 
-10- En el archivo "remitos.json" considerando que, los campos IdRemito y FechaEmision
+11- En el archivo "remitos.json" considerando que, los campos IdRemito y FechaEmision
 se completarán según el Id que corresponda, y la fecha del día de la prueba, validar que la ultima fila sea:
 
 {
@@ -30,7 +30,7 @@ se completarán según el Id que corresponda, y la fecha del día de la prueba, 
     ]
 }
 
-11- En el Archivo "ordenesPreparacion.json" se actualizan la línea correspondiente a la órden de preparación
+12- En el Archivo "ordenesPreparacion.json" se actualizan la línea correspondiente a la órden de preparación
 1003, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
 
 {
@@ -51,7 +51,7 @@ se completarán según el Id que corresponda, y la fecha del día de la prueba, 
     ]
 }
 
-12- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
+13- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
 se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
   {
     "IdOrdenEntrega": xxxx,

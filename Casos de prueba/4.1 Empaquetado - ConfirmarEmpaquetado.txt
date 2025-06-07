@@ -6,14 +6,14 @@
 2- Presionar el botón "Confirmar Empaquetado" del "N° Orden de Preparacion: 1002"
 3- Presionar el botón "Confirmar Empaquetado" del "N° Orden de Preparacion: 1007". Se muestra la ventana de 
 "Aviso: No hay ordenes de preparación para empaquetar"
-3- Presionar el botón "Aceptar" de la ventana de "Aviso"
-4- Presionar el botón "Volver al menú principal"
-5- Cerrar el sistema presionando la "X"
+4- Presionar el botón "Aceptar" de la ventana de "Aviso"
+5- Presionar el botón "Volver al menú principal"
+6- Cerrar el sistema presionando la "X"
 
 (Termina cerrando el programa)
 
 Verificaciones:
-6- En el Archivo "ordenesPreparacion.json" se actualizan las líneas correspondientes a las órdenes de preparación
+7- En el Archivo "ordenesPreparacion.json" se actualizan las líneas correspondientes a las órdenes de preparación
 1002 y 1007:
 
 "IdOrdenPreparacion": 1002,
