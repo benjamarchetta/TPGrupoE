@@ -189,11 +189,16 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                 detallesOrdenes.Add("Y más...");
             }
 
+            var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" ;
+
+
+            /*mensaje distinto para confirmar la selección de órdenes
+
             // Crear el mensaje con el detalle de las órdenes
             var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" +
                           string.Join("\n", detallesOrdenes) + "\n\n" +
                           $"Total de productos seleccionados: {totalProductos}";
-
+            */
             var result = MessageBox.Show(mensaje, "Confirmar selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
