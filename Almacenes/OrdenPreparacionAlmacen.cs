@@ -91,26 +91,24 @@ namespace TPGrupoE.Almacenes
             return ordenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == id);
         }
 
-        //COMENTO PARA VER MAS ADELANTE....
-        /*
-        public static List<int> ObtenerTransportistasConOrdenesParaDespacho()
+        
+        public static List<int> BuscarTransportistasConOrdenesParaDespacho()
         {
 
-            // Crear un HashSet para almacenar DNI únicos
             HashSet<int> dniTransportistasUnicos = new HashSet<int>();
 
-            var ordenes = ObtenerOrdenesParaDespacho();
+            var ordenes = BuscarOrdenesPreparadas();
 
             foreach (var o in ordenes)
             {
-                dniTransportistasUnicos.Add(o.DNITransportista);
+                dniTransportistasUnicos.Add(o.DniTransportista);
             }
 
             var transportistas = new List<int>(dniTransportistasUnicos);
 
             return transportistas;
         }
-        */
+        
 
         //VER SI HAY QUE ADAPTAR ESTA FUNCION
         internal static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
