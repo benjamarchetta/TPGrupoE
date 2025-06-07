@@ -1,0 +1,11 @@
+﻿Caso: Confirmar empaquetado de una órden de preparación (OP) seleccionada, pero no existen OP en ese estado
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Empaquetar"
+2- Se muestra la ventana de "Aviso: No hay ordenes de preparación para empaquetar"
+3- Presionar el botón "Aceptar" de la ventana de "Aviso"
+4- Presionar el botón "Volver al menú principal"
+5- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)

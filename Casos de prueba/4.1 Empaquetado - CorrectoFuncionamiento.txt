@@ -1,9 +1,0 @@
-﻿Caso: Funcionamiento de empaquetado correcto
-
-1- Presionar el boton "Empaquetar" del menú principal.
-2- Presionar el botón "Confirmar Empaquetado" las veces que sean necesarias hasta que
-se muestre la ventana de Aviso: "No hay ordenes de preparación para empaquetar"
-3- Presionar el botón "Aceptar" de la ventana de Aviso
-4- Cerrar el sistema presionando la "X"
-
-Verificaciones:
