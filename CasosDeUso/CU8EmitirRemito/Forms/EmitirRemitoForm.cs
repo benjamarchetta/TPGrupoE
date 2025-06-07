@@ -10,111 +10,205 @@ using System.Windows.Forms;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU8EmitirRemito.Model;
+using static TPGrupoE.CasosDeUso.CU8EmitirRemito.Model.EmitirRemitoModel;
+using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
+using OrdenPreparacion = TPGrupoE.CasosDeUso.CU8EmitirRemito.Model.EmitirRemitoModel.OrdenPreparacion;
 
 namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
 {
     public partial class EmitirRemitoForm : Form
     {
-        private readonly EmitirRemitoModel _model = new();
+            private EmitirRemitoModel _emitirRemitoModel;
 
-        public EmitirRemitoForm()
+            public EmitirRemitoForm()
+            {
+                InitializeComponent();
+                _emitirRemitoModel = new EmitirRemitoModel();
+            }
+        private void DespacharyEmitirRemitoButton_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            _model.CargarDatosIniciales();
-            _model.CargarTransportistas();
-            CargarComboTransportistas();
+            MessageBox.Show("Se generó correctamente el remito y se registró correctamente el despacho de las órdenes de preparación.");
+        }
 
-            // Eventos
+        private void EmitirRemito_Load(object sender, EventArgs e)
+        {
+            CargarTransportistaComboBox();
             TransportistaComboBox.SelectedIndexChanged += TransportistaComboBox_SelectedIndexChanged;
-            SeleccionarButton.Click += SeleccionarButton_Click;
-            EmitirRemitoButton.Click += EmitirRemitoButton_Click;
-            VolverButton.Click += VolverButton_Click;
         }
-
-        private void CargarComboTransportistas()
+        private static string ConvertirEstadoEnumAString(EstadoOrdenPreparacion estado)
         {
-            TransportistaComboBox.DataSource = _model.Transportistas;
-            TransportistaComboBox.DisplayMember = "Text";
-            TransportistaComboBox.ValueMember = "Value";
+            return estado switch
+            {
+                EstadoOrdenPreparacion.Preparada => "Lista para Despachar",
+                //EstadoOrdenPreparacion.PendienteDeDespacho => "Pendiente de Despacho",
+                _ => estado.ToString()
+            };
         }
+        private void CargarTransportistaComboBox()
+        {
+            List<Transportista> transportistas = _emitirRemitoModel.Transportistas;
 
+            if (transportistas.Count == 0)
+            {
+                MessageBox.Show("No hay transportistas con ordenes de preparacion pendientes de despacho");
+            }
+
+            TransportistaComboBox.DataSource = transportistas;
+            TransportistaComboBox.DisplayMember = "DisplayText";
+            TransportistaComboBox.ValueMember = "Documento";
+
+            TransportistaComboBox.SelectedIndex = -1;
+        }
         private void TransportistaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (TransportistaComboBox.SelectedItem is ComboBoxItem item)
-            {
-                int dni = item.Value;
-                var clientes = _model.ObtenerClientesDeTransportista(dni);
-                ClienteComboBox.DataSource = clientes;
-                ClienteComboBox.DisplayMember = "RazonSocial";
-                ClienteComboBox.ValueMember = "IdCliente";
-            }
-        }
+           
+            if (TransportistaComboBox.SelectedIndex == -1)
+                return;
 
-        private void SeleccionarButton_Click(object sender, EventArgs e)
+            CargarClienteComboBox();
+        }
+        private string BuscarDocumentoTransportista()
         {
+            string documentoTransportista = "";
+
+            if (TransportistaComboBox.SelectedValue != null)
+            {
+                documentoTransportista = TransportistaComboBox.SelectedValue.ToString();
+            }
+
+            string errorDocumentoTransportistaSeleccionado = _emitirRemitoModel.ValidarTransportista(documentoTransportista);
+
+            if (errorDocumentoTransportistaSeleccionado != null)
+            {
+                MessageBox.Show(errorDocumentoTransportistaSeleccionado);
+                return null;
+            }
+
+            return documentoTransportista;
+        }
+        private void CargarClienteComboBox()
+        {
+            string documentoTransportista = BuscarDocumentoTransportista();
+            if (documentoTransportista == null) return;
+
+            _emitirRemitoModel.CargarClientesPorTransportista(documentoTransportista);
+            List<Cliente> clientes = _emitirRemitoModel.Clientes;
+
+            if (clientes.Count == 0)
+            {
+                MessageBox.Show("No hay clientes con órdenes de preparación preparadas para este transportista.");
+            }
+
+            ClienteComboBox.DataSource = clientes;
+            ClienteComboBox.DisplayMember = "DisplayText"; 
+            ClienteComboBox.ValueMember = "Cuit";          
+
+            ClienteComboBox.SelectedIndex = -1;
+        }
+        private void ActualizarTabla()
+        {
+            string documentoTransportista = BuscarDocumentoTransportista();
+
+            List<OrdenPreparacion> ordenesPreparacion = _emitirRemitoModel.OrdenesDePreparacion;
+
             EmitirRemitoListView.Items.Clear();
 
-            if (ClienteComboBox.SelectedItem == null || TransportistaComboBox.SelectedItem == null)
-                return;
-
-            int idCliente = ((ClienteEntidad)ClienteComboBox.SelectedItem).IdCliente;
-            int dni = (int)TransportistaComboBox.SelectedValue;
-
-            _model.CargarOrdenesPorTransportistaYCliente(dni, idCliente);
-
-            if (_model.OrdenesFiltradas.Count == 0)
+            if (ordenesPreparacion.Count == 0)
             {
-                MessageBox.Show("No hay ninguna orden para despachar el día de hoy.");
+                MessageBox.Show("No hay ordenes de preparacion pendientes de despacho para el transportista seleccionado");
                 return;
             }
 
-            foreach (var op in _model.OrdenesFiltradas)
+            foreach (var orden in ordenesPreparacion)
             {
-                var oe = OrdenEntregaAlmacen.OrdenesEntrega.FirstOrDefault(o => o.IdOrdenPreparacion.Contains(op.IdOrdenPreparacion));
-                if (oe != null)
+                var item = new ListViewItem(new[]
+                  {
+                        orden.Id.ToString(),
+                        ConvertirEstadoEnumAString(orden.Estado),
+                        orden.IdOrdenEntrega.ToString(),
+                        orden.FechaEntrega.ToString("dd/MM/yyyy"),
+            });
+
+                EmitirRemitoListView.Items.Add(item);
+            }
+        }
+        private void SeleccionarTransportistaButton_Click(object sender, EventArgs e)
+        {
+            string documentoTransportista = BuscarDocumentoTransportista();
+            if (documentoTransportista == null)
+            {
+                return;
+            }
+            _emitirRemitoModel.CargarOrdenesPorTransportista(documentoTransportista);
+            CargarClienteComboBox();
+            ActualizarTabla();
+        }
+        private void MarcarOpDespachadaButton_Click(object sender, EventArgs e)
+        {
+            BuscarDocumentoTransportista();
+            string error = _emitirRemitoModel.MarcarOpDespachada();
+
+            if (error != null)
+            {
+                MessageBox.Show(error);
+                return;
+            }
+
+            MessageBox.Show("Ordenes despachadas correctamente");
+            ActualizarTabla();
+        }
+        private bool OrdenEnProceso()
+        {
+            bool ordenEnProceso = false;
+
+            if (EmitirRemitoListView.Items.Count > 0)
+            {
+                ordenEnProceso = true;
+            }
+
+            return ordenEnProceso;
+        }
+        private void VolverAlMenuPrincipal()
+        {
+            this.Hide();
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
                 {
-                    var item = new ListViewItem(op.IdOrdenPreparacion.ToString());
-                    item.SubItems.Add(oe.IdOrdenEntrega.ToString());
-                    item.SubItems.Add(op.FechaEntrega.ToShortDateString());
-                    EmitirRemitoListView.Items.Add(item);
+                    form.Show();
+                    return;
                 }
             }
-        }
 
-        private void EmitirRemitoButton_Click(object sender, EventArgs e)
+            MenuPrincipalGeneralForm menuPrincipalForm = new MenuPrincipalGeneralForm();
+            menuPrincipalForm.Show();
+        }
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
         {
-            if (EmitirRemitoListView.SelectedItems.Count == 0)
+            bool ordenEnProceso = OrdenEnProceso();
+
+            if (!ordenEnProceso)
             {
-                MessageBox.Show("Debe seleccionar al menos una orden de preparación.");
+                VolverAlMenuPrincipal();
                 return;
             }
+            DialogResult result = MessageBox.Show(
+              "Se dispone a cerrar el formulario. ¿Está seguro?",
+              "Advertencia",
+              MessageBoxButtons.YesNo,
+              MessageBoxIcon.Warning);
 
-            var seleccionados = EmitirRemitoListView.SelectedItems
-                .Cast<ListViewItem>()
-                .Select(item => int.Parse(item.SubItems[0].Text))
-                .ToList();
-
-            int idCliente = ((ClienteEntidad)ClienteComboBox.SelectedItem).IdCliente;
-            int dni = (int)TransportistaComboBox.SelectedValue;
-
-            var confirmacion = MessageBox.Show(
-                "¿Desea emitir el remito para las siguientes OP?\n" + string.Join(", ", seleccionados),
-                "Confirmar emisión",
-                MessageBoxButtons.OKCancel);
-
-            if (confirmacion == DialogResult.OK)
+            // Si 
+            if (result == DialogResult.Yes)
             {
-                var idRemito = _model.EmitirRemito(dni, idCliente, seleccionados);
-                MessageBox.Show($"Remito generado con éxito. ID: {idRemito}");
-                SeleccionarButton.PerformClick();
+                VolverAlMenuPrincipal();
             }
-        }
 
-        private void VolverButton_Click(object sender, EventArgs e)
+        }
+        private void EmitirRemitoForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
-            MenuPrincipalGeneralForm principalGeneralForm = new MenuPrincipalGeneralForm();
-            principalGeneralForm.Show();
+            VolverAlMenuPrincipal();
         }
     }
 }

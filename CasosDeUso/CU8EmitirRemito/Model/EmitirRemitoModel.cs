@@ -4,102 +4,133 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using static TPGrupoE.CasosDeUso.CU8EmitirRemito.Model.EmitirRemitoModel;
+
 
 namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
 {
-    public class ComboBoxItem
+    internal partial class EmitirRemitoModel
     {
-        public string Text { get; set; } = "";
-        public int Value { get; set; }
 
-        public override string ToString() => Text;
-    }
+        public List<OrdenPreparacion> OrdenesDePreparacion { get; private set; }
+        public List<Transportista> Transportistas { get; private set; }
+        public List<Cliente> Clientes { get; private set; }
 
-    public class EmitirRemitoModel
-    {
-        public List<OrdenPreparacionEntidad> OrdenesFiltradas { get; private set; } = new();
-        public List<ComboBoxItem> Transportistas { get; private set; } = new();
-
-        public void CargarDatosIniciales()
+        public EmitirRemitoModel()
         {
-            ClienteAlmacen.LeerCliente();
-            OrdenPreparacionAlmacen.LeerOP();
-            OrdenEntregaAlmacen.LeerOE();
-            RemitoAlmacen.LeerRemito();
+            OrdenesDePreparacion = new List<OrdenPreparacion>();
+
+            CargarTransportistas();
         }
-
-        public void CargarTransportistas()
+        public string ValidarTransportista(string dniTransportista)
         {
-            // Mostrar todos los transportistas con OP cargadas
-            Transportistas = OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Select(op => op.DniTransportista)
-                .Distinct()
-                .Select(dni => new ComboBoxItem { Text = $"DNI: {dni}", Value = dni })
-                .ToList();
-        }
-
-        public List<ClienteEntidad> ObtenerClientesDeTransportista(int dni)
-        {
-            var clientesConOP = OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Where(op => op.DniTransportista == dni)
-                .Select(op => op.IdCliente)
-                .Distinct()
-                .ToList();
-
-            return ClienteAlmacen.Clientes
-                .Where(c => clientesConOP.Contains(c.IdCliente))
-                .ToList();
-        }
-
-        public void CargarOrdenesPorTransportistaYCliente(int dni, int idCliente)
-        {
-            OrdenesFiltradas = OrdenPreparacionAlmacen.OrdenesPreparacion
-                .Where(op =>
-                    op.DniTransportista == dni &&
-                    op.IdCliente == idCliente &&
-                    op.Estado == EstadoOrdenPreparacion.Preparada &&
-                    op.FechaEntrega.Date == DateTime.Today &&
-                    OrdenEntregaAlmacen.OrdenesEntrega.Any(oe => oe.IdOrdenPreparacion.Contains(op.IdOrdenPreparacion) &&
-                                                                 oe.Estado == EstadoOrdenEntrega.Pendiente))
-                .ToList();
-        }
-
-        public string EmitirRemito(int dniTransportista, int idCliente, List<int> idsOrdenes)
-        {
-            if (idsOrdenes.Count == 0)
-                return "No hay órdenes seleccionadas.";
-
-            int nuevoId = RemitoAlmacen.Remitos.Count + 1;
-
-            var remito = new RemitoEntidad
+            if (dniTransportista == null || dniTransportista == "")
             {
-                IdRemito = nuevoId,
-                DNITransportista = dniTransportista,
-                IDCliente = idCliente,
-                FechaEmision = DateTime.Now,
-                IDOrdenPreparacion = idsOrdenes
-            };
-
-            if (RemitoAlmacen.Remitos is List<RemitoEntidad> lista)
-                lista.Add(remito);
-
-            RemitoAlmacen.GrabarRemito();
-
-            foreach (var id in idsOrdenes)
-            {
-                var orden = OrdenPreparacionAlmacen.OrdenesPreparacion.FirstOrDefault(op => op.IdOrdenPreparacion == id);
-                if (orden != null)
-                    orden.MarcarOpDespachada();
-
-                var entrega = OrdenEntregaAlmacen.OrdenesEntrega.FirstOrDefault(oe => oe.IdOrdenPreparacion.Contains(id));
-                if (entrega != null)
-                    entrega.Estado = EstadoOrdenEntrega.Cumplida;
+                return "Por favor seleccione un transportista valido.";
             }
 
-            OrdenPreparacionAlmacen.GrabarOP();
-            OrdenEntregaAlmacen.GrabarOE();
+            return null;
+        }
+        public void CargarOrdenesPorTransportista(string dniTransportista)
+        {
+            OrdenesDePreparacion = [];
+            var ordenesDeEntregaParaDespacho = OrdenEntregaAlmacen.BuscarOrdenesParaDespachar();
 
-            return nuevoId.ToString();
+            foreach (var ordenEntrega in ordenesDeEntregaParaDespacho)
+            {
+                foreach (var idOrdenPreparacion in ordenEntrega.IdOrdenPreparacion)
+                {
+                    var ordenEntidad = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPreparacion);
+
+                    if (ordenEntidad.DniTransportista.ToString() == dniTransportista && ordenEntidad.Estado != EstadoOrdenPreparacion.Despachada)
+                    {
+                        var ordenPreparacion = new OrdenPreparacion(ordenEntidad.IdOrdenPreparacion, ordenEntidad.DniTransportista.ToString(), ordenEntidad.Estado, ordenEntrega.IdOrdenEntrega, ordenEntidad.IdCliente);
+                        OrdenesDePreparacion.Add(ordenPreparacion);
+                    }
+                }
+            }
+        }
+        private void CargarTransportistas()
+        {
+            Transportistas = new List<Transportista>();
+
+            var transportistasConOrdenesParaDespacho = OrdenPreparacionAlmacen.BuscarTransportistasConOrdenesParaDespacho();
+            foreach (var dniTransportista in transportistasConOrdenesParaDespacho)
+            {
+                Transportista transportista = new Transportista(dniTransportista.ToString());
+                Transportistas.Add(transportista);
+            }
+        }
+        public void CargarClientesPorTransportista(string dniTransportista)
+        {
+            Clientes = new List<Cliente>();
+
+            var ordenesPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+
+            foreach (var ordenEntidad in ordenesPreparadas)
+            {
+                if (ordenEntidad.DniTransportista.ToString() == dniTransportista &&
+             ordenEntidad.Estado == EstadoOrdenPreparacion.Preparada)
+                {
+                    var clienteEntidad = ClienteAlmacen.BuscarClientePorId(ordenEntidad.IdCliente);
+                    if (clienteEntidad != null && 
+                        !Clientes.Any(c => c.Cuit == clienteEntidad.Cuit))
+                    {
+                        var cliente = new Cliente(clienteEntidad.Cuit, clienteEntidad.RazonSocial);
+                        Clientes.Add(cliente);
+                    }
+                }
+            }
+        }
+
+        private void ActualizarOrdenDeEntrega(int idOrdenEntrega)
+        {
+            bool marcarOrdenComoCumplida = true;
+
+            var ordenEntrega = OrdenEntregaAlmacen.BuscarOrdenPorId(idOrdenEntrega);
+
+            foreach (var idOrdenPreparacion in ordenEntrega.IdOrdenPreparacion)
+            {
+                var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPreparacion);
+
+                if (ordenPrep.Estado != EstadoOrdenPreparacion.Despachada)
+                {
+                    marcarOrdenComoCumplida = false;
+                }
+            }
+
+            if (marcarOrdenComoCumplida)
+            {
+                ordenEntrega.MarcarComoCumplida();
+            }
+        }
+        public string MarcarOpDespachada()
+        {
+            if (OrdenesDePreparacion.Count == 0)
+            {
+                return "No hay ninguna orden para marcar como despachada.";
+            }
+
+            var primeraOrden = OrdenPreparacionAlmacen.BuscarOrdenesPorId(OrdenesDePreparacion[0].Id);
+
+            RemitoEntidad remito = new();
+
+            remito.DNITransportista = primeraOrden.DniTransportista;
+            remito.IDCliente = primeraOrden.IdCliente;
+            remito.IDOrdenPreparacion = [];
+
+            foreach (var orden in OrdenesDePreparacion)
+            {
+                var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(orden.Id);
+                ordenPreparacion.MarcarOpDespachada();
+                remito.IDOrdenPreparacion.Add(ordenPreparacion.IdOrdenPreparacion);
+                ActualizarOrdenDeEntrega(orden.IdOrdenEntrega);
+            }
+
+            RemitoAlmacen.NuevoRemito(remito);
+            OrdenesDePreparacion = [];
+
+            return null;
         }
     }
 }
