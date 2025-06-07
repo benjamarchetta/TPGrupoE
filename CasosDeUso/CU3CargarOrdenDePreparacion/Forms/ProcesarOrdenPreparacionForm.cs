@@ -217,6 +217,16 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .Where(d => depositosFiltrados.Contains(d.IdDeposito))
                     .ToList();
 
+                if (depositosAMostrar.Count == 0)
+                {
+                    MessageBox.Show(
+                            $"El cliente no tiene productos disponibles.",
+                            "Advertencia",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                }
+
                 depositoComboBox.DataSource = depositosAMostrar;
                 depositoComboBox.DisplayMember = "Domicilio";
                 depositoComboBox.ValueMember = "IdDeposito";
