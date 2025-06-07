@@ -1,0 +1,54 @@
+Caso: Generar orden de selección - Seleccionar órdenes de preparación pendientes
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el botón "Generar Órden de Selección"
+2- Presionar el botón "Agregar a orden de selección"
+3- Presionar el botón "Aceptar" de la ventana de Aviso: "Seleccione al menos una orden"
+4- Seleccionar la orden con fecha a despachar "10/06/2025" de la lista "Ordenes de preparacion pendientes"
+5- Presionar el botón "Agregar a orden de selección"
+6- Seleccionar la orden con fecha a despachar "15/06/2025" de la lista "Ordenes de preparacion pendientes"
+7- Presionar el botón "Agregar a orden de selección"
+8- Presionar el botón "Eliminar de orden de selección"
+9- Presionar el botón "Aceptar" de la ventana Aviso: Selecciona al menos una mercadería para eliminar"
+10- Seleccionar la orden con fecha a despachar "15/06/2025" de la lista de "Mercaderias a preparar"
+11- Presionar el botón "Eliminar de orden de selección"
+12- Presionar el botón "Aceptar" de la ventana de Éxito: "Se eliminaron 1 mercaderias y se devolvieron 1 ordenes"
+10- Presionar el botón "Generar órden de selección"
+11- Presionar el boton "Aceptar" de la ventana llamada "Orden Generada"
+12- Presionar el botón "Volver al menú principal"
+13- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
+
+Verificaciones:
+
+14-En el Archivo "ordenesPicking.json" la última linea debe verse:
+{
+  "IdOrdenSeleccion": xxxx ,
+  "Estado": 0,
+  "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+  "IdOrdenPreparacion": [
+    1001
+  ]
+}
+
+15- En el Archivo "ordenesPreparacion.json" se actualiza la línea correspondiente a las órden de preparación
+1001:
+
+{
+ "IdOrdenPreparacion": 1001,
+    "IdDeposito": 3,
+    "IdCliente": 3,
+    "DniTransportista": 30111222,
+    "Estado": 1,
+    "FechaEntrega": "2025-06-10T14:18:16.6600073-03:00",
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "PalletCerrado": true,
+    "ProductoOrden": [
+      {
+        "IdProducto": 2,
+        "Cantidad": 30,
+        "PalletCerrado": true
+      }
+ }

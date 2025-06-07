@@ -142,5 +142,21 @@
         "PalletCerrado": false
       }
     ]
+  },
+  {
+    "IdOrdenPreparacion": 1010,
+    "IdDeposito": 1,
+    "IdCliente": 1,
+    "DniTransportista": 30111230,
+    "Estado": 1,
+    "FechaEntrega": "2025-06-18T18:18:16.6600073-03:00",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 17,
+        "Cantidad": 2,
+        "PalletCerrado": false
+      }
+    ]
   }
 ]
