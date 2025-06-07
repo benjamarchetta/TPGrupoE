@@ -6,8 +6,8 @@
 2- Presionar el CheckBox de "N° Orden de Preparacion: 1008"
 3- Presionar el CheckBox de "N° Orden de Preparacion: 1009"
 4- Presionar el botón "Liberar para despacho"
-5- Presionar el botón "OK" de la ventana de Éxito: "Se registro correctamente la orden de entrega"
-6- Presionar el botón "OK" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
+5- Presionar el botón "Aceptar" de la ventana de Éxito: "Se registro correctamente la orden de entrega"
+6- Presionar el botón "Aceptar" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
 7- Presionar el botón "Volver al menú principal"
 8- Cerrar el sistema presionando la "X"
 

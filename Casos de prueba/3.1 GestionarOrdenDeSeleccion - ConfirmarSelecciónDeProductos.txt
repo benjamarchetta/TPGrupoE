@@ -1,0 +1,53 @@
+Caso: Gestionar orden de selección - Confirmar la selección de productos
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Gestionar Órden de Selección"
+2- Seleccionar el CheckBox con Id de orden de selección "1" en la lista "Ordenes de seleccion pendientes"
+3- Presionar el botón "Seleccionar mercaderia"
+4- Seleccionar el CheckBox con Id de orden de selección "2" en la lista "Ordenes de seleccion pendientes"
+5- Presionar el botón "Seleccionar mercaderia"
+6- Mantener seleccionado el CheckBox con Id de orden de selección "2" en la lista "Ordenes de seleccion pendientes"
+7- Presionar el botón "Cancelar seleccion"
+8- Presionar el botón "Aceptar" de la ventana Aviso:"Se eliminaron las mercaderias de la orden n° 2"
+9- Presionar el botón "Confirmar seleccion"
+10- Presionar el boton "No" de la ventana llamada "Confirmar selección".
+11- Presionar el botón "Confirmar seleccion"
+12- Presionar el boton "Si" de la ventana llamada "Confirmar selección".
+13- Presionar el boton "Aceptar" de la ventana Éxito: "Ordenes de seleccion confirmadas correctamente"
+14- Presionar el boton "Aceptar" de la ventana "No hay órdenes de seleccion pendientes"
+15- Presionar el botón "Volver al menú principal"
+16- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
+
+Verificaciones:
+17- Del archivo "ordenesPicking.json" validar que la ultima fila
+
+{
+  "IdOrdenSeleccion": 1,
+  "Estado": 1,
+  "IdOrdenPreparacion": [
+    1006
+  ]
+}
+
+18- En el Archivo "ordenesPreparacion.json" se actualiza la línea correspondiente a las órden de preparación
+1006, considerando que el campo "FechaActualizacionEstado" se completará según la fecha del día de la prueba:
+  {
+    "IdOrdenPreparacion": 1006,
+    "IdDeposito": 3,
+    "IdCliente": 4,
+    "DniTransportista": 30111227,
+    "Estado": 2,
+    "FechaEntrega": "2025-06-15T14:18:16.6600073-03:00",
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
+    "PalletCerrado": false,
+    "ProductoOrden": [
+      {
+        "IdProducto": 1,
+        "Cantidad": 40,
+        "PalletCerrado": false
+      }
+    ]
+  }

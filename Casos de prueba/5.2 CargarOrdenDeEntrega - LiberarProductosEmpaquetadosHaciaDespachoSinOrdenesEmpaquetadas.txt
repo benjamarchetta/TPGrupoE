@@ -4,7 +4,7 @@ pero no existen OP en estado "Empaquetada"
 (Empieza con la pantalla "Menú principal")
 
 1- Presionar el boton "Cargar Orden de Entrega"
-2- Presionar el botón "OK" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
+2- Presionar el botón "Aceptar" de la nueva ventana de Aviso: "No hay ordenes de preparación empaquetadas para agregar a la orden de entrega"
 3- Presionar el botón "Volver al menú principal"
 4- Cerrar el sistema presionando la "X"
 

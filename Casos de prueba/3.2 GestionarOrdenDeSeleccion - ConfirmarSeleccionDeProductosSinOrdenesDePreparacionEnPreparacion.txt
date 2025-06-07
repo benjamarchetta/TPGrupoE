@@ -1,0 +1,10 @@
+﻿Caso: Gestionar orden de selección - Confirmar la selección de productos, pero no existen OP en estado "En Preparación"
+
+(Empieza con la pantalla "Menú principal")
+
+1- Presionar el boton "Gestionar Órden de Selección"
+2- Presionar el boton "Aceptar" de la ventana "No hay órdenes de seleccion pendientes"
+15- Presionar el botón "Volver al menú principal"
+16- Cerrar el sistema presionando la "X"
+
+(Termina cerrando el programa)
