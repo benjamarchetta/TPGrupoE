@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
+
+
+
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 {
     public partial class GestionarOrdenSeleccionForm : Form
@@ -24,7 +27,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
         private void ConfigurarControles()
         {
-            // LISTVIEW DE ÓRDENES
             ordenesListView.View = View.Details;
             ordenesListView.FullRowSelect = true;
             ordenesListView.MultiSelect = false;
@@ -34,7 +36,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             ordenesListView.Columns.Add("Estado", 100);
             ordenesListView.Columns.Add("Fecha Despacho", 150);
 
-            // LISTVIEW DE PRODUCTOS
             detalleProductosListView.View = View.Details;
             detalleProductosListView.FullRowSelect = true;
             detalleProductosListView.MultiSelect = false;
@@ -91,7 +92,15 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
+                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);
 
+                foreach (var p in productos)
+                {
+                    var fila = new ListViewItem(p.Sku);
+                    fila.SubItems.Add(p.Descripcion);
+                    fila.SubItems.Add(p.Cantidad.ToString());
+                    fila.SubItems.Add(p.PalletCerrado);
+                    fila.SubItems.Add(p.Ubicacion);
 
                     detalleProductosListView.Items.Add(fila);
                 }
