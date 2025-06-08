@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using System.IO;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
@@ -40,31 +39,23 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                var ordenesPendientes = GenerarOrdenDeSeleccionModelo.BuscarOrdenesPendientes();
-
-                //DEBUG: Verificar cuántas órdenes se cargaron en total
-                //var todasLasOrdenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
-                //MessageBox.Show($"Total órdenes cargadas: {todasLasOrdenes.Count}", "Debug");
-
-                //Obtener órdenes pendientes a través del modelo
-                //var ordenesPendientes = GenerarOrdenDeSeleccionModelo.BuscarOrdenesPendientes();
-
-                //DEBUG: Verificar cuántas órdenes pendientes hay
-                //MessageBox.Show($"Órdenes pendientes: {ordenesPendientes.Count}", "Debug");
-
-                // Limpiar y cargar ListView
+                var ordenesPendientes = modelo.BuscarOrdenesPendientes();
                 ordenesPendientesListView.Items.Clear();
 
                 foreach (var orden in ordenesPendientes)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
-                    item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
-                    item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerRazonSocialCliente(orden.IdCliente));
-                    item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerCuitCliente(orden.IdCliente));
-                    item.Tag = orden;
-
-                    ordenesPendientesListView.Items.Add(item);
+                    foreach (var producto in orden.Productos)  // ← AGREGAR: iterar productos
+                    {
+                        ListViewItem item = new ListViewItem();
+                        item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                        item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                        item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
+                        item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
+                        item.SubItems.Add(producto.Descripcion);  // ← AGREGAR: Producto
+                        item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR: Cantidad
+                        item.Tag = orden;
+                        ordenesPendientesListView.Items.Add(item);
+                    }
                 }
             }
             catch (Exception ex)
@@ -72,33 +63,32 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void AgregarProductosAMercaderias(OrdenPreparacionEntidad orden)
+        private void AgregarProductosAMercaderias(OrdenPreparacion orden)
         {
-            foreach (var producto in orden.ProductoOrden)
+            foreach (var producto in orden.Productos)  // ← AGREGAR este foreach
             {
                 ListViewItem item = new ListViewItem();
-                item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy"); // Fecha
-                item.SubItems.Add(orden.IdOrdenPreparacion.ToString()); // ID Orden
-                item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerRazonSocialCliente(orden.IdCliente)); // Cliente
-                item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerCuitCliente(orden.IdCliente)); // CUIT
-
-                item.Tag = orden; // Guardar la orden completa
-
-                mercaderiasAPrepList.Items.Add(item); // Agregar a la lista de abajo
+                item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                item.SubItems.Add(orden.RazonSocial);
+                item.SubItems.Add(orden.Cuit);
+                item.SubItems.Add(producto.Descripcion);  // ← AGREGAR
+                item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR
+                item.Tag = orden;
+                mercaderiasAPrepList.Items.Add(item);
             }
         }
-
 
         private void agregarAOrdenButton_Click(object sender, EventArgs e)
         {
             try
             {
                 // 1. Obtener órdenes seleccionadas
-                var ordenesSeleccionadas = new List<OrdenPreparacionEntidad>();
+                var ordenesSeleccionadas = new List<OrdenPreparacion>();
 
                 foreach (ListViewItem item in ordenesPendientesListView.CheckedItems)
                 {
-                    if (item.Tag is OrdenPreparacionEntidad orden)
+                    if (item.Tag is OrdenPreparacion orden)
                     {
                         ordenesSeleccionadas.Add(orden);
                     }
@@ -172,11 +162,11 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 }
 
                 // 3. Obtener órdenes únicas (evitar duplicados)
-                var ordenesAVolver = new HashSet<OrdenPreparacionEntidad>();
+                var ordenesAVolver = new HashSet<OrdenPreparacion>();
 
                 foreach (var item in mercaderiasSeleccionadas)
                 {
-                    if (item.Tag is OrdenPreparacionEntidad orden)
+                    if (item.Tag is OrdenPreparacion orden)
                     {
                         ordenesAVolver.Add(orden); // HashSet evita duplicados automáticamente
                     }
@@ -206,16 +196,20 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         }
 
         // Método auxiliar para volver orden a la lista de arriba
-        private void VolverOrdenAPendientes(OrdenPreparacionEntidad orden)
+        private void VolverOrdenAPendientes(OrdenPreparacion orden)
         {
-            ListViewItem item = new ListViewItem();
-            item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
-            item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
-            item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerRazonSocialCliente(orden.IdCliente));
-            item.SubItems.Add(GenerarOrdenDeSeleccionModelo.ObtenerCuitCliente(orden.IdCliente));
-            item.Tag = orden;
-
-            ordenesPendientesListView.Items.Add(item);
+            foreach (var producto in orden.Productos)  // ← AGREGAR este foreach
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
+                item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
+                item.SubItems.Add(producto.Descripcion);  // ← AGREGAR
+                item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR
+                item.Tag = orden;
+                ordenesPendientesListView.Items.Add(item);
+            }
         }
 
 
@@ -231,11 +225,11 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 }
 
                 // 2. Obtener todas las órdenes únicas de las mercaderías
-                var ordenesAConfirmar = new List<OrdenPreparacionEntidad>();
+                var ordenesAConfirmar = new List<OrdenPreparacion>();
 
                 foreach (ListViewItem item in mercaderiasAPrepList.Items)
                 {
-                    if (item.Tag is OrdenPreparacionEntidad orden)
+                    if (item.Tag is OrdenPreparacion orden)
                     {
                         // Solo agregar si no está ya en la lista
                         bool yaEsta = false;
@@ -256,27 +250,8 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 }
 
                 // 3. Crear nueva Orden de Picking (Selección)
-                var nuevaOrdenPicking = new OrdenPickingEntidad();
-                nuevaOrdenPicking.Estado = EstadoOrdenSeleccion.Pendiente; // Estado Pendiente
-
-                // Agregar IDs de las órdenes de preparación
-                foreach (var orden in ordenesAConfirmar)
-                {
-                    nuevaOrdenPicking.IdOrdenPreparacion.Add(orden.IdOrdenPreparacion);
-                }
-
-                // 4. Guardar la nueva Orden de Picking
-                OrdenPickingAlmacen.NuevaOS(nuevaOrdenPicking); // Agregar nueva
-                OrdenPickingAlmacen.GrabarOS(); // Guardar en JSON
-
-                // 5. Cambiar estado de las órdenes de preparación a "En Preparación"
-
-                foreach (var orden in ordenesAConfirmar)
-                {
-                    orden.MarcarOpEnPreparacion();
-                    OrdenPreparacionAlmacen.ActualizarOrdenPreparacion(orden);
-                }
-
+                // 3. Confirmar órdenes a través del modelo
+                int idOrdenGenerada = modelo.ConfirmarOrdenesDePreparacion(ordenesAConfirmar);
 
                 // 6. Limpiar listas y recargar
                 mercaderiasAPrepList.Items.Clear();
@@ -284,11 +259,12 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 HabilitarBotones();
 
                 // 7. Mostrar mensaje de éxito
-                MessageBox.Show($"¡Orden de Picking #{nuevaOrdenPicking.IdOrdenSeleccion} generada exitosamente!\n" +
-                               $"Estado: Pendiente\n" +
-                               $"Órdenes de preparación incluidas: {ordenesAConfirmar.Count}\n" +
-                               $"Estado OP cambiado: Pendiente → En Preparación",
-                               "Orden Generada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 7. Mostrar mensaje de éxito
+                MessageBox.Show($"¡Orden de Picking #{idOrdenGenerada} generada exitosamente!\n" +
+                $"Estado: Pendiente\n" +
+                $"Órdenes de preparación incluidas: {ordenesAConfirmar.Count}\n" +
+                $"Estado OP cambiado: Pendiente → En Preparación",
+                "Orden Generada", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -296,42 +272,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             }
         }
 
-        private void btnRestaurarEstado_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var todasLasOrdenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
-
-                // Cambiar todas las órdenes "En Preparación" de vuelta a "Pendiente"
-                int ordenesRestauradas = 0;
-                foreach (var orden in todasLasOrdenes)
-                {
-                    if (orden.Estado == EstadoOrdenPreparacion.EnPreparacion)
-                    {
-                        orden.Estado = EstadoOrdenPreparacion.Pendiente;
-                        OrdenPreparacionAlmacen.ActualizarOrdenPreparacion(orden);
-                        ordenesRestauradas++;
-                    }
-                }
-
-                // Limpiar órdenes de picking (volver archivo a estado inicial)
-                if (File.Exists(@"Datos\ordenPicking.json"))
-                {
-                    File.Delete(@"Datos\ordenPicking.json");
-                }
-
-                // Recargar lista
-                CargarOrdenesPendientes();
-                HabilitarBotones();
-
-                MessageBox.Show($"Estado restaurado exitosamente!\n{ordenesRestauradas} órdenes vueltas a Pendiente\nArchivo ordenPicking.json eliminado", "Restaurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al restaurar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+     
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -349,30 +290,66 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         }
     }
 }
+//private void btnRestaurarEstado_Click(object sender, EventArgs e)
+//{
+//    try
+//    {
+//        var todasLasOrdenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
+
+//        // Cambiar todas las órdenes "En Preparación" de vuelta a "Pendiente"
+//        int ordenesRestauradas = 0;
+//        foreach (var orden in todasLasOrdenes)
+//        {
+//            if (orden.Estado == EstadoOrdenPreparacion.EnPreparacion)
+//            {
+//                orden.Estado = EstadoOrdenPreparacion.Pendiente;
+//                OrdenPreparacionAlmacen.ActualizarOrdenPreparacion(orden);
+//                ordenesRestauradas++;
+//            }
+//        }
+
+//        // Limpiar órdenes de picking (volver archivo a estado inicial)
+//        if (File.Exists(@"Datos\ordenPicking.json"))
+//        {
+//            File.Delete(@"Datos\ordenPicking.json");
+//        }
+
+//        // Recargar lista
+//        CargarOrdenesPendientes();
+//        HabilitarBotones();
+
+//        MessageBox.Show($"Estado restaurado exitosamente!\n{ordenesRestauradas} órdenes vueltas a Pendiente\nArchivo ordenPicking.json eliminado", "Restaurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+//    }
+//    catch (Exception ex)
+//    {
+//        MessageBox.Show($"Error al restaurar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//    }
+//}
 
 
 
 
-        //private void ProcesarOrdenSeleccionForm_Load(object sender, EventArgs e)
-        //{
-        //    modelo = new GenerarOrdenDeSeleccionModelo();
-        //    ordenesPendientesListView.Items.Clear(); // Limpia la lista visual
-        //    // 
-        //    foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
-        //    {
-        //        ListViewItem OrdenDePreparacionitem = new ListViewItem();
-        //        OrdenDePreparacionitem.Text = OrdenDePreparacion.FechaDespacho.ToString("dd/mm/yyyy");
-        //        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.Id.ToString());
-        //        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.CuitCliente);
-        //        //OrdenDePreparacionitem.Tag = OrdenDePreparacion.Doco;
-        //        string razonSocial = modelo.ObtenerRazonSocialPorCuit(OrdenDePreparacion.CuitCliente);
-        //        OrdenDePreparacionitem.SubItems.Add(razonSocial); // Razón social cliente
 
-        //        ordenesPendientesListView.Items.Add(OrdenDePreparacionitem);
+//private void ProcesarOrdenSeleccionForm_Load(object sender, EventArgs e)
+//{
+//    modelo = new GenerarOrdenDeSeleccionModelo();
+//    ordenesPendientesListView.Items.Clear(); // Limpia la lista visual
+//    // 
+//    foreach (var OrdenDePreparacion in OrdenPreparacionAlmacen.OrdenesDePreparacion)
+//    {
+//        ListViewItem OrdenDePreparacionitem = new ListViewItem();
+//        OrdenDePreparacionitem.Text = OrdenDePreparacion.FechaDespacho.ToString("dd/mm/yyyy");
+//        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.Id.ToString());
+//        OrdenDePreparacionitem.SubItems.Add(OrdenDePreparacion.CuitCliente);
+//        //OrdenDePreparacionitem.Tag = OrdenDePreparacion.Doco;
+//        string razonSocial = modelo.ObtenerRazonSocialPorCuit(OrdenDePreparacion.CuitCliente);
+//        OrdenDePreparacionitem.SubItems.Add(razonSocial); // Razón social cliente
+
+//        ordenesPendientesListView.Items.Add(OrdenDePreparacionitem);
 
 
-        //    }
-        //}
+//    }
+//}
 //        private void mercaderiasAPrepList_SelectedIndexChanged(object sender, EventArgs e)
 //        {
 //            // Habilita el botón solo si hay elementos seleccionados

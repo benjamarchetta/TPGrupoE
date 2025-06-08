@@ -34,6 +34,8 @@
             idOrdenColumna = new ColumnHeader();
             idClienteColumna = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            Producto = new ColumnHeader();
+            Cantidad = new ColumnHeader();
             agregarAOrdenButton = new Button();
             generarOrdenButton = new Button();
             label2 = new Label();
@@ -43,6 +45,8 @@
             columnHeader2 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
+            dfgfd = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
             menubutton = new Button();
             SuspendLayout();
             // 
@@ -58,7 +62,7 @@
             // ordenesPendientesListView
             // 
             ordenesPendientesListView.CheckBoxes = true;
-            ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3 });
+            ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, Producto, Cantidad });
             ordenesPendientesListView.FullRowSelect = true;
             ordenesPendientesListView.Location = new Point(12, 27);
             ordenesPendientesListView.Name = "ordenesPendientesListView";
@@ -70,22 +74,32 @@
             // fechaColumna
             // 
             fechaColumna.Text = "Fecha a despachar";
-            fechaColumna.Width = 195;
+            fechaColumna.Width = 100;
             // 
             // idOrdenColumna
             // 
             idOrdenColumna.Text = "ID de Orden";
-            idOrdenColumna.Width = 195;
+            idOrdenColumna.Width = 100;
             // 
             // idClienteColumna
             // 
             idClienteColumna.Text = "Razón social cliente";
-            idClienteColumna.Width = 195;
+            idClienteColumna.Width = 100;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "CUIT Cliente";
-            columnHeader3.Width = 195;
+            columnHeader3.Width = 100;
+            // 
+            // Producto
+            // 
+            Producto.Text = "Producto";
+            Producto.Width = 100;
+            // 
+            // Cantidad
+            // 
+            Cantidad.Text = "cantidad";
+            Cantidad.Width = 100;
             // 
             // agregarAOrdenButton
             // 
@@ -131,7 +145,7 @@
             // mercaderiasAPrepList
             // 
             mercaderiasAPrepList.CheckBoxes = true;
-            mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
+            mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5, dfgfd, columnHeader7 });
             mercaderiasAPrepList.FullRowSelect = true;
             mercaderiasAPrepList.Location = new Point(12, 268);
             mercaderiasAPrepList.Name = "mercaderiasAPrepList";
@@ -143,22 +157,32 @@
             // columnHeader1
             // 
             columnHeader1.Text = "Fecha a despachar";
-            columnHeader1.Width = 195;
+            columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
             columnHeader2.Text = "ID de Orden";
-            columnHeader2.Width = 195;
+            columnHeader2.Width = 100;
             // 
             // columnHeader4
             // 
             columnHeader4.Text = "Razón social cliente";
-            columnHeader4.Width = 195;
+            columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
             columnHeader5.Text = "CUIT Cliente";
-            columnHeader5.Width = 195;
+            columnHeader5.Width = 100;
+            // 
+            // dfgfd
+            // 
+            dfgfd.Text = "Producto";
+            dfgfd.Width = 100;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Cantidad";
+            columnHeader7.Width = 100;
             // 
             // menubutton
             // 
@@ -208,5 +232,9 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private Button menubutton;
+        private ColumnHeader Producto;
+        private ColumnHeader Cantidad;
+        private ColumnHeader dfgfd;
+        private ColumnHeader columnHeader7;
     }
 }
