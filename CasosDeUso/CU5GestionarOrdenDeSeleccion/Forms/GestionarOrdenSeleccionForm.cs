@@ -91,15 +91,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
-                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);
 
-                foreach (var p in productos)
-                {
-                    var fila = new ListViewItem(p.Sku);
-                    fila.SubItems.Add(p.Descripcion);
-                    fila.SubItems.Add(p.Cantidad.ToString());
-                    fila.SubItems.Add(p.PalletCerrado);
-                    fila.SubItems.Add(p.Ubicacion);
 
                     detalleProductosListView.Items.Add(fila);
                 }

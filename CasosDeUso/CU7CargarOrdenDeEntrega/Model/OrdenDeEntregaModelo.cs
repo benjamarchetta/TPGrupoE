@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 
@@ -11,7 +12,6 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
 {
     internal partial class OrdenDeEntregaModelo
     {
-
         public List<OrdenPreparacion> OrdenesDePreparacion { get; private set; }
 
         public OrdenDeEntregaModelo()
@@ -26,13 +26,17 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model
                 var cliente = ClienteAlmacen.BuscarClientePorId(ordenPreparacionEmpaquetada.IdCliente);
                 OrdenPreparacion ordenPreparacion = new OrdenPreparacion(
                     ordenPreparacionEmpaquetada.IdOrdenPreparacion,
+                     ordenPreparacionEmpaquetada.IdCliente,
                     cliente.Cuit,
                     cliente.RazonSocial,
                     ordenPreparacionEmpaquetada.DniTransportista,
                     ordenPreparacionEmpaquetada.Estado,
-                    ordenPreparacionEmpaquetada.FechaEntrega
-                    );
+                    ordenPreparacionEmpaquetada.FechaEntrega,
+                    new List<ProductoOP>()
+                    )
+                {
 
+                };
                 OrdenesDePreparacion.Add(ordenPreparacion);
             }
         }

@@ -586,12 +586,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     IdDeposito = idDepositoSeleccionado,
                     IdCliente = idClienteSeleccionado,
                     Cantidad = cantidad,
-                    PalletCerrado = pallet,
                 };
 
-                productosAsociados.Add(productoOrden);
-                ProductoOrdenAlmacen.AgregarProductoOrden(productoOrden);
-                
+                productosAsociados.Add(productoOrden);               
             }
 
             // Crear la orden de preparación
@@ -604,7 +601,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 Estado = EstadoOrdenPreparacion.Pendiente,
                 FechaEntrega = despachoDateTimePicker.Value,
                 PalletCerrado = pallet,
-                ProductoOrden = productosAsociados,
+                ProductoOrden = productosAsociados
             };
 
             // Agregar la orden al almacén

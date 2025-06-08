@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 
 namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
 {
@@ -12,15 +13,17 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
 
         public int IdOrdenPreparacion { get; set; }
         //public int IdDeposito { get; set; }
-        //public int IdCliente { get; set; }
+        public int IdCliente { get; set; }
         public string Cuit { get; set; }
         public string RazonSocial { get; set; }
         public int DniTransportista { get; set; }
         public EstadoOrdenPreparacion Estado { get; set; }
         public DateTime FechaEntrega { get; set; }
         public bool PalletCerrado { get; set; }
+        public List<ProductoOP> Productos { get; set; }
 
-        public OrdenPreparacion(int idOrdenPreparacion, string cuit, string razonSocial, int dniTransportista, EstadoOrdenPreparacion estado, DateTime fechaEntrega)
+
+        public OrdenPreparacion(int idOrdenPreparacion,int idcliente, string cuit, string razonSocial, int dniTransportista, EstadoOrdenPreparacion estado, DateTime fechaEntrega, List<ProductoOP> productos)
         {
             IdOrdenPreparacion = idOrdenPreparacion;
             Cuit = cuit;
@@ -28,6 +31,10 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model
             DniTransportista = dniTransportista;
             Estado = estado;
             FechaEntrega = fechaEntrega;
+            IdCliente = idcliente;
+            Productos = productos;
+           
+
         }
     }
 }
