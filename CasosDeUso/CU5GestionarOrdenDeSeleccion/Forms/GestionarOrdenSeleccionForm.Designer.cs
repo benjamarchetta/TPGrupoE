@@ -131,7 +131,7 @@
             Controls.Add(label1);
             Name = "GestionarOrdenSeleccionForm";
             Text = "Gestionar órden de selección";
-            Load += GestionarOrdenSeleccionForm_Load;
+           // Load += GestionarOrdenSeleccionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
