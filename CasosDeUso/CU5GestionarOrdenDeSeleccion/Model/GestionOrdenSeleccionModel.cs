@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
 
 
-
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
     internal class GestionOrdenSeleccionModel
@@ -50,11 +49,8 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             }
         }
 
-
+        public List<ProductoDetalleDTO> ObtenerDetalleProductos(int idOrdenSeleccion)
         {
-            return null; //TODO: implementar este método.
-
-            /*
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             var lista = new List<ProductoDetalleDTO>();
 
@@ -87,7 +83,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 }
             }
 
-
+            return lista;
         }
 
         public void ConfirmarSeleccion(int idOrdenSeleccion)
@@ -119,11 +115,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             OrdenPreparacionAlmacen.GrabarOP();
             StockFisicoAlmacen.GrabarStock();
 
-
+            CargarOrdenesPendientes(); // Recarga la lista actualizada
+        }
     }
-    
-
 }
-
-
-
