@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,53 +5,96 @@ using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
 
 
+
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
     internal class GestionOrdenSeleccionModel
     {
-        public List<OrdenPickingEntidad> OrdenesDeSeleccion { get; private set; }
+        public List<OrdenSeleccionDTO> OrdenesDeSeleccion { get; private set; }
 
         public GestionOrdenSeleccionModel()
         {
-            // Filtra órdenes de selección pendientes
-            OrdenesDeSeleccion = OrdenPickingAlmacen
-                .BuscarOrdenesPendientes()
-                .ToList();
-
-            // Mensaje para mostrar cuántas se cargaron
-            // MessageBox.Show($"Se encontraron {OrdenesDeSeleccion.Count} órdenes de selección pendientes.");
+            CargarOrdenesPendientes();
         }
 
-        // Devuelve el detalle de productos de una orden de selección
-        public List<DetalleProductoModel> ObtenerDetalleProductos(int idOrdenSeleccion)
+        private void CargarOrdenesPendientes()
+        {
+            var ordenes = OrdenPickingAlmacen.BuscarOrdenesPendientes();
+            OrdenesDeSeleccion = new List<OrdenSeleccionDTO>();
+
+            foreach (var orden in ordenes)
+            {
+                string clienteNombre = "N/A";
+                DateTime? fechaMasProxima = null;
+
+                foreach (var idOp in orden.IdOrdenPreparacion)
+                {
+                    var op = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOp);
+                    if (op == null) continue;
+
+                    var cliente = ClienteAlmacen.BuscarClientePorId(op.IdCliente);
+                    if (cliente != null)
+                        clienteNombre = cliente.RazonSocial;
+
+                    if (fechaMasProxima == null || op.FechaEntrega < fechaMasProxima)
+                        fechaMasProxima = op.FechaEntrega;
+                }
+
+                OrdenesDeSeleccion.Add(new OrdenSeleccionDTO
+                {
+                    IdOrdenSeleccion = orden.IdOrdenSeleccion,
+                    Cliente = clienteNombre,
+                    Estado = orden.Estado.ToString(),
+                    FechaDespacho = fechaMasProxima?.ToString("dd/MM/yyyy") ?? "Sin fecha"
+                });
+            }
+        }
+
+
         {
             return null; //TODO: implementar este método.
 
             /*
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
-            var productos = new List<ProductoOrden>();
+            var lista = new List<ProductoDetalleDTO>();
 
-            if (ordenSeleccion == null) return productos;
+            if (ordenSeleccion == null) return lista;
 
             foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
             {
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
-                if (ordenPrep != null)
+                if (ordenPrep == null) continue;
+
+                foreach (var producto in ordenPrep.ProductoOrden)
                 {
-                    productos.AddRange(ordenPrep.ProductoOrden);
+                    var productoEntidad = ProductoAlmacen.BuscarProductoPorId(producto.IdProducto);
+                    var stock = StockFisicoAlmacen.ObtenerStockPorId(producto.IdProducto);
+
+                    string ubicacion = "Sin ubicación";
+                    if (stock != null && stock.Posiciones.Any())
+                    {
+                        ubicacion = string.Join(", ", stock.Posiciones.Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
+                    }
+
+                    lista.Add(new ProductoDetalleDTO
+                    {
+                        Sku = productoEntidad?.Sku ?? "N/A",
+                        Descripcion = productoEntidad?.DescripcionProducto ?? "Sin descripción",
+                        Cantidad = producto.Cantidad,
+                        PalletCerrado = producto.PalletCerrado ? "Sí" : "No",
+                        Ubicacion = ubicacion
+                    });
                 }
             }
 
-            return productos;*/
+
         }
 
-        // Confirma una orden de selección, actualiza estados y descuenta stock
         public void ConfirmarSeleccion(int idOrdenSeleccion)
         {
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
             if (ordenSeleccion == null) return;
 
-            // Cambiar estado de la orden de selección a "Cumplida"
             ordenSeleccion.Estado = EstadoOrdenSeleccion.Cumplida;
 
             foreach (var idOrdenPrep in ordenSeleccion.IdOrdenPreparacion)
@@ -60,30 +102,28 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
                 if (ordenPrep == null) continue;
 
-                // Cambiar estado de las órdenes de preparación a "Seleccionada"
-                ordenPrep.Estado = EstadoOrdenPreparacion.Seleccionada;
+                ordenPrep.MarcarOpSeleccionada();
 
                 foreach (var producto in ordenPrep.ProductoOrden)
                 {
-                    // Descontar productos de stock según FIFO
                     StockFisicoAlmacen.DescontarProductoPorPosicion(
                         producto.IdProducto,
                         ordenPrep.IdCliente,
                         producto.Cantidad);
                 }
+
+                OrdenPreparacionAlmacen.ActualizarOrdenPreparacion(ordenPrep);
             }
 
-            // Guardar los cambios en los archivos
             OrdenPickingAlmacen.GrabarOS();
             OrdenPreparacionAlmacen.GrabarOP();
             StockFisicoAlmacen.GrabarStock();
 
-            // Volver a leer los datos actualizados
 
-            // Actualizar lista de órdenes de selección pendientes
-            OrdenesDeSeleccion = OrdenPickingAlmacen
-                .BuscarOrdenesPendientes()
-                .ToList();
-        }        
     }
+    
+
 }
+
+
+

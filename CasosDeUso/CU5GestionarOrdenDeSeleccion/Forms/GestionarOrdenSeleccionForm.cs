@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
-
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 {
     public partial class GestionarOrdenSeleccionForm : Form
@@ -45,15 +44,12 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             detalleProductosListView.Columns.Add("Pallet Cerrado", 120);
             detalleProductosListView.Columns.Add("Ubicación", 100);
 
-            // BOTONES
             VerDetallesButton.Text = "Seleccionar mercadería";
             VerDetallesButton.Enabled = false;
             confirmarSeleccionButton.Enabled = false;
 
-            // EVENTO
             ordenesListView.ItemCheck += ordenesListView_ItemCheck;
         }
-
 
         private void CargarDatosIniciales()
         {
@@ -67,45 +63,22 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
             foreach (var orden in _modelo.OrdenesDeSeleccion)
             {
-                string clienteNombre = "N/A";
-                DateTime? fechaMasProxima = null;
-
-                // Buscar cliente y la fecha de despacho más próxima
-                foreach (var idOP in orden.IdOrdenPreparacion)
-                {
-                    var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOP);
-                    if (ordenPrep != null)
-                    {
-                        var cliente = ClienteAlmacen.BuscarClientePorId(ordenPrep.IdCliente);
-                        if (cliente != null) clienteNombre = cliente.RazonSocial;
-
-                        if (fechaMasProxima == null || ordenPrep.FechaEntrega < fechaMasProxima)
-                        {
-                            fechaMasProxima = ordenPrep.FechaEntrega;
-                        }
-                    }
-                }
-
-                // Si no se encuentra fecha, mostrar "Sin fecha"
-                string fechaDespachoTexto = fechaMasProxima?.ToString("dd/MM/yyyy") ?? "Sin fecha";
-
                 var item = new ListViewItem(orden.IdOrdenSeleccion.ToString());
-                item.SubItems.Add(clienteNombre);
-                item.SubItems.Add(orden.Estado.ToString());
-                item.SubItems.Add(fechaDespachoTexto);
+                item.SubItems.Add(orden.Cliente);
+                item.SubItems.Add(orden.Estado);
+                item.SubItems.Add(orden.FechaDespacho);
                 item.Tag = orden.IdOrdenSeleccion;
 
                 ordenesListView.Items.Add(item);
             }
         }
+
         private void ordenesListView_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            // Habilitar el botón si hay al menos una orden seleccionada
-
             BeginInvoke((MethodInvoker)delegate
             {
                 VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0;
-                cancelarSeleccionButton.Enabled = ordenesListView.CheckedItems.Count > 0; // Habilitar el botón cancelar
+                cancelarSeleccionButton.Enabled = ordenesListView.CheckedItems.Count > 0;
             });
         }
 
@@ -113,24 +86,12 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
         {
             if (ordenesListView.CheckedItems.Count == 0) return;
 
-            detalleProductosListView.Items.Clear(); // Limpiar el ListView de productos
+            detalleProductosListView.Items.Clear();
 
-            // Iterar sobre las órdenes seleccionadas
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
-                // Agregar los productos al ListView
-                foreach (var producto in _modelo.ObtenerDetalleProductos(idOrdenSeleccion))
-                {
-                    // Obtener el SKU del producto desde el almacén de productos
-                    var fila = new ListViewItem(producto.Sku); // Agregar SKU
-                    fila.SubItems.Add(producto.DescripcionProducto); // Agregar Descripción (de ProductoEntidad)                  
-                    fila.SubItems.Add(producto.Cantidad.ToString()); // Cantidad
-                    fila.SubItems.Add(producto.PalletCerrado ? "Sí" : "No"); // Pallet Cerrado
 
-                    // Obtener la ubicación del producto (usamos la función `ObtenerUbicacion` para obtener las posiciones desde el stock)
-                    var ubicacion = ObtenerUbicacion(producto.IdProducto); // Obtener ubicación desde StockFisicoAlmacen
-                    fila.SubItems.Add(ubicacion); // Ubicación
 
                     detalleProductosListView.Items.Add(fila);
                 }
@@ -138,60 +99,21 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
             confirmarSeleccionButton.Enabled = true;
             cancelarSeleccionButton.Enabled = true;
-
         }
 
-        // Función para obtener la ubicación de un producto desde el stock
-        private string ObtenerUbicacion(int idProducto)
-        {
-            var stock = StockFisicoAlmacen.ObtenerStockPorId(idProducto);
-            if (stock != null && stock.Posiciones.Count > 0)
-            {
-                // Unir las posiciones disponibles por ", " si el producto tiene más de una
-                return string.Join(", ", stock.Posiciones.Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
-            }
-            return "Sin ubicación"; // Si no hay ubicaciones
-        }
         private void confirmarSeleccionButton_Click(object sender, EventArgs e)
         {
             if (ordenesListView.CheckedItems.Count == 0) return;
 
             var ids = new List<int>();
-            var detallesOrdenes = new List<string>();
-            var totalProductos = 0;
-
-            // Recopilar información sobre las órdenes seleccionadas
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 ids.Add((int)item.Tag);
-
-                var productos = _modelo.ObtenerDetalleProductos((int)item.Tag);
-                totalProductos += productos.Count;
-
-                // Mostrar un resumen de las órdenes (hasta 3 por ejemplo)
-                if (detallesOrdenes.Count < 3)
-                {
-                    var orden = $"OS-{item.Tag:D5} - {productos.Count} productos";
-                    detallesOrdenes.Add(orden);
-                }
             }
 
-            // Si hay más de 3 órdenes seleccionadas, agregar un mensaje diciendo que hay más
-            if (detallesOrdenes.Count == 3)
-            {
-                detallesOrdenes.Add("Y más...");
-            }
-
-            var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" ;
-
-
-            /*mensaje distinto para confirmar la selección de órdenes
-
-            // Crear el mensaje con el detalle de las órdenes
             var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" +
-                          string.Join("\n", detallesOrdenes) + "\n\n" +
-                          $"Total de productos seleccionados: {totalProductos}";
-            */
+                          string.Join("\n", ids.Select(id => $"OS-{id:D5}"));
+
             var result = MessageBox.Show(mensaje, "Confirmar selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -211,42 +133,26 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             }
         }
 
-        private void GestionarOrdenSeleccionForm_Load(object sender, EventArgs e)
+        private void cancelarSeleccionButton_Click(object sender, EventArgs e)
         {
+            foreach (ListViewItem item in ordenesListView.CheckedItems)
+            {
+                item.Checked = false;
+            }
 
+            detalleProductosListView.Items.Clear();
+            confirmarSeleccionButton.Enabled = false;
+            cancelarSeleccionButton.Enabled = false;
+            VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0;
         }
 
         private void volverAlMenuButton_Click(object sender, EventArgs e)
         {
             var menuForm = new MenuPrincipalGeneralForm();
-            menuForm.Show(); // Abre el menú principal
-            this.Close(); // Cierra el formulario actual
+            menuForm.Show();
+            this.Close();
         }
-
-
-        private void cancelarSeleccionButton_Click(object sender, EventArgs e)
-        {
-            // Deseleccionar todos los ítems en ordenesListView
-            foreach (ListViewItem item in ordenesListView.CheckedItems)
-            {
-                item.Checked = false;  // Desmarcar la orden seleccionada
-            }
-
-            // Limpiar el detalle de productos en el ListView
-            detalleProductosListView.Items.Clear();
-
-            // Deshabilitar el botón "Confirmar selección" y "Cancelar selección"
-            confirmarSeleccionButton.Enabled = false;
-            cancelarSeleccionButton.Enabled = false;
-
-            // Habilitar el botón "Ver Detalles" si se ha desmarcado alguna orden
-            VerDetallesButton.Enabled = ordenesListView.CheckedItems.Count > 0; // Solo habilitar si hay alguna orden seleccionada
-        }
-
     }
-
-
-
-
-
 }
+
+
