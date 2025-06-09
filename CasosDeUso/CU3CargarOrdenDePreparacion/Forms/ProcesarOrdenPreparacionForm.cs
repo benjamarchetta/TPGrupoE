@@ -33,7 +33,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             groupBox1.SendToBack();
-            id = GenerarIdOrden() - 1009;
+            id = OrdenPreparacionModelo.GenerarIdOrden();
             palletCerradoComboBox.SelectedIndex = -1;
             palletCerradoComboBox.Enabled = false;
             depositoComboBox.SelectedIndex = -1;
@@ -246,7 +246,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 idDepositoSeleccionado = deposito.IdDeposito;
 
                 // Obtener los IDs de producto filtrados por pallet, cliente y depósito
-                var idsProductosFiltrados = StockFisicoAlmacen
+                var idsProductosFiltrados = OrdenPreparacionModelo
                     .FiltrarPorPalletCerrado(palletCerrado)
                     .Where(stock =>
                         stock.IdCliente == idClienteSeleccionado &&
@@ -402,7 +402,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
                 // Buscar stock para el cliente, producto y depósito seleccionado
-                var stockProducto = StockFisicoAlmacen.Stock
+                var stockProducto = OrdenPreparacionModelo.Stock
                     .Where(stock =>
                         stock.IdCliente == idClienteSeleccionado &&
                         stock.IdProducto == producto.IdProducto
@@ -508,7 +508,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .FirstOrDefault(p => p.IdProducto == producto.IdProducto);
 
                 // Buscar el stock físico específico (cliente + producto)
-                var stockProducto = StockFisicoAlmacen.Stock
+                var stockProducto = OrdenPreparacionModelo.Stock
                     .FirstOrDefault(s =>
                         s.IdProducto == producto.IdProducto &&
                         s.IdCliente == idClienteSeleccionado);
@@ -583,7 +583,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 ProductoOrden productoOrden = new ProductoOrden
                 {
                     IdProducto = idClienteSeleccionado,
-                    IdDeposito = idDepositoSeleccionado,
+                    //IdDeposito = idDepositoSeleccionado,
                     IdCliente = idClienteSeleccionado,
                     Cantidad = cantidad,
                 };
@@ -605,7 +605,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             };
 
             // Agregar la orden al almacén
-            OrdenPreparacionAlmacen.NuevaOrdenPreparacion(Orden);
+            OrdenPreparacionModelo.NuevaOrdenPreparacion(Orden);
             string Pallet;
             if (palletCerrado)
             {
@@ -631,7 +631,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             
-            OrdenPreparacionAlmacen.GrabarOP();
+           OrdenPreparacionModelo.GrabarOP();
             /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
             foreach (OrdenPreparacionEntidad entidad in ordenes)
             {
@@ -646,12 +646,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }*/
         }
 
-        private int GenerarIdOrden()
-        {
-            return OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0
-                ? 1
-                : OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
-        }
 
         private void dniTransportistaTextBox_TextChanged(object sender, EventArgs e)
         {
