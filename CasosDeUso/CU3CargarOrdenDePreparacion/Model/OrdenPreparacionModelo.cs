@@ -118,6 +118,31 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
+    public static int GenerarIdOrden()
+    {
+        return OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0
+            ? 1
+            : OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
+    }
+
+    public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
+        {
+            return OrdenPreparacionModelo.Stock
+                .Where(stock => stock.Posiciones.Any(p => p.PalletCerrado == palletCerrado))
+                .ToList();
+        }
+
+    public static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
+    {
+        OrdenPreparacionAlmacen.NuevaOrdenPreparacion(nuevaOrden); // <- uso del método de almacén
+        return null; // sin errores
+    }
+
+    public static void GrabarOP()
+    {
+        OrdenPreparacionAlmacen.GrabarOP();
+    }
+
     /*public static List<StockFisicoEntidad> StockFisico
     {
         get
