@@ -60,12 +60,7 @@ namespace TPGrupoE.Almacenes
                 cantidadRestante -= cantidadTomada;
             }
         }
-        public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
-        {
-            return OrdenPreparacionModelo.Stock
-                .Where(stock => stock.Posiciones.Any(p => p.PalletCerrado == palletCerrado))
-                .ToList();
-        }
+        
     }
 }
 

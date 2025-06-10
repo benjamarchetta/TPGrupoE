@@ -34,26 +34,42 @@ namespace TPGrupoE.Almacenes
              ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
         }
 
-       /* public static int CalcularCantidadReservada(int idDeposito, int idProducto, int idCliente)
+        /* public static int CalcularCantidadReservada(int idDeposito, int idProducto, int idCliente)
+         {
+             // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
+             var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.Pendiente || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IdDeposito == idDeposito && o.IdCliente == idCliente);
+
+             int cantidadReservada = 0;
+
+
+             foreach (var o in ordenes)
+             {
+                 // Buscar la mercaderia en la orden de preparacion
+                 var productosOrden = o.ProductoOrden.Find(prods => prods.IdProducto == idProducto);
+
+                 if (productosOrden != null)
+                 {
+                     cantidadReservada += productosOrden.Cantidad;
+                 }
+             }
+             return cantidadReservada;
+         }*/
+
+        public static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
         {
-            // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
-            var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.Pendiente || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IdDeposito == idDeposito && o.IdCliente == idCliente);
-
-            int cantidadReservada = 0;
-
-
-            foreach (var o in ordenes)
+            if (OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0)
             {
-                // Buscar la mercaderia en la orden de preparacion
-                var productosOrden = o.ProductoOrden.Find(prods => prods.IdProducto == idProducto);
-
-                if (productosOrden != null)
-                {
-                    cantidadReservada += productosOrden.Cantidad;
-                }
+                nuevaOrden.IdOrdenPreparacion = 1;
             }
-            return cantidadReservada;
-        }*/
+            else
+            {
+                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(op => op.IdOrdenPreparacion) + 1;
+            }
+
+
+            OrdenPreparacionAlmacen.ordenesPreparacion.Add(nuevaOrden);
+            return null; //sin errores.
+        }
 
         //REVISAR SI NOS SIRVE AHORA
         public static List<OrdenPreparacionEntidad> BuscarTodasLasOrdenes()
@@ -110,22 +126,6 @@ namespace TPGrupoE.Almacenes
         }
         
 
-        //VER SI HAY QUE ADAPTAR ESTA FUNCION
-        internal static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
-        {
-            if (OrdenPreparacionAlmacen.ordenesPreparacion.Count == 0)
-            {
-                nuevaOrden.IdOrdenPreparacion = 1;
-            }
-            else
-            {
-                nuevaOrden.IdOrdenPreparacion = OrdenPreparacionAlmacen.OrdenesPreparacion.Max(op => op.IdOrdenPreparacion) + 1;
-            }
-
-
-            ordenesPreparacion.Add(nuevaOrden);
-            return null; //sin errores.
-        }
 
         //COMENTO POR AHORA PERO SEGURO NOS SIRVE MAS ADELANTE
         /*

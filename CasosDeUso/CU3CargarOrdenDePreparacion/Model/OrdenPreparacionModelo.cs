@@ -9,12 +9,9 @@ using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparac
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
-internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benja haga un pull
+internal partial class OrdenPreparacionModelo
 {
-    
-    
-
-    public static List<ClienteEntidad> Clientes
+    public List<ClienteEntidad> Clientes
     {
         get
         {
@@ -34,7 +31,7 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
-    public static List<ProductoEntidad> Productos
+    public List<ProductoEntidad> Productos
     {
         get
         {
@@ -44,19 +41,15 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 Productos.Add(new ProductoEntidad
                 {
                     IdProducto = Producto.IdProducto,
-                    //CuitCliente = Producto.CuitCliente,
                     Sku = Producto.Sku,
-                    //TipoProducto = Producto.TipoProducto,
-                    //CantidadEnStock = Producto.CantidadEnStock,
                     DescripcionProducto= Producto.DescripcionProducto,
-                    //Ubicacion = Producto.Ubicacion,
                 });
             }
             return Productos;
         }
     }
 
-    public static List<StockFisicoEntidad> Stock
+    public List<StockFisicoEntidad> Stock
     {
         get
         {
@@ -67,7 +60,13 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 {
                     IdCliente = stockFisico.IdCliente,
                     IdProducto = stockFisico.IdProducto,
-                    Posiciones = stockFisico.Posiciones,
+                    Posiciones = stockFisico.Posiciones.Select(p => new PosicionesPorDeposito
+                    {
+                        IdDeposito = p.IdDeposito,
+                        Posicion = p.Posicion,
+                        PalletCerrado = p.PalletCerrado,
+                        Cantidad = p.Cantidad
+                    }).ToList()
                 });
             }
             // Restar cantidades según las ordenes ya registradas
@@ -83,8 +82,13 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
 
                     int cantidadARestar = productoOrden.Cantidad;
 
-                    // Restar de las posiciones, de forma secuencial
-                    foreach (var pos in stockCliente.Posiciones)
+                    // 🔴 FILTRAR POR PALLET CERRADO/ABIERTO ANTES DE RESTAR
+                    var posicionesFiltradas = stockCliente.Posiciones
+                        .Where(p => p.PalletCerrado == productoOrden.PalletCerrado)
+                        .OrderByDescending(p => p.Cantidad)
+                        .ToList();
+
+                    foreach (var pos in posicionesFiltradas)
                     {
                         if (cantidadARestar <= 0) break;
 
@@ -99,7 +103,7 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
-    public static List<DepositoEntidad> Depositos
+    public List<DepositoEntidad> Depositos
     {
         get
         {
@@ -116,6 +120,31 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
             return depositos;
 
         }
+    }
+
+    public int GenerarIdOrden()
+    {
+        return OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0
+            ? 1
+            : OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
+    }
+
+    public List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
+    {
+            return Stock
+                .Where(stock => stock.Posiciones.Any(p => p.PalletCerrado == palletCerrado))
+                .ToList();
+    }
+
+    public string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
+    {
+        OrdenPreparacionAlmacen.NuevaOrdenPreparacion(nuevaOrden);
+        return null;
+    }
+
+    public void GrabarOP()
+    {
+        OrdenPreparacionAlmacen.GrabarOP();
     }
 
     /*public static List<StockFisicoEntidad> StockFisico
