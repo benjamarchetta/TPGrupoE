@@ -9,12 +9,9 @@ using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparac
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
-internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benja haga un pull
+internal partial class OrdenPreparacionModelo
 {
-    
-    
-
-    public static List<ClienteEntidad> Clientes
+    public List<ClienteEntidad> Clientes
     {
         get
         {
@@ -34,7 +31,7 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
-    public static List<ProductoEntidad> Productos
+    public List<ProductoEntidad> Productos
     {
         get
         {
@@ -44,19 +41,15 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
                 Productos.Add(new ProductoEntidad
                 {
                     IdProducto = Producto.IdProducto,
-                    //CuitCliente = Producto.CuitCliente,
                     Sku = Producto.Sku,
-                    //TipoProducto = Producto.TipoProducto,
-                    //CantidadEnStock = Producto.CantidadEnStock,
                     DescripcionProducto= Producto.DescripcionProducto,
-                    //Ubicacion = Producto.Ubicacion,
                 });
             }
             return Productos;
         }
     }
 
-    public static List<StockFisicoEntidad> Stock
+    public List<StockFisicoEntidad> Stock
     {
         get
         {
@@ -99,7 +92,7 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
-    public static List<DepositoEntidad> Depositos
+    public List<DepositoEntidad> Depositos
     {
         get
         {
@@ -118,27 +111,27 @@ internal class OrdenPreparacionModelo //nota ara: solo lo comente hasta que benj
         }
     }
 
-    public static int GenerarIdOrden()
+    public int GenerarIdOrden()
     {
         return OrdenPreparacionAlmacen.OrdenesPreparacion.Count == 0
             ? 1
             : OrdenPreparacionAlmacen.OrdenesPreparacion.Max(o => o.IdOrdenPreparacion) + 1;
     }
 
-    public static List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
-        {
-            return OrdenPreparacionModelo.Stock
+    public List<StockFisicoEntidad> FiltrarPorPalletCerrado(bool palletCerrado)
+    {
+            return Stock
                 .Where(stock => stock.Posiciones.Any(p => p.PalletCerrado == palletCerrado))
                 .ToList();
-        }
-
-    public static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
-    {
-        OrdenPreparacionAlmacen.NuevaOrdenPreparacion(nuevaOrden); // <- uso del método de almacén
-        return null; // sin errores
     }
 
-    public static void GrabarOP()
+    public string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
+    {
+        OrdenPreparacionAlmacen.NuevaOrdenPreparacion(nuevaOrden);
+        return null;
+    }
+
+    public void GrabarOP()
     {
         OrdenPreparacionAlmacen.GrabarOP();
     }

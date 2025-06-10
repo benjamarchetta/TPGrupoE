@@ -24,6 +24,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             InitializeComponent();
         }
+        OrdenPreparacionModelo Modelo = new OrdenPreparacionModelo();
 
         private int idClienteSeleccionado = -1;
         private int idDepositoSeleccionado;
@@ -33,7 +34,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
             groupBox1.SendToBack();
-            id = OrdenPreparacionModelo.GenerarIdOrden();
+            id = Modelo.GenerarIdOrden();
             palletCerradoComboBox.SelectedIndex = -1;
             palletCerradoComboBox.Enabled = false;
             depositoComboBox.SelectedIndex = -1;
@@ -42,7 +43,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
             //Razon Social cmbobox
             razonSocialComboBox.SelectedIndexChanged -= razonSocialComboBox_SelectedIndexChanged;
-            razonSocialComboBox.DataSource = OrdenPreparacionModelo.Clientes;
+            razonSocialComboBox.DataSource = Modelo.Clientes;
             razonSocialComboBox.DisplayMember = "RazonSocial";
             razonSocialComboBox.ValueMember = "Cuit";
             razonSocialComboBox.SelectedIndex = -1;
@@ -83,7 +84,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
 
                 // Filtrar el stock del cliente según si tiene posiciones con el palletCerrado elegido
-                var depositosFiltrados = OrdenPreparacionModelo.Stock
+                var depositosFiltrados = Modelo.Stock
                     .Where(s => s.IdCliente == Cliente.IdCliente)
                     .SelectMany(s => s.Posiciones)
                     .Where(p => p.PalletCerrado == palletCerrado) // 🔴 filtro por PalletCerrado
@@ -92,7 +93,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .ToList();
 
                 // Obtener los depósitos válidos con esa condición
-                var depositosAMostrar = OrdenPreparacionModelo.Depositos
+                var depositosAMostrar = Modelo.Depositos
                     .Where(d => depositosFiltrados.Contains(d.IdDeposito))
                     .ToList();
 
@@ -204,7 +205,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 idClienteSeleccionado = Cliente.IdCliente;
 
-                var depositosFiltrados = OrdenPreparacionModelo.Stock
+                var depositosFiltrados = Modelo.Stock
                     .Where(s => s.IdCliente == Cliente.IdCliente)
                     .SelectMany(s => s.Posiciones)
                     .Where(p => p.PalletCerrado == palletCerrado)
@@ -212,7 +213,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .Distinct()
                     .ToList();
 
-                var depositosAMostrar = OrdenPreparacionModelo.Depositos
+                var depositosAMostrar = Modelo.Depositos
                     .Where(d => depositosFiltrados.Contains(d.IdDeposito))
                     .ToList();
 
@@ -246,7 +247,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 idDepositoSeleccionado = deposito.IdDeposito;
 
                 // Obtener los IDs de producto filtrados por pallet, cliente y depósito
-                var idsProductosFiltrados = OrdenPreparacionModelo
+                var idsProductosFiltrados = Modelo
                     .FiltrarPorPalletCerrado(palletCerrado)
                     .Where(stock =>
                         stock.IdCliente == idClienteSeleccionado &&
@@ -257,7 +258,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .ToList();
 
                 // Obtener las entidades ProductoEntidad correspondientes
-                var productosFiltrados = OrdenPreparacionModelo.Productos
+                var productosFiltrados = Modelo.Productos
                     .Where(p => idsProductosFiltrados.Contains(p.IdProducto))
                     .ToList();
 
@@ -302,7 +303,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 skuTextBox.Text = productoSeleccionado.Sku;
 
                 // Buscar TODAS las entradas de stock para ese cliente y producto
-                var stockDelProducto = OrdenPreparacionModelo.Stock
+                var stockDelProducto = Modelo.Stock
                     .Where(s =>
                         s.IdCliente == idClienteSeleccionado &&
                         s.IdProducto == productoSeleccionado.IdProducto
@@ -342,7 +343,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             int.TryParse(cantidadARetirarTextBox.Text, out int cantidadARetirar))
             {
                 // Buscar TODAS las entradas de stock para ese cliente y producto
-                var stockDelProducto = OrdenPreparacionModelo.Stock
+                var stockDelProducto = Modelo.Stock
                     .Where(s =>
                         s.IdCliente == idClienteSeleccionado &&
                         s.IdProducto == producto.IdProducto
@@ -402,7 +403,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
                 // Buscar stock para el cliente, producto y depósito seleccionado
-                var stockProducto = OrdenPreparacionModelo.Stock
+                var stockProducto = Modelo.Stock
                     .Where(stock =>
                         stock.IdCliente == idClienteSeleccionado &&
                         stock.IdProducto == producto.IdProducto
@@ -499,7 +500,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 int cantidadARetirada = int.Parse(item.SubItems[1].Text);
 
                 // Buscar el producto que se está quitando
-                var producto = OrdenPreparacionModelo.Productos.FirstOrDefault(p => p.Sku == sku);
+                var producto = Modelo.Productos.FirstOrDefault(p => p.Sku == sku);
                 if (producto == null) continue;
 
                 // Seleccionar este producto en el ComboBox
@@ -508,7 +509,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .FirstOrDefault(p => p.IdProducto == producto.IdProducto);
 
                 // Buscar el stock físico específico (cliente + producto)
-                var stockProducto = OrdenPreparacionModelo.Stock
+                var stockProducto = Modelo.Stock
                     .FirstOrDefault(s =>
                         s.IdProducto == producto.IdProducto &&
                         s.IdCliente == idClienteSeleccionado);
@@ -605,7 +606,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             };
 
             // Agregar la orden al almacén
-            OrdenPreparacionModelo.NuevaOrdenPreparacion(Orden);
+            Modelo.NuevaOrdenPreparacion(Orden);
             string Pallet;
             if (palletCerrado)
             {
@@ -631,7 +632,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             
-           OrdenPreparacionModelo.GrabarOP();
+           Modelo.GrabarOP();
             /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
             foreach (OrdenPreparacionEntidad entidad in ordenes)
             {
