@@ -60,7 +60,13 @@ internal partial class OrdenPreparacionModelo
                 {
                     IdCliente = stockFisico.IdCliente,
                     IdProducto = stockFisico.IdProducto,
-                    Posiciones = stockFisico.Posiciones,
+                    Posiciones = stockFisico.Posiciones.Select(p => new PosicionesPorDeposito
+                    {
+                        IdDeposito = p.IdDeposito,
+                        Posicion = p.Posicion,
+                        PalletCerrado = p.PalletCerrado,
+                        Cantidad = p.Cantidad
+                    }).ToList()
                 });
             }
             // Restar cantidades según las ordenes ya registradas
@@ -76,8 +82,13 @@ internal partial class OrdenPreparacionModelo
 
                     int cantidadARestar = productoOrden.Cantidad;
 
-                    // Restar de las posiciones, de forma secuencial
-                    foreach (var pos in stockCliente.Posiciones)
+                    // 🔴 FILTRAR POR PALLET CERRADO/ABIERTO ANTES DE RESTAR
+                    var posicionesFiltradas = stockCliente.Posiciones
+                        .Where(p => p.PalletCerrado == productoOrden.PalletCerrado)
+                        .OrderByDescending(p => p.Cantidad)
+                        .ToList();
+
+                    foreach (var pos in posicionesFiltradas)
                     {
                         if (cantidadARestar <= 0) break;
 
