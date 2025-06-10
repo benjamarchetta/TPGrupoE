@@ -7,7 +7,7 @@ using TPGrupoE.Almacenes;
 
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
-    internal class GestionOrdenSeleccionModel
+    internal partial class GestionOrdenSeleccionModel
     {
         public List<OrdenSeleccionDTO> OrdenesDeSeleccion { get; private set; }
 

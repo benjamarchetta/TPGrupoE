@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
+    internal partial class GestionOrdenSeleccionModel
+    { 
     public class OrdenSeleccionDTO
     {
         public int IdOrdenSeleccion { get; set; }
@@ -13,4 +15,5 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         public string Estado { get; set; } = string.Empty;
         public string FechaDespacho { get; set; } = "Sin fecha";
     }
+   }
 }

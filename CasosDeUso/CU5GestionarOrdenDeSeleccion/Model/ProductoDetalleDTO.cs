@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
+    internal partial class GestionOrdenSeleccionModel
+    { 
     public class ProductoDetalleDTO
     {
         public string Sku { get; set; } = string.Empty;
@@ -13,5 +15,6 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         public int Cantidad { get; set; }
         public string PalletCerrado { get; set; } = "No";
         public string Ubicacion { get; set; } = "Sin ubicación";
+    }
     }
 }
