@@ -24,7 +24,7 @@ namespace TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms
         }
         private void CargarOrdenPreparacionButton_Click(object sender, EventArgs e)
         {
-            ProcesarOrdenPreparacionForm cargaOrdenDePreparacionForm = new ProcesarOrdenPreparacionForm();
+            CargarOrdenPreparacionForm cargaOrdenDePreparacionForm = new CargarOrdenPreparacionForm();
             this.Hide();
             cargaOrdenDePreparacionForm.Show();
         }

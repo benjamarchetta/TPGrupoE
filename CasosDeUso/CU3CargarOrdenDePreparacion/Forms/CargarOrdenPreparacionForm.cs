@@ -18,9 +18,9 @@ using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
-    public partial class ProcesarOrdenPreparacionForm : Form
+    public partial class CargarOrdenPreparacionForm : Form
     {
-        public ProcesarOrdenPreparacionForm()
+        public CargarOrdenPreparacionForm()
         {
             InitializeComponent();
         }
@@ -307,25 +307,26 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     .Where(s =>
                         s.IdCliente == idClienteSeleccionado &&
                         s.IdProducto == productoSeleccionado.IdProducto
-                    )
-                    .ToList();
-
-                // Sumar cantidades disponibles filtrando por depósito y palletCerrado
-                var cantidadDisponible = stockDelProducto
-                    .SelectMany(s => s.Posiciones)
-                    .Where(p =>
-                        p.IdDeposito == idDepositoSeleccionado &&
-                        p.PalletCerrado == palletCerrado
-                    )
+                    ).SelectMany(s => s.Posiciones)
+                    .Where(p => p.IdDeposito == idDepositoSeleccionado &&
+                       p.PalletCerrado == palletCerrado)
                     .Sum(p => p.Cantidad);
-                if (cantidadDisponible > 0)
+
+                // 2. Calcular cantidad ya reservada en la orden actual
+                int cantidadReservada = 0;
+                foreach (ListViewItem item in ordenDePreparacionListView.Items)
                 {
-                    cantidadEnStockTextBox.Text = cantidadDisponible.ToString();
+                    if (item.Text == productoSeleccionado.Sku) // Comparar por SKU
+                    {
+                        cantidadReservada += int.Parse(item.SubItems[1].Text);
+                    }
                 }
-                else
-                {
-                    cantidadEnStockTextBox.Text = "0";
-                }
+
+                // 3. Calcular stock realmente disponible
+                int stockDisponible = stockDelProducto - cantidadReservada;
+
+                // Mostrar el stock disponible (nunca menor que 0)
+                cantidadEnStockTextBox.Text = Math.Max(stockDisponible, 0).ToString();
             }
             else
             {
@@ -334,7 +335,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             }
 
             cantidadARetirarTextBox.Enabled = productoComboBox.SelectedIndex != -1;
-
         }
 
         private void cantidadARetirarTextBox_TextChanged_1(object sender, EventArgs e)
@@ -402,43 +402,52 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
-                // Buscar stock para el cliente, producto y depósito seleccionado
-                var stockProducto = Modelo.Stock
-                    .Where(stock =>
-                        stock.IdCliente == idClienteSeleccionado &&
-                        stock.IdProducto == producto.IdProducto
-                    )
-                    .SelectMany(stock => stock.Posiciones)
-                    .Where(p =>
-                        p.IdDeposito == idDepositoSeleccionado &&
-                        p.PalletCerrado == palletCerrado
-                    )
-                    .ToList();
+                // 🔴 Obtener el stock FÍSICO REAL (no el del modelo ya descontado)
+                var stockReal = StockFisicoAlmacen.Stock
+                    .FirstOrDefault(s =>
+                        s.IdCliente == idClienteSeleccionado &&
+                        s.IdProducto == producto.IdProducto);
 
-                if (!stockProducto.Any())
+                if (stockReal == null)
                 {
                     MessageBox.Show("No hay stock disponible con ese filtro.");
                     return;
                 }
 
-                int cantidadEnStock = stockProducto.Sum(p => p.Cantidad);
-                string posiciones = string.Join(", ", stockProducto.Select(p => p.Posicion));
+                // Filtrar por depósito y tipo de pallet
+                var posicionesDisponibles = stockReal.Posiciones
+                    .Where(p =>
+                        p.IdDeposito == idDepositoSeleccionado &&
+                        p.PalletCerrado == palletCerrado)
+                    .OrderByDescending(p => p.Cantidad)
+                    .ToList();
+
+                if (!posicionesDisponibles.Any())
+                {
+                    MessageBox.Show("No hay stock disponible con ese filtro.");
+                    return;
+                }
+
+                // Calcular stock disponible REAL (considerando órdenes existentes)
+                int stockDisponible = posicionesDisponibles.Sum(p => p.Cantidad);
+                int cantidadReservada = ObtenerCantidadReservada(producto.IdProducto);
+                int cantidadRealDisponible = stockDisponible - cantidadReservada;
 
                 string Sku = producto.Sku;
                 int CantidadARetirar = int.Parse(cantidadARetirarTextBox.Text);
 
-                if (CantidadARetirar > cantidadEnStock)
+                // Validar contra stock REAL disponible
+                if (CantidadARetirar > cantidadRealDisponible)
                 {
-                    MessageBox.Show("No hay suficiente stock disponible.");
+                    MessageBox.Show($"No hay suficiente stock disponible. Máximo: {cantidadRealDisponible}");
                     return;
                 }
 
-                // Buscar si ya existe el producto en la lista
+                // Buscar/crear item en ListView
                 ListViewItem filaExistente = ordenDePreparacionListView.Items
                     .Cast<ListViewItem>()
                     .FirstOrDefault(item => item.Text == Sku)!;
 
-                // Agregar o actualizar fila en la lista
                 if (filaExistente != null)
                 {
                     int cantidadAnterior = int.Parse(filaExistente.SubItems[1].Text);
@@ -448,26 +457,23 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 {
                     filaExistente = ordenDePreparacionListView.Items.Add(Sku);
                     filaExistente.SubItems.Add(CantidadARetirar.ToString());
-                    filaExistente.SubItems.Add(posiciones);
+                    filaExistente.SubItems.Add(string.Join(", ", posicionesDisponibles.Select(p => p.Posicion)));
                 }
 
-                // Restar stock y registrar de dónde se retiró
+                // Restar de las posiciones físicas (simulación)
                 int cantidadRestante = CantidadARetirar;
                 var posicionesUtilizadas = new List<(string posicion, int cantidad, bool pallet)>();
 
-                foreach (var Posicion in stockProducto
-                         .OrderByDescending(p => p.Cantidad))
+                foreach (var posicion in posicionesDisponibles)
                 {
-                    if (cantidadRestante == 0) break;
+                    if (cantidadRestante <= 0) break;
 
-                    int descontar = Math.Min(Posicion.Cantidad, cantidadRestante);
-                    Posicion.Cantidad -= descontar;
-                    cantidadRestante -= descontar;
-
-                    posicionesUtilizadas.Add((Posicion.Posicion, descontar, palletCerrado));
+                    int aDescontar = Math.Min(posicion.Cantidad, cantidadRestante);
+                    cantidadRestante -= aDescontar;
+                    posicionesUtilizadas.Add((posicion.Posicion, aDescontar, palletCerrado));
                 }
 
-                // Guardar info en el Tag del item para poder reponer proporcionalmente
+                // Actualizar Tag
                 if (filaExistente.Tag is List<(string, int, bool)> existentes)
                 {
                     existentes.AddRange(posicionesUtilizadas);
@@ -477,19 +483,32 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     filaExistente.Tag = posicionesUtilizadas;
                 }
 
-                // Actualizar el TextBox con el nuevo stock
-                int nuevoStock = stockProducto.Sum(p => p.Cantidad);
-                cantidadEnStockTextBox.Text = nuevoStock.ToString();
+                // Actualizar con el nuevo cálculo
+                cantidadEnStockTextBox.Text = (cantidadRealDisponible - CantidadARetirar).ToString();
 
+                // Limpiar controles
                 cantidadARetirarTextBox.Text = "";
                 agregarProductoButton.Enabled = false;
 
-                // Activar/desactivar controles según la lógica
-                depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-                razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-                palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-                dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
+                // Actualizar estados
+                bool listaVacia = ordenDePreparacionListView.Items.Count == 0;
+                depositoComboBox.Enabled = listaVacia;
+                razonSocialComboBox.Enabled = listaVacia;
+                palletCerradoComboBox.Enabled = listaVacia;
+                dniTransportistaTextBox.Enabled = !listaVacia;
             }
+        }
+
+        private int ObtenerCantidadReservada(int idProducto)
+        {
+            return ordenDePreparacionListView.Items
+                .Cast<ListViewItem>()
+                .Where(item =>
+                {
+                    var prod = Modelo.Productos.FirstOrDefault(p => p.Sku == item.Text);
+                    return prod != null && prod.IdProducto == idProducto;
+                })
+                .Sum(item => int.Parse(item.SubItems[1].Text));
         }
 
         private void quitarProductoButton_Click(object sender, EventArgs e)
@@ -533,17 +552,16 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                         }
                     }
 
-                    // Calcular nuevo stock para mostrar
-                    var stockActual = stockProducto.Posiciones
-                        .Where(p =>
-                            p.IdDeposito == idDepositoSeleccionado &&
-                            p.PalletCerrado == palletCerrado)
-                        .Sum(p => p.Cantidad);
+                    // 🔴 CALCULAR EL STOCK DISPONIBLE CORRECTAMENTE (considerando órdenes existentes)
+                    var stockDisponible = CalcularStockDisponibleReal(
+                        producto.IdProducto,
+                        idClienteSeleccionado,
+                        idDepositoSeleccionado,
+                        palletCerrado);
 
-                    cantidadEnStockTextBox.Text = stockActual.ToString();
+                    cantidadEnStockTextBox.Text = stockDisponible.ToString();
                 }
 
-                // Eliminar el item de la lista
                 ordenDePreparacionListView.Items.Remove(item);
             }
 
@@ -554,6 +572,34 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             cargarOrdenButton.Enabled = hayItems;
             razonSocialComboBox.Enabled = !hayItems;
             palletCerradoComboBox.Enabled = !hayItems;
+        }
+
+        private int CalcularStockDisponibleReal(int idProducto, int idCliente, int idDeposito, bool palletCerrado)
+        {
+            // 1. Obtener stock físico base
+            var stockFisico = StockFisicoAlmacen.Stock
+                .FirstOrDefault(s =>
+                    s.IdProducto == idProducto &&
+                    s.IdCliente == idCliente)?
+                .Posiciones
+                .Where(p =>
+                    p.IdDeposito == idDeposito &&
+                    p.PalletCerrado == palletCerrado)
+                .Sum(p => p.Cantidad) ?? 0;
+
+            // 2. Obtener cantidades reservadas en órdenes (excepto la actual)
+            int cantidadReservada = OrdenPreparacionAlmacen.OrdenesPreparacion
+                .Where(o =>
+                    o.IdCliente == idCliente &&
+                    o.Estado == 0) // Solo órdenes activas
+                .SelectMany(o => o.ProductoOrden)
+                .Where(po =>
+                    po.IdProducto == idProducto &&
+                    po.PalletCerrado == palletCerrado)
+                .Sum(po => po.Cantidad);
+
+            // 3. Calcular stock realmente disponible
+            return stockFisico - cantidadReservada;
         }
         private void ordenDePreparacionListView_SelectedIndexChanged(object sender, EventArgs e)
         {

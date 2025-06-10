@@ -1,6 +1,6 @@
 ﻿namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
-    partial class ProcesarOrdenPreparacionForm
+    partial class CargarOrdenPreparacionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -170,7 +170,7 @@
             productoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             productoComboBox.Enabled = false;
             productoComboBox.FormattingEnabled = true;
-            productoComboBox.Location = new Point(400, 174);
+            productoComboBox.Location = new Point(400, 184);
             productoComboBox.Name = "productoComboBox";
             productoComboBox.Size = new Size(385, 23);
             productoComboBox.TabIndex = 20;
@@ -179,7 +179,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(400, 156);
+            label3.Location = new Point(400, 166);
             label3.Name = "label3";
             label3.Size = new Size(56, 15);
             label3.TabIndex = 21;
@@ -188,7 +188,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(400, 200);
+            label6.Location = new Point(400, 210);
             label6.Name = "label6";
             label6.Size = new Size(99, 15);
             label6.TabIndex = 22;
@@ -197,7 +197,7 @@
             // skuTextBox
             // 
             skuTextBox.Enabled = false;
-            skuTextBox.Location = new Point(400, 218);
+            skuTextBox.Location = new Point(400, 228);
             skuTextBox.Name = "skuTextBox";
             skuTextBox.Size = new Size(188, 23);
             skuTextBox.TabIndex = 23;
@@ -207,7 +207,7 @@
             // cantidadEnStockTextBox
             // 
             cantidadEnStockTextBox.Enabled = false;
-            cantidadEnStockTextBox.Location = new Point(594, 218);
+            cantidadEnStockTextBox.Location = new Point(594, 228);
             cantidadEnStockTextBox.Name = "cantidadEnStockTextBox";
             cantidadEnStockTextBox.Size = new Size(191, 23);
             cantidadEnStockTextBox.TabIndex = 24;
@@ -217,7 +217,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(589, 200);
+            label9.Location = new Point(589, 210);
             label9.Name = "label9";
             label9.Size = new Size(102, 15);
             label9.TabIndex = 25;
@@ -228,7 +228,7 @@
             palletCerradoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             palletCerradoComboBox.FormattingEnabled = true;
             palletCerradoComboBox.Items.AddRange(new object[] { "No", "Sí" });
-            palletCerradoComboBox.Location = new Point(12, 127);
+            palletCerradoComboBox.Location = new Point(12, 137);
             palletCerradoComboBox.Name = "palletCerradoComboBox";
             palletCerradoComboBox.Size = new Size(385, 23);
             palletCerradoComboBox.TabIndex = 26;
@@ -237,7 +237,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(12, 108);
+            label10.Location = new Point(12, 119);
             label10.Name = "label10";
             label10.Size = new Size(79, 15);
             label10.TabIndex = 27;
@@ -246,7 +246,7 @@
             // cantidadARetirarLabel
             // 
             cantidadARetirarLabel.AutoSize = true;
-            cantidadARetirarLabel.Location = new Point(12, 200);
+            cantidadARetirarLabel.Location = new Point(12, 210);
             cantidadARetirarLabel.Name = "cantidadARetirarLabel";
             cantidadARetirarLabel.Size = new Size(98, 15);
             cantidadARetirarLabel.TabIndex = 28;
@@ -255,7 +255,7 @@
             // cantidadARetirarTextBox
             // 
             cantidadARetirarTextBox.Enabled = false;
-            cantidadARetirarTextBox.Location = new Point(12, 218);
+            cantidadARetirarTextBox.Location = new Point(12, 228);
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
             cantidadARetirarTextBox.Size = new Size(382, 23);
             cantidadARetirarTextBox.TabIndex = 29;
@@ -265,7 +265,7 @@
             // agregarProductoButton
             // 
             agregarProductoButton.Enabled = false;
-            agregarProductoButton.Location = new Point(534, 258);
+            agregarProductoButton.Location = new Point(534, 267);
             agregarProductoButton.Name = "agregarProductoButton";
             agregarProductoButton.Size = new Size(251, 26);
             agregarProductoButton.TabIndex = 30;
@@ -315,7 +315,7 @@
             depositoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             depositoComboBox.Enabled = false;
             depositoComboBox.FormattingEnabled = true;
-            depositoComboBox.Location = new Point(12, 174);
+            depositoComboBox.Location = new Point(12, 184);
             depositoComboBox.Name = "depositoComboBox";
             depositoComboBox.Size = new Size(382, 23);
             depositoComboBox.TabIndex = 40;
@@ -324,7 +324,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(11, 156);
+            label11.Location = new Point(11, 166);
             label11.Name = "label11";
             label11.Size = new Size(97, 15);
             label11.TabIndex = 41;
@@ -342,9 +342,9 @@
             // 
             // groupBox1
             // 
-            groupBox1.Location = new Point(8, 156);
+            groupBox1.Location = new Point(7, 119);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(782, 100);
+            groupBox1.Size = new Size(782, 142);
             groupBox1.TabIndex = 43;
             groupBox1.TabStop = false;
             // 
