@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
@@ -118,6 +119,30 @@ internal partial class OrdenPreparacionModelo
                 });
             }
             return depositos;
+
+        }
+    }
+
+    public List<OrdenPreparacionEntidad> OrdenesPreparacion
+    {
+        get
+        {
+            var ordenes = new List<OrdenPreparacionEntidad>();
+            foreach (var orden in OrdenPreparacionAlmacen.OrdenesPreparacion)
+            {
+                ordenes.Add(new OrdenPreparacionEntidad
+                {
+                    IdOrdenPreparacion = orden.IdOrdenPreparacion,
+                    IdCliente = orden.IdCliente,
+                    IdDeposito = orden.IdDeposito,
+                    DniTransportista = orden.DniTransportista,
+                    Estado = orden.Estado,
+                    FechaEntrega = orden.FechaEntrega,
+                    PalletCerrado = orden.PalletCerrado,
+                    ProductoOrden = orden.ProductoOrden,
+                });
+            }
+            return ordenes;
 
         }
     }

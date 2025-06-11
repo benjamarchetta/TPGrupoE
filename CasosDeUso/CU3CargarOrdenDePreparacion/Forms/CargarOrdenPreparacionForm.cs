@@ -54,17 +54,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         {
             palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
 
-           /* var productosFiltrados = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado);
-
-            var idsClientesConStock = productosFiltrados
-                .Select(s => s.IdCliente)
-                .Distinct()
-                .ToList();
-
-            var clientesFiltrados = OrdenPreparacionModelo.Clientes
-                .Where(c => idsClientesConStock.Contains(c.IdCliente))
-                .ToList();*/
-
             if (palletCerrado)
             {
                 cantidadARetirarLabel.Text = "Cantidad de pallets a retirar";
@@ -403,10 +392,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
                 // 🔴 Obtener el stock FÍSICO REAL (no el del modelo ya descontado)
-                var stockReal = StockFisicoAlmacen.Stock
+                var stockReal = Modelo.Stock
                     .FirstOrDefault(s =>
-                        s.IdCliente == idClienteSeleccionado &&
-                        s.IdProducto == producto.IdProducto);
+                    s.IdCliente == idClienteSeleccionado &&
+                    s.IdProducto == producto.IdProducto);
 
                 if (stockReal == null)
                 {
@@ -577,7 +566,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private int CalcularStockDisponibleReal(int idProducto, int idCliente, int idDeposito, bool palletCerrado)
         {
             // 1. Obtener stock físico base
-            var stockFisico = StockFisicoAlmacen.Stock
+            var stockFisico = Modelo.Stock
                 .FirstOrDefault(s =>
                     s.IdProducto == idProducto &&
                     s.IdCliente == idCliente)?
@@ -588,7 +577,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 .Sum(p => p.Cantidad) ?? 0;
 
             // 2. Obtener cantidades reservadas en órdenes (excepto la actual)
-            int cantidadReservada = OrdenPreparacionAlmacen.OrdenesPreparacion
+            int cantidadReservada = Modelo.OrdenesPreparacion
                 .Where(o =>
                     o.IdCliente == idCliente &&
                     o.Estado == 0) // Solo órdenes activas
