@@ -8,7 +8,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
     internal partial class GestionOrdenSeleccionModel
     { 
-    public class OrdenSeleccionDTO
+    public class OrdenSeleccion
     {
         public int IdOrdenSeleccion { get; set; }
         public string Cliente { get; set; } = string.Empty;

@@ -9,7 +9,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
 {
     internal partial class GestionOrdenSeleccionModel
     {
-        public List<OrdenSeleccionDTO> OrdenesDeSeleccion { get; private set; }
+        public List<OrdenSeleccion> OrdenesDeSeleccion { get; private set; }
 
         public GestionOrdenSeleccionModel()
         {
@@ -19,7 +19,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         private void CargarOrdenesPendientes()
         {
             var ordenes = OrdenPickingAlmacen.BuscarOrdenesPendientes();
-            OrdenesDeSeleccion = new List<OrdenSeleccionDTO>();
+            OrdenesDeSeleccion = new List<OrdenSeleccion>();
 
             foreach (var orden in ordenes)
             {
@@ -39,7 +39,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                         fechaMasProxima = op.FechaEntrega;
                 }
 
-                OrdenesDeSeleccion.Add(new OrdenSeleccionDTO
+                OrdenesDeSeleccion.Add(new OrdenSeleccion
                 {
                     IdOrdenSeleccion = orden.IdOrdenSeleccion,
                     Cliente = clienteNombre,
@@ -49,10 +49,10 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
             }
         }
 
-        public List<ProductoDetalleDTO> ObtenerDetalleProductos(int idOrdenSeleccion)
+        public List<ProductoDetalle> ObtenerDetalleProductos(int idOrdenSeleccion)
         {
             var ordenSeleccion = OrdenPickingAlmacen.BuscarOrdenPorId(idOrdenSeleccion);
-            var lista = new List<ProductoDetalleDTO>();
+            var lista = new List<ProductoDetalle>();
 
             if (ordenSeleccion == null) return lista;
 
@@ -76,7 +76,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                         if (posicionesFiltradas.Any())
                         {
                             ubicacion = string.Join(", ", posicionesFiltradas
-                                .Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
+                                .Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad} unidades)"));
                             // Si se desea filtrar por cliente, descomentar la siguiente línea y comentar la anterior,  Si Posicion tiene una propiedad IdCliente
                             /*.Where(p => p.PalletCerrado == true 
                               && p.IdDeposito == ordenPrep.IdDeposito
@@ -85,7 +85,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                         }
                     }
 
-                    lista.Add(new ProductoDetalleDTO
+                    lista.Add(new ProductoDetalle
                     {
                         Sku = productoEntidad?.Sku ?? "N/A",
                         Descripcion = productoEntidad?.DescripcionProducto ?? "Sin descripción",

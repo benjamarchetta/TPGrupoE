@@ -43,7 +43,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             detalleProductosListView.Columns.Add("Descripción", 100);
             detalleProductosListView.Columns.Add("Cantidad", 100);
             detalleProductosListView.Columns.Add("Pallet Cerrado", 120);
-            detalleProductosListView.Columns.Add("Ubicación", 100);
+            detalleProductosListView.Columns.Add("Ubicación", 400);
 
             VerDetallesButton.Text = "Seleccionar mercadería";
             VerDetallesButton.Enabled = false;
