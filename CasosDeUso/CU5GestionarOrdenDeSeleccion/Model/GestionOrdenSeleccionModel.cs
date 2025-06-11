@@ -69,7 +69,20 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                     string ubicacion = "Sin ubicación";
                     if (stock != null && stock.Posiciones.Any())
                     {
-                        ubicacion = string.Join(", ", stock.Posiciones.Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
+                        var posicionesFiltradas = stock.Posiciones
+                        .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito)
+                        .ToList();
+
+                        if (posicionesFiltradas.Any())
+                        {
+                            ubicacion = string.Join(", ", posicionesFiltradas
+                                .Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad})"));
+                            // Si se desea filtrar por cliente, descomentar la siguiente línea y comentar la anterior,  Si Posicion tiene una propiedad IdCliente
+                            /*.Where(p => p.PalletCerrado == true 
+                              && p.IdDeposito == ordenPrep.IdDeposito
+                               && p.IdCliente == ordenPrep.IdCliente)
+                            */
+                        }
                     }
 
                     lista.Add(new ProductoDetalleDTO
