@@ -85,7 +85,7 @@ internal partial class OrdenPreparacionModelo
 
                     // 🔴 FILTRAR POR PALLET CERRADO/ABIERTO ANTES DE RESTAR
                     var posicionesFiltradas = stockCliente.Posiciones
-                        .Where(p => p.PalletCerrado == productoOrden.PalletCerrado)
+                        .Where(p => p.PalletCerrado == p.PalletCerrado)
                         .OrderByDescending(p => p.Cantidad)
                         .ToList();
 
