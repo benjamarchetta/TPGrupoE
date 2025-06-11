@@ -10,8 +10,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 2,
-        "Cantidad": 30,
-        "PalletCerrado": true
+        "IdCliente" : 3,
+        "Cantidad": 30
       }
     ]
   },
@@ -26,8 +26,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 18,
-        "Cantidad": 40,
-        "PalletCerrado": true
+        "IdCliente": 2,
+        "Cantidad": 40
       }
     ]
   },
@@ -42,8 +42,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 6,
-        "Cantidad": 20,
-        "PalletCerrado": true
+        "IdCliente": 4,
+        "Cantidad": 20
       }
     ]
   },
@@ -58,8 +58,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 10,
-        "Cantidad": 25,
-        "PalletCerrado": true
+        "IdCliente": 4,
+        "Cantidad": 25
       }
     ]
   },
@@ -74,8 +74,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 9,
-        "Cantidad": 30,
-        "PalletCerrado": true
+        "IdCliente": 3,
+        "Cantidad": 30
       }
     ]
   },
@@ -90,8 +90,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 1,
-        "Cantidad": 40,
-        "PalletCerrado": false
+        "IdCliente": 4,
+        "Cantidad": 40
       }
     ]
   },
@@ -106,8 +106,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 8,
-        "Cantidad": 50,
-        "PalletCerrado": false
+        "IdCliente": 3,
+        "Cantidad": 50
       }
     ]
   },
@@ -122,8 +122,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 15,
-        "Cantidad": 20,
-        "PalletCerrado": false
+        "IdCliente": 3,
+        "Cantidad": 20
       }
     ]
   },
@@ -138,8 +138,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 17,
-        "Cantidad": 25,
-        "PalletCerrado": false
+        "IdCliente": 1,
+        "Cantidad": 25
       }
     ]
   },
@@ -154,8 +154,8 @@
     "ProductoOrden": [
       {
         "IdProducto": 17,
-        "Cantidad": 2,
-        "PalletCerrado": false
+        "IdCliente": 1,
+        "Cantidad": 2
       }
     ]
   }

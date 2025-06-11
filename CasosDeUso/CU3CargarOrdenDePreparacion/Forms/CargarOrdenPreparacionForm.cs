@@ -15,6 +15,7 @@ using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparac
 using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
@@ -53,17 +54,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private void palletCerradoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             palletCerrado = palletCerradoComboBox.SelectedIndex == 1;
-
-           /* var productosFiltrados = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado);
-
-            var idsClientesConStock = productosFiltrados
-                .Select(s => s.IdCliente)
-                .Distinct()
-                .ToList();
-
-            var clientesFiltrados = OrdenPreparacionModelo.Clientes
-                .Where(c => idsClientesConStock.Contains(c.IdCliente))
-                .ToList();*/
 
             if (palletCerrado)
             {
@@ -403,10 +393,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             if (productoComboBox.SelectedItem is ProductoEntidad producto)
             {
                 // 🔴 Obtener el stock FÍSICO REAL (no el del modelo ya descontado)
-                var stockReal = StockFisicoAlmacen.Stock
+                var stockReal = Modelo.Stock
                     .FirstOrDefault(s =>
-                        s.IdCliente == idClienteSeleccionado &&
-                        s.IdProducto == producto.IdProducto);
+                    s.IdCliente == idClienteSeleccionado &&
+                    s.IdProducto == producto.IdProducto);
 
                 if (stockReal == null)
                 {
@@ -577,7 +567,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         private int CalcularStockDisponibleReal(int idProducto, int idCliente, int idDeposito, bool palletCerrado)
         {
             // 1. Obtener stock físico base
-            var stockFisico = StockFisicoAlmacen.Stock
+            var stockFisico = Modelo.Stock
                 .FirstOrDefault(s =>
                     s.IdProducto == idProducto &&
                     s.IdCliente == idCliente)?
@@ -588,14 +578,13 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 .Sum(p => p.Cantidad) ?? 0;
 
             // 2. Obtener cantidades reservadas en órdenes (excepto la actual)
-            int cantidadReservada = OrdenPreparacionAlmacen.OrdenesPreparacion
+            int cantidadReservada = Modelo.OrdenesPreparacion
                 .Where(o =>
                     o.IdCliente == idCliente &&
-                    o.Estado == 0) // Solo órdenes activas
+                    o.Estado == 0 && o.PalletCerrado == palletCerrado) // Solo órdenes activas
                 .SelectMany(o => o.ProductoOrden)
                 .Where(po =>
-                    po.IdProducto == idProducto &&
-                    po.PalletCerrado == palletCerrado)
+                    po.IdProducto == idProducto)
                 .Sum(po => po.Cantidad);
 
             // 3. Calcular stock realmente disponible
@@ -619,7 +608,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             foreach (ListViewItem item in ordenDePreparacionListView.Items)
             {
                 string sku = item.SubItems[0].Text;
-                //string tipoProducto = item.SubItems[1].Text;
                 int cantidad = int.Parse(item.SubItems[1].Text);
 
                 if (palletCerradoComboBox.SelectedIndex == 1)
@@ -627,10 +615,12 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     pallet = true;
                 }
 
+                // Buscar el producto por SKU en la lista de productos
+                ProductoEntidad productoACargar = Modelo.Productos.FirstOrDefault(p => p.Sku == sku);
+
                 ProductoOrden productoOrden = new ProductoOrden
                 {
-                    IdProducto = idClienteSeleccionado,
-                    //IdDeposito = idDepositoSeleccionado,
+                    IdProducto = productoACargar.IdProducto,
                     IdCliente = idClienteSeleccionado,
                     Cantidad = cantidad,
                 };

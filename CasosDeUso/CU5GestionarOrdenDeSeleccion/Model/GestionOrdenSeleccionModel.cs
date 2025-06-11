@@ -77,7 +77,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                         Sku = productoEntidad?.Sku ?? "N/A",
                         Descripcion = productoEntidad?.DescripcionProducto ?? "Sin descripción",
                         Cantidad = producto.Cantidad,
-                        PalletCerrado = producto.PalletCerrado ? "Sí" : "No",
+                        //PalletCerrado = producto.PalletCerrado ? "Sí" : "No",
                         Ubicacion = ubicacion
                     });
                 }
