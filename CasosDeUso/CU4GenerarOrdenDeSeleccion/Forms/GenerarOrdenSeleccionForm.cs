@@ -34,26 +34,53 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             HabilitarBotones();
         }
 
-
         private void CargarOrdenesPendientes()
         {
             try
             {
                 var ordenesPendientes = modelo.BuscarOrdenesPendientes();
                 ordenesPendientesListView.Items.Clear();
+                if (ordenesPendientes.Count == 0)
+                {
+                    MessageBox.Show("No hay órdenes pendientes para procesar", "Sin órdenes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Volver al menú principal
+                    var menuForm = new MenuPrincipalGeneralForm();
+                    menuForm.Show();
+                    this.Close();
+                    return;
+                }
 
                 foreach (var orden in ordenesPendientes)
                 {
-                    foreach (var producto in orden.Productos)  // ← AGREGAR: iterar productos
+                    bool esPrimeraFila = true;
+
+                    foreach (var producto in orden.Productos)
                     {
                         ListViewItem item = new ListViewItem();
-                        item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
-                        item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
-                        item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
-                        item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
-                        item.SubItems.Add(producto.Descripcion);  // ← AGREGAR: Producto
-                        item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR: Cantidad
+
+                        if (esPrimeraFila)
+                        {
+                            //  datos completos
+                            item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                            item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                            item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
+                            item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
+                            esPrimeraFila = false;
+                        }
+                        else
+                        {
+                            // espacios vacíos
+                            item.Text = "";
+                            item.SubItems.Add("");
+                            item.SubItems.Add("");
+                            item.SubItems.Add("");
+                        }
+
+                        item.SubItems.Add(producto.Descripcion);
+                        item.SubItems.Add(producto.Cantidad.ToString());
                         item.Tag = orden;
+
                         ordenesPendientesListView.Items.Add(item);
                     }
                 }
@@ -63,19 +90,50 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void AgregarProductosAMercaderias(OrdenPreparacion orden)
         {
-            foreach (var producto in orden.Productos)  // ← AGREGAR este foreach
+            // Verificar si ya existe
+            bool yaEsta = false;
+            foreach (ListViewItem item in mercaderiasAPrepList.Items)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
-                item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
-                item.SubItems.Add(orden.RazonSocial);
-                item.SubItems.Add(orden.Cuit);
-                item.SubItems.Add(producto.Descripcion);  // ← AGREGAR
-                item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR
-                item.Tag = orden;
-                mercaderiasAPrepList.Items.Add(item);
+                OrdenPreparacion ordenExistente = (OrdenPreparacion)item.Tag;
+                if (ordenExistente.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                {
+                    yaEsta = true;
+                    break;
+                }
+            }
+
+            if (yaEsta == false)
+            {
+                bool esPrimeraFila = true;
+
+                foreach (var producto in orden.Productos)
+                {
+                    ListViewItem item = new ListViewItem();
+
+                    if (esPrimeraFila)
+                    {
+                        item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                        item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                        item.SubItems.Add(orden.RazonSocial);
+                        item.SubItems.Add(orden.Cuit);
+                        esPrimeraFila = false;
+                    }
+                    else
+                    {
+                        item.Text = "";
+                        item.SubItems.Add("");
+                        item.SubItems.Add("");
+                        item.SubItems.Add("");
+                    }
+
+                    item.SubItems.Add(producto.Descripcion);
+                    item.SubItems.Add(producto.Cantidad.ToString());
+                    item.Tag = orden;
+                    mercaderiasAPrepList.Items.Add(item);
+                }
             }
         }
 
@@ -83,14 +141,28 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                // 1. Obtener órdenes seleccionadas
+                // 1. Obtener órdenes seleccionadas (sin duplicados)
                 var ordenesSeleccionadas = new List<OrdenPreparacion>();
 
-                foreach (ListViewItem item in ordenesPendientesListView.CheckedItems)
+                foreach (ListViewItem item in ordenesPendientesListView.SelectedItems)
                 {
                     if (item.Tag is OrdenPreparacion orden)
                     {
-                        ordenesSeleccionadas.Add(orden);
+                        // Solo agregar si no está ya en la lista
+                        bool yaEsta = false;
+                        foreach (var ordenExistente in ordenesSeleccionadas)
+                        {
+                            if (ordenExistente.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                            {
+                                yaEsta = true;
+                                break;
+                            }
+                        }
+
+                        if (!yaEsta)
+                        {
+                            ordenesSeleccionadas.Add(orden);
+                        }
                     }
                 }
 
@@ -107,8 +179,31 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
                     AgregarProductosAMercaderias(orden);
                 }
 
-                // 4. Remover de la lista de arriba (pero no cambiar estado en BD)
-                foreach (ListViewItem item in ordenesPendientesListView.CheckedItems.Cast<ListViewItem>().ToList())
+                // 4. Remover todas las filas de las órdenes seleccionadas
+                var itemsARemover = new List<ListViewItem>();
+                foreach (ListViewItem item in ordenesPendientesListView.Items)
+                {
+                    if (item.Tag is OrdenPreparacion orden)
+                    {
+                        // Verificar si esta orden está en las seleccionadas
+                        bool estaSeleccionada = false;
+                        foreach (var ordenSeleccionada in ordenesSeleccionadas)
+                        {
+                            if (ordenSeleccionada.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                            {
+                                estaSeleccionada = true;
+                                break;
+                            }
+                        }
+
+                        if (estaSeleccionada)
+                        {
+                            itemsARemover.Add(item);
+                        }
+                    }
+                }
+
+                foreach (var item in itemsARemover)
                 {
                     ordenesPendientesListView.Items.Remove(item);
                 }
@@ -146,48 +241,77 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
         {
             try
             {
-                // 1. Obtener mercaderías seleccionadas
-                var mercaderiasSeleccionadas = new List<ListViewItem>();
+                // 1. Obtener órdenes seleccionadas (sin duplicados)
+                var ordenesSeleccionadas = new List<OrdenPreparacion>();
 
-                foreach (ListViewItem item in mercaderiasAPrepList.CheckedItems)
-                {
-                    mercaderiasSeleccionadas.Add(item);
-                }
-
-                // 2. Validar que haya selecciones
-                if (mercaderiasSeleccionadas.Count == 0)
-                {
-                    MessageBox.Show("Selecciona al menos una mercadería para eliminar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // 3. Obtener órdenes únicas (evitar duplicados)
-                var ordenesAVolver = new HashSet<OrdenPreparacion>();
-
-                foreach (var item in mercaderiasSeleccionadas)
+                foreach (ListViewItem item in mercaderiasAPrepList.SelectedItems)
                 {
                     if (item.Tag is OrdenPreparacion orden)
                     {
-                        ordenesAVolver.Add(orden); // HashSet evita duplicados automáticamente
+                        // Solo agregar si no está ya en la lista
+                        bool yaEsta = false;
+                        foreach (var ordenExistente in ordenesSeleccionadas)
+                        {
+                            if (ordenExistente.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                            {
+                                yaEsta = true;
+                                break;
+                            }
+                        }
+
+                        if (!yaEsta)
+                        {
+                            ordenesSeleccionadas.Add(orden);
+                        }
                     }
                 }
 
-                // 4. Eliminar mercaderías seleccionadas de la lista de abajo
-                foreach (var item in mercaderiasSeleccionadas)
+                // 2. Validar que haya selecciones
+                if (ordenesSeleccionadas.Count == 0)
+                {
+                    MessageBox.Show("Selecciona al menos una orden para eliminar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 3. Eliminar todas las filas de las órdenes seleccionadas
+                var itemsARemover = new List<ListViewItem>();
+                foreach (ListViewItem item in mercaderiasAPrepList.Items)
+                {
+                    if (item.Tag is OrdenPreparacion orden)
+                    {
+                        // Verificar si esta orden está en las seleccionadas
+                        bool estaSeleccionada = false;
+                        foreach (var ordenSeleccionada in ordenesSeleccionadas)
+                        {
+                            if (ordenSeleccionada.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                            {
+                                estaSeleccionada = true;
+                                break;
+                            }
+                        }
+
+                        if (estaSeleccionada)
+                        {
+                            itemsARemover.Add(item);
+                        }
+                    }
+                }
+
+                foreach (var item in itemsARemover)
                 {
                     mercaderiasAPrepList.Items.Remove(item);
                 }
 
-                // 5. Volver órdenes a la lista de arriba
-                foreach (var orden in ordenesAVolver)
+                // 4. Volver órdenes a la lista de arriba
+                foreach (var orden in ordenesSeleccionadas)
                 {
                     VolverOrdenAPendientes(orden);
                 }
 
-                // 6. Actualizar estado de botones
+                // 5. Actualizar estado de botones
                 HabilitarBotones();
 
-                MessageBox.Show($"Se eliminaron {mercaderiasSeleccionadas.Count} mercaderías y se devolvieron {ordenesAVolver.Count} órdenes", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Se eliminaron {itemsARemover.Count} filas y se devolvieron {ordenesSeleccionadas.Count} órdenes", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -195,20 +319,49 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             }
         }
 
-        // Método auxiliar para volver orden a la lista de arriba
         private void VolverOrdenAPendientes(OrdenPreparacion orden)
         {
-            foreach (var producto in orden.Productos)  // ← AGREGAR este foreach
+            // Verificar si ya existe
+            bool yaEsta = false;
+            foreach (ListViewItem item in ordenesPendientesListView.Items)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
-                item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
-                item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
-                item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
-                item.SubItems.Add(producto.Descripcion);  // ← AGREGAR
-                item.SubItems.Add(producto.Cantidad.ToString());  // ← AGREGAR
-                item.Tag = orden;
-                ordenesPendientesListView.Items.Add(item);
+                OrdenPreparacion ordenExistente = (OrdenPreparacion)item.Tag;
+                if (ordenExistente.IdOrdenPreparacion == orden.IdOrdenPreparacion)
+                {
+                    yaEsta = true;
+                    break;
+                }
+            }
+
+            if (yaEsta == false)
+            {
+                bool esPrimeraFila = true;
+
+                foreach (var producto in orden.Productos)
+                {
+                    ListViewItem item = new ListViewItem();
+
+                    if (esPrimeraFila)
+                    {
+                        item.Text = orden.FechaEntrega.ToString("dd/MM/yyyy");
+                        item.SubItems.Add(orden.IdOrdenPreparacion.ToString());
+                        item.SubItems.Add(modelo.ObtenerRazonSocialCliente(orden.IdCliente));
+                        item.SubItems.Add(modelo.ObtenerCuitCliente(orden.IdCliente));
+                        esPrimeraFila = false;
+                    }
+                    else
+                    {
+                        item.Text = "";
+                        item.SubItems.Add("");
+                        item.SubItems.Add("");
+                        item.SubItems.Add("");
+                    }
+
+                    item.SubItems.Add(producto.Descripcion);
+                    item.SubItems.Add(producto.Cantidad.ToString());
+                    item.Tag = orden;
+                    ordenesPendientesListView.Items.Add(item);
+                }
             }
         }
 
@@ -272,7 +425,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             }
         }
 
-     
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -287,6 +440,38 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             var menuForm = new MenuPrincipalGeneralForm();
             menuForm.Show(); // Abre el menú principal
             this.Close(); // Cierra el formulario actual
+        }
+
+        private void ordenesPendientesListView_Click(object sender, EventArgs e)
+        {
+            if (ordenesPendientesListView.SelectedItems.Count > 0)
+            {
+                var ordenSeleccionada = (OrdenPreparacion)ordenesPendientesListView.SelectedItems[0].Tag;
+
+                foreach (ListViewItem item in ordenesPendientesListView.Items)
+                {
+                    if (item.Tag is OrdenPreparacion orden && orden.IdOrdenPreparacion == ordenSeleccionada.IdOrdenPreparacion)
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+        }
+
+        private void mercaderiasAPrepList_Click(object sender, EventArgs e)
+        {
+            if (mercaderiasAPrepList.SelectedItems.Count > 0)
+            {
+                var ordenSeleccionada = (OrdenPreparacion)mercaderiasAPrepList.SelectedItems[0].Tag;
+
+                foreach (ListViewItem item in mercaderiasAPrepList.Items)
+                {
+                    if (item.Tag is OrdenPreparacion orden && orden.IdOrdenPreparacion == ordenSeleccionada.IdOrdenPreparacion)
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
         }
     }
 }
