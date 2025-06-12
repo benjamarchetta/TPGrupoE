@@ -66,9 +66,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 9);
             label2.Name = "label2";
-            label2.Size = new Size(158, 15);
+            label2.Size = new Size(97, 15);
             label2.TabIndex = 2;
-            label2.Text = "Fecha de despacho de orden";
+            label2.Text = "Fecha de entrega";
             // 
             // despachoDateTimePicker
             // 
@@ -348,7 +348,7 @@
             groupBox1.TabIndex = 43;
             groupBox1.TabStop = false;
             // 
-            // ProcesarOrdenPreparacionForm
+            // CargarOrdenPreparacionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -381,7 +381,7 @@
             Controls.Add(cargarOrdenButton);
             Controls.Add(despachoDateTimePicker);
             Controls.Add(label2);
-            Name = "ProcesarOrdenPreparacionForm";
+            Name = "CargarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
             FormClosing += ProcesarOrdenPreparacionForm_FormClosing;
             Load += ProcesarOrdenPreparacion_Load;
