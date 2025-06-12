@@ -61,7 +61,6 @@
             // 
             // ordenesPendientesListView
             // 
-            ordenesPendientesListView.CheckBoxes = true;
             ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, Producto, Cantidad });
             ordenesPendientesListView.FullRowSelect = true;
             ordenesPendientesListView.Location = new Point(12, 27);
@@ -70,36 +69,37 @@
             ordenesPendientesListView.TabIndex = 1;
             ordenesPendientesListView.UseCompatibleStateImageBehavior = false;
             ordenesPendientesListView.View = View.Details;
+            ordenesPendientesListView.Click += ordenesPendientesListView_Click;
             // 
             // fechaColumna
             // 
             fechaColumna.Text = "Fecha a despachar";
-            fechaColumna.Width = 100;
+            fechaColumna.Width = 122;
             // 
             // idOrdenColumna
             // 
             idOrdenColumna.Text = "ID de Orden";
-            idOrdenColumna.Width = 100;
+            idOrdenColumna.Width = 122;
             // 
             // idClienteColumna
             // 
             idClienteColumna.Text = "Razón social cliente";
-            idClienteColumna.Width = 100;
+            idClienteColumna.Width = 122;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "CUIT Cliente";
-            columnHeader3.Width = 100;
+            columnHeader3.Width = 122;
             // 
             // Producto
             // 
             Producto.Text = "Producto";
-            Producto.Width = 100;
+            Producto.Width = 122;
             // 
             // Cantidad
             // 
             Cantidad.Text = "cantidad";
-            Cantidad.Width = 100;
+            Cantidad.Width = 122;
             // 
             // agregarAOrdenButton
             // 
@@ -144,7 +144,6 @@
             // 
             // mercaderiasAPrepList
             // 
-            mercaderiasAPrepList.CheckBoxes = true;
             mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5, dfgfd, columnHeader7 });
             mercaderiasAPrepList.FullRowSelect = true;
             mercaderiasAPrepList.Location = new Point(12, 268);
@@ -153,6 +152,7 @@
             mercaderiasAPrepList.TabIndex = 9;
             mercaderiasAPrepList.UseCompatibleStateImageBehavior = false;
             mercaderiasAPrepList.View = View.Details;
+            mercaderiasAPrepList.Click += mercaderiasAPrepList_Click;
             // 
             // columnHeader1
             // 
