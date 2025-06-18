@@ -34,26 +34,6 @@ namespace TPGrupoE.Almacenes
              ordenesPreparacion = JsonSerializer.Deserialize<List<OrdenPreparacionEntidad>>(datos)!;
         }
 
-        /* public static int CalcularCantidadReservada(int idDeposito, int idProducto, int idCliente)
-         {
-             // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
-             var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.Pendiente || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IdDeposito == idDeposito && o.IdCliente == idCliente);
-
-             int cantidadReservada = 0;
-
-
-             foreach (var o in ordenes)
-             {
-                 // Buscar la mercaderia en la orden de preparacion
-                 var productosOrden = o.ProductoOrden.Find(prods => prods.IdProducto == idProducto);
-
-                 if (productosOrden != null)
-                 {
-                     cantidadReservada += productosOrden.Cantidad;
-                 }
-             }
-             return cantidadReservada;
-         }*/
 
         public static string NuevaOrdenPreparacion(OrdenPreparacionEntidad nuevaOrden)
         {
@@ -125,33 +105,6 @@ namespace TPGrupoE.Almacenes
             return transportistas;
         }
         
-
-
-        //COMENTO POR AHORA PERO SEGURO NOS SIRVE MAS ADELANTE
-        /*
-        public static int CalcularCantidadReservada(int idDeposito, int idMercaderia, int idCliente)
-        {
-            // Buscar las ordenes de preparacion en estado "EnPreparacion" o "Preparada", donde el deposito y el cliente coincidan
-            var ordenes = ordenesPreparacion.FindAll(o => (o.Estado == EstadoOrdenPreparacion.PendienteDeSeleccion || o.Estado == EstadoOrdenPreparacion.EnPreparacion) && o.IDDeposito == idDeposito && o.IDCliente == idCliente);
-
-            int cantidadReservada = 0;
-
-
-            foreach (var o in ordenes)
-            {
-                // Buscar la mercaderia en la orden de preparacion
-                var mercaderiaOrden = o.MercaderiaOrden.Find(mo => mo.IDMercaderia == idMercaderia);
-
-                if (mercaderiaOrden != null)
-                {
-                    cantidadReservada += mercaderiaOrden.Cantidad;
-                }
-            }
-
-
-            return cantidadReservada;
-        }
-        */
 
         public static void ActualizarOrdenPreparacion(OrdenPreparacionEntidad ordenActualizada)
         {
