@@ -21,17 +21,17 @@ namespace TPGrupoE.Almacenes
         {
             var datosOS = JsonSerializer.Serialize(ordenesPicking);
 
-            File.WriteAllText(@"Datos\ordenPicking.json", datosOS);
+            File.WriteAllText(@"Datos\ordenesPicking.json", datosOS);
         }
 
         static OrdenPickingAlmacen()
         {
-            if (!File.Exists(@"Datos\ordenPicking.json"))
+            if (!File.Exists(@"Datos\ordenesPicking.json"))
             {
                 return;
             }
-
-            var datosOS = File.ReadAllText(@"Datos\ordenPicking.json");
+            
+            var datosOS = File.ReadAllText(@"Datos\ordenesPicking.json");
 
             ordenesPicking = JsonSerializer.Deserialize<List<OrdenPickingEntidad>>(datosOS)!;
         }

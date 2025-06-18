@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 

@@ -11,11 +11,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
-using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
-using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
-using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
+//using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
+//using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
+//using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {

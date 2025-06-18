@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 {
@@ -63,6 +63,9 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
             };
 
             OrdenEntregaAlmacen.NuevaOE(ordenEntregaACrear);
+
+            OrdenPreparacionAlmacen.GrabarOP();
+            OrdenEntregaAlmacen.GrabarOE();
 
             // Mostrar todo en un solo mensaje
             MessageBox.Show(
