@@ -58,5 +58,10 @@ namespace TPGrupoE.Almacenes
         {
             return ordenesEntrega.FirstOrDefault(oe => oe.IdOrdenEntrega == id);
         }
+
+        public static OrdenEntregaEntidad BuscarOrdenQueContieneOp(int idOrdenPreparacion)
+        {
+            return ordenesEntrega.FirstOrDefault(oe => oe.IdOrdenPreparacion.Contains(idOrdenPreparacion));
+        }
     }
 }

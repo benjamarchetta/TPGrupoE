@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
-using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model;
-using static TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Model.OrdenDeEntregaModelo;
+using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model;
+using static TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model.ConfirmarOrdenDeEntregaModelo;
 
-namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
+namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
 {
-    public partial class CargarOrdenDeEntregaForm : Form
+    public partial class ConfirmarOrdenDeEntregaForm : Form
     {
-        private OrdenDeEntregaModelo _ordenDeEntregaModel;
-        public CargarOrdenDeEntregaForm()
+        private ConfirmarOrdenDeEntregaModelo _ordenDeEntregaModel;
+        public ConfirmarOrdenDeEntregaForm()
         {
             InitializeComponent();
-            _ordenDeEntregaModel = new OrdenDeEntregaModelo();
+            _ordenDeEntregaModel = new ConfirmarOrdenDeEntregaModelo();
         }
 
         //Es la acción que genera la órden de entrega
@@ -34,8 +34,9 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
                 return;
             }
 
-            _ordenDeEntregaModel.CrearOrdenEntrega();
-            MessageBox.Show("Se registró correctamente la orden de entrega.");
+            _ordenDeEntregaModel.ConfirmarOrdenEntrega();
+            MessageBox.Show("Las órdenes fueron confirmadas y liberadas para despacho.");
+            _ordenDeEntregaModel = new ConfirmarOrdenDeEntregaModelo();
             ActualizarTabla();
         }
 
@@ -47,25 +48,25 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
 
         private void ActualizarTabla()
         {
-
-            List<OrdenPreparacion> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
+            List<OrdenDePreparacionADespachar> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();
 
             if (ordenesPreparacion.Count == 0)
             {
-                MessageBox.Show("No hay ordenes de preparacion empaquetadas para agregar a la orden de entrega");
+                MessageBox.Show("No hay órdenes de preparación empaquetadas pendientes de despacho.");
+                return;
             }
 
             foreach (var orden in ordenesPreparacion)
             {
                 var item = new ListViewItem(new[]
-                  {
-                        orden.IdOrdenPreparacion.ToString(),
-                        orden.FechaEntrega.ToShortDateString(),
-                    });
+                {
+            orden.IdOrdenPreparacion.ToString(),
+            orden.IdOrdenEntrega.ToString(),
+            orden.FechaEntrega.ToShortDateString()
+        });
 
-                // Agregar el item al ListView
                 OrdenesEmpaquetadasListView.Items.Add(item);
             }
         }
@@ -97,7 +98,7 @@ namespace TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms
             VolverAlMenuPrincipal();
         }
 
-        private void CargarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void ConfirmarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             VolverAlMenuPrincipal();
         }

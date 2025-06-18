@@ -11,7 +11,7 @@ using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms;
 using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms;
 using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Forms;
-using TPGrupoE.CasosDeUso.CU7CargarOrdenDeEntrega.Forms;
+using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms;
 using TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms;
 
 namespace TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms
@@ -49,9 +49,9 @@ namespace TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms
             this.Hide();
             empaquetadoForm.Show();
         }
-        private void CargarOrdenDeEntregaButton_Click(object sender, EventArgs e)
+        private void ConfirmarOrdenDeEntregaButton_Click(object sender, EventArgs e)
         {
-            CargarOrdenDeEntregaForm cargaOrdenDeEntregaForm = new CargarOrdenDeEntregaForm();
+            ConfirmarOrdenDeEntregaForm cargaOrdenDeEntregaForm = new ConfirmarOrdenDeEntregaForm();
             this.Hide();
             cargaOrdenDeEntregaForm.Show();
         }

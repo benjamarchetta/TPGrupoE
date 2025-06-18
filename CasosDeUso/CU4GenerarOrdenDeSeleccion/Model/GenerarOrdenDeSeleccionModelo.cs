@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
-using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+//using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
 
 
 namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
+using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
