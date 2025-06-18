@@ -8,9 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
-using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model;
-using static TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model.ConfirmarOrdenDeEntregaModelo;
 
 namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
 {
@@ -35,42 +33,47 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
             }
 
             _ordenDeEntregaModel.ConfirmarOrdenEntrega();
-            MessageBox.Show("Las órdenes fueron confirmadas y liberadas para despacho.");
+            MessageBox.Show("Las órdenes fueron confirmadas y liberadas para despacho.", "Orden de Entrega Confirmada", MessageBoxButtons.OK, MessageBoxIcon.Information);
             _ordenDeEntregaModel = new ConfirmarOrdenDeEntregaModelo();
+            if (!ValidarOrdenesYVolverSiNoHay())
+                return;
             ActualizarTabla();
         }
 
         //Carga la nueva orden de entrega en OrdenEntregaAlmacen
         private void OrdenEntregaForm_Load(object sender, EventArgs e)
         {
+            _ordenDeEntregaModel = new ConfirmarOrdenDeEntregaModelo();
+            if (!ValidarOrdenesYVolverSiNoHay())
+            {
+                // Cierra el formulario si no hay órdenes al cargar
+                this.Close();
+                return;
+            }
             ActualizarTabla();
         }
 
+
         private void ActualizarTabla()
         {
+
+
             List<OrdenDePreparacionADespachar> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();
-
-            if (ordenesPreparacion.Count == 0)
-            {
-                MessageBox.Show("No hay órdenes de preparación empaquetadas pendientes de despacho.");
-                return;
-            }
 
             foreach (var orden in ordenesPreparacion)
             {
                 var item = new ListViewItem(new[]
                 {
-            orden.IdOrdenPreparacion.ToString(),
-            orden.IdOrdenEntrega.ToString(),
-            orden.FechaEntrega.ToShortDateString()
-        });
+                    orden.IdOrdenPreparacion.ToString(),
+                    orden.IdOrdenEntrega.ToString(),
+                    orden.FechaEntrega.ToShortDateString()
+                });
 
                 OrdenesEmpaquetadasListView.Items.Add(item);
             }
         }
-
 
         private void VolverAlMenuPrincipal()
         {
@@ -101,6 +104,23 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
         private void ConfirmarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             VolverAlMenuPrincipal();
+        }
+
+        private bool ValidarOrdenesYVolverSiNoHay()
+        {
+            if (_ordenDeEntregaModel.OrdenesDePreparacion.Count == 0)
+            {
+                MessageBox.Show(
+                    "No hay órdenes empaquetadas disponibles para confirmar.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                VolverAlMenuPrincipal();
+                return false;
+            }
+
+            return true;
         }
     }
 

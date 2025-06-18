@@ -53,7 +53,7 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model
         {
             if (OrdenesDePreparacion.Count == 0)
             {
-                return "No hay ninguna orden empaquetada para liberar al Sector Despacho";
+                return "No hay órdenes de preparación listas para ser despachadas.";
             }
 
             return null;
