@@ -34,7 +34,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
         public void CargarOrdenesPorTransportista(string dniTransportista)
         {
             OrdenesDePreparacion = [];
-            var ordenesDeEntregaParaDespacho = OrdenEntregaAlmacen.BuscarOrdenesParaDespachar();
+            var ordenesDeEntregaParaDespacho = OrdenEntregaAlmacen.BuscarOrdenesDeEntregaCumplidas();
 
             foreach (var ordenEntrega in ordenesDeEntregaParaDespacho)
             {

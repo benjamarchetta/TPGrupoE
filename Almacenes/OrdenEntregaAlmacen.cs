@@ -54,6 +54,11 @@ namespace TPGrupoE.Almacenes
             return ordenesEntrega.FindAll(o => o.Estado == EstadoOrdenEntrega.Pendiente);
         }
 
+        public static List<OrdenEntregaEntidad> BuscarOrdenesDeEntregaCumplidas()
+        {
+            return ordenesEntrega.FindAll(o => o.Estado == EstadoOrdenEntrega.Cumplida);
+        }
+
         public static OrdenEntregaEntidad BuscarOrdenPorId(int id)
         {
             return ordenesEntrega.FirstOrDefault(oe => oe.IdOrdenEntrega == id);
