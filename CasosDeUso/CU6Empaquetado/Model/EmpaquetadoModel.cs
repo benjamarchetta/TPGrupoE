@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TPGrupoE.Almacenes;
-using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model;
-using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
+using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.ProductosOP;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
@@ -16,11 +15,14 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
         public List<OrdenDePreparacionAEmpaquetar> OrdenesDePreparacionAEmpaquetar { get; private set; }
 
         private List<ProductoOP> ProductosIniciales = new List<ProductoOP>();
+        public List<OrdenPreparacion> OrdenesDePreparacion { get; private set; }
 
         public EmpaquetadoModel()
         {
             ProductosIniciales = new List<ProductoOP>();
+
             OrdenesDePreparacionAEmpaquetar = new List<OrdenDePreparacionAEmpaquetar>();
+
             var ordenesDePreparacionSeleccionadas = OrdenPreparacionAlmacen.BuscarOrdenesSeleccionadas();
 
             foreach (var ordenPreparacion in ordenesDePreparacionSeleccionadas)
@@ -45,6 +47,33 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 
             }
         }
+        public string CrearOrdenEntrega(OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar)
+        {
+
+            int idOp = int.Parse(ordenDePreparacionAEmpaquetar.IdOrdenPreparacion);
+
+            // Marcar como empaquetada
+            MarcarOrdenComoEmpaquetada(ordenDePreparacionAEmpaquetar);
+
+            // Crear OE solo para esta OP
+            var ordenEntregaACrear = new OrdenEntregaEntidad
+            {
+                Estado = EstadoOrdenEntrega.Pendiente,
+                IdOrdenPreparacion = new List<int> { idOp }
+            };
+
+            OrdenEntregaAlmacen.NuevaOE(ordenEntregaACrear);
+
+            // Mostrar todo en un solo mensaje
+            MessageBox.Show(
+                $"¡Listo! Empaquetaste la órden de preparación Nº {ordenDePreparacionAEmpaquetar.IdOrdenPreparacion}.\n" +
+                $"\nSe creó la Orden de Entrega Nº {ordenEntregaACrear.IdOrdenEntrega} para su despacho correctamente.",
+                "Empaquetado confirmado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            return null;
+        }
 
         public void MarcarOrdenComoEmpaquetada(OrdenDePreparacionAEmpaquetar orden)
         {
@@ -59,6 +88,7 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Model
 
             OrdenesDePreparacionAEmpaquetar.Remove(orden);
         }
+
 
     }
 }
