@@ -39,7 +39,24 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 
             if (ordenDePreparacionAEmpaquetar == null)
             {
-                MessageBox.Show("No hay ordenes de preparacion para empaquetar");
+                DialogResult resultado = MessageBox.Show("No hay órdenes de preparación para empaquetar","Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+                Form menuPrincipal = Application.OpenForms["MenuPrincipalGeneralForm"];
+                
+                if (menuPrincipal != null)
+                {
+                    menuPrincipal.Show(); // por si estuviera minimizado u oculto
+                }
+                
+                else
+                {
+                    // Como fallback, lo abrís nuevo
+                    menuPrincipal = new MenuPrincipalGeneralForm();
+                    menuPrincipal.Show();
+                }
+
+                this.Close(); // cerrás el form actual
+
                 MercaderiasALiberarParaDespachoListView.Items.Clear();
                 return;
             }
@@ -66,6 +83,7 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
         private void ConfirmarEmpaquetadoButton_Click(object sender, EventArgs e)
         {
             _empaquetadoModel.MarcarOrdenComoEmpaquetada(ordenDePreparacionAEmpaquetar);
+            MessageBox.Show($"Se confirmó el empaquetado de la órden N°: {ordenDePreparacionAEmpaquetar.IdOrdenPreparacion}", "Confirmación de Empaquetado Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             PasarALaSiguienteOrden();
         }
 
