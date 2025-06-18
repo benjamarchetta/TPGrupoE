@@ -41,28 +41,31 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(14, 12);
             label1.Name = "label1";
-            label1.Size = new Size(180, 15);
+            label1.Size = new Size(227, 20);
             label1.TabIndex = 0;
             label1.Text = "Órdenes de selección pendientes";
             // 
             // confirmarSeleccionButton
             // 
+            confirmarSeleccionButton.BackColor = SystemColors.Highlight;
             confirmarSeleccionButton.Enabled = false;
-            confirmarSeleccionButton.Location = new Point(626, 409);
+            confirmarSeleccionButton.Location = new Point(470, 574);
+            confirmarSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             confirmarSeleccionButton.Name = "confirmarSeleccionButton";
-            confirmarSeleccionButton.Size = new Size(162, 23);
+            confirmarSeleccionButton.Size = new Size(430, 50);
             confirmarSeleccionButton.TabIndex = 2;
             confirmarSeleccionButton.Text = "Confirmar selección";
-            confirmarSeleccionButton.UseVisualStyleBackColor = true;
+            confirmarSeleccionButton.UseVisualStyleBackColor = false;
             // 
             // detalleProductosListView
             // 
             detalleProductosListView.FullRowSelect = true;
-            detalleProductosListView.Location = new Point(12, 217);
+            detalleProductosListView.Location = new Point(14, 309);
+            detalleProductosListView.Margin = new Padding(3, 4, 3, 4);
             detalleProductosListView.Name = "detalleProductosListView";
-            detalleProductosListView.Size = new Size(776, 175);
+            detalleProductosListView.Size = new Size(886, 167);
             detalleProductosListView.TabIndex = 3;
             detalleProductosListView.UseCompatibleStateImageBehavior = false;
             detalleProductosListView.View = View.Details;
@@ -70,19 +73,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 199);
+            label2.Location = new Point(14, 285);
             label2.Name = "label2";
-            label2.Size = new Size(192, 15);
+            label2.Size = new Size(247, 20);
             label2.TabIndex = 4;
             label2.Text = "Detalle de mercadería a seleccionar";
             // 
             // ordenesListView
             // 
             ordenesListView.CheckBoxes = true;
-            ordenesListView.Location = new Point(12, 27);
+            ordenesListView.Location = new Point(14, 36);
+            ordenesListView.Margin = new Padding(3, 4, 3, 4);
             ordenesListView.MultiSelect = false;
             ordenesListView.Name = "ordenesListView";
-            ordenesListView.Size = new Size(776, 140);
+            ordenesListView.Size = new Size(886, 185);
             ordenesListView.TabIndex = 0;
             ordenesListView.UseCompatibleStateImageBehavior = false;
             ordenesListView.View = View.Details;
@@ -90,27 +94,30 @@
             // cancelarSeleccionButton
             // 
             cancelarSeleccionButton.Enabled = false;
-            cancelarSeleccionButton.Location = new Point(626, 173);
+            cancelarSeleccionButton.Location = new Point(637, 484);
+            cancelarSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             cancelarSeleccionButton.Name = "cancelarSeleccionButton";
-            cancelarSeleccionButton.Size = new Size(162, 23);
+            cancelarSeleccionButton.Size = new Size(263, 40);
             cancelarSeleccionButton.TabIndex = 5;
             cancelarSeleccionButton.Text = "Cancelar selección";
             cancelarSeleccionButton.UseVisualStyleBackColor = true;
             // 
             // VerDetallesButton
             // 
-            VerDetallesButton.Location = new Point(419, 173);
+            VerDetallesButton.Location = new Point(637, 229);
+            VerDetallesButton.Margin = new Padding(3, 4, 3, 4);
             VerDetallesButton.Name = "VerDetallesButton";
-            VerDetallesButton.Size = new Size(171, 23);
+            VerDetallesButton.Size = new Size(263, 40);
             VerDetallesButton.TabIndex = 6;
-            VerDetallesButton.Text = "Seleccionar Mercaderia";
+            VerDetallesButton.Text = "Seleccionar mercadería";
             VerDetallesButton.UseVisualStyleBackColor = true;
             // 
             // volverAlMenuButton
             // 
-            volverAlMenuButton.Location = new Point(12, 409);
+            volverAlMenuButton.Location = new Point(14, 574);
+            volverAlMenuButton.Margin = new Padding(3, 4, 3, 4);
             volverAlMenuButton.Name = "volverAlMenuButton";
-            volverAlMenuButton.Size = new Size(157, 23);
+            volverAlMenuButton.Size = new Size(430, 50);
             volverAlMenuButton.TabIndex = 7;
             volverAlMenuButton.Text = "Volver al menú principal";
             volverAlMenuButton.UseVisualStyleBackColor = true;
@@ -118,9 +125,9 @@
             // 
             // GestionarOrdenSeleccionForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 444);
+            ClientSize = new Size(914, 649);
             Controls.Add(volverAlMenuButton);
             Controls.Add(VerDetallesButton);
             Controls.Add(cancelarSeleccionButton);
@@ -129,9 +136,9 @@
             Controls.Add(confirmarSeleccionButton);
             Controls.Add(ordenesListView);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "GestionarOrdenSeleccionForm";
             Text = "Gestionar órden de selección";
-           // Load += GestionarOrdenSeleccionForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

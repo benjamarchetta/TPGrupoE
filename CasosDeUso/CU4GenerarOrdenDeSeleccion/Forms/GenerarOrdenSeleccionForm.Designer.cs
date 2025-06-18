@@ -53,9 +53,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(14, 25);
             label1.Name = "label1";
-            label1.Size = new Size(194, 15);
+            label1.Size = new Size(246, 20);
             label1.TabIndex = 0;
             label1.Text = "Órdenes de preparación pendientes";
             // 
@@ -63,9 +63,10 @@
             // 
             ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, Producto, Cantidad });
             ordenesPendientesListView.FullRowSelect = true;
-            ordenesPendientesListView.Location = new Point(12, 27);
+            ordenesPendientesListView.Location = new Point(14, 49);
+            ordenesPendientesListView.Margin = new Padding(3, 4, 3, 4);
             ordenesPendientesListView.Name = "ordenesPendientesListView";
-            ordenesPendientesListView.Size = new Size(776, 175);
+            ordenesPendientesListView.Size = new Size(886, 219);
             ordenesPendientesListView.TabIndex = 1;
             ordenesPendientesListView.UseCompatibleStateImageBehavior = false;
             ordenesPendientesListView.View = View.Details;
@@ -73,17 +74,17 @@
             // 
             // fechaColumna
             // 
-            fechaColumna.Text = "Fecha a despachar";
+            fechaColumna.Text = "Fecha de entrega";
             fechaColumna.Width = 122;
             // 
             // idOrdenColumna
             // 
-            idOrdenColumna.Text = "ID de Orden";
+            idOrdenColumna.Text = "N° O. Preparación";
             idOrdenColumna.Width = 122;
             // 
             // idClienteColumna
             // 
-            idClienteColumna.Text = "Razón social cliente";
+            idClienteColumna.Text = "Razón social";
             idClienteColumna.Width = 122;
             // 
             // columnHeader3
@@ -98,14 +99,15 @@
             // 
             // Cantidad
             // 
-            Cantidad.Text = "cantidad";
+            Cantidad.Text = "Cantidad";
             Cantidad.Width = 122;
             // 
             // agregarAOrdenButton
             // 
-            agregarAOrdenButton.Location = new Point(604, 208);
+            agregarAOrdenButton.Location = new Point(613, 277);
+            agregarAOrdenButton.Margin = new Padding(3, 4, 3, 4);
             agregarAOrdenButton.Name = "agregarAOrdenButton";
-            agregarAOrdenButton.Size = new Size(184, 23);
+            agregarAOrdenButton.Size = new Size(287, 40);
             agregarAOrdenButton.TabIndex = 2;
             agregarAOrdenButton.Text = "Agregar a orden de selección";
             agregarAOrdenButton.UseVisualStyleBackColor = true;
@@ -113,30 +115,33 @@
             // 
             // generarOrdenButton
             // 
+            generarOrdenButton.BackColor = SystemColors.Highlight;
             generarOrdenButton.Enabled = false;
-            generarOrdenButton.Location = new Point(414, 486);
+            generarOrdenButton.Location = new Point(470, 687);
+            generarOrdenButton.Margin = new Padding(3, 4, 3, 4);
             generarOrdenButton.Name = "generarOrdenButton";
-            generarOrdenButton.Size = new Size(184, 23);
+            generarOrdenButton.Size = new Size(430, 50);
             generarOrdenButton.TabIndex = 4;
             generarOrdenButton.Text = "Generar órden de selección";
-            generarOrdenButton.UseVisualStyleBackColor = true;
+            generarOrdenButton.UseVisualStyleBackColor = false;
             generarOrdenButton.Click += generarOrdenButton_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 250);
+            label2.Location = new Point(14, 333);
             label2.Name = "label2";
-            label2.Size = new Size(127, 15);
+            label2.Size = new Size(163, 20);
             label2.TabIndex = 5;
             label2.Text = "Mercaderías a preparar";
             // 
             // eliminarDeSeleccionButton
             // 
             eliminarDeSeleccionButton.Enabled = false;
-            eliminarDeSeleccionButton.Location = new Point(604, 449);
+            eliminarDeSeleccionButton.Location = new Point(613, 599);
+            eliminarDeSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             eliminarDeSeleccionButton.Name = "eliminarDeSeleccionButton";
-            eliminarDeSeleccionButton.Size = new Size(184, 23);
+            eliminarDeSeleccionButton.Size = new Size(287, 40);
             eliminarDeSeleccionButton.TabIndex = 6;
             eliminarDeSeleccionButton.Text = "Eliminar de orden de selección";
             eliminarDeSeleccionButton.UseVisualStyleBackColor = true;
@@ -146,9 +151,10 @@
             // 
             mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5, dfgfd, columnHeader7 });
             mercaderiasAPrepList.FullRowSelect = true;
-            mercaderiasAPrepList.Location = new Point(12, 268);
+            mercaderiasAPrepList.Location = new Point(14, 357);
+            mercaderiasAPrepList.Margin = new Padding(3, 4, 3, 4);
             mercaderiasAPrepList.Name = "mercaderiasAPrepList";
-            mercaderiasAPrepList.Size = new Size(776, 175);
+            mercaderiasAPrepList.Size = new Size(886, 232);
             mercaderiasAPrepList.TabIndex = 9;
             mercaderiasAPrepList.UseCompatibleStateImageBehavior = false;
             mercaderiasAPrepList.View = View.Details;
@@ -156,17 +162,17 @@
             // 
             // columnHeader1
             // 
-            columnHeader1.Text = "Fecha a despachar";
+            columnHeader1.Text = "Fecha de entrega";
             columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "ID de Orden";
+            columnHeader2.Text = "N° O. Preparación";
             columnHeader2.Width = 100;
             // 
             // columnHeader4
             // 
-            columnHeader4.Text = "Razón social cliente";
+            columnHeader4.Text = "Razón social";
             columnHeader4.Width = 100;
             // 
             // columnHeader5
@@ -186,9 +192,10 @@
             // 
             // menubutton
             // 
-            menubutton.Location = new Point(604, 486);
+            menubutton.Location = new Point(14, 687);
+            menubutton.Margin = new Padding(3, 4, 3, 4);
             menubutton.Name = "menubutton";
-            menubutton.Size = new Size(184, 23);
+            menubutton.Size = new Size(430, 50);
             menubutton.TabIndex = 10;
             menubutton.Text = "Volver al Menu Principal";
             menubutton.UseVisualStyleBackColor = true;
@@ -196,9 +203,9 @@
             // 
             // GenerarOrdenSeleccionForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 533);
+            ClientSize = new Size(914, 750);
             Controls.Add(menubutton);
             Controls.Add(mercaderiasAPrepList);
             Controls.Add(eliminarDeSeleccionButton);
@@ -207,6 +214,7 @@
             Controls.Add(agregarAOrdenButton);
             Controls.Add(ordenesPendientesListView);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "GenerarOrdenSeleccionForm";
             Text = "Generar órden de selección";
             Load += GenerarOrdenSeleccionForm_Load;
