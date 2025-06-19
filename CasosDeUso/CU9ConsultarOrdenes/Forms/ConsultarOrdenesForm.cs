@@ -32,8 +32,6 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             InicializarFiltros();
           
             CargarOrdenesActuales();
-
-
         }
 
         private void CargarOrdenesActuales()
@@ -96,53 +94,11 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             VolverAlMenuPrincipal();
         }
 
-        private void ConsultarOrdenesForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void LimpiarBusquedaButton_Click(object sender, EventArgs e)
         {
-            VolverAlMenuPrincipal();
-        }
-
-        private void VolverAlMenuPrincipal()
-        {
-            this.Hide();
-
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form is MenuPrincipalGeneralForm)
-                {
-                    form.Show();
-                    return;
-                }
-            }
-
-            new MenuPrincipalGeneralForm().Show();
-        }
-
-        private void InicializarFiltros()
-        {
-            // Clientes
-            RazonSocialClienteFiltroComboBox.Items.Clear();
-            RazonSocialClienteFiltroComboBox.Items.Add("(Todos)");
-            RazonSocialClienteFiltroComboBox.DisplayMember = "ToString";
-
-            var clientes = _consultarOrdenesModel.ObtenerClientesParaFiltro()
-                .GroupBy(c => c.IdCliente)
-                .Select(g => g.First())
-                .OrderBy(c => c.RazonSocial)
-                .ToList();
-
-            foreach (var cliente in clientes)
-                RazonSocialClienteFiltroComboBox.Items.Add(cliente);
-
             RazonSocialClienteFiltroComboBox.SelectedIndex = 0;
-
-            // Estados
-            EstadoOrdenFiltroComboBox.Items.Clear();
-            EstadoOrdenFiltroComboBox.Items.Add("(Todos)");
-
-            foreach (var estado in Enum.GetValues(typeof(EstadoOrdenPreparacion)))
-                EstadoOrdenFiltroComboBox.Items.Add(estado.ToString());
-
             EstadoOrdenFiltroComboBox.SelectedIndex = 0;
+            CargarOrdenesFiltradas(_consultarOrdenesModel.Ordenes);
         }
 
         private void BuscarOrdenesButton_Click(object sender, EventArgs e)
@@ -153,7 +109,7 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
 
             EstadoOrdenPreparacion? estado = null;
             if (EstadoOrdenFiltroComboBox.SelectedIndex > 0)
-                estado = Enum.Parse<EstadoOrdenPreparacion>(EstadoOrdenFiltroComboBox.SelectedItem.ToString());
+                estado = ((EstadoOrdenFiltro)EstadoOrdenFiltroComboBox.SelectedItem).Estado;
 
             var filtradas = _consultarOrdenesModel.Ordenes
                 .Where(o => (!idCliente.HasValue || o.IdCliente == idCliente.Value) &&
@@ -193,11 +149,56 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             DepositoOPSeleccionadaLabel.Text = "Depósito:";
         }
 
-        private void LimpiarBusquedaButton_Click(object sender, EventArgs e)
+        private void InicializarFiltros()
         {
+            // Clientes
+            RazonSocialClienteFiltroComboBox.Items.Clear();
+            RazonSocialClienteFiltroComboBox.Items.Add("(Todos)");
+            RazonSocialClienteFiltroComboBox.DisplayMember = "ToString";
+
+            var clientes = _consultarOrdenesModel.ObtenerClientesParaFiltro()
+                .GroupBy(c => c.IdCliente)
+                .Select(g => g.First())
+                .OrderBy(c => c.RazonSocial)
+                .ToList();
+
+            foreach (var cliente in clientes)
+                RazonSocialClienteFiltroComboBox.Items.Add(cliente);
+
             RazonSocialClienteFiltroComboBox.SelectedIndex = 0;
+
+            // Estados
+            EstadoOrdenFiltroComboBox.Items.Clear();
+            EstadoOrdenFiltroComboBox.Items.Add("(Todos)");
+
+            foreach (var estado in _consultarOrdenesModel.ObtenerEstadosParaFiltro())
+                EstadoOrdenFiltroComboBox.Items.Add(estado);
+
             EstadoOrdenFiltroComboBox.SelectedIndex = 0;
-            CargarOrdenesFiltradas(_consultarOrdenesModel.Ordenes);
         }
+
+        private void VolverAlMenuPrincipal()
+        {
+            this.Close();
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show();
+                    return;
+                }
+            }
+
+            new MenuPrincipalGeneralForm().Show();
+        }
+
+        private void ConsultarOrdenesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
+
+
+
     }
 }

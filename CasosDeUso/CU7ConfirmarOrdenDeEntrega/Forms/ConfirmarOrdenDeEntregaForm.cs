@@ -14,7 +14,9 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
 {
     public partial class ConfirmarOrdenDeEntregaForm : Form
     {
+        
         private ConfirmarOrdenDeEntregaModelo _ordenDeEntregaModel;
+        
         public ConfirmarOrdenDeEntregaForm()
         {
             InitializeComponent();
@@ -39,6 +41,11 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
                 return;
             ActualizarTabla();
         }
+        
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
 
         //Carga la nueva orden de entrega en OrdenEntregaAlmacen
         private void OrdenEntregaForm_Load(object sender, EventArgs e)
@@ -53,11 +60,8 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
             ActualizarTabla();
         }
 
-
         private void ActualizarTabla()
         {
-
-
             List<OrdenDePreparacionADespachar> ordenesPreparacion = _ordenDeEntregaModel.OrdenesDePreparacion;
 
             OrdenesEmpaquetadasListView.Items.Clear();
@@ -77,8 +81,7 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
 
         private void VolverAlMenuPrincipal()
         {
-            // Solo oculta el formulario actual
-            this.Hide();
+            this.Close();
 
             // Mostrar el formulario de menú principal
             // Verifica si el formulario principal ya está abierto
@@ -91,14 +94,8 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
                 }
             }
 
-            // Si no está abierto, crea una nueva instancia (solo si es necesario)
             MenuPrincipalGeneralForm menuPrincipalForm = new MenuPrincipalGeneralForm();
             menuPrincipalForm.Show();
-        }
-
-        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
-        {
-            VolverAlMenuPrincipal();
         }
 
         private void ConfirmarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
