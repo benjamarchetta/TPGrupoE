@@ -40,20 +40,20 @@
             IdOrdenPreparacion = new ColumnHeader();
             EstadoActualOP = new ColumnHeader();
             FechaEntregaOP = new ColumnHeader();
-            UltimoEstadoGroupBox = new GroupBox();
-            groupBox1 = new GroupBox();
-            IdOrdenPreparacionSeleccionadaLabel = new Label();
-            HistoricoOrdenesListView = new ListView();
-            VolverMenuPrincipalButton = new Button();
             CuitCliente = new ColumnHeader();
             RazonSocialCliente = new ColumnHeader();
             DomicilioDeposito = new ColumnHeader();
             FechaUltimaActualizacionEstado = new ColumnHeader();
+            UltimoEstadoGroupBox = new GroupBox();
+            groupBox1 = new GroupBox();
+            DepositoOPSeleccionadaLabel = new Label();
+            CuitRazonClienteLabel = new Label();
+            FechaEntregaOPSeleccionadaLabel = new Label();
+            IdOrdenPreparacionSeleccionadaLabel = new Label();
+            HistoricoOrdenesListView = new ListView();
             EstadoHist = new ColumnHeader();
             FechaActualizacionEstadoHist = new ColumnHeader();
-            FechaEntregaOPSeleccionadaLabel = new Label();
-            CuitRazonClienteLabel = new Label();
-            DepositoOPSeleccionadaLabel = new Label();
+            VolverMenuPrincipalButton = new Button();
             FiltroConsultaOrdenesGroupBox.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -91,6 +91,7 @@
             LimpiarBusquedaButton.TabIndex = 5;
             LimpiarBusquedaButton.Text = "Limpiar búsqueda";
             LimpiarBusquedaButton.UseVisualStyleBackColor = true;
+            LimpiarBusquedaButton.Click += LimpiarBusquedaButton_Click;
             // 
             // BuscarOrdenesButton
             // 
@@ -100,6 +101,7 @@
             BuscarOrdenesButton.TabIndex = 4;
             BuscarOrdenesButton.Text = "Buscar";
             BuscarOrdenesButton.UseVisualStyleBackColor = true;
+            BuscarOrdenesButton.Click += BuscarOrdenesButton_Click;
             // 
             // EstadoOrdenLabel
             // 
@@ -138,13 +140,13 @@
             // EstadoActualOrdenesListView
             // 
             EstadoActualOrdenesListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, EstadoActualOP, FechaEntregaOP, CuitCliente, RazonSocialCliente, DomicilioDeposito, FechaUltimaActualizacionEstado });
+            EstadoActualOrdenesListView.FullRowSelect = true;
             EstadoActualOrdenesListView.Location = new Point(52, 248);
             EstadoActualOrdenesListView.Name = "EstadoActualOrdenesListView";
             EstadoActualOrdenesListView.Size = new Size(944, 249);
             EstadoActualOrdenesListView.TabIndex = 2;
             EstadoActualOrdenesListView.UseCompatibleStateImageBehavior = false;
             EstadoActualOrdenesListView.View = View.Details;
-            EstadoActualOrdenesListView.FullRowSelect = true;
             // 
             // IdOrdenPreparacion
             // 
@@ -160,6 +162,26 @@
             // 
             FechaEntregaOP.Text = "Fecha de entrega";
             FechaEntregaOP.Width = 140;
+            // 
+            // CuitCliente
+            // 
+            CuitCliente.Text = "CUIT Cliente";
+            CuitCliente.Width = 100;
+            // 
+            // RazonSocialCliente
+            // 
+            RazonSocialCliente.Text = "Razon social";
+            RazonSocialCliente.Width = 150;
+            // 
+            // DomicilioDeposito
+            // 
+            DomicilioDeposito.Text = "Deposito";
+            DomicilioDeposito.Width = 150;
+            // 
+            // FechaUltimaActualizacionEstado
+            // 
+            FechaUltimaActualizacionEstado.Text = "Último estado";
+            FechaUltimaActualizacionEstado.Width = 120;
             // 
             // UltimoEstadoGroupBox
             // 
@@ -184,6 +206,33 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Historico de la órden";
             // 
+            // DepositoOPSeleccionadaLabel
+            // 
+            DepositoOPSeleccionadaLabel.AutoSize = true;
+            DepositoOPSeleccionadaLabel.Location = new Point(746, 30);
+            DepositoOPSeleccionadaLabel.Name = "DepositoOPSeleccionadaLabel";
+            DepositoOPSeleccionadaLabel.Size = new Size(73, 20);
+            DepositoOPSeleccionadaLabel.TabIndex = 9;
+            DepositoOPSeleccionadaLabel.Text = "Depósito:";
+            // 
+            // CuitRazonClienteLabel
+            // 
+            CuitRazonClienteLabel.AutoSize = true;
+            CuitRazonClienteLabel.Location = new Point(544, 30);
+            CuitRazonClienteLabel.Name = "CuitRazonClienteLabel";
+            CuitRazonClienteLabel.Size = new Size(58, 20);
+            CuitRazonClienteLabel.TabIndex = 8;
+            CuitRazonClienteLabel.Text = "Cliente:";
+            // 
+            // FechaEntregaOPSeleccionadaLabel
+            // 
+            FechaEntregaOPSeleccionadaLabel.AutoSize = true;
+            FechaEntregaOPSeleccionadaLabel.Location = new Point(296, 30);
+            FechaEntregaOPSeleccionadaLabel.Name = "FechaEntregaOPSeleccionadaLabel";
+            FechaEntregaOPSeleccionadaLabel.Size = new Size(130, 20);
+            FechaEntregaOPSeleccionadaLabel.TabIndex = 7;
+            FechaEntregaOPSeleccionadaLabel.Text = "Fecha de entrega: ";
+            // 
             // IdOrdenPreparacionSeleccionadaLabel
             // 
             IdOrdenPreparacionSeleccionadaLabel.AutoSize = true;
@@ -196,42 +245,13 @@
             // HistoricoOrdenesListView
             // 
             HistoricoOrdenesListView.Columns.AddRange(new ColumnHeader[] { EstadoHist, FechaActualizacionEstadoHist });
+            HistoricoOrdenesListView.FullRowSelect = true;
             HistoricoOrdenesListView.Location = new Point(20, 64);
             HistoricoOrdenesListView.Name = "HistoricoOrdenesListView";
             HistoricoOrdenesListView.Size = new Size(944, 146);
             HistoricoOrdenesListView.TabIndex = 5;
             HistoricoOrdenesListView.UseCompatibleStateImageBehavior = false;
             HistoricoOrdenesListView.View = View.Details;
-            HistoricoOrdenesListView.FullRowSelect = true;
-            // 
-            // VolverMenuPrincipalButton
-            // 
-            VolverMenuPrincipalButton.Location = new Point(32, 793);
-            VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(981, 58);
-            VolverMenuPrincipalButton.TabIndex = 5;
-            VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
-            VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
-            // 
-            // CuitCliente
-            // 
-            CuitCliente.Text = "CUIT Cliente";
-            CuitCliente.Width = 100;
-            // 
-            // RazonSocialCliente
-            // 
-            RazonSocialCliente.Text = "Razon social";
-            RazonSocialCliente.Width = 150;
-            // 
-            // DomicilioDeposito
-            // 
-            DomicilioDeposito.Text = "Deposito";
-            DomicilioDeposito.Width = 150;
-            // 
-            // FechaUltimaActualizacionEstado
-            // 
-            FechaUltimaActualizacionEstado.Text = "Último estado";
-            FechaUltimaActualizacionEstado.Width = 120;
             // 
             // EstadoHist
             // 
@@ -243,32 +263,14 @@
             FechaActualizacionEstadoHist.Text = "Fecha de modificación";
             FechaActualizacionEstadoHist.Width = 200;
             // 
-            // FechaEntregaOPSeleccionadaLabel
+            // VolverMenuPrincipalButton
             // 
-            FechaEntregaOPSeleccionadaLabel.AutoSize = true;
-            FechaEntregaOPSeleccionadaLabel.Location = new Point(296, 30);
-            FechaEntregaOPSeleccionadaLabel.Name = "FechaEntregaOPSeleccionadaLabel";
-            FechaEntregaOPSeleccionadaLabel.Size = new Size(130, 20);
-            FechaEntregaOPSeleccionadaLabel.TabIndex = 7;
-            FechaEntregaOPSeleccionadaLabel.Text = "Fecha de entrega: ";
-            // 
-            // CuitRazonClienteLabel
-            // 
-            CuitRazonClienteLabel.AutoSize = true;
-            CuitRazonClienteLabel.Location = new Point(544, 30);
-            CuitRazonClienteLabel.Name = "CuitRazonClienteLabel";
-            CuitRazonClienteLabel.Size = new Size(58, 20);
-            CuitRazonClienteLabel.TabIndex = 8;
-            CuitRazonClienteLabel.Text = "Cliente:";
-            // 
-            // DepositoOPSeleccionadaLabel
-            // 
-            DepositoOPSeleccionadaLabel.AutoSize = true;
-            DepositoOPSeleccionadaLabel.Location = new Point(746, 30);
-            DepositoOPSeleccionadaLabel.Name = "DepositoOPSeleccionadaLabel";
-            DepositoOPSeleccionadaLabel.Size = new Size(73, 20);
-            DepositoOPSeleccionadaLabel.TabIndex = 9;
-            DepositoOPSeleccionadaLabel.Text = "Depósito:";
+            VolverMenuPrincipalButton.Location = new Point(32, 793);
+            VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
+            VolverMenuPrincipalButton.Size = new Size(981, 58);
+            VolverMenuPrincipalButton.TabIndex = 5;
+            VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
+            VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
             // 
             // ConsultarOrdenesForm
             // 

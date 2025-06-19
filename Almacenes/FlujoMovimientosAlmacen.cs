@@ -80,6 +80,28 @@ namespace TPGrupoE.Almacenes
             return movimientos.Where(m => m.IdCliente == idCliente).ToList();
         }
 
+        public static void InicializarMovimientosDesdeOrdenes()
+        {
+            foreach (var orden in OrdenPreparacionAlmacen.OrdenesPreparacion)
+            {
+                bool yaRegistrada = movimientos.Any(m => m.IdOrdenPreparacion == orden.IdOrdenPreparacion);
+
+                if (!yaRegistrada)
+                {
+                    movimientos.Add(new FlujoMovimientosEntidad
+                    {
+                        IdOrdenPreparacion = orden.IdOrdenPreparacion,
+                        IdCliente = orden.IdCliente,
+                        Estado = orden.Estado,
+                        FechaEntrega = orden.FechaEntrega,
+                        FechaActualizacionEstado = DateTime.Now
+                    });
+                }
+            }
+
+            GrabarMovimiento(); // Persistimos los nuevos registros
+        }
+
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model;
 
@@ -27,8 +28,12 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
 
             EstadoActualOrdenesListView.SelectedIndexChanged += EstadoActualOrdenesListView_SelectedIndexChanged;
             VolverMenuPrincipalButton.Click += VolverMenuPrincipalButton_Click;
-
+            
+            InicializarFiltros();
+          
             CargarOrdenesActuales();
+
+
         }
 
         private void CargarOrdenesActuales()
@@ -110,6 +115,84 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             }
 
             new MenuPrincipalGeneralForm().Show();
+        }
+
+        private void InicializarFiltros()
+        {
+            // Clientes
+            RazonSocialClienteFiltroComboBox.Items.Clear();
+            RazonSocialClienteFiltroComboBox.Items.Add("(Todos)");
+
+            var clientes = _consultarOrdenesModel.ObtenerClientesParaFiltro();
+
+            foreach (var cliente in clientes)
+                RazonSocialClienteFiltroComboBox.Items.Add(cliente);
+
+            RazonSocialClienteFiltroComboBox.SelectedIndex = 0;
+
+            // Estados
+            EstadoOrdenFiltroComboBox.Items.Clear();
+            EstadoOrdenFiltroComboBox.Items.Add("(Todos)");
+
+            foreach (var estado in Enum.GetValues(typeof(EstadoOrdenPreparacion)))
+                EstadoOrdenFiltroComboBox.Items.Add(estado.ToString());
+
+            EstadoOrdenFiltroComboBox.SelectedIndex = 0;
+        }
+
+        private void BuscarOrdenesButton_Click(object sender, EventArgs e)
+        {
+            int? idCliente = null;
+            if (RazonSocialClienteFiltroComboBox.SelectedIndex > 0)
+                idCliente = ((ClienteFiltro)RazonSocialClienteFiltroComboBox.SelectedItem).IdCliente;
+
+            EstadoOrdenPreparacion? estado = null;
+            if (EstadoOrdenFiltroComboBox.SelectedIndex > 0)
+                estado = Enum.Parse<EstadoOrdenPreparacion>(EstadoOrdenFiltroComboBox.SelectedItem.ToString());
+
+            var filtradas = _consultarOrdenesModel.Ordenes
+                .Where(o => (!idCliente.HasValue || o.IdCliente == idCliente.Value) &&
+                            (!estado.HasValue || o.Estado == estado.Value))
+                .ToList();
+
+            CargarOrdenesFiltradas(filtradas);
+        }
+
+        private void CargarOrdenesFiltradas(List<HistorialDeOrdenesPreparacion> ordenes)
+        {
+            EstadoActualOrdenesListView.Items.Clear();
+
+            foreach (var orden in ordenes)
+            {
+                var item = new ListViewItem
+                (new[]
+                {
+                    orden.IdOrdenPreparacion.ToString(),
+                    orden.Estado.ToString(),
+                    orden.FechaEntrega.ToShortDateString(),
+                    orden.ClienteCuit,
+                    orden.ClienteRazonSocial,
+                    orden.DepositoDomicilio,
+                    orden.FechaUltimaActualizacionEstado.ToString("g")
+                }
+                );
+
+                item.Tag = orden.IdOrdenPreparacion;
+                EstadoActualOrdenesListView.Items.Add(item);
+            }
+
+            HistoricoOrdenesListView.Items.Clear();
+            IdOrdenPreparacionSeleccionadaLabel.Text = "N° Órden seleccionada:";
+            FechaEntregaOPSeleccionadaLabel.Text = "Fecha de entrega:";
+            CuitRazonClienteLabel.Text = "Cliente:";
+            DepositoOPSeleccionadaLabel.Text = "Depósito:";
+        }
+
+        private void LimpiarBusquedaButton_Click(object sender, EventArgs e)
+        {
+            RazonSocialClienteFiltroComboBox.SelectedIndex = 0;
+            EstadoOrdenFiltroComboBox.SelectedIndex = 0;
+            CargarOrdenesFiltradas(_consultarOrdenesModel.Ordenes);
         }
     }
 }
