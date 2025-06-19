@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ using TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Forms;
 using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms;
 using TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms;
+using TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms;
 
 namespace TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms
 {
@@ -61,6 +63,13 @@ namespace TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms
             EmitirRemitoForm emiteRemitoForm = new EmitirRemitoForm();
             this.Hide();
             emiteRemitoForm.Show();
+        }
+
+        private void ConsultarEstadoOrdenesButton_Click(object sender, EventArgs e)
+        {
+            ConsultarOrdenesForm consultaEstadoOrdenForm = new ConsultarOrdenesForm();
+            this.Hide();
+            consultaEstadoOrdenForm.Show();
         }
 
         private void MenuPrincipalGeneralForm_FormClosing(object sender, FormClosingEventArgs e)

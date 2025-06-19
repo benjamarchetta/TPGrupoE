@@ -48,6 +48,9 @@ namespace TPGrupoE.Almacenes
 
 
             OrdenPreparacionAlmacen.ordenesPreparacion.Add(nuevaOrden);
+
+            nuevaOrden.RegistrarCambioDeEstado();
+
             return null; //sin errores.
         }
 
