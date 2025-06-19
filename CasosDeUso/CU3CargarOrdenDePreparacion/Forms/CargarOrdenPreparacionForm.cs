@@ -109,7 +109,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
         }
 
         private void ActualizarDepositosYProductos()
-{
+        {
             if (palletCerrado)
             {
                 palletCerradoComboBox.SelectedIndex = 1;
@@ -118,7 +118,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 palletCerradoComboBox.SelectedIndex = 0;
             }
-    if (razonSocialComboBox.SelectedItem is ClienteEntidad Cliente)
+            if (razonSocialComboBox.SelectedItem is ClienteEntidad Cliente)
             {
                 idClienteSeleccionado = Cliente.IdCliente;
 
@@ -153,7 +153,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 productoComboBox.DataSource = null;
                 productoComboBox.Enabled = false;
             }
-}
+        }
 
 
         private void depositoComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -183,7 +183,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 productoComboBox.DataSource = productosFiltrados;
                 productoComboBox.DisplayMember = "DescripcionProducto";
                 productoComboBox.ValueMember = "IdProducto";
-                productoComboBox.SelectedIndex = -1; 
+                productoComboBox.SelectedIndex = -1;
                 productoComboBox.Enabled = depositoComboBox.SelectedIndex != -1;
 
             }
@@ -258,32 +258,32 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     )
                     .Sum(p => p.Cantidad);
 
-                    if (cantidadARetirar > cantidadDisponible)
-                    {
-                        MessageBox.Show(
-                            $"La cantidad ingresada supera el stock disponible ({cantidadDisponible}).",
-                            "Aviso",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-                        cantidadARetirarTextBox.Text = "";
-                        agregarProductoButton.Enabled = false;
-                    }
-                    else if (cantidadARetirar == 0)
-                    {
-                        MessageBox.Show(
-                            $"Entrada inválida. Ingrese un número positivo.",
-                            "Aviso",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        );
-                        cantidadARetirarTextBox.Text = "";
-                        agregarProductoButton.Enabled = false;
-                    }
-                    else
-                    {
-                        agregarProductoButton.Enabled = true;
-                    }
+                if (cantidadARetirar > cantidadDisponible)
+                {
+                    MessageBox.Show(
+                        $"La cantidad ingresada supera el stock disponible ({cantidadDisponible}).",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    cantidadARetirarTextBox.Text = "";
+                    agregarProductoButton.Enabled = false;
+                }
+                else if (cantidadARetirar == 0)
+                {
+                    MessageBox.Show(
+                        $"Entrada inválida. Ingrese un número positivo.",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    cantidadARetirarTextBox.Text = "";
+                    agregarProductoButton.Enabled = false;
+                }
+                else
+                {
+                    agregarProductoButton.Enabled = true;
+                }
             }
         }
 
@@ -543,7 +543,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     Cantidad = cantidad,
                 };
 
-                productosAsociados.Add(productoOrden);               
+                productosAsociados.Add(productoOrden);
             }
 
             // Crear la orden de preparación
@@ -592,9 +592,9 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             */
-           Modelo.GrabarOP();
-           
-           id = Modelo.GenerarIdOrden();
+            Modelo.GrabarOP();
+
+            id = Modelo.GenerarIdOrden();
 
 
         }
@@ -698,6 +698,11 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         }
         private void skuTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DatosObligatoriosGroupBox_Enter(object sender, EventArgs e)
         {
 
         }
