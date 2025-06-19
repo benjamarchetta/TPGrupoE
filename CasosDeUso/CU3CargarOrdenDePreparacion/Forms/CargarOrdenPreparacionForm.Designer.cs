@@ -57,6 +57,7 @@
             VolverMenuPrincipalButton = new Button();
             DetalleOProupBox = new GroupBox();
             DatosTransportistaGroupBox = new GroupBox();
+            label1 = new Label();
             DatosObligatoriosGroupBox = new GroupBox();
             FlagPalletCerradoLabel = new Label();
             ProductosAsociadosOPGroupBox = new GroupBox();
@@ -100,6 +101,7 @@
             // 
             // quitarProductoButton
             // 
+            quitarProductoButton.BackColor = SystemColors.GradientActiveCaption;
             quitarProductoButton.Enabled = false;
             quitarProductoButton.Location = new Point(643, 194);
             quitarProductoButton.Margin = new Padding(3, 4, 3, 4);
@@ -107,12 +109,13 @@
             quitarProductoButton.Size = new Size(223, 40);
             quitarProductoButton.TabIndex = 14;
             quitarProductoButton.Text = "Quitar producto";
-            quitarProductoButton.UseVisualStyleBackColor = true;
+            quitarProductoButton.UseVisualStyleBackColor = false;
             quitarProductoButton.Click += quitarProductoButton_Click;
             // 
             // ordenDePreparacionListView
             // 
             ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, posicionesColumna });
+            ordenDePreparacionListView.Font = new Font("Segoe UI", 9F);
             ordenDePreparacionListView.FullRowSelect = true;
             ordenDePreparacionListView.Location = new Point(21, 27);
             ordenDePreparacionListView.Margin = new Padding(3, 4, 3, 4);
@@ -143,6 +146,7 @@
             // 
             razonSocialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             razonSocialComboBox.DropDownWidth = 383;
+            razonSocialComboBox.Font = new Font("Segoe UI", 9F);
             razonSocialComboBox.FormattingEnabled = true;
             razonSocialComboBox.Location = new Point(466, 48);
             razonSocialComboBox.Margin = new Padding(3, 4, 3, 4);
@@ -175,6 +179,7 @@
             // 
             productoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             productoComboBox.Enabled = false;
+            productoComboBox.Font = new Font("Segoe UI", 9F);
             productoComboBox.FormattingEnabled = true;
             productoComboBox.Location = new Point(478, 223);
             productoComboBox.Margin = new Padding(3, 4, 3, 4);
@@ -235,6 +240,7 @@
             // palletCerradoComboBox
             // 
             palletCerradoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            palletCerradoComboBox.Font = new Font("Segoe UI", 9F);
             palletCerradoComboBox.FormattingEnabled = true;
             palletCerradoComboBox.Items.AddRange(new object[] { "No", "Sí" });
             palletCerradoComboBox.Location = new Point(23, 107);
@@ -266,6 +272,7 @@
             // 
             // agregarProductoButton
             // 
+            agregarProductoButton.BackColor = SystemColors.GradientActiveCaption;
             agregarProductoButton.Enabled = false;
             agregarProductoButton.Location = new Point(655, 348);
             agregarProductoButton.Margin = new Padding(3, 4, 3, 4);
@@ -273,7 +280,7 @@
             agregarProductoButton.Size = new Size(223, 40);
             agregarProductoButton.TabIndex = 30;
             agregarProductoButton.Text = "Agregar producto";
-            agregarProductoButton.UseVisualStyleBackColor = true;
+            agregarProductoButton.UseVisualStyleBackColor = false;
             agregarProductoButton.Click += agregarProductoButton_Click;
             // 
             // DniTransportistaLabel
@@ -309,6 +316,7 @@
             // 
             depositoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             depositoComboBox.Enabled = false;
+            depositoComboBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             depositoComboBox.FormattingEnabled = true;
             depositoComboBox.Location = new Point(33, 223);
             depositoComboBox.Margin = new Padding(3, 4, 3, 4);
@@ -350,6 +358,7 @@
             // 
             // DatosTransportistaGroupBox
             // 
+            DatosTransportistaGroupBox.Controls.Add(label1);
             DatosTransportistaGroupBox.Controls.Add(dniTransportistaTextBox);
             DatosTransportistaGroupBox.Controls.Add(DniTransportistaLabel);
             DatosTransportistaGroupBox.Location = new Point(12, 670);
@@ -357,7 +366,17 @@
             DatosTransportistaGroupBox.Size = new Size(890, 95);
             DatosTransportistaGroupBox.TabIndex = 44;
             DatosTransportistaGroupBox.TabStop = false;
-            DatosTransportistaGroupBox.Text = "Datos del transportista";
+            DatosTransportistaGroupBox.Text = "DNI del transportista";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Enabled = false;
+            label1.Location = new Point(119, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(296, 15);
+            label1.TabIndex = 47;
+            label1.Text = "Ingrese 8 dígitos, sólo números, sin puntos ni espacios.";
             // 
             // DatosObligatoriosGroupBox
             // 
@@ -375,6 +394,7 @@
             DatosObligatoriosGroupBox.TabIndex = 45;
             DatosObligatoriosGroupBox.TabStop = false;
             DatosObligatoriosGroupBox.Text = "Datos obligatorios";
+            DatosObligatoriosGroupBox.Enter += DatosObligatoriosGroupBox_Enter;
             // 
             // FlagPalletCerradoLabel
             // 
