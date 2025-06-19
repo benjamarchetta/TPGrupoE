@@ -115,7 +115,7 @@
             // 
             groupBox1.Controls.Add(VerDetallesButton);
             groupBox1.Controls.Add(ordenesListView);
-            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            groupBox1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(783, 199);
@@ -127,7 +127,7 @@
             // 
             groupBox2.Controls.Add(cancelarSeleccionButton);
             groupBox2.Controls.Add(detalleProductosListView);
-            groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            groupBox2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox2.Location = new Point(12, 230);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(783, 198);
