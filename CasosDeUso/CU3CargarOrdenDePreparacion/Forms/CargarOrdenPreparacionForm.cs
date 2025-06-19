@@ -11,10 +11,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
-//using static TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model.OrdenPreparacionModelo;
-//using TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Model;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
-//using TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Model;
 
 namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 {
@@ -97,76 +93,8 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 productoComboBox.DataSource = null;
                 productoComboBox.Enabled = false;
                 ActualizarDepositosYProductos();
-
-                /*
-                var productosDelCliente = OrdenPreparacionModelo.Stock
-                    .Where(p => p.IdCliente == idClienteSeleccionado)
-                    .Select(p => p.IdProducto)
-                    .Distinct()
-                    .ToList();
-
-                // Buscar si tiene productos almacenados
-                    productosDelCliente = OrdenPreparacionModelo.Stock
-                    .Where(p => p.IdCliente == idClienteSeleccionado)
-                    .Select(p => p.IdProducto)
-                    .Distinct()
-                    .ToList();
-
-                    if (productosDelCliente.Count == 0)
-                    {
-                        MessageBox.Show("El cliente seleccionado no tiene productos almacenados. \n" +
-                            "No es posible crear una órden de preparación para este cliente.",
-                            "Advertencia",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-
-                        // Reiniciar selección
-                        razonSocialComboBox.SelectedIndex = -1;
-                        cuitTextBox.Text = "-";
-                        productoComboBox.DataSource = null;
-                        productoComboBox.Enabled = false;
-                        return;
-                    }
-                   
-                    // Obtener las descripciones
-                    var productosConDescripcion = OrdenPreparacionModelo.Productos
-                        .Where(prod => productosDelCliente.Contains(prod.IdProducto))
-                        .ToList();
-
-                    // 2. Obtener los IdProducto únicos del stock
-                    var idsProductos = productosConDescripcion.Select(s => s.IdProducto).Distinct().ToList();
-
-                    // 3. Buscar los productos con esas IDs en la lista general de productos
-                   var ProductosDelCliente = OrdenPreparacionModelo.Productos .Where(prod => idsProductos.Contains(prod.IdProducto)).ToList();
-
-                    // Si tiene productos
-                    productoComboBox.DataSource = ProductosDelCliente;
-                    productoComboBox.DisplayMember = "DescripcionProducto";
-                    productoComboBox.ValueMember = "IdProducto";
-                    productoComboBox.Enabled = true;*/
             }
-            /*
-            // 1. Obtener stock físico del cliente seleccionadoo
-            var stockDelCliente = StockFisicoAlmacen.FiltrarPorPalletCerrado(palletCerrado).Where(s => s.IdCliente == idClienteSeleccionado).ToList();
 
-            //stockDelCliente = StockFisicoAlmacen.Stock.Where(s => s.IdCliente == idClienteSeleccionado)
-            //.ToList();
-
-            // 2. Obtener los IdDeposito únicos
-            var idsDepositos = stockDelCliente
-                .SelectMany(s => s.Posiciones)
-                .Select(p => p.IdDeposito)
-                .Distinct()
-                .ToList();
-
-            // 3. Filtrar los depósitos según esos IDs
-            var DepositosDelCliente = DepositosAlmacen.Depositos
-                .Where(d => idsDepositos.Contains(d.IdDeposito))
-                .ToList();*/
-
-            //razonSocialComboBox.Enabled = true;
-            //productoComboBox.DataSource = null;
-            //productoComboBox.Enabled = false;
         }
 
         private void razonSocialComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -258,24 +186,6 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 productoComboBox.SelectedIndex = -1; 
                 productoComboBox.Enabled = depositoComboBox.SelectedIndex != -1;
 
-
-                // Filtrar los productos del cliente que están en ese depósito
-                //var productosEnDeposito = productosFiltrados
-                //  .Where(s => s.Posiciones.Any(p => p.IdDeposito == idDepositoSeleccionado))
-                //.Select(s => s.IdProducto)
-                //.Distinct()
-                //.ToList();
-
-                // (Opcional) Si tenés lista de productos con nombre, lo podés hacer así:
-                //var productosFiltrados = OrdenPreparacionModelo.Productos
-                //  .Where(p => productosEnDeposito.Contains(p.IdProducto))
-                //.ToList();
-
-
-
-                //var productosAMostrar = productosFiltrados
-                //  .Where(p => productosFiltrados.Contains(p.IdProducto))
-                //.ToList();
             }
 
             dniTransportistaTextBox.Enabled = ordenDePreparacionListView.Items.Count > 0;
@@ -541,7 +451,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                         }
                     }
 
-                    // 🔴 CALCULAR EL STOCK DISPONIBLE CORRECTAMENTE (considerando órdenes existentes)
+                    // CALCULAR EL STOCK DISPONIBLE CORRECTAMENTE (considerando órdenes existentes)
                     var stockDisponible = CalcularStockDisponibleReal(
                         producto.IdProducto,
                         idClienteSeleccionado,
@@ -668,18 +578,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             
            Modelo.GrabarOP();
-            /*List<OrdenPreparacionEntidad> ordenes = OrdenPreparacionAlmacen.BuscarTodasLasOrdenes();
-            foreach (OrdenPreparacionEntidad entidad in ordenes)
-            {
-                string mensaje = $"ID: {entidad.IdOrdenPreparacion}\n" +
-                                 $"Cliente: {entidad.IdCliente}\n" +
-                                 $"DNI T: {entidad.DniTransportista}"+
-                                 $"DNI T: {entidad.IdDeposito}"+
-                                 $"Fecha: {entidad.FechaEntrega}\n" +
-                                 $"Estado: {entidad.Estado}\n";
 
-                MessageBox.Show(mensaje, "Orden de Preparación");
-            }*/
         }
 
 

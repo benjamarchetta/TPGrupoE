@@ -25,6 +25,7 @@ namespace TPGrupoE
                 OrdenEntregaAlmacen.GrabarOE();
                 ProductoAlmacen.GrabarProducto();
                 RemitoAlmacen.GrabarRemito();
+                FlujoMovimientosAlmacen.GrabarMovimiento();
             }
             catch (Exception ex)
             {

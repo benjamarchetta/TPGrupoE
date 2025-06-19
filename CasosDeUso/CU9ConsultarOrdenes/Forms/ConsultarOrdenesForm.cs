@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
+using TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model;
+
+namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
+{
+    public partial class ConsultarOrdenesForm : Form
+    {
+        private ConsultarOrdenesModelo _consultarOrdenesModel;
+
+        public ConsultarOrdenesForm()
+        {
+            InitializeComponent();
+            _consultarOrdenesModel = new ConsultarOrdenesModelo();
+
+            EstadoActualOrdenesListView.FullRowSelect = true;
+            EstadoActualOrdenesListView.View = View.Details;
+            HistoricoOrdenesListView.View = View.Details;
+
+            EstadoActualOrdenesListView.SelectedIndexChanged += EstadoActualOrdenesListView_SelectedIndexChanged;
+            VolverMenuPrincipalButton.Click += VolverMenuPrincipalButton_Click;
+
+            CargarOrdenesActuales();
+        }
+
+        private void CargarOrdenesActuales()
+        {
+            EstadoActualOrdenesListView.Items.Clear();
+
+            foreach (var orden in _consultarOrdenesModel.Ordenes)
+            {
+                var item = new ListViewItem(new[]
+                {
+                    orden.IdOrdenPreparacion.ToString(),
+                    orden.Estado.ToString(),
+                    orden.FechaEntrega.ToShortDateString(),
+                    orden.ClienteCuit,
+                    orden.ClienteRazonSocial,
+                    orden.DepositoDomicilio,
+                    orden.FechaUltimaActualizacionEstado.ToString("g")
+                });
+
+                item.Tag = orden.IdOrdenPreparacion;
+                EstadoActualOrdenesListView.Items.Add(item);
+            }
+        }
+
+        private void EstadoActualOrdenesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EstadoActualOrdenesListView.SelectedItems.Count == 0)
+                return;
+
+            int idOrden = (int)EstadoActualOrdenesListView.SelectedItems[0].Tag;
+            var orden = _consultarOrdenesModel.Ordenes.FirstOrDefault(o => o.IdOrdenPreparacion == idOrden);
+
+            if (orden == null) return;
+
+            // Labels
+            IdOrdenPreparacionSeleccionadaLabel.Text = $"N° Órden seleccionada: {orden.IdOrdenPreparacion}";
+            FechaEntregaOPSeleccionadaLabel.Text = $"Fecha de entrega: {orden.FechaEntrega.ToShortDateString()}";
+            CuitRazonClienteLabel.Text = $"Cliente: {orden.ClienteCuit} - {orden.ClienteRazonSocial}";
+            DepositoOPSeleccionadaLabel.Text = $"Depósito: {orden.DepositoDomicilio}";
+
+            // Historico (delegado al modelo en una futura mejora si querés desacoplar más)
+            var historico = _consultarOrdenesModel.BuscarHistoricoPorOrden(idOrden).OrderBy(m => m.FechaActualizacionEstado).ToList();
+
+            HistoricoOrdenesListView.Items.Clear();
+
+            foreach (var m in historico)
+            {
+                var item = new ListViewItem(new[]
+                {
+                    m.Estado.ToString(),
+                    m.FechaActualizacionEstado.ToString("g")
+                });
+
+                HistoricoOrdenesListView.Items.Add(item);
+            }
+        }
+
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
+
+        private void ConsultarOrdenesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
+
+        private void VolverAlMenuPrincipal()
+        {
+            this.Hide();
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show();
+                    return;
+                }
+            }
+
+            new MenuPrincipalGeneralForm().Show();
+        }
+    }
+}

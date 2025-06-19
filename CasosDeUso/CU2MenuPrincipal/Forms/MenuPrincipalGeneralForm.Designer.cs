@@ -30,13 +30,14 @@
         {
             CargarOrdenPreparacionButton = new Button();
             SectorPrepatacionGroupBox = new GroupBox();
-            CargarOrdenEntregaButton = new Button();
             EmpaquetadoButton = new Button();
             GenerarOrdenSeleccionButton = new Button();
+            CargarOrdenEntregaButton = new Button();
             SectorAlmacenGroupBox = new GroupBox();
             GestionarOrdenSeleccionButton = new Button();
             SectorDespachoGroupBox = new GroupBox();
             EmitirRemitoButton = new Button();
+            ConsultarEstadoOrdenesButton = new Button();
             SectorPrepatacionGroupBox.SuspendLayout();
             SectorAlmacenGroupBox.SuspendLayout();
             SectorDespachoGroupBox.SuspendLayout();
@@ -60,23 +61,12 @@
             SectorPrepatacionGroupBox.Controls.Add(GenerarOrdenSeleccionButton);
             SectorPrepatacionGroupBox.Controls.Add(CargarOrdenPreparacionButton);
             SectorPrepatacionGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            SectorPrepatacionGroupBox.Location = new Point(11, 31);
+            SectorPrepatacionGroupBox.Location = new Point(50, 28);
             SectorPrepatacionGroupBox.Name = "SectorPrepatacionGroupBox";
             SectorPrepatacionGroupBox.Size = new Size(424, 252);
             SectorPrepatacionGroupBox.TabIndex = 1;
             SectorPrepatacionGroupBox.TabStop = false;
             SectorPrepatacionGroupBox.Text = "Sector Preparación";
-            // 
-            // CargarOrdenEntregaButton
-            // 
-            CargarOrdenEntregaButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            CargarOrdenEntregaButton.Location = new Point(6, 29);
-            CargarOrdenEntregaButton.Name = "CargarOrdenEntregaButton";
-            CargarOrdenEntregaButton.Size = new Size(406, 65);
-            CargarOrdenEntregaButton.TabIndex = 3;
-            CargarOrdenEntregaButton.Text = "Confirmar Órden de Entrega";
-            CargarOrdenEntregaButton.UseVisualStyleBackColor = true;
-            CargarOrdenEntregaButton.Click += ConfirmarOrdenDeEntregaButton_Click;
             // 
             // EmpaquetadoButton
             // 
@@ -100,12 +90,23 @@
             GenerarOrdenSeleccionButton.UseVisualStyleBackColor = true;
             GenerarOrdenSeleccionButton.Click += GenerarOrdenSeleccionButton_Click;
             // 
+            // CargarOrdenEntregaButton
+            // 
+            CargarOrdenEntregaButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CargarOrdenEntregaButton.Location = new Point(6, 29);
+            CargarOrdenEntregaButton.Name = "CargarOrdenEntregaButton";
+            CargarOrdenEntregaButton.Size = new Size(406, 65);
+            CargarOrdenEntregaButton.TabIndex = 3;
+            CargarOrdenEntregaButton.Text = "Confirmar Órden de Entrega";
+            CargarOrdenEntregaButton.UseVisualStyleBackColor = true;
+            CargarOrdenEntregaButton.Click += ConfirmarOrdenDeEntregaButton_Click;
+            // 
             // SectorAlmacenGroupBox
             // 
             SectorAlmacenGroupBox.BackColor = SystemColors.Control;
             SectorAlmacenGroupBox.Controls.Add(GestionarOrdenSeleccionButton);
             SectorAlmacenGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            SectorAlmacenGroupBox.Location = new Point(12, 299);
+            SectorAlmacenGroupBox.Location = new Point(51, 296);
             SectorAlmacenGroupBox.Name = "SectorAlmacenGroupBox";
             SectorAlmacenGroupBox.Size = new Size(424, 104);
             SectorAlmacenGroupBox.TabIndex = 3;
@@ -129,7 +130,7 @@
             SectorDespachoGroupBox.Controls.Add(CargarOrdenEntregaButton);
             SectorDespachoGroupBox.Controls.Add(EmitirRemitoButton);
             SectorDespachoGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            SectorDespachoGroupBox.Location = new Point(12, 425);
+            SectorDespachoGroupBox.Location = new Point(51, 422);
             SectorDespachoGroupBox.Name = "SectorDespachoGroupBox";
             SectorDespachoGroupBox.Size = new Size(424, 181);
             SectorDespachoGroupBox.TabIndex = 4;
@@ -147,11 +148,23 @@
             EmitirRemitoButton.UseVisualStyleBackColor = true;
             EmitirRemitoButton.Click += EmitirRemitoButton_Click;
             // 
+            // ConsultarEstadoOrdenesButton
+            // 
+            ConsultarEstadoOrdenesButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ConsultarEstadoOrdenesButton.Location = new Point(56, 623);
+            ConsultarEstadoOrdenesButton.Name = "ConsultarEstadoOrdenesButton";
+            ConsultarEstadoOrdenesButton.Size = new Size(406, 65);
+            ConsultarEstadoOrdenesButton.TabIndex = 4;
+            ConsultarEstadoOrdenesButton.Text = "Consultar estado de órdenes";
+            ConsultarEstadoOrdenesButton.UseVisualStyleBackColor = true;
+            ConsultarEstadoOrdenesButton.Click += ConsultarEstadoOrdenesButton_Click;
+            // 
             // MenuPrincipalGeneralForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(448, 623);
+            ClientSize = new Size(539, 713);
+            Controls.Add(ConsultarEstadoOrdenesButton);
             Controls.Add(SectorDespachoGroupBox);
             Controls.Add(SectorAlmacenGroupBox);
             Controls.Add(SectorPrepatacionGroupBox);
@@ -174,5 +187,6 @@
         private Button GestionarOrdenSeleccionButton;
         private GroupBox SectorDespachoGroupBox;
         private Button EmitirRemitoButton;
+        private Button ConsultarEstadoOrdenesButton;
     }
 }
