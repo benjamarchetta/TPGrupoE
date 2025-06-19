@@ -17,13 +17,13 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
 {
     public partial class EmitirRemitoForm : Form
     {
-            private EmitirRemitoModel _emitirRemitoModel;
+        private EmitirRemitoModel _emitirRemitoModel;
 
-            public EmitirRemitoForm()
-            {
-                InitializeComponent();
-                _emitirRemitoModel = new EmitirRemitoModel();
-            }
+        public EmitirRemitoForm()
+        {
+            InitializeComponent();
+            _emitirRemitoModel = new EmitirRemitoModel();
+        }
         private void DespacharyEmitirRemitoButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Se generó correctamente el remito y se registró correctamente el despacho de las órdenes de preparación.");
@@ -238,7 +238,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
                 return;
             }
 
-            MessageBox.Show("Órdenes despachadas correctamente","Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Órdenes despachadas correctamente", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             string documentoTransportista = TransportistaComboBox.SelectedValue?.ToString();
             string cuitCliente = ClienteComboBox.SelectedValue?.ToString();
@@ -368,6 +368,11 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
             }
 
             new MenuPrincipalGeneralForm().Show();
+        }
+
+        private void EmitirRemitogroupBox_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
