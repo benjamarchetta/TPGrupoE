@@ -57,7 +57,6 @@
             VolverMenuPrincipalButton = new Button();
             DetalleOProupBox = new GroupBox();
             DatosTransportistaGroupBox = new GroupBox();
-            label1 = new Label();
             DatosObligatoriosGroupBox = new GroupBox();
             FlagPalletCerradoLabel = new Label();
             ProductosAsociadosOPGroupBox = new GroupBox();
@@ -71,6 +70,7 @@
             // FechaEntregaLabel
             // 
             FechaEntregaLabel.AutoSize = true;
+            FechaEntregaLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FechaEntregaLabel.Location = new Point(23, 23);
             FechaEntregaLabel.Name = "FechaEntregaLabel";
             FechaEntregaLabel.Size = new Size(123, 20);
@@ -79,6 +79,7 @@
             // 
             // despachoDateTimePicker
             // 
+            despachoDateTimePicker.Font = new Font("Segoe UI", 9F);
             despachoDateTimePicker.Location = new Point(23, 47);
             despachoDateTimePicker.Margin = new Padding(3, 4, 3, 4);
             despachoDateTimePicker.MinDate = new DateTime(2025, 6, 4, 0, 0, 0, 0);
@@ -103,7 +104,8 @@
             // 
             quitarProductoButton.BackColor = SystemColors.GradientActiveCaption;
             quitarProductoButton.Enabled = false;
-            quitarProductoButton.Location = new Point(643, 194);
+            quitarProductoButton.Font = new Font("Segoe UI", 9F);
+            quitarProductoButton.Location = new Point(645, 200);
             quitarProductoButton.Margin = new Padding(3, 4, 3, 4);
             quitarProductoButton.Name = "quitarProductoButton";
             quitarProductoButton.Size = new Size(223, 40);
@@ -117,7 +119,7 @@
             ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, posicionesColumna });
             ordenDePreparacionListView.Font = new Font("Segoe UI", 9F);
             ordenDePreparacionListView.FullRowSelect = true;
-            ordenDePreparacionListView.Location = new Point(21, 27);
+            ordenDePreparacionListView.Location = new Point(19, 30);
             ordenDePreparacionListView.Margin = new Padding(3, 4, 3, 4);
             ordenDePreparacionListView.MultiSelect = false;
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
@@ -158,6 +160,7 @@
             // RazonSocialClienteLabel
             // 
             RazonSocialClienteLabel.AutoSize = true;
+            RazonSocialClienteLabel.Font = new Font("Segoe UI", 9F);
             RazonSocialClienteLabel.Location = new Point(466, 24);
             RazonSocialClienteLabel.Name = "RazonSocialClienteLabel";
             RazonSocialClienteLabel.Size = new Size(165, 20);
@@ -167,6 +170,7 @@
             // cuitTextBox
             // 
             cuitTextBox.Enabled = false;
+            cuitTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuitTextBox.Location = new Point(468, 107);
             cuitTextBox.Margin = new Padding(3, 4, 3, 4);
             cuitTextBox.Name = "cuitTextBox";
@@ -286,6 +290,7 @@
             // DniTransportistaLabel
             // 
             DniTransportistaLabel.AutoSize = true;
+            DniTransportistaLabel.Font = new Font("Segoe UI", 9F);
             DniTransportistaLabel.Location = new Point(21, 29);
             DniTransportistaLabel.Name = "DniTransportistaLabel";
             DniTransportistaLabel.Size = new Size(277, 20);
@@ -295,6 +300,7 @@
             // CuitClienteLabel
             // 
             CuitClienteLabel.AutoSize = true;
+            CuitClienteLabel.Font = new Font("Segoe UI", 9F);
             CuitClienteLabel.Location = new Point(468, 84);
             CuitClienteLabel.Name = "CuitClienteLabel";
             CuitClienteLabel.Size = new Size(113, 20);
@@ -304,6 +310,7 @@
             // dniTransportistaTextBox
             // 
             dniTransportistaTextBox.Enabled = false;
+            dniTransportistaTextBox.Font = new Font("Segoe UI", 9F);
             dniTransportistaTextBox.Location = new Point(21, 53);
             dniTransportistaTextBox.Margin = new Padding(3, 4, 3, 4);
             dniTransportistaTextBox.Name = "dniTransportistaTextBox";
@@ -347,36 +354,27 @@
             // 
             // DetalleOProupBox
             // 
-            DetalleOProupBox.Location = new Point(12, 179);
+            DetalleOProupBox.Font = new Font("Segoe UI Semibold", 10F);
+            DetalleOProupBox.Location = new Point(12, 171);
             DetalleOProupBox.Margin = new Padding(3, 4, 3, 4);
             DetalleOProupBox.Name = "DetalleOProupBox";
             DetalleOProupBox.Padding = new Padding(3, 4, 3, 4);
-            DetalleOProupBox.Size = new Size(890, 223);
+            DetalleOProupBox.Size = new Size(890, 231);
             DetalleOProupBox.TabIndex = 43;
             DetalleOProupBox.TabStop = false;
             DetalleOProupBox.Text = "Detalle de la mercadería a despachar";
             // 
             // DatosTransportistaGroupBox
             // 
-            DatosTransportistaGroupBox.Controls.Add(label1);
             DatosTransportistaGroupBox.Controls.Add(dniTransportistaTextBox);
             DatosTransportistaGroupBox.Controls.Add(DniTransportistaLabel);
+            DatosTransportistaGroupBox.Font = new Font("Segoe UI Semibold", 10F);
             DatosTransportistaGroupBox.Location = new Point(12, 670);
             DatosTransportistaGroupBox.Name = "DatosTransportistaGroupBox";
             DatosTransportistaGroupBox.Size = new Size(890, 95);
             DatosTransportistaGroupBox.TabIndex = 44;
             DatosTransportistaGroupBox.TabStop = false;
             DatosTransportistaGroupBox.Text = "DNI del transportista";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Enabled = false;
-            label1.Location = new Point(119, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(296, 15);
-            label1.TabIndex = 47;
-            label1.Text = "Ingrese 8 dígitos, sólo números, sin puntos ni espacios.";
             // 
             // DatosObligatoriosGroupBox
             // 
@@ -388,6 +386,7 @@
             DatosObligatoriosGroupBox.Controls.Add(CuitClienteLabel);
             DatosObligatoriosGroupBox.Controls.Add(despachoDateTimePicker);
             DatosObligatoriosGroupBox.Controls.Add(FechaEntregaLabel);
+            DatosObligatoriosGroupBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DatosObligatoriosGroupBox.Location = new Point(12, 12);
             DatosObligatoriosGroupBox.Name = "DatosObligatoriosGroupBox";
             DatosObligatoriosGroupBox.Size = new Size(890, 152);
@@ -399,6 +398,7 @@
             // FlagPalletCerradoLabel
             // 
             FlagPalletCerradoLabel.AutoSize = true;
+            FlagPalletCerradoLabel.Font = new Font("Segoe UI", 9F);
             FlagPalletCerradoLabel.Location = new Point(23, 83);
             FlagPalletCerradoLabel.Name = "FlagPalletCerradoLabel";
             FlagPalletCerradoLabel.Size = new Size(134, 20);
@@ -409,9 +409,10 @@
             // 
             ProductosAsociadosOPGroupBox.Controls.Add(ordenDePreparacionListView);
             ProductosAsociadosOPGroupBox.Controls.Add(quitarProductoButton);
-            ProductosAsociadosOPGroupBox.Location = new Point(12, 416);
+            ProductosAsociadosOPGroupBox.Font = new Font("Segoe UI Semibold", 10F);
+            ProductosAsociadosOPGroupBox.Location = new Point(12, 409);
             ProductosAsociadosOPGroupBox.Name = "ProductosAsociadosOPGroupBox";
-            ProductosAsociadosOPGroupBox.Size = new Size(890, 241);
+            ProductosAsociadosOPGroupBox.Size = new Size(890, 248);
             ProductosAsociadosOPGroupBox.TabIndex = 46;
             ProductosAsociadosOPGroupBox.TabStop = false;
             ProductosAsociadosOPGroupBox.Text = "Productos asignados a la órden de preparación";

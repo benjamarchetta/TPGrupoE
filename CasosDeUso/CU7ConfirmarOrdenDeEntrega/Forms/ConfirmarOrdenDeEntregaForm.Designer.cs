@@ -66,7 +66,7 @@
             // 
             OrdenesEmpaquetadasALiberarGroupBox.BackColor = SystemColors.Control;
             OrdenesEmpaquetadasALiberarGroupBox.Controls.Add(OrdenesEmpaquetadasListView);
-            OrdenesEmpaquetadasALiberarGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OrdenesEmpaquetadasALiberarGroupBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             OrdenesEmpaquetadasALiberarGroupBox.Location = new Point(12, 12);
             OrdenesEmpaquetadasALiberarGroupBox.Margin = new Padding(2, 3, 2, 3);
             OrdenesEmpaquetadasALiberarGroupBox.Name = "OrdenesEmpaquetadasALiberarGroupBox";
@@ -75,6 +75,7 @@
             OrdenesEmpaquetadasALiberarGroupBox.TabIndex = 12;
             OrdenesEmpaquetadasALiberarGroupBox.TabStop = false;
             OrdenesEmpaquetadasALiberarGroupBox.Text = "Mercaderías a despachar";
+            OrdenesEmpaquetadasALiberarGroupBox.Enter += OrdenesEmpaquetadasALiberarGroupBox_Enter;
             // 
             // OrdenesEmpaquetadasListView
             // 

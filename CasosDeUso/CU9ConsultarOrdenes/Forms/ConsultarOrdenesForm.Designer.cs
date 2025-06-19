@@ -45,7 +45,7 @@
             RazonSocialCliente = new ColumnHeader();
             DomicilioDeposito = new ColumnHeader();
             UltimoEstadoGroupBox = new GroupBox();
-            groupBox1 = new GroupBox();
+            HistoricoOrdenesGroupBox = new GroupBox();
             DepositoOPSeleccionadaLabel = new Label();
             CuitRazonClienteLabel = new Label();
             FechaEntregaOPSeleccionadaLabel = new Label();
@@ -56,7 +56,7 @@
             VolverMenuPrincipalButton = new Button();
             FiltroConsultaOrdenesGroupBox.SuspendLayout();
             UltimoEstadoGroupBox.SuspendLayout();
-            groupBox1.SuspendLayout();
+            HistoricoOrdenesGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // ConsultarOrdenesPreparacionLabel
@@ -77,6 +77,7 @@
             FiltroConsultaOrdenesGroupBox.Controls.Add(RazonSocialClienteLabel);
             FiltroConsultaOrdenesGroupBox.Controls.Add(EstadoOrdenFiltroComboBox);
             FiltroConsultaOrdenesGroupBox.Controls.Add(RazonSocialClienteFiltroComboBox);
+            FiltroConsultaOrdenesGroupBox.Font = new Font("Segoe UI Semibold", 10F);
             FiltroConsultaOrdenesGroupBox.Location = new Point(32, 65);
             FiltroConsultaOrdenesGroupBox.Name = "FiltroConsultaOrdenesGroupBox";
             FiltroConsultaOrdenesGroupBox.Size = new Size(981, 106);
@@ -86,27 +87,32 @@
             // 
             // LimpiarBusquedaButton
             // 
+            LimpiarBusquedaButton.BackColor = SystemColors.GradientActiveCaption;
+            LimpiarBusquedaButton.Font = new Font("Segoe UI", 9F);
             LimpiarBusquedaButton.Location = new Point(799, 39);
             LimpiarBusquedaButton.Name = "LimpiarBusquedaButton";
             LimpiarBusquedaButton.Size = new Size(165, 51);
             LimpiarBusquedaButton.TabIndex = 5;
             LimpiarBusquedaButton.Text = "Limpiar búsqueda";
-            LimpiarBusquedaButton.UseVisualStyleBackColor = true;
+            LimpiarBusquedaButton.UseVisualStyleBackColor = false;
             LimpiarBusquedaButton.Click += LimpiarBusquedaButton_Click;
             // 
             // BuscarOrdenesButton
             // 
+            BuscarOrdenesButton.BackColor = SystemColors.GradientActiveCaption;
+            BuscarOrdenesButton.Font = new Font("Segoe UI", 9F);
             BuscarOrdenesButton.Location = new Point(617, 39);
             BuscarOrdenesButton.Name = "BuscarOrdenesButton";
             BuscarOrdenesButton.Size = new Size(165, 51);
             BuscarOrdenesButton.TabIndex = 4;
             BuscarOrdenesButton.Text = "Buscar";
-            BuscarOrdenesButton.UseVisualStyleBackColor = true;
+            BuscarOrdenesButton.UseVisualStyleBackColor = false;
             BuscarOrdenesButton.Click += BuscarOrdenesButton_Click;
             // 
             // EstadoOrdenLabel
             // 
             EstadoOrdenLabel.AutoSize = true;
+            EstadoOrdenLabel.Font = new Font("Segoe UI", 9F);
             EstadoOrdenLabel.Location = new Point(326, 39);
             EstadoOrdenLabel.Name = "EstadoOrdenLabel";
             EstadoOrdenLabel.Size = new Size(134, 20);
@@ -116,6 +122,7 @@
             // RazonSocialClienteLabel
             // 
             RazonSocialClienteLabel.AutoSize = true;
+            RazonSocialClienteLabel.Font = new Font("Segoe UI", 9F);
             RazonSocialClienteLabel.Location = new Point(20, 39);
             RazonSocialClienteLabel.Name = "RazonSocialClienteLabel";
             RazonSocialClienteLabel.Size = new Size(165, 20);
@@ -124,6 +131,7 @@
             // 
             // EstadoOrdenFiltroComboBox
             // 
+            EstadoOrdenFiltroComboBox.Font = new Font("Segoe UI", 9F);
             EstadoOrdenFiltroComboBox.FormattingEnabled = true;
             EstadoOrdenFiltroComboBox.Location = new Point(326, 62);
             EstadoOrdenFiltroComboBox.Name = "EstadoOrdenFiltroComboBox";
@@ -132,6 +140,7 @@
             // 
             // RazonSocialClienteFiltroComboBox
             // 
+            RazonSocialClienteFiltroComboBox.Font = new Font("Segoe UI", 9F);
             RazonSocialClienteFiltroComboBox.FormattingEnabled = true;
             RazonSocialClienteFiltroComboBox.Location = new Point(20, 62);
             RazonSocialClienteFiltroComboBox.Name = "RazonSocialClienteFiltroComboBox";
@@ -141,6 +150,7 @@
             // EstadoActualOrdenesListView
             // 
             EstadoActualOrdenesListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, EstadoActualOP, FechaUltimaActualizacionEstado, FechaEntregaOP, CuitCliente, RazonSocialCliente, DomicilioDeposito });
+            EstadoActualOrdenesListView.Font = new Font("Segoe UI", 9F);
             EstadoActualOrdenesListView.FullRowSelect = true;
             EstadoActualOrdenesListView.Location = new Point(20, 26);
             EstadoActualOrdenesListView.Name = "EstadoActualOrdenesListView";
@@ -187,6 +197,7 @@
             // UltimoEstadoGroupBox
             // 
             UltimoEstadoGroupBox.Controls.Add(EstadoActualOrdenesListView);
+            UltimoEstadoGroupBox.Font = new Font("Segoe UI Semibold", 10F);
             UltimoEstadoGroupBox.Location = new Point(32, 186);
             UltimoEstadoGroupBox.Name = "UltimoEstadoGroupBox";
             UltimoEstadoGroupBox.Size = new Size(981, 267);
@@ -194,19 +205,20 @@
             UltimoEstadoGroupBox.TabStop = false;
             UltimoEstadoGroupBox.Text = "Estado actual";
             // 
-            // groupBox1
+            // HistoricoOrdenesGroupBox
             // 
-            groupBox1.Controls.Add(DepositoOPSeleccionadaLabel);
-            groupBox1.Controls.Add(CuitRazonClienteLabel);
-            groupBox1.Controls.Add(FechaEntregaOPSeleccionadaLabel);
-            groupBox1.Controls.Add(IdOrdenPreparacionSeleccionadaLabel);
-            groupBox1.Controls.Add(HistoricoOrdenesListView);
-            groupBox1.Location = new Point(32, 469);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(981, 257);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Historico de la órden";
+            HistoricoOrdenesGroupBox.Controls.Add(DepositoOPSeleccionadaLabel);
+            HistoricoOrdenesGroupBox.Controls.Add(CuitRazonClienteLabel);
+            HistoricoOrdenesGroupBox.Controls.Add(FechaEntregaOPSeleccionadaLabel);
+            HistoricoOrdenesGroupBox.Controls.Add(IdOrdenPreparacionSeleccionadaLabel);
+            HistoricoOrdenesGroupBox.Controls.Add(HistoricoOrdenesListView);
+            HistoricoOrdenesGroupBox.Font = new Font("Segoe UI Semibold", 10F);
+            HistoricoOrdenesGroupBox.Location = new Point(32, 469);
+            HistoricoOrdenesGroupBox.Name = "HistoricoOrdenesGroupBox";
+            HistoricoOrdenesGroupBox.Size = new Size(981, 257);
+            HistoricoOrdenesGroupBox.TabIndex = 4;
+            HistoricoOrdenesGroupBox.TabStop = false;
+            HistoricoOrdenesGroupBox.Text = "Historico de la órden";
             // 
             // DepositoOPSeleccionadaLabel
             // 
@@ -251,6 +263,7 @@
             // HistoricoOrdenesListView
             // 
             HistoricoOrdenesListView.Columns.AddRange(new ColumnHeader[] { EstadoHist, FechaActualizacionEstadoHist });
+            HistoricoOrdenesListView.Font = new Font("Segoe UI", 9F);
             HistoricoOrdenesListView.FullRowSelect = true;
             HistoricoOrdenesListView.Location = new Point(20, 92);
             HistoricoOrdenesListView.Name = "HistoricoOrdenesListView";
@@ -284,7 +297,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1044, 808);
             Controls.Add(VolverMenuPrincipalButton);
-            Controls.Add(groupBox1);
+            Controls.Add(HistoricoOrdenesGroupBox);
             Controls.Add(FiltroConsultaOrdenesGroupBox);
             Controls.Add(ConsultarOrdenesPreparacionLabel);
             Controls.Add(UltimoEstadoGroupBox);
@@ -294,8 +307,8 @@
             FiltroConsultaOrdenesGroupBox.ResumeLayout(false);
             FiltroConsultaOrdenesGroupBox.PerformLayout();
             UltimoEstadoGroupBox.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            HistoricoOrdenesGroupBox.ResumeLayout(false);
+            HistoricoOrdenesGroupBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -312,7 +325,7 @@
         private Button BuscarOrdenesButton;
         private ListView EstadoActualOrdenesListView;
         private GroupBox UltimoEstadoGroupBox;
-        private GroupBox groupBox1;
+        private GroupBox HistoricoOrdenesGroupBox;
         private Label IdOrdenPreparacionSeleccionadaLabel;
         private ListView HistoricoOrdenesListView;
         private Button VolverMenuPrincipalButton;

@@ -69,14 +69,14 @@
             EmitirRemitoPanel.Dock = DockStyle.Fill;
             EmitirRemitoPanel.Location = new Point(0, 0);
             EmitirRemitoPanel.Name = "EmitirRemitoPanel";
-            EmitirRemitoPanel.Size = new Size(765, 570);
+            EmitirRemitoPanel.Size = new Size(765, 549);
             EmitirRemitoPanel.TabIndex = 0;
             // 
             // EliminarPictureBox
             // 
             EliminarPictureBox.BackColor = SystemColors.Control;
             EliminarPictureBox.Image = (Image)resources.GetObject("EliminarPictureBox.Image");
-            EliminarPictureBox.Location = new Point(356, 305);
+            EliminarPictureBox.Location = new Point(363, 314);
             EliminarPictureBox.Margin = new Padding(2);
             EliminarPictureBox.Name = "EliminarPictureBox";
             EliminarPictureBox.Size = new Size(30, 25);
@@ -88,7 +88,7 @@
             // EmitirRemitoButton
             // 
             EmitirRemitoButton.BackColor = SystemColors.Highlight;
-            EmitirRemitoButton.Location = new Point(379, 482);
+            EmitirRemitoButton.Location = new Point(387, 482);
             EmitirRemitoButton.Margin = new Padding(3, 4, 3, 4);
             EmitirRemitoButton.Name = "EmitirRemitoButton";
             EmitirRemitoButton.Size = new Size(358, 50);
@@ -101,7 +101,7 @@
             // 
             AgregarPictureBox.BackColor = SystemColors.Control;
             AgregarPictureBox.Image = (Image)resources.GetObject("AgregarPictureBox.Image");
-            AgregarPictureBox.Location = new Point(356, 269);
+            AgregarPictureBox.Location = new Point(363, 274);
             AgregarPictureBox.Margin = new Padding(2);
             AgregarPictureBox.Name = "AgregarPictureBox";
             AgregarPictureBox.Size = new Size(30, 26);
@@ -112,7 +112,7 @@
             // 
             // VolverButton
             // 
-            VolverButton.Location = new Point(4, 482);
+            VolverButton.Location = new Point(12, 482);
             VolverButton.Margin = new Padding(3, 4, 3, 4);
             VolverButton.Name = "VolverButton";
             VolverButton.Size = new Size(358, 50);
@@ -124,7 +124,8 @@
             // EmitirRemitogroupBox
             // 
             EmitirRemitogroupBox.Controls.Add(EmitirRemitoListView);
-            EmitirRemitogroupBox.Location = new Point(4, 148);
+            EmitirRemitogroupBox.Font = new Font("Segoe UI Semibold", 10F);
+            EmitirRemitogroupBox.Location = new Point(12, 148);
             EmitirRemitogroupBox.Margin = new Padding(3, 4, 3, 4);
             EmitirRemitogroupBox.Name = "EmitirRemitogroupBox";
             EmitirRemitogroupBox.Padding = new Padding(3, 4, 3, 4);
@@ -132,10 +133,12 @@
             EmitirRemitogroupBox.TabIndex = 20;
             EmitirRemitogroupBox.TabStop = false;
             EmitirRemitogroupBox.Text = "Órdenes de preparación a despachar";
+            EmitirRemitogroupBox.Enter += EmitirRemitogroupBox_Enter;
             // 
             // EmitirRemitoListView
             // 
             EmitirRemitoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, FechaEntrega });
+            EmitirRemitoListView.Font = new Font("Segoe UI", 9F);
             EmitirRemitoListView.FullRowSelect = true;
             EmitirRemitoListView.GridLines = true;
             EmitirRemitoListView.Location = new Point(19, 33);
@@ -164,7 +167,8 @@
             BuscarDespachoPendienteGroupBox.Controls.Add(ClienteLabel);
             BuscarDespachoPendienteGroupBox.Controls.Add(SeleccionarButton);
             BuscarDespachoPendienteGroupBox.Controls.Add(TransportistaComboBox);
-            BuscarDespachoPendienteGroupBox.Location = new Point(4, 3);
+            BuscarDespachoPendienteGroupBox.Font = new Font("Segoe UI Semibold", 10F);
+            BuscarDespachoPendienteGroupBox.Location = new Point(12, 3);
             BuscarDespachoPendienteGroupBox.Name = "BuscarDespachoPendienteGroupBox";
             BuscarDespachoPendienteGroupBox.Size = new Size(733, 138);
             BuscarDespachoPendienteGroupBox.TabIndex = 23;
@@ -173,6 +177,7 @@
             // 
             // ClienteComboBox
             // 
+            ClienteComboBox.Font = new Font("Segoe UI", 9F);
             ClienteComboBox.FormattingEnabled = true;
             ClienteComboBox.Location = new Point(358, 53);
             ClienteComboBox.Margin = new Padding(3, 4, 3, 4);
@@ -183,6 +188,7 @@
             // TransportistaLabel
             // 
             TransportistaLabel.AutoSize = true;
+            TransportistaLabel.Font = new Font("Segoe UI", 9F);
             TransportistaLabel.Location = new Point(19, 29);
             TransportistaLabel.Name = "TransportistaLabel";
             TransportistaLabel.Size = new Size(174, 20);
@@ -192,6 +198,7 @@
             // ClienteLabel
             // 
             ClienteLabel.AutoSize = true;
+            ClienteLabel.Font = new Font("Segoe UI", 9F);
             ClienteLabel.Location = new Point(358, 29);
             ClienteLabel.Name = "ClienteLabel";
             ClienteLabel.Size = new Size(135, 20);
@@ -201,10 +208,11 @@
             // SeleccionarButton
             // 
             SeleccionarButton.BackColor = SystemColors.GradientActiveCaption;
+            SeleccionarButton.Font = new Font("Segoe UI", 9F);
             SeleccionarButton.Location = new Point(19, 85);
             SeleccionarButton.Margin = new Padding(3, 4, 3, 4);
             SeleccionarButton.Name = "SeleccionarButton";
-            SeleccionarButton.Size = new Size(694, 38);
+            SeleccionarButton.Size = new Size(696, 38);
             SeleccionarButton.TabIndex = 4;
             SeleccionarButton.Text = "Buscar";
             SeleccionarButton.UseVisualStyleBackColor = false;
@@ -212,6 +220,7 @@
             // 
             // TransportistaComboBox
             // 
+            TransportistaComboBox.Font = new Font("Segoe UI", 9F);
             TransportistaComboBox.FormattingEnabled = true;
             TransportistaComboBox.Location = new Point(19, 53);
             TransportistaComboBox.Margin = new Padding(3, 4, 3, 4);
@@ -222,7 +231,8 @@
             // ConfirmarDespachoGroupBox
             // 
             ConfirmarDespachoGroupBox.Controls.Add(ConfirmarDespachoListView);
-            ConfirmarDespachoGroupBox.Location = new Point(400, 148);
+            ConfirmarDespachoGroupBox.Font = new Font("Segoe UI Semibold", 10F);
+            ConfirmarDespachoGroupBox.Location = new Point(408, 148);
             ConfirmarDespachoGroupBox.Margin = new Padding(3, 4, 3, 4);
             ConfirmarDespachoGroupBox.Name = "ConfirmarDespachoGroupBox";
             ConfirmarDespachoGroupBox.Padding = new Padding(3, 4, 3, 4);
@@ -234,6 +244,7 @@
             // ConfirmarDespachoListView
             // 
             ConfirmarDespachoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacionADespachar, FechaEntregaADespachar });
+            ConfirmarDespachoListView.Font = new Font("Segoe UI", 9F);
             ConfirmarDespachoListView.FullRowSelect = true;
             ConfirmarDespachoListView.GridLines = true;
             ConfirmarDespachoListView.Location = new Point(19, 33);
@@ -259,7 +270,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(765, 570);
+            ClientSize = new Size(765, 549);
             Controls.Add(EmitirRemitoPanel);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EmitirRemitoForm";
