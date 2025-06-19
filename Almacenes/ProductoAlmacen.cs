@@ -15,7 +15,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarProducto()
         {
-            var datosProducto = JsonSerializer.Serialize(productos);
+            var datosProducto = JsonSerializer.Serialize(productos, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\productos.json", datosProducto);
         }

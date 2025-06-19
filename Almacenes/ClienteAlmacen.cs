@@ -28,7 +28,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarCliente()
         {
-            var datosCliente = JsonSerializer.Serialize(clientes);
+            var datosCliente = JsonSerializer.Serialize(clientes, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(@"Datos\clientes.json", datosCliente);
         }
 

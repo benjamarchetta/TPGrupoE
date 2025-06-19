@@ -15,7 +15,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarOP()
         {
-            var datosOP = JsonSerializer.Serialize(ordenesPreparacion);
+            var datosOP = JsonSerializer.Serialize(ordenesPreparacion, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\ordenesPreparacion.json", datosOP);
         }

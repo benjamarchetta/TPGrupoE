@@ -19,7 +19,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarOS()
         {
-            var datosOS = JsonSerializer.Serialize(ordenesPicking);
+            var datosOS = JsonSerializer.Serialize(ordenesPicking, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\ordenesPicking.json", datosOS);
         }

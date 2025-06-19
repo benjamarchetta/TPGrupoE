@@ -16,7 +16,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarOE()
         {
-            var datosOE = JsonSerializer.Serialize(ordenesEntrega);
+            var datosOE = JsonSerializer.Serialize(ordenesEntrega, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\ordenesEntrega.json", datosOE);
         }
