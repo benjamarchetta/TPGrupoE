@@ -139,11 +139,11 @@
             // 
             // EstadoActualOrdenesListView
             // 
-            EstadoActualOrdenesListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, EstadoActualOP, FechaEntregaOP, CuitCliente, RazonSocialCliente, DomicilioDeposito, FechaUltimaActualizacionEstado });
+            EstadoActualOrdenesListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, EstadoActualOP, FechaUltimaActualizacionEstado, FechaEntregaOP, CuitCliente, RazonSocialCliente, DomicilioDeposito });
             EstadoActualOrdenesListView.FullRowSelect = true;
             EstadoActualOrdenesListView.Location = new Point(52, 248);
             EstadoActualOrdenesListView.Name = "EstadoActualOrdenesListView";
-            EstadoActualOrdenesListView.Size = new Size(944, 249);
+            EstadoActualOrdenesListView.Size = new Size(944, 225);
             EstadoActualOrdenesListView.TabIndex = 2;
             EstadoActualOrdenesListView.UseCompatibleStateImageBehavior = false;
             EstadoActualOrdenesListView.View = View.Details;
@@ -187,7 +187,7 @@
             // 
             UltimoEstadoGroupBox.Location = new Point(32, 213);
             UltimoEstadoGroupBox.Name = "UltimoEstadoGroupBox";
-            UltimoEstadoGroupBox.Size = new Size(981, 304);
+            UltimoEstadoGroupBox.Size = new Size(981, 285);
             UltimoEstadoGroupBox.TabIndex = 3;
             UltimoEstadoGroupBox.TabStop = false;
             UltimoEstadoGroupBox.Text = "Estado actual";
@@ -199,9 +199,9 @@
             groupBox1.Controls.Add(FechaEntregaOPSeleccionadaLabel);
             groupBox1.Controls.Add(IdOrdenPreparacionSeleccionadaLabel);
             groupBox1.Controls.Add(HistoricoOrdenesListView);
-            groupBox1.Location = new Point(32, 539);
+            groupBox1.Location = new Point(32, 519);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(981, 228);
+            groupBox1.Size = new Size(981, 257);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Historico de la órden";
@@ -209,7 +209,7 @@
             // DepositoOPSeleccionadaLabel
             // 
             DepositoOPSeleccionadaLabel.AutoSize = true;
-            DepositoOPSeleccionadaLabel.Location = new Point(746, 30);
+            DepositoOPSeleccionadaLabel.Location = new Point(419, 69);
             DepositoOPSeleccionadaLabel.Name = "DepositoOPSeleccionadaLabel";
             DepositoOPSeleccionadaLabel.Size = new Size(73, 20);
             DepositoOPSeleccionadaLabel.TabIndex = 9;
@@ -218,7 +218,7 @@
             // CuitRazonClienteLabel
             // 
             CuitRazonClienteLabel.AutoSize = true;
-            CuitRazonClienteLabel.Location = new Point(544, 30);
+            CuitRazonClienteLabel.Location = new Point(419, 30);
             CuitRazonClienteLabel.Name = "CuitRazonClienteLabel";
             CuitRazonClienteLabel.Size = new Size(58, 20);
             CuitRazonClienteLabel.TabIndex = 8;
@@ -227,7 +227,7 @@
             // FechaEntregaOPSeleccionadaLabel
             // 
             FechaEntregaOPSeleccionadaLabel.AutoSize = true;
-            FechaEntregaOPSeleccionadaLabel.Location = new Point(296, 30);
+            FechaEntregaOPSeleccionadaLabel.Location = new Point(20, 69);
             FechaEntregaOPSeleccionadaLabel.Name = "FechaEntregaOPSeleccionadaLabel";
             FechaEntregaOPSeleccionadaLabel.Size = new Size(130, 20);
             FechaEntregaOPSeleccionadaLabel.TabIndex = 7;
@@ -246,7 +246,7 @@
             // 
             HistoricoOrdenesListView.Columns.AddRange(new ColumnHeader[] { EstadoHist, FechaActualizacionEstadoHist });
             HistoricoOrdenesListView.FullRowSelect = true;
-            HistoricoOrdenesListView.Location = new Point(20, 64);
+            HistoricoOrdenesListView.Location = new Point(20, 92);
             HistoricoOrdenesListView.Name = "HistoricoOrdenesListView";
             HistoricoOrdenesListView.Size = new Size(944, 146);
             HistoricoOrdenesListView.TabIndex = 5;
@@ -276,7 +276,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1035, 877);
+            ClientSize = new Size(1044, 877);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(groupBox1);
             Controls.Add(EstadoActualOrdenesListView);

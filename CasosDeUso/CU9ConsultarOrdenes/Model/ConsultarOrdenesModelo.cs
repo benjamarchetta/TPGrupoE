@@ -43,6 +43,7 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model
                     IdOrdenPreparacion = movimiento.IdOrdenPreparacion,
                     Estado = movimiento.Estado,
                     FechaEntrega = movimiento.FechaEntrega,
+                    IdCliente = orden.IdCliente,
                     ClienteCuit = cliente.Cuit,
                     ClienteRazonSocial = cliente.RazonSocial,
                     DepositoDomicilio = deposito.Domicilio,
