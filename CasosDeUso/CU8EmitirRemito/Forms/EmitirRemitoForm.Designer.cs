@@ -39,8 +39,8 @@
             IdOrdenPreparacion = new ColumnHeader();
             FechaEntrega = new ColumnHeader();
             ConfirmarDespachoListView = new ListView();
-            columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
+            IdOrdenPreparacionADespachar = new ColumnHeader();
+            FechaEntregaADespachar = new ColumnHeader();
             EmitirRemitoButton = new Button();
             VolverButton = new Button();
             BuscarDespachoPendienteGroupBox = new GroupBox();
@@ -57,48 +57,46 @@
             // TransportistaLabel
             // 
             TransportistaLabel.AutoSize = true;
-            TransportistaLabel.Location = new Point(36, 54);
-            TransportistaLabel.Margin = new Padding(6, 0, 6, 0);
+            TransportistaLabel.Location = new Point(19, 29);
             TransportistaLabel.Name = "TransportistaLabel";
-            TransportistaLabel.Size = new Size(310, 37);
+            TransportistaLabel.Size = new Size(174, 20);
             TransportistaLabel.TabIndex = 0;
             TransportistaLabel.Text = "Seleccionar Transportista";
             // 
             // ClienteLabel
             // 
             ClienteLabel.AutoSize = true;
-            ClienteLabel.Location = new Point(672, 54);
-            ClienteLabel.Margin = new Padding(6, 0, 6, 0);
+            ClienteLabel.Location = new Point(358, 29);
             ClienteLabel.Name = "ClienteLabel";
-            ClienteLabel.Size = new Size(241, 37);
+            ClienteLabel.Size = new Size(135, 20);
             ClienteLabel.TabIndex = 1;
             ClienteLabel.Text = "Seleccionar Cliente";
             // 
             // TransportistaComboBox
             // 
             TransportistaComboBox.FormattingEnabled = true;
-            TransportistaComboBox.Location = new Point(36, 98);
-            TransportistaComboBox.Margin = new Padding(6, 7, 6, 7);
+            TransportistaComboBox.Location = new Point(19, 53);
+            TransportistaComboBox.Margin = new Padding(3, 4, 3, 4);
             TransportistaComboBox.Name = "TransportistaComboBox";
-            TransportistaComboBox.Size = new Size(596, 45);
+            TransportistaComboBox.Size = new Size(320, 28);
             TransportistaComboBox.TabIndex = 2;
             // 
             // ClienteComboBox
             // 
             ClienteComboBox.FormattingEnabled = true;
-            ClienteComboBox.Location = new Point(672, 98);
-            ClienteComboBox.Margin = new Padding(6, 7, 6, 7);
+            ClienteComboBox.Location = new Point(358, 53);
+            ClienteComboBox.Margin = new Padding(3, 4, 3, 4);
             ClienteComboBox.Name = "ClienteComboBox";
-            ClienteComboBox.Size = new Size(666, 45);
+            ClienteComboBox.Size = new Size(357, 28);
             ClienteComboBox.TabIndex = 3;
             // 
             // SeleccionarButton
             // 
             SeleccionarButton.BackColor = SystemColors.InactiveCaption;
-            SeleccionarButton.Location = new Point(36, 157);
-            SeleccionarButton.Margin = new Padding(6, 7, 6, 7);
+            SeleccionarButton.Location = new Point(19, 85);
+            SeleccionarButton.Margin = new Padding(3, 4, 3, 4);
             SeleccionarButton.Name = "SeleccionarButton";
-            SeleccionarButton.Size = new Size(1302, 71);
+            SeleccionarButton.Size = new Size(694, 38);
             SeleccionarButton.TabIndex = 4;
             SeleccionarButton.Text = "Buscar";
             SeleccionarButton.UseVisualStyleBackColor = false;
@@ -107,11 +105,11 @@
             // EmitirRemitogroupBox
             // 
             EmitirRemitogroupBox.Controls.Add(EmitirRemitoListView);
-            EmitirRemitogroupBox.Location = new Point(26, 306);
-            EmitirRemitogroupBox.Margin = new Padding(6, 7, 6, 7);
+            EmitirRemitogroupBox.Location = new Point(14, 165);
+            EmitirRemitogroupBox.Margin = new Padding(3, 4, 3, 4);
             EmitirRemitogroupBox.Name = "EmitirRemitogroupBox";
-            EmitirRemitogroupBox.Padding = new Padding(6, 7, 6, 7);
-            EmitirRemitogroupBox.Size = new Size(632, 603);
+            EmitirRemitogroupBox.Padding = new Padding(3, 4, 3, 4);
+            EmitirRemitogroupBox.Size = new Size(337, 326);
             EmitirRemitogroupBox.TabIndex = 5;
             EmitirRemitogroupBox.TabStop = false;
             EmitirRemitogroupBox.Text = "Órdenes de preparación a despachar";
@@ -120,10 +118,10 @@
             // 
             EmitirRemitoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, FechaEntrega });
             EmitirRemitoListView.FullRowSelect = true;
-            EmitirRemitoListView.Location = new Point(36, 61);
-            EmitirRemitoListView.Margin = new Padding(6, 7, 6, 7);
+            EmitirRemitoListView.Location = new Point(19, 33);
+            EmitirRemitoListView.Margin = new Padding(3, 4, 3, 4);
             EmitirRemitoListView.Name = "EmitirRemitoListView";
-            EmitirRemitoListView.Size = new Size(559, 510);
+            EmitirRemitoListView.Size = new Size(300, 278);
             EmitirRemitoListView.TabIndex = 16;
             EmitirRemitoListView.UseCompatibleStateImageBehavior = false;
             EmitirRemitoListView.View = View.Details;
@@ -131,44 +129,44 @@
             // IdOrdenPreparacion
             // 
             IdOrdenPreparacion.Text = "N° Órden de Preparación";
-            IdOrdenPreparacion.Width = 320;
+            IdOrdenPreparacion.Width = 180;
             // 
             // FechaEntrega
             // 
             FechaEntrega.Text = "Fecha de Entrega";
             FechaEntrega.TextAlign = HorizontalAlignment.Center;
-            FechaEntrega.Width = 220;
+            FechaEntrega.Width = 130;
             // 
             // ConfirmarDespachoListView
             // 
-            ConfirmarDespachoListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2 });
+            ConfirmarDespachoListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacionADespachar, FechaEntregaADespachar });
             ConfirmarDespachoListView.FullRowSelect = true;
-            ConfirmarDespachoListView.Location = new Point(36, 61);
-            ConfirmarDespachoListView.Margin = new Padding(6, 7, 6, 7);
+            ConfirmarDespachoListView.Location = new Point(19, 33);
+            ConfirmarDespachoListView.Margin = new Padding(3, 4, 3, 4);
             ConfirmarDespachoListView.Name = "ConfirmarDespachoListView";
-            ConfirmarDespachoListView.Size = new Size(559, 510);
+            ConfirmarDespachoListView.Size = new Size(300, 278);
             ConfirmarDespachoListView.TabIndex = 17;
             ConfirmarDespachoListView.UseCompatibleStateImageBehavior = false;
             ConfirmarDespachoListView.View = View.Details;
             // 
-            // columnHeader1
+            // IdOrdenPreparacionADespachar
             // 
-            columnHeader1.Text = "N° Órden de Preparación";
-            columnHeader1.Width = 320;
+            IdOrdenPreparacionADespachar.Text = "N° Órden de Preparación";
+            IdOrdenPreparacionADespachar.Width = 180;
             // 
-            // columnHeader2
+            // FechaEntregaADespachar
             // 
-            columnHeader2.Text = "Fecha de Entrega";
-            columnHeader2.TextAlign = HorizontalAlignment.Center;
-            columnHeader2.Width = 220;
+            FechaEntregaADespachar.Text = "Fecha de Entrega";
+            FechaEntregaADespachar.TextAlign = HorizontalAlignment.Center;
+            FechaEntregaADespachar.Width = 130;
             // 
             // EmitirRemitoButton
             // 
             EmitirRemitoButton.BackColor = SystemColors.Highlight;
-            EmitirRemitoButton.Location = new Point(730, 946);
-            EmitirRemitoButton.Margin = new Padding(6, 7, 6, 7);
+            EmitirRemitoButton.Location = new Point(389, 511);
+            EmitirRemitoButton.Margin = new Padding(3, 4, 3, 4);
             EmitirRemitoButton.Name = "EmitirRemitoButton";
-            EmitirRemitoButton.Size = new Size(671, 92);
+            EmitirRemitoButton.Size = new Size(358, 50);
             EmitirRemitoButton.TabIndex = 6;
             EmitirRemitoButton.Text = "Confirmar Despacho y Emitir Remito";
             EmitirRemitoButton.UseVisualStyleBackColor = false;
@@ -176,10 +174,10 @@
             // 
             // VolverButton
             // 
-            VolverButton.Location = new Point(26, 946);
-            VolverButton.Margin = new Padding(6, 7, 6, 7);
+            VolverButton.Location = new Point(14, 511);
+            VolverButton.Margin = new Padding(3, 4, 3, 4);
             VolverButton.Name = "VolverButton";
-            VolverButton.Size = new Size(671, 92);
+            VolverButton.Size = new Size(358, 50);
             VolverButton.TabIndex = 7;
             VolverButton.Text = "Volver al Menú Principal";
             VolverButton.UseVisualStyleBackColor = true;
@@ -192,11 +190,9 @@
             BuscarDespachoPendienteGroupBox.Controls.Add(ClienteLabel);
             BuscarDespachoPendienteGroupBox.Controls.Add(SeleccionarButton);
             BuscarDespachoPendienteGroupBox.Controls.Add(TransportistaComboBox);
-            BuscarDespachoPendienteGroupBox.Location = new Point(26, 37);
-            BuscarDespachoPendienteGroupBox.Margin = new Padding(6);
+            BuscarDespachoPendienteGroupBox.Location = new Point(14, 20);
             BuscarDespachoPendienteGroupBox.Name = "BuscarDespachoPendienteGroupBox";
-            BuscarDespachoPendienteGroupBox.Padding = new Padding(6);
-            BuscarDespachoPendienteGroupBox.Size = new Size(1375, 256);
+            BuscarDespachoPendienteGroupBox.Size = new Size(733, 138);
             BuscarDespachoPendienteGroupBox.TabIndex = 8;
             BuscarDespachoPendienteGroupBox.TabStop = false;
             BuscarDespachoPendienteGroupBox.Text = "Buscar órdenes a despachar";
@@ -204,11 +200,11 @@
             // ConfirmarDespachoGroupBox
             // 
             ConfirmarDespachoGroupBox.Controls.Add(ConfirmarDespachoListView);
-            ConfirmarDespachoGroupBox.Location = new Point(769, 306);
-            ConfirmarDespachoGroupBox.Margin = new Padding(6, 7, 6, 7);
+            ConfirmarDespachoGroupBox.Location = new Point(410, 165);
+            ConfirmarDespachoGroupBox.Margin = new Padding(3, 4, 3, 4);
             ConfirmarDespachoGroupBox.Name = "ConfirmarDespachoGroupBox";
-            ConfirmarDespachoGroupBox.Padding = new Padding(6, 7, 6, 7);
-            ConfirmarDespachoGroupBox.Size = new Size(632, 603);
+            ConfirmarDespachoGroupBox.Padding = new Padding(3, 4, 3, 4);
+            ConfirmarDespachoGroupBox.Size = new Size(337, 326);
             ConfirmarDespachoGroupBox.TabIndex = 17;
             ConfirmarDespachoGroupBox.TabStop = false;
             ConfirmarDespachoGroupBox.Text = "Confirmar despacho";
@@ -217,9 +213,10 @@
             // 
             AgregarPictureBox.BackColor = SystemColors.Control;
             AgregarPictureBox.Image = (Image)resources.GetObject("AgregarPictureBox.Image");
-            AgregarPictureBox.Location = new Point(687, 529);
+            AgregarPictureBox.Location = new Point(366, 286);
+            AgregarPictureBox.Margin = new Padding(2, 2, 2, 2);
             AgregarPictureBox.Name = "AgregarPictureBox";
-            AgregarPictureBox.Size = new Size(56, 48);
+            AgregarPictureBox.Size = new Size(30, 26);
             AgregarPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             AgregarPictureBox.TabIndex = 18;
             AgregarPictureBox.TabStop = false;
@@ -229,9 +226,10 @@
             // 
             EliminarPictureBox.BackColor = SystemColors.Control;
             EliminarPictureBox.Image = (Image)resources.GetObject("EliminarPictureBox.Image");
-            EliminarPictureBox.Location = new Point(687, 595);
+            EliminarPictureBox.Location = new Point(366, 322);
+            EliminarPictureBox.Margin = new Padding(2, 2, 2, 2);
             EliminarPictureBox.Name = "EliminarPictureBox";
-            EliminarPictureBox.Size = new Size(56, 47);
+            EliminarPictureBox.Size = new Size(30, 25);
             EliminarPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             EliminarPictureBox.TabIndex = 19;
             EliminarPictureBox.TabStop = false;
@@ -239,9 +237,9 @@
             // 
             // EmitirRemitoForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1435, 1054);
+            ClientSize = new Size(765, 570);
             Controls.Add(EliminarPictureBox);
             Controls.Add(EmitirRemitoButton);
             Controls.Add(AgregarPictureBox);
@@ -249,7 +247,7 @@
             Controls.Add(EmitirRemitogroupBox);
             Controls.Add(BuscarDespachoPendienteGroupBox);
             Controls.Add(ConfirmarDespachoGroupBox);
-            Margin = new Padding(6, 7, 6, 7);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "EmitirRemitoForm";
             Text = "Emitir Remito";
             FormClosing += EmitirRemitoForm_FormClosing;
@@ -278,8 +276,8 @@
         private Button VolverButton;
         private GroupBox BuscarDespachoPendienteGroupBox;
         private ListView ConfirmarDespachoListView;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
+        private ColumnHeader IdOrdenPreparacionADespachar;
+        private ColumnHeader FechaEntregaADespachar;
         private GroupBox ConfirmarDespachoGroupBox;
         private PictureBox AgregarPictureBox;
         private PictureBox EliminarPictureBox;
