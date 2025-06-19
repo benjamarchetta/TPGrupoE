@@ -19,91 +19,101 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
         public EmitirRemitoModel()
         {
             OrdenesDePreparacion = new List<OrdenPreparacion>();
-
-            CargarTransportistas();
         }
-        public string ValidarTransportista(string dniTransportista)
-        {
-            if (dniTransportista == null || dniTransportista == "")
-            {
-                return "Por favor seleccione un transportista valido.";
-            }
-
-            return null;
-        }
-        public void CargarOrdenesPorTransportista(string dniTransportista)
+        public void CargarOrdenesPorTransportistaYCliente(string dniTransportista, string cuitCliente)
         {
             OrdenesDePreparacion = [];
-            var ordenesDeEntregaParaDespacho = OrdenEntregaAlmacen.BuscarOrdenesDeEntregaCumplidas();
 
-            foreach (var ordenEntrega in ordenesDeEntregaParaDespacho)
+            var ordenesPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+
+            foreach (var orden in ordenesPreparadas)
             {
-                foreach (var idOrdenPreparacion in ordenEntrega.IdOrdenPreparacion)
-                {
-                    var ordenEntidad = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPreparacion);
+                var cliente = ClienteAlmacen.BuscarClientePorId(orden.IdCliente);
+                if (cliente == null) continue;
 
-                    if (ordenEntidad.DniTransportista.ToString() == dniTransportista && ordenEntidad.Estado != EstadoOrdenPreparacion.Despachada)
-                    {
-                        var ordenPreparacion = new OrdenPreparacion(ordenEntidad.IdOrdenPreparacion, ordenEntidad.DniTransportista.ToString(), ordenEntidad.Estado, ordenEntrega.IdOrdenEntrega, ordenEntidad.IdCliente, ordenEntidad.FechaEntrega);
-                        OrdenesDePreparacion.Add(ordenPreparacion);
-                    }
+                if (orden.DniTransportista.ToString() == dniTransportista && cliente.Cuit == cuitCliente)
+                {
+                    var ordenPreparacion = new OrdenPreparacion(
+                        orden.IdOrdenPreparacion,
+                        orden.DniTransportista.ToString(),
+                        orden.Estado,
+                        orden.IdCliente,
+                        orden.FechaEntrega
+                    );
+
+                    OrdenesDePreparacion.Add(ordenPreparacion);
                 }
             }
         }
-        private void CargarTransportistas()
-        {
-            Transportistas = new List<Transportista>();
 
-            var transportistasConOrdenesParaDespacho = OrdenPreparacionAlmacen.BuscarTransportistasConOrdenesParaDespacho();
-            foreach (var dniTransportista in transportistasConOrdenesParaDespacho)
-            {
-                Transportista transportista = new Transportista(dniTransportista.ToString());
-                Transportistas.Add(transportista);
-            }
-        }
         public void CargarClientesPorTransportista(string dniTransportista)
         {
             Clientes = new List<Cliente>();
 
-            var ordenesPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            var ordenes = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas()
+                .Where(op => op.DniTransportista.ToString() == dniTransportista)
+                .ToList();
 
-            foreach (var ordenEntidad in ordenesPreparadas)
+            foreach (var op in ordenes)
             {
-                if (ordenEntidad.DniTransportista.ToString() == dniTransportista &&
-             ordenEntidad.Estado == EstadoOrdenPreparacion.Preparada)
+                var cliente = ClienteAlmacen.BuscarClientePorId(op.IdCliente);
+                if (cliente != null && !Clientes.Any(c => c.Cuit == cliente.Cuit))
                 {
-                    var clienteEntidad = ClienteAlmacen.BuscarClientePorId(ordenEntidad.IdCliente);
-                    if (clienteEntidad != null && 
-                        !Clientes.Any(c => c.Cuit == clienteEntidad.Cuit))
+                    Clientes.Add(new Cliente(cliente.Cuit, cliente.RazonSocial));
+                }
+            }
+        }
+
+        public void CargarTransportistasPorCliente(string cuitCliente)
+        {
+            Transportistas = new List<Transportista>();
+
+            var ordenes = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+
+            foreach (var op in ordenes)
+            {
+                var cliente = ClienteAlmacen.BuscarClientePorId(op.IdCliente);
+                if (cliente != null && cliente.Cuit == cuitCliente)
+                {
+                    var dni = op.DniTransportista.ToString();
+                    if (!Transportistas.Any(t => t.Documento == dni))
                     {
-                        var cliente = new Cliente(clienteEntidad.Cuit, clienteEntidad.RazonSocial);
-                        Clientes.Add(cliente);
+                        Transportistas.Add(new Transportista(dni));
                     }
                 }
             }
         }
 
-        private void ActualizarOrdenDeEntrega(int idOrdenEntrega)
+        public void CargarTodosLosTransportistas()
         {
-            bool marcarOrdenComoCumplida = true;
+            Transportistas = new List<Transportista>();
 
-            var ordenEntrega = OrdenEntregaAlmacen.BuscarOrdenPorId(idOrdenEntrega);
-
-            foreach (var idOrdenPreparacion in ordenEntrega.IdOrdenPreparacion)
+            var ordenes = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            foreach (var op in ordenes)
             {
-                var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPreparacion);
-
-                if (ordenPrep.Estado != EstadoOrdenPreparacion.Despachada)
+                var dni = op.DniTransportista.ToString();
+                if (!Transportistas.Any(t => t.Documento == dni))
                 {
-                    marcarOrdenComoCumplida = false;
+                    Transportistas.Add(new Transportista(dni));
                 }
             }
+        }
 
-            if (marcarOrdenComoCumplida)
+        public void CargarTodosLosClientes()
+        {
+            Clientes = new List<Cliente>();
+
+            var ordenes = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            foreach (var op in ordenes)
             {
-                ordenEntrega.MarcarComoCumplida();
+                var cliente = ClienteAlmacen.BuscarClientePorId(op.IdCliente);
+                if (cliente != null && !Clientes.Any(c => c.Cuit == cliente.Cuit))
+                {
+                    Clientes.Add(new Cliente(cliente.Cuit, cliente.RazonSocial));
+                }
             }
         }
+
         public string MarcarOpDespachada()
         {
             if (OrdenesDePreparacion.Count == 0)
@@ -124,13 +134,39 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
                 var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(orden.Id);
                 ordenPreparacion.MarcarOpDespachada();
                 remito.IDOrdenPreparacion.Add(ordenPreparacion.IdOrdenPreparacion);
-                ActualizarOrdenDeEntrega(orden.IdOrdenEntrega);
             }
 
             RemitoAlmacen.NuevoRemito(remito);
             OrdenesDePreparacion = [];
 
             return null;
+        }
+
+        public bool HayOrdenesPreparadas()
+        {
+            var ordenesPreparadas = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            return ordenesPreparadas != null && ordenesPreparadas.Count > 0;
+        }
+
+        public (List<Transportista> transportistas, List<Cliente> clientes) ObtenerFiltrosDisponibles()
+        {
+            var ordenes = OrdenPreparacionAlmacen.BuscarOrdenesPreparadas();
+            var transportistas = new List<Transportista>();
+            var clientes = new List<Cliente>();
+
+            foreach (var op in ordenes)
+            {
+                var cliente = ClienteAlmacen.BuscarClientePorId(op.IdCliente);
+                if (cliente == null) continue;
+
+                if (!transportistas.Any(t => t.Documento == op.DniTransportista.ToString()))
+                    transportistas.Add(new Transportista(op.DniTransportista.ToString()));
+
+                if (!clientes.Any(c => c.Cuit == cliente.Cuit))
+                    clientes.Add(new Cliente(cliente.Cuit, cliente.RazonSocial));
+            }
+
+            return (transportistas, clientes);
         }
     }
 }
