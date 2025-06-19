@@ -39,11 +39,11 @@
             EstadoActualOrdenesListView = new ListView();
             IdOrdenPreparacion = new ColumnHeader();
             EstadoActualOP = new ColumnHeader();
+            FechaUltimaActualizacionEstado = new ColumnHeader();
             FechaEntregaOP = new ColumnHeader();
             CuitCliente = new ColumnHeader();
             RazonSocialCliente = new ColumnHeader();
             DomicilioDeposito = new ColumnHeader();
-            FechaUltimaActualizacionEstado = new ColumnHeader();
             UltimoEstadoGroupBox = new GroupBox();
             groupBox1 = new GroupBox();
             DepositoOPSeleccionadaLabel = new Label();
@@ -62,9 +62,10 @@
             // 
             ConsultarOrdenesPreparacionLabel.AutoSize = true;
             ConsultarOrdenesPreparacionLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ConsultarOrdenesPreparacionLabel.Location = new Point(23, 20);
+            ConsultarOrdenesPreparacionLabel.Location = new Point(43, 37);
+            ConsultarOrdenesPreparacionLabel.Margin = new Padding(6, 0, 6, 0);
             ConsultarOrdenesPreparacionLabel.Name = "ConsultarOrdenesPreparacionLabel";
-            ConsultarOrdenesPreparacionLabel.Size = new Size(486, 31);
+            ConsultarOrdenesPreparacionLabel.Size = new Size(889, 57);
             ConsultarOrdenesPreparacionLabel.TabIndex = 0;
             ConsultarOrdenesPreparacionLabel.Text = "Consultar histórico de órdenes de preparación";
             // 
@@ -76,18 +77,21 @@
             FiltroConsultaOrdenesGroupBox.Controls.Add(RazonSocialClienteLabel);
             FiltroConsultaOrdenesGroupBox.Controls.Add(EstadoOrdenFiltroComboBox);
             FiltroConsultaOrdenesGroupBox.Controls.Add(RazonSocialClienteFiltroComboBox);
-            FiltroConsultaOrdenesGroupBox.Location = new Point(32, 65);
+            FiltroConsultaOrdenesGroupBox.Location = new Point(60, 120);
+            FiltroConsultaOrdenesGroupBox.Margin = new Padding(6);
             FiltroConsultaOrdenesGroupBox.Name = "FiltroConsultaOrdenesGroupBox";
-            FiltroConsultaOrdenesGroupBox.Size = new Size(981, 125);
+            FiltroConsultaOrdenesGroupBox.Padding = new Padding(6);
+            FiltroConsultaOrdenesGroupBox.Size = new Size(1839, 196);
             FiltroConsultaOrdenesGroupBox.TabIndex = 1;
             FiltroConsultaOrdenesGroupBox.TabStop = false;
             FiltroConsultaOrdenesGroupBox.Text = "Filtros";
             // 
             // LimpiarBusquedaButton
             // 
-            LimpiarBusquedaButton.Location = new Point(799, 39);
+            LimpiarBusquedaButton.Location = new Point(1498, 72);
+            LimpiarBusquedaButton.Margin = new Padding(6);
             LimpiarBusquedaButton.Name = "LimpiarBusquedaButton";
-            LimpiarBusquedaButton.Size = new Size(165, 51);
+            LimpiarBusquedaButton.Size = new Size(309, 94);
             LimpiarBusquedaButton.TabIndex = 5;
             LimpiarBusquedaButton.Text = "Limpiar búsqueda";
             LimpiarBusquedaButton.UseVisualStyleBackColor = true;
@@ -95,9 +99,10 @@
             // 
             // BuscarOrdenesButton
             // 
-            BuscarOrdenesButton.Location = new Point(617, 39);
+            BuscarOrdenesButton.Location = new Point(1157, 72);
+            BuscarOrdenesButton.Margin = new Padding(6);
             BuscarOrdenesButton.Name = "BuscarOrdenesButton";
-            BuscarOrdenesButton.Size = new Size(165, 51);
+            BuscarOrdenesButton.Size = new Size(309, 94);
             BuscarOrdenesButton.TabIndex = 4;
             BuscarOrdenesButton.Text = "Buscar";
             BuscarOrdenesButton.UseVisualStyleBackColor = true;
@@ -106,44 +111,49 @@
             // EstadoOrdenLabel
             // 
             EstadoOrdenLabel.AutoSize = true;
-            EstadoOrdenLabel.Location = new Point(326, 39);
+            EstadoOrdenLabel.Location = new Point(611, 72);
+            EstadoOrdenLabel.Margin = new Padding(6, 0, 6, 0);
             EstadoOrdenLabel.Name = "EstadoOrdenLabel";
-            EstadoOrdenLabel.Size = new Size(134, 20);
+            EstadoOrdenLabel.Size = new Size(239, 37);
             EstadoOrdenLabel.TabIndex = 3;
             EstadoOrdenLabel.Text = "Estado de la órden";
             // 
             // RazonSocialClienteLabel
             // 
             RazonSocialClienteLabel.AutoSize = true;
-            RazonSocialClienteLabel.Location = new Point(20, 39);
+            RazonSocialClienteLabel.Location = new Point(38, 72);
+            RazonSocialClienteLabel.Margin = new Padding(6, 0, 6, 0);
             RazonSocialClienteLabel.Name = "RazonSocialClienteLabel";
-            RazonSocialClienteLabel.Size = new Size(165, 20);
+            RazonSocialClienteLabel.Size = new Size(293, 37);
             RazonSocialClienteLabel.TabIndex = 2;
             RazonSocialClienteLabel.Text = "Razon social del cliente";
             // 
             // EstadoOrdenFiltroComboBox
             // 
             EstadoOrdenFiltroComboBox.FormattingEnabled = true;
-            EstadoOrdenFiltroComboBox.Location = new Point(326, 62);
+            EstadoOrdenFiltroComboBox.Location = new Point(611, 115);
+            EstadoOrdenFiltroComboBox.Margin = new Padding(6);
             EstadoOrdenFiltroComboBox.Name = "EstadoOrdenFiltroComboBox";
-            EstadoOrdenFiltroComboBox.Size = new Size(264, 28);
+            EstadoOrdenFiltroComboBox.Size = new Size(492, 45);
             EstadoOrdenFiltroComboBox.TabIndex = 1;
             // 
             // RazonSocialClienteFiltroComboBox
             // 
             RazonSocialClienteFiltroComboBox.FormattingEnabled = true;
-            RazonSocialClienteFiltroComboBox.Location = new Point(20, 62);
+            RazonSocialClienteFiltroComboBox.Location = new Point(38, 115);
+            RazonSocialClienteFiltroComboBox.Margin = new Padding(6);
             RazonSocialClienteFiltroComboBox.Name = "RazonSocialClienteFiltroComboBox";
-            RazonSocialClienteFiltroComboBox.Size = new Size(264, 28);
+            RazonSocialClienteFiltroComboBox.Size = new Size(492, 45);
             RazonSocialClienteFiltroComboBox.TabIndex = 0;
             // 
             // EstadoActualOrdenesListView
             // 
             EstadoActualOrdenesListView.Columns.AddRange(new ColumnHeader[] { IdOrdenPreparacion, EstadoActualOP, FechaUltimaActualizacionEstado, FechaEntregaOP, CuitCliente, RazonSocialCliente, DomicilioDeposito });
             EstadoActualOrdenesListView.FullRowSelect = true;
-            EstadoActualOrdenesListView.Location = new Point(52, 248);
+            EstadoActualOrdenesListView.Location = new Point(98, 459);
+            EstadoActualOrdenesListView.Margin = new Padding(6);
             EstadoActualOrdenesListView.Name = "EstadoActualOrdenesListView";
-            EstadoActualOrdenesListView.Size = new Size(944, 225);
+            EstadoActualOrdenesListView.Size = new Size(1766, 413);
             EstadoActualOrdenesListView.TabIndex = 2;
             EstadoActualOrdenesListView.UseCompatibleStateImageBehavior = false;
             EstadoActualOrdenesListView.View = View.Details;
@@ -157,6 +167,11 @@
             // 
             EstadoActualOP.Text = "Estado actual";
             EstadoActualOP.Width = 130;
+            // 
+            // FechaUltimaActualizacionEstado
+            // 
+            FechaUltimaActualizacionEstado.Text = "Último estado";
+            FechaUltimaActualizacionEstado.Width = 120;
             // 
             // FechaEntregaOP
             // 
@@ -178,16 +193,13 @@
             DomicilioDeposito.Text = "Deposito";
             DomicilioDeposito.Width = 150;
             // 
-            // FechaUltimaActualizacionEstado
-            // 
-            FechaUltimaActualizacionEstado.Text = "Último estado";
-            FechaUltimaActualizacionEstado.Width = 120;
-            // 
             // UltimoEstadoGroupBox
             // 
-            UltimoEstadoGroupBox.Location = new Point(32, 213);
+            UltimoEstadoGroupBox.Location = new Point(60, 345);
+            UltimoEstadoGroupBox.Margin = new Padding(6);
             UltimoEstadoGroupBox.Name = "UltimoEstadoGroupBox";
-            UltimoEstadoGroupBox.Size = new Size(981, 285);
+            UltimoEstadoGroupBox.Padding = new Padding(6);
+            UltimoEstadoGroupBox.Size = new Size(1839, 527);
             UltimoEstadoGroupBox.TabIndex = 3;
             UltimoEstadoGroupBox.TabStop = false;
             UltimoEstadoGroupBox.Text = "Estado actual";
@@ -199,9 +211,11 @@
             groupBox1.Controls.Add(FechaEntregaOPSeleccionadaLabel);
             groupBox1.Controls.Add(IdOrdenPreparacionSeleccionadaLabel);
             groupBox1.Controls.Add(HistoricoOrdenesListView);
-            groupBox1.Location = new Point(32, 519);
+            groupBox1.Location = new Point(60, 917);
+            groupBox1.Margin = new Padding(6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(981, 257);
+            groupBox1.Padding = new Padding(6);
+            groupBox1.Size = new Size(1839, 475);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Historico de la órden";
@@ -209,36 +223,44 @@
             // DepositoOPSeleccionadaLabel
             // 
             DepositoOPSeleccionadaLabel.AutoSize = true;
-            DepositoOPSeleccionadaLabel.Location = new Point(419, 69);
+            DepositoOPSeleccionadaLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            DepositoOPSeleccionadaLabel.Location = new Point(786, 107);
+            DepositoOPSeleccionadaLabel.Margin = new Padding(6, 0, 6, 0);
             DepositoOPSeleccionadaLabel.Name = "DepositoOPSeleccionadaLabel";
-            DepositoOPSeleccionadaLabel.Size = new Size(73, 20);
+            DepositoOPSeleccionadaLabel.Size = new Size(134, 37);
             DepositoOPSeleccionadaLabel.TabIndex = 9;
             DepositoOPSeleccionadaLabel.Text = "Depósito:";
             // 
             // CuitRazonClienteLabel
             // 
             CuitRazonClienteLabel.AutoSize = true;
-            CuitRazonClienteLabel.Location = new Point(419, 30);
+            CuitRazonClienteLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CuitRazonClienteLabel.Location = new Point(786, 56);
+            CuitRazonClienteLabel.Margin = new Padding(6, 0, 6, 0);
             CuitRazonClienteLabel.Name = "CuitRazonClienteLabel";
-            CuitRazonClienteLabel.Size = new Size(58, 20);
+            CuitRazonClienteLabel.Size = new Size(109, 37);
             CuitRazonClienteLabel.TabIndex = 8;
             CuitRazonClienteLabel.Text = "Cliente:";
             // 
             // FechaEntregaOPSeleccionadaLabel
             // 
             FechaEntregaOPSeleccionadaLabel.AutoSize = true;
-            FechaEntregaOPSeleccionadaLabel.Location = new Point(20, 69);
+            FechaEntregaOPSeleccionadaLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            FechaEntregaOPSeleccionadaLabel.Location = new Point(38, 107);
+            FechaEntregaOPSeleccionadaLabel.Margin = new Padding(6, 0, 6, 0);
             FechaEntregaOPSeleccionadaLabel.Name = "FechaEntregaOPSeleccionadaLabel";
-            FechaEntregaOPSeleccionadaLabel.Size = new Size(130, 20);
+            FechaEntregaOPSeleccionadaLabel.Size = new Size(240, 37);
             FechaEntregaOPSeleccionadaLabel.TabIndex = 7;
             FechaEntregaOPSeleccionadaLabel.Text = "Fecha de entrega: ";
             // 
             // IdOrdenPreparacionSeleccionadaLabel
             // 
             IdOrdenPreparacionSeleccionadaLabel.AutoSize = true;
-            IdOrdenPreparacionSeleccionadaLabel.Location = new Point(20, 30);
+            IdOrdenPreparacionSeleccionadaLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IdOrdenPreparacionSeleccionadaLabel.Location = new Point(38, 56);
+            IdOrdenPreparacionSeleccionadaLabel.Margin = new Padding(6, 0, 6, 0);
             IdOrdenPreparacionSeleccionadaLabel.Name = "IdOrdenPreparacionSeleccionadaLabel";
-            IdOrdenPreparacionSeleccionadaLabel.Size = new Size(164, 20);
+            IdOrdenPreparacionSeleccionadaLabel.Size = new Size(301, 37);
             IdOrdenPreparacionSeleccionadaLabel.TabIndex = 6;
             IdOrdenPreparacionSeleccionadaLabel.Text = "N° Órden seleccionada:";
             // 
@@ -246,9 +268,10 @@
             // 
             HistoricoOrdenesListView.Columns.AddRange(new ColumnHeader[] { EstadoHist, FechaActualizacionEstadoHist });
             HistoricoOrdenesListView.FullRowSelect = true;
-            HistoricoOrdenesListView.Location = new Point(20, 92);
+            HistoricoOrdenesListView.Location = new Point(38, 170);
+            HistoricoOrdenesListView.Margin = new Padding(6);
             HistoricoOrdenesListView.Name = "HistoricoOrdenesListView";
-            HistoricoOrdenesListView.Size = new Size(944, 146);
+            HistoricoOrdenesListView.Size = new Size(1766, 267);
             HistoricoOrdenesListView.TabIndex = 5;
             HistoricoOrdenesListView.UseCompatibleStateImageBehavior = false;
             HistoricoOrdenesListView.View = View.Details;
@@ -261,30 +284,33 @@
             // FechaActualizacionEstadoHist
             // 
             FechaActualizacionEstadoHist.Text = "Fecha de modificación";
-            FechaActualizacionEstadoHist.Width = 200;
+            FechaActualizacionEstadoHist.Width = 300;
             // 
             // VolverMenuPrincipalButton
             // 
-            VolverMenuPrincipalButton.Location = new Point(32, 793);
+            VolverMenuPrincipalButton.Location = new Point(60, 1417);
+            VolverMenuPrincipalButton.Margin = new Padding(6);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(981, 58);
+            VolverMenuPrincipalButton.Size = new Size(1839, 107);
             VolverMenuPrincipalButton.TabIndex = 5;
             VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
             // 
             // ConsultarOrdenesForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1044, 877);
+            ClientSize = new Size(1958, 1560);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(groupBox1);
             Controls.Add(EstadoActualOrdenesListView);
             Controls.Add(FiltroConsultaOrdenesGroupBox);
             Controls.Add(ConsultarOrdenesPreparacionLabel);
             Controls.Add(UltimoEstadoGroupBox);
+            Margin = new Padding(6);
             Name = "ConsultarOrdenesForm";
             Text = "Consultar histórico de órdenes";
+            FormClosing += ConsultarOrdenesForm_FormClosing;
             FiltroConsultaOrdenesGroupBox.ResumeLayout(false);
             FiltroConsultaOrdenesGroupBox.PerformLayout();
             groupBox1.ResumeLayout(false);
