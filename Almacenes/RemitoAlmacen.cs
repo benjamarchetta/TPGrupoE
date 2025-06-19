@@ -17,7 +17,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarRemito()
         {
-            var datosRemito = JsonSerializer.Serialize(remitos);
+            var datosRemito = JsonSerializer.Serialize(remitos, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\remitos.json", datosRemito);
         }
