@@ -561,23 +561,32 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 Pallet = "No";
             }
-            MessageBox.Show("Orden de preparación OP-" + id + " cargada correctamente. \nID de órden: " + id + "\nID de depósito: " + idDepositoSeleccionado + "\nID de cliente: " + idClienteSeleccionado +
-               "\nPallet cerrado: " + Pallet + "\nFecha de entrega: " + despachoDateTimePicker.Value + "\nDNI de transportista: " + dniTransportistaTextBox.Text + "\nEstado: Pendiente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Orden de preparación " + id + " cargada correctamente."// \nID de órden: " + id + "\nID de depósito: " + idDepositoSeleccionado + "\nID de cliente: " + idClienteSeleccionado +
+              /* "\nPallet cerrado: " + Pallet + "\nFecha de entrega: " + despachoDateTimePicker.Value + "\nDNI de transportista: " + dniTransportistaTextBox.Text + "\nEstado: Pendiente"*/, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Limpiar formulario
             ordenDePreparacionListView.Items.Clear();
             cantidadARetirarTextBox.Text = "";
             productoComboBox.SelectedIndex = -1;
             razonSocialComboBox.SelectedIndex = -1;
+            depositoComboBox.SelectedIndex = -1;
+            palletCerradoComboBox.SelectedIndex = -1;
+            palletCerradoComboBox.Enabled = false;
+            depositoComboBox.Enabled = false;
+            productoComboBox.Enabled = false;
             cuitTextBox.Text = "-";
             skuTextBox.Text = "-";
             cantidadEnStockTextBox.Text = "-";
             dniTransportistaTextBox.Text = "";
-            razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
+            razonSocialComboBox.Enabled = true;
+            /*razonSocialComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             palletCerradoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
             depositoComboBox.Enabled = ordenDePreparacionListView.Items.Count == 0;
-            
+            */
            Modelo.GrabarOP();
+           
+           id = Modelo.GenerarIdOrden();
+
 
         }
 

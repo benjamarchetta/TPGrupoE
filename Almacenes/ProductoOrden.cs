@@ -8,6 +8,7 @@ namespace TPGrupoE.Almacenes
 {
     public class ProductoOrden
     {
+        public int IdOrdenPreparacion { get; set; }
         public int IdProducto { get; set; }
         //public int IdDeposito { get; set; }
         public int IdCliente { get; set; }
