@@ -39,17 +39,19 @@
             generarOrdenButton = new Button();
             eliminarDeSeleccionButton = new Button();
             mercaderiasAPrepList = new ListView();
-            columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
-            columnHeader5 = new ColumnHeader();
-            prod = new ColumnHeader();
-            columnHeader7 = new ColumnHeader();
+            FechaEntregaAPreparar = new ColumnHeader();
+            IdOrdenPreparacionAPreparar = new ColumnHeader();
+            RazonSocialClienteAPreparar = new ColumnHeader();
+            CuitClienteAPreparar = new ColumnHeader();
+            ProductoAPreparar = new ColumnHeader();
+            CantidadAPreparar = new ColumnHeader();
             menubutton = new Button();
-            groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            OrdenesPendientesGroupBox = new GroupBox();
+            MercaderiasAPrepararGroupBox = new GroupBox();
+            GenerarOSPanel = new Panel();
+            OrdenesPendientesGroupBox.SuspendLayout();
+            MercaderiasAPrepararGroupBox.SuspendLayout();
+            GenerarOSPanel.SuspendLayout();
             SuspendLayout();
             // 
             // ordenesPendientesListView
@@ -57,9 +59,10 @@
             ordenesPendientesListView.Columns.AddRange(new ColumnHeader[] { fechaColumna, idOrdenColumna, idClienteColumna, columnHeader3, Producto, Cantidad });
             ordenesPendientesListView.Font = new Font("Segoe UI", 9F);
             ordenesPendientesListView.FullRowSelect = true;
-            ordenesPendientesListView.Location = new Point(6, 22);
+            ordenesPendientesListView.Location = new Point(9, 35);
+            ordenesPendientesListView.Margin = new Padding(3, 4, 3, 4);
             ordenesPendientesListView.Name = "ordenesPendientesListView";
-            ordenesPendientesListView.Size = new Size(776, 165);
+            ordenesPendientesListView.Size = new Size(884, 213);
             ordenesPendientesListView.TabIndex = 1;
             ordenesPendientesListView.UseCompatibleStateImageBehavior = false;
             ordenesPendientesListView.View = View.Details;
@@ -101,9 +104,10 @@
             agregarAOrdenButton.FlatAppearance.BorderColor = Color.DarkGray;
             agregarAOrdenButton.FlatStyle = FlatStyle.Flat;
             agregarAOrdenButton.Font = new Font("Segoe UI", 9F);
-            agregarAOrdenButton.Location = new Point(530, 193);
+            agregarAOrdenButton.Location = new Point(606, 257);
+            agregarAOrdenButton.Margin = new Padding(3, 4, 3, 4);
             agregarAOrdenButton.Name = "agregarAOrdenButton";
-            agregarAOrdenButton.Size = new Size(251, 30);
+            agregarAOrdenButton.Size = new Size(287, 40);
             agregarAOrdenButton.TabIndex = 2;
             agregarAOrdenButton.Text = "Agregar a orden de selección";
             agregarAOrdenButton.UseVisualStyleBackColor = false;
@@ -115,9 +119,10 @@
             generarOrdenButton.Enabled = false;
             generarOrdenButton.FlatAppearance.BorderColor = Color.Gray;
             generarOrdenButton.FlatStyle = FlatStyle.Flat;
-            generarOrdenButton.Location = new Point(420, 515);
+            generarOrdenButton.Location = new Point(467, 668);
+            generarOrdenButton.Margin = new Padding(3, 4, 3, 4);
             generarOrdenButton.Name = "generarOrdenButton";
-            generarOrdenButton.Size = new Size(376, 38);
+            generarOrdenButton.Size = new Size(450, 51);
             generarOrdenButton.TabIndex = 4;
             generarOrdenButton.Text = "Generar órden de selección";
             generarOrdenButton.UseVisualStyleBackColor = false;
@@ -130,9 +135,10 @@
             eliminarDeSeleccionButton.FlatAppearance.BorderColor = Color.Gray;
             eliminarDeSeleccionButton.FlatStyle = FlatStyle.Flat;
             eliminarDeSeleccionButton.Font = new Font("Segoe UI", 9F);
-            eliminarDeSeleccionButton.Location = new Point(534, 202);
+            eliminarDeSeleccionButton.Location = new Point(606, 268);
+            eliminarDeSeleccionButton.Margin = new Padding(3, 4, 3, 4);
             eliminarDeSeleccionButton.Name = "eliminarDeSeleccionButton";
-            eliminarDeSeleccionButton.Size = new Size(251, 30);
+            eliminarDeSeleccionButton.Size = new Size(287, 40);
             eliminarDeSeleccionButton.TabIndex = 6;
             eliminarDeSeleccionButton.Text = "Eliminar de orden de selección";
             eliminarDeSeleccionButton.UseVisualStyleBackColor = false;
@@ -140,99 +146,117 @@
             // 
             // mercaderiasAPrepList
             // 
-            mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader4, columnHeader5, prod, columnHeader7 });
+            mercaderiasAPrepList.Columns.AddRange(new ColumnHeader[] { FechaEntregaAPreparar, IdOrdenPreparacionAPreparar, RazonSocialClienteAPreparar, CuitClienteAPreparar, ProductoAPreparar, CantidadAPreparar });
             mercaderiasAPrepList.Font = new Font("Segoe UI", 9F);
             mercaderiasAPrepList.FullRowSelect = true;
-            mercaderiasAPrepList.Location = new Point(8, 21);
+            mercaderiasAPrepList.Location = new Point(9, 35);
+            mercaderiasAPrepList.Margin = new Padding(3, 4, 3, 4);
             mercaderiasAPrepList.Name = "mercaderiasAPrepList";
-            mercaderiasAPrepList.Size = new Size(776, 175);
+            mercaderiasAPrepList.Size = new Size(884, 225);
             mercaderiasAPrepList.TabIndex = 9;
             mercaderiasAPrepList.UseCompatibleStateImageBehavior = false;
             mercaderiasAPrepList.View = View.Details;
             mercaderiasAPrepList.Click += mercaderiasAPrepList_Click;
             // 
-            // columnHeader1
+            // FechaEntregaAPreparar
             // 
-            columnHeader1.Text = "Fecha de entrega";
-            columnHeader1.Width = 129;
+            FechaEntregaAPreparar.Text = "Fecha de entrega";
+            FechaEntregaAPreparar.Width = 129;
             // 
-            // columnHeader2
+            // IdOrdenPreparacionAPreparar
             // 
-            columnHeader2.Text = "N° O. Preparación";
-            columnHeader2.Width = 129;
+            IdOrdenPreparacionAPreparar.Text = "N° O. Preparación";
+            IdOrdenPreparacionAPreparar.Width = 129;
             // 
-            // columnHeader4
+            // RazonSocialClienteAPreparar
             // 
-            columnHeader4.Text = "Razón social";
-            columnHeader4.Width = 129;
+            RazonSocialClienteAPreparar.Text = "Razón social";
+            RazonSocialClienteAPreparar.Width = 129;
             // 
-            // columnHeader5
+            // CuitClienteAPreparar
             // 
-            columnHeader5.Text = "CUIT Cliente";
-            columnHeader5.Width = 129;
+            CuitClienteAPreparar.Text = "CUIT Cliente";
+            CuitClienteAPreparar.Width = 129;
             // 
-            // prod
+            // ProductoAPreparar
             // 
-            prod.Text = "Producto";
-            prod.Width = 129;
+            ProductoAPreparar.Text = "Producto";
+            ProductoAPreparar.Width = 129;
             // 
-            // columnHeader7
+            // CantidadAPreparar
             // 
-            columnHeader7.Text = "Cantidad";
-            columnHeader7.Width = 129;
+            CantidadAPreparar.Text = "Cantidad";
+            CantidadAPreparar.Width = 129;
             // 
             // menubutton
             // 
             menubutton.BackColor = Color.Silver;
             menubutton.FlatAppearance.BorderColor = Color.Gray;
             menubutton.FlatStyle = FlatStyle.Flat;
-            menubutton.Location = new Point(12, 515);
+            menubutton.Location = new Point(14, 668);
+            menubutton.Margin = new Padding(3, 4, 3, 4);
             menubutton.Name = "menubutton";
-            menubutton.Size = new Size(376, 38);
+            menubutton.Size = new Size(450, 51);
             menubutton.TabIndex = 10;
             menubutton.Text = "Volver al Menu Principal";
             menubutton.UseVisualStyleBackColor = false;
             menubutton.Click += menubutton_Click;
             // 
-            // groupBox1
+            // OrdenesPendientesGroupBox
             // 
-            groupBox1.AccessibleRole = AccessibleRole.OutlineButton;
-            groupBox1.Controls.Add(agregarAOrdenButton);
-            groupBox1.Controls.Add(ordenesPendientesListView);
-            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            groupBox1.Location = new Point(12, 15);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(790, 232);
-            groupBox1.TabIndex = 11;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Ordenes de preparacion pendientes";
+            OrdenesPendientesGroupBox.AccessibleRole = AccessibleRole.OutlineButton;
+            OrdenesPendientesGroupBox.Controls.Add(agregarAOrdenButton);
+            OrdenesPendientesGroupBox.Controls.Add(ordenesPendientesListView);
+            OrdenesPendientesGroupBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            OrdenesPendientesGroupBox.Location = new Point(14, 20);
+            OrdenesPendientesGroupBox.Margin = new Padding(3, 4, 3, 4);
+            OrdenesPendientesGroupBox.Name = "OrdenesPendientesGroupBox";
+            OrdenesPendientesGroupBox.Padding = new Padding(3, 4, 3, 4);
+            OrdenesPendientesGroupBox.Size = new Size(903, 309);
+            OrdenesPendientesGroupBox.TabIndex = 11;
+            OrdenesPendientesGroupBox.TabStop = false;
+            OrdenesPendientesGroupBox.Text = "Ordenes de preparacion pendientes";
             // 
-            // groupBox2
+            // MercaderiasAPrepararGroupBox
             // 
-            groupBox2.Controls.Add(mercaderiasAPrepList);
-            groupBox2.Controls.Add(eliminarDeSeleccionButton);
-            groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            groupBox2.Location = new Point(12, 253);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(790, 242);
-            groupBox2.TabIndex = 12;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Mercaderias a preparar";
+            MercaderiasAPrepararGroupBox.Controls.Add(mercaderiasAPrepList);
+            MercaderiasAPrepararGroupBox.Controls.Add(eliminarDeSeleccionButton);
+            MercaderiasAPrepararGroupBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            MercaderiasAPrepararGroupBox.Location = new Point(14, 337);
+            MercaderiasAPrepararGroupBox.Margin = new Padding(3, 4, 3, 4);
+            MercaderiasAPrepararGroupBox.Name = "MercaderiasAPrepararGroupBox";
+            MercaderiasAPrepararGroupBox.Padding = new Padding(3, 4, 3, 4);
+            MercaderiasAPrepararGroupBox.Size = new Size(903, 323);
+            MercaderiasAPrepararGroupBox.TabIndex = 12;
+            MercaderiasAPrepararGroupBox.TabStop = false;
+            MercaderiasAPrepararGroupBox.Text = "Mercaderias a preparar";
+            // 
+            // GenerarOSPanel
+            // 
+            GenerarOSPanel.AutoScroll = true;
+            GenerarOSPanel.Controls.Add(generarOrdenButton);
+            GenerarOSPanel.Controls.Add(OrdenesPendientesGroupBox);
+            GenerarOSPanel.Controls.Add(menubutton);
+            GenerarOSPanel.Controls.Add(MercaderiasAPrepararGroupBox);
+            GenerarOSPanel.Dock = DockStyle.Fill;
+            GenerarOSPanel.Location = new Point(0, 0);
+            GenerarOSPanel.Name = "GenerarOSPanel";
+            GenerarOSPanel.Size = new Size(930, 741);
+            GenerarOSPanel.TabIndex = 13;
             // 
             // GenerarOrdenSeleccionForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(814, 562);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
-            Controls.Add(menubutton);
-            Controls.Add(generarOrdenButton);
+            ClientSize = new Size(930, 741);
+            Controls.Add(GenerarOSPanel);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "GenerarOrdenSeleccionForm";
             Text = "Generar órden de selección";
             Load += GenerarOrdenSeleccionForm_Load;
-            groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
+            OrdenesPendientesGroupBox.ResumeLayout(false);
+            MercaderiasAPrepararGroupBox.ResumeLayout(false);
+            GenerarOSPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -246,16 +270,17 @@
         private Button eliminarDeSeleccionButton;
         private ColumnHeader columnHeader3;
         private ListView mercaderiasAPrepList;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader4;
-        private ColumnHeader columnHeader5;
+        private ColumnHeader FechaEntregaAPreparar;
+        private ColumnHeader IdOrdenPreparacionAPreparar;
+        private ColumnHeader RazonSocialClienteAPreparar;
+        private ColumnHeader CuitClienteAPreparar;
         private Button menubutton;
         private ColumnHeader Producto;
         private ColumnHeader Cantidad;
-        private ColumnHeader prod;
-        private ColumnHeader columnHeader7;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
+        private ColumnHeader ProductoAPreparar;
+        private ColumnHeader CantidadAPreparar;
+        private GroupBox OrdenesPendientesGroupBox;
+        private GroupBox MercaderiasAPrepararGroupBox;
+        private Panel GenerarOSPanel;
     }
 }

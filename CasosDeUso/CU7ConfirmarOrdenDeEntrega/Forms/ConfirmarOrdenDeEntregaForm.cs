@@ -14,9 +14,9 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
 {
     public partial class ConfirmarOrdenDeEntregaForm : Form
     {
-        
+
         private ConfirmarOrdenDeEntregaModelo _ordenDeEntregaModel;
-        
+
         public ConfirmarOrdenDeEntregaForm()
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
                 return;
             ActualizarTabla();
         }
-        
+
         private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
         {
             VolverAlMenuPrincipal();
@@ -113,6 +113,11 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
             }
 
             return true;
+        }
+
+        private void OrdenesEmpaquetadasALiberarGroupBox_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 

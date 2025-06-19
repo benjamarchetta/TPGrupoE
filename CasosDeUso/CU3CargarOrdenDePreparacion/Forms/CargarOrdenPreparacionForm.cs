@@ -29,7 +29,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
         private void ProcesarOrdenPreparacion_Load(object sender, EventArgs e)
         {
-            groupBox1.SendToBack();
+            DetalleOProupBox.SendToBack();
             id = Modelo.GenerarIdOrden();
             palletCerradoComboBox.SelectedIndex = -1;
             palletCerradoComboBox.Enabled = false;
