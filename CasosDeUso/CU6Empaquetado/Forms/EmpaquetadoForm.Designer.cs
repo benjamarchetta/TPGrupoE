@@ -48,12 +48,12 @@
             MercaderiaAEmpaquetarGroupBox.Controls.Add(NroOrdenPreparacionTextBox);
             MercaderiaAEmpaquetarGroupBox.Controls.Add(NumeroOrdenPreparacionLabel);
             MercaderiaAEmpaquetarGroupBox.Controls.Add(MercaderiasALiberarParaDespachoListView);
-            MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            MercaderiaAEmpaquetarGroupBox.Location = new Point(21, 20);
-            MercaderiaAEmpaquetarGroupBox.Margin = new Padding(4, 6, 4, 6);
+            MercaderiaAEmpaquetarGroupBox.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            MercaderiaAEmpaquetarGroupBox.Location = new Point(10, 8);
+            MercaderiaAEmpaquetarGroupBox.Margin = new Padding(2, 2, 2, 2);
             MercaderiaAEmpaquetarGroupBox.Name = "MercaderiaAEmpaquetarGroupBox";
-            MercaderiaAEmpaquetarGroupBox.Padding = new Padding(4, 6, 4, 6);
-            MercaderiaAEmpaquetarGroupBox.Size = new Size(1011, 838);
+            MercaderiaAEmpaquetarGroupBox.Padding = new Padding(2, 2, 2, 2);
+            MercaderiaAEmpaquetarGroupBox.Size = new Size(472, 340);
             MercaderiaAEmpaquetarGroupBox.TabIndex = 9;
             MercaderiaAEmpaquetarGroupBox.TabStop = false;
             MercaderiaAEmpaquetarGroupBox.Text = "Mercaderías a liberar para despacho";
@@ -62,20 +62,22 @@
             // 
             NroOrdenPreparacionTextBox.BackColor = SystemColors.Control;
             NroOrdenPreparacionTextBox.BorderStyle = BorderStyle.None;
-            NroOrdenPreparacionTextBox.Location = new Point(26, 43);
-            NroOrdenPreparacionTextBox.Margin = new Padding(2);
+            NroOrdenPreparacionTextBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            NroOrdenPreparacionTextBox.Location = new Point(10, 19);
+            NroOrdenPreparacionTextBox.Margin = new Padding(1, 1, 1, 1);
             NroOrdenPreparacionTextBox.Name = "NroOrdenPreparacionTextBox";
-            NroOrdenPreparacionTextBox.Size = new Size(272, 32);
+            NroOrdenPreparacionTextBox.Size = new Size(137, 18);
             NroOrdenPreparacionTextBox.TabIndex = 8;
             NroOrdenPreparacionTextBox.Text = "N° Orden Preparación:";
             // 
             // NumeroOrdenPreparacionLabel
             // 
             NumeroOrdenPreparacionLabel.AutoSize = true;
-            NumeroOrdenPreparacionLabel.Location = new Point(296, 43);
-            NumeroOrdenPreparacionLabel.Margin = new Padding(2, 0, 2, 0);
+            NumeroOrdenPreparacionLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            NumeroOrdenPreparacionLabel.Location = new Point(149, 19);
+            NumeroOrdenPreparacionLabel.Margin = new Padding(1, 0, 1, 0);
             NumeroOrdenPreparacionLabel.Name = "NumeroOrdenPreparacionLabel";
-            NumeroOrdenPreparacionLabel.Size = new Size(77, 32);
+            NumeroOrdenPreparacionLabel.Size = new Size(47, 19);
             NumeroOrdenPreparacionLabel.TabIndex = 7;
             NumeroOrdenPreparacionLabel.Text = "12345";
             // 
@@ -85,10 +87,10 @@
             MercaderiasALiberarParaDespachoListView.Columns.AddRange(new ColumnHeader[] { IdProducto, DescripcionProducto, CantidadAEmpaquetar });
             MercaderiasALiberarParaDespachoListView.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             MercaderiasALiberarParaDespachoListView.GridLines = true;
-            MercaderiasALiberarParaDespachoListView.Location = new Point(21, 98);
-            MercaderiasALiberarParaDespachoListView.Margin = new Padding(4, 6, 4, 6);
+            MercaderiasALiberarParaDespachoListView.Location = new Point(10, 40);
+            MercaderiasALiberarParaDespachoListView.Margin = new Padding(2, 2, 2, 2);
             MercaderiasALiberarParaDespachoListView.Name = "MercaderiasALiberarParaDespachoListView";
-            MercaderiasALiberarParaDespachoListView.Size = new Size(955, 694);
+            MercaderiasALiberarParaDespachoListView.Size = new Size(448, 284);
             MercaderiasALiberarParaDespachoListView.TabIndex = 6;
             MercaderiasALiberarParaDespachoListView.UseCompatibleStateImageBehavior = false;
             MercaderiasALiberarParaDespachoListView.View = View.Details;
@@ -112,10 +114,9 @@
             // 
             ConfirmarEmpaquetadoButton.BackColor = SystemColors.Highlight;
             ConfirmarEmpaquetadoButton.ForeColor = SystemColors.ActiveCaptionText;
-            ConfirmarEmpaquetadoButton.Location = new Point(544, 895);
-            ConfirmarEmpaquetadoButton.Margin = new Padding(6, 7, 6, 7);
+            ConfirmarEmpaquetadoButton.Location = new Point(254, 363);
             ConfirmarEmpaquetadoButton.Name = "ConfirmarEmpaquetadoButton";
-            ConfirmarEmpaquetadoButton.Size = new Size(489, 89);
+            ConfirmarEmpaquetadoButton.Size = new Size(228, 36);
             ConfirmarEmpaquetadoButton.TabIndex = 3;
             ConfirmarEmpaquetadoButton.Text = "Confirmar Empaquetado";
             ConfirmarEmpaquetadoButton.UseVisualStyleBackColor = false;
@@ -123,10 +124,10 @@
             // 
             // VolverMenuPrincipalButton
             // 
-            VolverMenuPrincipalButton.Location = new Point(21, 895);
-            VolverMenuPrincipalButton.Margin = new Padding(6);
+            VolverMenuPrincipalButton.Location = new Point(10, 363);
+            VolverMenuPrincipalButton.Margin = new Padding(3, 2, 3, 2);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(489, 89);
+            VolverMenuPrincipalButton.Size = new Size(228, 36);
             VolverMenuPrincipalButton.TabIndex = 10;
             VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
@@ -134,13 +135,12 @@
             // 
             // EmpaquetadoForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1059, 1006);
+            ClientSize = new Size(503, 418);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(MercaderiaAEmpaquetarGroupBox);
             Controls.Add(ConfirmarEmpaquetadoButton);
-            Margin = new Padding(6, 7, 6, 7);
             Name = "EmpaquetadoForm";
             Text = "Empaquetado";
             FormClosing += EmpaquetadoForm_FormClosing;
