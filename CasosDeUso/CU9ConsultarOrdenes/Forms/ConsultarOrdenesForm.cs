@@ -122,8 +122,13 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             // Clientes
             RazonSocialClienteFiltroComboBox.Items.Clear();
             RazonSocialClienteFiltroComboBox.Items.Add("(Todos)");
+            RazonSocialClienteFiltroComboBox.DisplayMember = "ToString";
 
-            var clientes = _consultarOrdenesModel.ObtenerClientesParaFiltro();
+            var clientes = _consultarOrdenesModel.ObtenerClientesParaFiltro()
+                .GroupBy(c => c.IdCliente)
+                .Select(g => g.First())
+                .OrderBy(c => c.RazonSocial)
+                .ToList();
 
             foreach (var cliente in clientes)
                 RazonSocialClienteFiltroComboBox.Items.Add(cliente);
