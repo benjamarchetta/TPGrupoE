@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU8EmitirRemito.Model;
 using static TPGrupoE.CasosDeUso.CU8EmitirRemito.Model.EmitirRemitoModel;
@@ -35,15 +34,6 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
             CargarTransportistaComboBox();
             TransportistaComboBox.SelectedIndexChanged += TransportistaComboBox_SelectedIndexChanged;
         }
-        private static string ConvertirEstadoEnumAString(EstadoOrdenPreparacion estado)
-        {
-            return estado switch
-            {
-                EstadoOrdenPreparacion.Preparada => "Lista para Despachar",
-                //EstadoOrdenPreparacion.PendienteDeDespacho => "Pendiente de Despacho",
-                _ => estado.ToString()
-            };
-        }
         private void CargarTransportistaComboBox()
         {
             List<Transportista> transportistas = _emitirRemitoModel.Transportistas;
@@ -64,6 +54,9 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
            
             if (TransportistaComboBox.SelectedIndex == -1)
                 return;
+
+            _emitirRemitoModel.OrdenesSeleccionadas.Clear();
+            ActualizarListaConfirmar();
 
             CargarClienteComboBox();
         }
@@ -108,6 +101,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
         private void ActualizarTabla()
         {
             string documentoTransportista = BuscarDocumentoTransportista();
+            if (documentoTransportista == null) return;
 
             List<OrdenPreparacion> ordenesPreparacion = _emitirRemitoModel.OrdenesDePreparacion;
 
@@ -115,19 +109,17 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
 
             if (ordenesPreparacion.Count == 0)
             {
-                MessageBox.Show("No hay ordenes de preparacion pendientes de despacho para el transportista seleccionado");
+                MessageBox.Show("No hay órdenes de preparación pendientes de despacho para el transportista seleccionado");
                 return;
             }
 
             foreach (var orden in ordenesPreparacion)
             {
                 var item = new ListViewItem(new[]
-                  {
-                        orden.Id.ToString(),
-                        ConvertirEstadoEnumAString(orden.Estado),
-                        orden.IdOrdenEntrega.ToString(),
-                        orden.FechaEntrega.ToString("dd/MM/yyyy"),
-            });
+                {
+                    orden.Id.ToString(),
+                    orden.FechaEntrega.ToString("dd/MM/yyyy")
+                });
 
                 EmitirRemitoListView.Items.Add(item);
             }
@@ -157,6 +149,60 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Forms
             MessageBox.Show("Ordenes despachadas correctamente");
             ActualizarTabla();
         }
+
+        private void AgregarPictureBox_Click(object sender, EventArgs e)
+        {
+            if (EmitirRemitoListView.SelectedItems.Count == 0) return;
+
+            foreach (ListViewItem item in EmitirRemitoListView.SelectedItems)
+            {
+                int idOrden = int.Parse(item.SubItems[0].Text);
+
+                var orden = _emitirRemitoModel.OrdenesDePreparacion
+                    .FirstOrDefault(o => o.Id == idOrden && !_emitirRemitoModel.OrdenesSeleccionadas.Any(sel => sel.Id == idOrden));
+
+                if (orden != null)
+                {
+                    _emitirRemitoModel.OrdenesSeleccionadas.Add(orden);
+                }
+            }
+
+            ActualizarListaConfirmar();
+        }
+
+        private void EliminarPictureBox_Click(object sender, EventArgs e)
+        {
+            if (ConfirmarDespachoListView.SelectedItems.Count == 0) return;
+
+            foreach (ListViewItem item in ConfirmarDespachoListView.SelectedItems)
+            {
+                int idOrden = int.Parse(item.SubItems[0].Text);
+                var orden = _emitirRemitoModel.OrdenesSeleccionadas.FirstOrDefault(o => o.Id == idOrden);
+                if (orden != null)
+                {
+                    _emitirRemitoModel.OrdenesSeleccionadas.Remove(orden);
+                }
+            }
+
+            ActualizarListaConfirmar();
+        }
+
+        private void ActualizarListaConfirmar()
+        {
+            ConfirmarDespachoListView.Items.Clear();
+
+            foreach (var orden in _emitirRemitoModel.OrdenesSeleccionadas)
+            {
+                var item = new ListViewItem(new[]
+                {
+            orden.Id.ToString(),
+            orden.FechaEntrega.ToString("dd/MM/yyyy")
+        });
+
+                ConfirmarDespachoListView.Items.Add(item);
+            }
+        }
+
         private bool OrdenEnProceso()
         {
             bool ordenEnProceso = false;

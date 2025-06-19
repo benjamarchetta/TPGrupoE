@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model;
 
@@ -38,22 +37,27 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
         {
             EstadoActualOrdenesListView.Items.Clear();
 
-            foreach (var orden in _consultarOrdenesModel.Ordenes)
+            foreach (var orden in _consultarOrdenesModel.Ordenes
+                .OrderByDescending(o => o.FechaUltimaActualizacionEstado))
             {
                 var item = new ListViewItem(new[]
                 {
                     orden.IdOrdenPreparacion.ToString(),
                     orden.Estado.ToString(),
+                    orden.FechaUltimaActualizacionEstado.ToString("g"),
                     orden.FechaEntrega.ToShortDateString(),
                     orden.ClienteCuit,
                     orden.ClienteRazonSocial,
-                    orden.DepositoDomicilio,
-                    orden.FechaUltimaActualizacionEstado.ToString("g")
+                    orden.DepositoDomicilio
+                    
                 });
 
                 item.Tag = orden.IdOrdenPreparacion;
                 EstadoActualOrdenesListView.Items.Add(item);
             }
+
+            EstadoActualOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            EstadoActualOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void EstadoActualOrdenesListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,6 +91,9 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
 
                 HistoricoOrdenesListView.Items.Add(item);
             }
+
+            HistoricoOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            HistoricoOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
@@ -107,14 +114,14 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
             if (RazonSocialClienteFiltroComboBox.SelectedIndex > 0)
                 idCliente = ((ClienteFiltro)RazonSocialClienteFiltroComboBox.SelectedItem).IdCliente;
 
-            EstadoOrdenPreparacion? estado = null;
+            EstadoOrdenFiltro estadoSeleccionado = null;
             if (EstadoOrdenFiltroComboBox.SelectedIndex > 0)
-                estado = ((EstadoOrdenFiltro)EstadoOrdenFiltroComboBox.SelectedItem).Estado;
+                estadoSeleccionado = (EstadoOrdenFiltro)EstadoOrdenFiltroComboBox.SelectedItem;
 
             var filtradas = _consultarOrdenesModel.Ordenes
-                .Where(o => (!idCliente.HasValue || o.IdCliente == idCliente.Value) &&
-                            (!estado.HasValue || o.Estado == estado.Value))
-                .ToList();
+               .Where(o => (!idCliente.HasValue || o.IdCliente == idCliente.Value) &&
+                           (estadoSeleccionado == null || o.Estado == estadoSeleccionado.Estado))
+               .ToList();
 
             CargarOrdenesFiltradas(filtradas);
         }
@@ -123,7 +130,7 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
         {
             EstadoActualOrdenesListView.Items.Clear();
 
-            foreach (var orden in ordenes)
+            foreach (var orden in ordenes.OrderByDescending(o => o.FechaUltimaActualizacionEstado))
             {
                 var item = new ListViewItem
                 (new[]
@@ -180,7 +187,10 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
         private void VolverAlMenuPrincipal()
         {
             this.Close();
+        }
 
+        private void ConsultarOrdenesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
             foreach (Form form in Application.OpenForms)
             {
                 if (form is MenuPrincipalGeneralForm)
@@ -192,13 +202,6 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
 
             new MenuPrincipalGeneralForm().Show();
         }
-
-        private void ConsultarOrdenesForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            VolverAlMenuPrincipal();
-        }
-
-
 
     }
 }

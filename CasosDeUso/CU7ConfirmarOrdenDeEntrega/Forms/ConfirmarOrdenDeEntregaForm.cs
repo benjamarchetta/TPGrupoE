@@ -82,25 +82,20 @@ namespace TPGrupoE.CasosDeUso.CU7ConfirmarOrdenDeEntrega.Forms
         private void VolverAlMenuPrincipal()
         {
             this.Close();
-
-            // Mostrar el formulario de menú principal
-            // Verifica si el formulario principal ya está abierto
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form is MenuPrincipalGeneralForm)
-                {
-                    form.Show(); // Muestra el formulario si está oculto
-                    return;
-                }
-            }
-
-            MenuPrincipalGeneralForm menuPrincipalForm = new MenuPrincipalGeneralForm();
-            menuPrincipalForm.Show();
         }
 
         private void ConfirmarOrdenEntregaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            VolverAlMenuPrincipal();
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show();
+                    return;
+                }
+            }
+
+            new MenuPrincipalGeneralForm().Show();
         }
 
         private bool ValidarOrdenesYVolverSiNoHay()

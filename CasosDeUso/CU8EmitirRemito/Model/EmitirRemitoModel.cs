@@ -11,7 +11,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
 {
     internal partial class EmitirRemitoModel
     {
-
+        public List<OrdenPreparacion> OrdenesSeleccionadas { get; private set; } = new();
         public List<OrdenPreparacion> OrdenesDePreparacion { get; private set; }
         public List<Transportista> Transportistas { get; private set; }
         public List<Cliente> Clientes { get; private set; }
@@ -44,7 +44,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
 
                     if (ordenEntidad.DniTransportista.ToString() == dniTransportista && ordenEntidad.Estado != EstadoOrdenPreparacion.Despachada)
                     {
-                        var ordenPreparacion = new OrdenPreparacion(ordenEntidad.IdOrdenPreparacion, ordenEntidad.DniTransportista.ToString(), ordenEntidad.Estado, ordenEntrega.IdOrdenEntrega, ordenEntidad.IdCliente);
+                        var ordenPreparacion = new OrdenPreparacion(ordenEntidad.IdOrdenPreparacion, ordenEntidad.DniTransportista.ToString(), ordenEntidad.Estado, ordenEntrega.IdOrdenEntrega, ordenEntidad.IdCliente, ordenEntidad.FechaEntrega);
                         OrdenesDePreparacion.Add(ordenPreparacion);
                     }
                 }
@@ -119,7 +119,7 @@ namespace TPGrupoE.CasosDeUso.CU8EmitirRemito.Model
             remito.IDCliente = primeraOrden.IdCliente;
             remito.IDOrdenPreparacion = [];
 
-            foreach (var orden in OrdenesDePreparacion)
+            foreach (var orden in OrdenesSeleccionadas)
             {
                 var ordenPreparacion = OrdenPreparacionAlmacen.BuscarOrdenesPorId(orden.Id);
                 ordenPreparacion.MarcarOpDespachada();

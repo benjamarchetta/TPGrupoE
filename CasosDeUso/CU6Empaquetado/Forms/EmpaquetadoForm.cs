@@ -94,26 +94,20 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
         private void VolverAlMenuPrincipal()
         {
             this.Close();
-
-            // Mostrar el formulario de menú principal
-            // Verifica si el formulario principal ya está abierto
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form is MenuPrincipalGeneralForm)
-                {
-                    form.Show(); // Muestra el formulario si está oculto
-                    return;
-                }
-            }
-
-            // Si no está abierto, crea una nueva instancia (solo si es necesario)
-            MenuPrincipalGeneralForm pantallaPrincipalForm = new MenuPrincipalGeneralForm();
-            pantallaPrincipalForm.Show();
         }
 
         private void EmpaquetadoForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            VolverAlMenuPrincipal();
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show();
+                    return;
+                }
+            }
+
+            new MenuPrincipalGeneralForm().Show();
         }
 
     }
