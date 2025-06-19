@@ -15,7 +15,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarDeposito()
         {
-            var datosDeposito = JsonSerializer.Serialize(depositos);
+            var datosDeposito = JsonSerializer.Serialize(depositos, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(@"Datos\depositos.json", datosDeposito);
         }
 

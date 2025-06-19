@@ -17,7 +17,7 @@ namespace TPGrupoE.Almacenes
 
         public static void GrabarStock()
         {
-            var datosStock = JsonSerializer.Serialize(stock);
+            var datosStock = JsonSerializer.Serialize(stock, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(@"Datos\stockFisico.json", datosStock);
         }
