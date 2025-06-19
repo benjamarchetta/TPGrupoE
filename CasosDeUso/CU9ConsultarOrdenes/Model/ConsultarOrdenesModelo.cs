@@ -9,7 +9,6 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model
 {
     internal partial class ConsultarOrdenesModelo
     {
-
         public List<HistorialDeOrdenesPreparacion> Ordenes { get; private set; }
 
         public ConsultarOrdenesModelo()
@@ -67,6 +66,14 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model
                     Cuit = g.First().ClienteCuit,
                     RazonSocial = g.First().ClienteRazonSocial
                 })
+                .ToList();
+        }
+
+        public List<EstadoOrdenFiltro> ObtenerEstadosParaFiltro()
+        {
+            return Enum.GetValues(typeof(EstadoOrdenPreparacion))
+                .Cast<EstadoOrdenPreparacion>()
+                .Select(e => new EstadoOrdenFiltro { Estado = e })
                 .ToList();
         }
     }

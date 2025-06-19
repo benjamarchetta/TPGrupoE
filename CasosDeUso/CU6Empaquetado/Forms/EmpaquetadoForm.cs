@@ -8,17 +8,16 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TPGrupoE.Almacenes;
 using TPGrupoE.CasosDeUso.CU2MenuPrincipal.Forms;
 using TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Model;
 using TPGrupoE.CasosDeUso.CU6Empaquetado.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
 {
     public partial class EmpaquetadoForm : Form
     {
         private EmpaquetadoModel _empaquetadoModel;
+        
         private OrdenDePreparacionAEmpaquetar ordenDePreparacionAEmpaquetar;
 
         public EmpaquetadoForm()
@@ -85,11 +84,16 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             _empaquetadoModel.CrearOrdenEntrega(ordenDePreparacionAEmpaquetar);
             PasarALaSiguienteOrden();
         }
+        
+        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
+        {
+
+            VolverAlMenuPrincipal();
+        }
 
         private void VolverAlMenuPrincipal()
         {
-            // Solo oculta el formulario actual
-            this.Hide();
+            this.Close();
 
             // Mostrar el formulario de menú principal
             // Verifica si el formulario principal ya está abierto
@@ -106,14 +110,6 @@ namespace TPGrupoE.CasosDeUso.CU6Empaquetado.Forms
             MenuPrincipalGeneralForm pantallaPrincipalForm = new MenuPrincipalGeneralForm();
             pantallaPrincipalForm.Show();
         }
-
-        private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
-        {
-
-            VolverAlMenuPrincipal();
-        }
-
-
 
         private void EmpaquetadoForm_FormClosing(object sender, FormClosingEventArgs e)
         {
