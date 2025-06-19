@@ -54,6 +54,9 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
                 item.Tag = orden.IdOrdenPreparacion;
                 EstadoActualOrdenesListView.Items.Add(item);
             }
+
+            EstadoActualOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            EstadoActualOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void EstadoActualOrdenesListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,6 +90,9 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
 
                 HistoricoOrdenesListView.Items.Add(item);
             }
+
+            HistoricoOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            HistoricoOrdenesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void VolverMenuPrincipalButton_Click(object sender, EventArgs e)
