@@ -58,6 +58,7 @@
             VolverMenuPrincipalButton = new Button();
             groupBox1 = new GroupBox();
             DatosTransportistaGroupBox = new GroupBox();
+            label1 = new Label();
             DatosObligatoriosGroupBox = new GroupBox();
             FlagPalletCerradoLabel = new Label();
             groupBox2 = new GroupBox();
@@ -88,9 +89,9 @@
             // 
             cargarOrdenButton.BackColor = SystemColors.Highlight;
             cargarOrdenButton.Enabled = false;
-            cargarOrdenButton.Location = new Point(407, 579);
+            cargarOrdenButton.Location = new Point(406, 571);
             cargarOrdenButton.Name = "cargarOrdenButton";
-            cargarOrdenButton.Size = new Size(382, 44);
+            cargarOrdenButton.Size = new Size(383, 44);
             cargarOrdenButton.TabIndex = 10;
             cargarOrdenButton.Text = "Cargar órden de preparación";
             cargarOrdenButton.UseVisualStyleBackColor = false;
@@ -321,7 +322,7 @@
             // 
             // VolverMenuPrincipalButton
             // 
-            VolverMenuPrincipalButton.Location = new Point(10, 579);
+            VolverMenuPrincipalButton.Location = new Point(10, 571);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
             VolverMenuPrincipalButton.Size = new Size(382, 44);
             VolverMenuPrincipalButton.TabIndex = 42;
@@ -341,15 +342,26 @@
             // 
             // DatosTransportistaGroupBox
             // 
+            DatosTransportistaGroupBox.Controls.Add(label1);
             DatosTransportistaGroupBox.Controls.Add(dniTransportistaTextBox);
-            DatosTransportistaGroupBox.Location = new Point(10, 513);
+            DatosTransportistaGroupBox.Location = new Point(10, 501);
             DatosTransportistaGroupBox.Margin = new Padding(3, 2, 3, 2);
             DatosTransportistaGroupBox.Name = "DatosTransportistaGroupBox";
             DatosTransportistaGroupBox.Padding = new Padding(3, 2, 3, 2);
-            DatosTransportistaGroupBox.Size = new Size(779, 48);
+            DatosTransportistaGroupBox.Size = new Size(777, 55);
             DatosTransportistaGroupBox.TabIndex = 44;
             DatosTransportistaGroupBox.TabStop = false;
-            DatosTransportistaGroupBox.Text = "DNI del transportista (ingrese 8 dígitos, sólo números, sin punto ni espacio)";
+            DatosTransportistaGroupBox.Text = "DNI del transportista";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Enabled = false;
+            label1.Location = new Point(119, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(296, 15);
+            label1.TabIndex = 47;
+            label1.Text = "Ingrese 8 dígitos, sólo números, sin puntos ni espacios.";
             // 
             // DatosObligatoriosGroupBox
             // 
@@ -396,7 +408,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 632);
+            ClientSize = new Size(800, 625);
             Controls.Add(groupBox1);
             Controls.Add(VolverMenuPrincipalButton);
             Controls.Add(label11);
@@ -464,5 +476,6 @@
         private GroupBox DatosObligatoriosGroupBox;
         private GroupBox groupBox2;
         private Label FlagPalletCerradoLabel;
+        private Label label1;
     }
 }

@@ -138,7 +138,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 {
                     MessageBox.Show(
                             $"El cliente no tiene productos disponibles.",
-                            "Advertencia",
+                            "Aviso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
@@ -262,7 +262,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     {
                         MessageBox.Show(
                             $"La cantidad ingresada supera el stock disponible ({cantidadDisponible}).",
-                            "Advertencia",
+                            "Aviso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
@@ -273,7 +273,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     {
                         MessageBox.Show(
                             $"Entrada inválida. Ingrese un número positivo.",
-                            "Advertencia",
+                            "Aviso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
@@ -309,7 +309,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
                 if (stockReal == null)
                 {
-                    MessageBox.Show("No hay stock disponible con ese filtro.");
+                    MessageBox.Show($"No hay stock disponible con ese filtro.",
+                            "Aviso",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -323,7 +326,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
 
                 if (!posicionesDisponibles.Any())
                 {
-                    MessageBox.Show("No hay stock disponible con ese filtro.");
+                    MessageBox.Show($"No hay stock disponible con ese filtro.",
+                            "Aviso",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -338,7 +344,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 // Validar contra stock REAL disponible
                 if (CantidadARetirar > cantidadRealDisponible)
                 {
-                    MessageBox.Show($"No hay suficiente stock disponible. Máximo: {cantidadRealDisponible}");
+                    MessageBox.Show($"No hay suficiente stock disponible. Máximo: {cantidadRealDisponible}",
+                            "Aviso",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -562,7 +571,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                 Pallet = "No";
             }
             MessageBox.Show("Orden de preparación " + id + " cargada correctamente."// \nID de órden: " + id + "\nID de depósito: " + idDepositoSeleccionado + "\nID de cliente: " + idClienteSeleccionado +
-              /* "\nPallet cerrado: " + Pallet + "\nFecha de entrega: " + despachoDateTimePicker.Value + "\nDNI de transportista: " + dniTransportistaTextBox.Text + "\nEstado: Pendiente"*/, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              /* "\nPallet cerrado: " + Pallet + "\nFecha de entrega: " + despachoDateTimePicker.Value + "\nDNI de transportista: " + dniTransportistaTextBox.Text + "\nEstado: Pendiente"*/, "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Limpiar formulario
             ordenDePreparacionListView.Items.Clear();
@@ -598,7 +607,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 MessageBox.Show(
                             $"Entrada inválida. Ingrese un número positivo.",
-                            "Advertencia",
+                            "Aviso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                         );
@@ -637,7 +646,7 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
             {
                 DialogResult resultado = MessageBox.Show(
                     "Si sale se eliminarán los productos ingresados. \n ¿Salir?",
-                    "Advertencia",
+                    "Aviso",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
