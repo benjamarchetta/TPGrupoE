@@ -38,9 +38,11 @@
             SectorDespachoGroupBox = new GroupBox();
             EmitirRemitoButton = new Button();
             ConsultarEstadoOrdenesButton = new Button();
+            MenuPrincipalPanel = new Panel();
             SectorPrepatacionGroupBox.SuspendLayout();
             SectorAlmacenGroupBox.SuspendLayout();
             SectorDespachoGroupBox.SuspendLayout();
+            MenuPrincipalPanel.SuspendLayout();
             SuspendLayout();
             // 
             // CargarOrdenPreparacionButton
@@ -159,20 +161,31 @@
             ConsultarEstadoOrdenesButton.UseVisualStyleBackColor = true;
             ConsultarEstadoOrdenesButton.Click += ConsultarEstadoOrdenesButton_Click;
             // 
+            // MenuPrincipalPanel
+            // 
+            MenuPrincipalPanel.AutoScroll = true;
+            MenuPrincipalPanel.Controls.Add(ConsultarEstadoOrdenesButton);
+            MenuPrincipalPanel.Controls.Add(SectorPrepatacionGroupBox);
+            MenuPrincipalPanel.Controls.Add(SectorAlmacenGroupBox);
+            MenuPrincipalPanel.Controls.Add(SectorDespachoGroupBox);
+            MenuPrincipalPanel.Dock = DockStyle.Fill;
+            MenuPrincipalPanel.Location = new Point(0, 0);
+            MenuPrincipalPanel.Name = "MenuPrincipalPanel";
+            MenuPrincipalPanel.Size = new Size(539, 713);
+            MenuPrincipalPanel.TabIndex = 5;
+            // 
             // MenuPrincipalGeneralForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(539, 713);
-            Controls.Add(ConsultarEstadoOrdenesButton);
-            Controls.Add(SectorDespachoGroupBox);
-            Controls.Add(SectorAlmacenGroupBox);
-            Controls.Add(SectorPrepatacionGroupBox);
+            Controls.Add(MenuPrincipalPanel);
             Name = "MenuPrincipalGeneralForm";
             Text = "Menú principal";
             SectorPrepatacionGroupBox.ResumeLayout(false);
             SectorAlmacenGroupBox.ResumeLayout(false);
             SectorDespachoGroupBox.ResumeLayout(false);
+            MenuPrincipalPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -188,5 +201,6 @@
         private GroupBox SectorDespachoGroupBox;
         private Button EmitirRemitoButton;
         private Button ConsultarEstadoOrdenesButton;
+        private Panel MenuPrincipalPanel;
     }
 }
