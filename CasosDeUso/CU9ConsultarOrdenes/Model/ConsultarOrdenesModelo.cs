@@ -14,6 +14,8 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model
 
         public ConsultarOrdenesModelo()
         {
+            FlujoMovimientosAlmacen.InicializarMovimientosDesdeOrdenes();
+
             Ordenes = new List<HistorialDeOrdenesPreparacion>();
 
             // Traer todos los movimientos registrados
@@ -54,5 +56,17 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultarOrdenes.Model
             return FlujoMovimientosAlmacen.BuscarHistoricoPorOrden(idOrdenPreparacion);
         }
 
+        public List<ClienteFiltro> ObtenerClientesParaFiltro()
+        {
+            return Ordenes
+                .GroupBy(o => o.IdCliente)
+                .Select(g => new ClienteFiltro
+                {
+                    IdCliente = g.First().IdCliente,
+                    Cuit = g.First().ClienteCuit,
+                    RazonSocial = g.First().ClienteRazonSocial
+                })
+                .ToList();
+        }
     }
 }
