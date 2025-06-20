@@ -1,4 +1,4 @@
-﻿Caso: Cargar orden de entrega para liberar productos empaquetados hacia despacho
+﻿Caso: Cumplir orden de entrega para liberar productos empaquetados hacia despacho
 
 (Empieza con la pantalla "Menú principal")
 
@@ -17,8 +17,8 @@ Verificaciones:
 9- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
 se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
   {
-    "IdOrdenEntrega": xxxx,
-    "Estado": 0,
+    "IdOrdenEntrega": 2001,
+    "Estado": 1,
     "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
     "IdOrdenPreparacion": [
       1008, 1009

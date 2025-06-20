@@ -21,7 +21,7 @@ Verificaciones:
 se completarán según el Id que corresponda, y la fecha del día de la prueba, validar que la ultima fila sea:
 
 {
-    "IdRemito": xxxx,
+    "IdRemito": 1,
     "FechaEmision": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
     "IDCliente": 4,
     "DNITransportista": 30111224,
@@ -51,14 +51,5 @@ se completarán según el Id que corresponda, y la fecha del día de la prueba, 
     ]
 }
 
-13- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
-se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
-  {
-    "IdOrdenEntrega": xxxx,
-    "Estado": 1,
-    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
-    "IdOrdenPreparacion": [
-      1003
-    ]
-  }
+
 

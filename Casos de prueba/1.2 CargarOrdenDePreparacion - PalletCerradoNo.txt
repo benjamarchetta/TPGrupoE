@@ -23,12 +23,12 @@ Caso: Cargar una órden de Preparacion (OP) sin pallet cerrado.
 Verificaciones:
 16- En el Archivo "ordenesPreparacion.json" la ultima linea debe ser:
 {
-  "IdOrdenPreparacion": xxxx,
+  "IdOrdenPreparacion": 1011,
   "IdDeposito": 3,
   "IdCliente": 4,
   "DniTransportista": 23456712,
   "Estado": 0,
-  "FechaEntrega": "xxxxxx",
+  "FechaEntrega": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
   "PalletCerrado": false,
   "ProductoOrden": [
     {

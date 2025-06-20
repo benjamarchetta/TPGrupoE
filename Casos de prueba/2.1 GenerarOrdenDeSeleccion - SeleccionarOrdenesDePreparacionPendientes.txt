@@ -25,7 +25,7 @@ Verificaciones:
 
 14-En el Archivo "ordenesPicking.json" la última linea debe verse:
 {
-  "IdOrdenSeleccion": xxxx ,
+  "IdOrdenSeleccion": 1 ,
   "Estado": 0,
   "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
   "IdOrdenPreparacion": [
