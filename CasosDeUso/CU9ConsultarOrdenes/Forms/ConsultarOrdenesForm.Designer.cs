@@ -54,9 +54,11 @@
             EstadoHist = new ColumnHeader();
             FechaActualizacionEstadoHist = new ColumnHeader();
             VolverMenuPrincipalButton = new Button();
+            ConsultarHistoricoPanel = new Panel();
             FiltroConsultaOrdenesGroupBox.SuspendLayout();
             UltimoEstadoGroupBox.SuspendLayout();
             HistoricoOrdenesGroupBox.SuspendLayout();
+            ConsultarHistoricoPanel.SuspendLayout();
             SuspendLayout();
             // 
             // ConsultarOrdenesPreparacionLabel
@@ -304,17 +306,26 @@
             VolverMenuPrincipalButton.Text = "Volver al Menú Principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
             // 
+            // ConsultarHistoricoPanel
+            // 
+            ConsultarHistoricoPanel.AutoScroll = true;
+            ConsultarHistoricoPanel.Controls.Add(ConsultarOrdenesPreparacionLabel);
+            ConsultarHistoricoPanel.Controls.Add(UltimoEstadoGroupBox);
+            ConsultarHistoricoPanel.Controls.Add(FiltroConsultaOrdenesGroupBox);
+            ConsultarHistoricoPanel.Controls.Add(VolverMenuPrincipalButton);
+            ConsultarHistoricoPanel.Controls.Add(HistoricoOrdenesGroupBox);
+            ConsultarHistoricoPanel.Dock = DockStyle.Fill;
+            ConsultarHistoricoPanel.Location = new Point(0, 0);
+            ConsultarHistoricoPanel.Name = "ConsultarHistoricoPanel";
+            ConsultarHistoricoPanel.Size = new Size(1044, 808);
+            ConsultarHistoricoPanel.TabIndex = 6;
+            // 
             // ConsultarOrdenesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 562);
-            Controls.Add(VolverMenuPrincipalButton);
-            Controls.Add(HistoricoOrdenesGroupBox);
-            Controls.Add(FiltroConsultaOrdenesGroupBox);
-            Controls.Add(ConsultarOrdenesPreparacionLabel);
-            Controls.Add(UltimoEstadoGroupBox);
-            Margin = new Padding(3, 2, 3, 2);
+            ClientSize = new Size(1044, 808);
+            Controls.Add(ConsultarHistoricoPanel);
             Name = "ConsultarOrdenesForm";
             Text = "Consultar histórico de órdenes";
             FormClosing += ConsultarOrdenesForm_FormClosing;
@@ -323,8 +334,9 @@
             UltimoEstadoGroupBox.ResumeLayout(false);
             HistoricoOrdenesGroupBox.ResumeLayout(false);
             HistoricoOrdenesGroupBox.PerformLayout();
+            ConsultarHistoricoPanel.ResumeLayout(false);
+            ConsultarHistoricoPanel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -355,5 +367,6 @@
         private Label FechaEntregaOPSeleccionadaLabel;
         private Label DepositoOPSeleccionadaLabel;
         private Label CuitRazonClienteLabel;
+        private Panel ConsultarHistoricoPanel;
     }
 }
