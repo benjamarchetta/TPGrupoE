@@ -137,7 +137,7 @@ namespace TPGrupoE.CasosDeUso.CU9ConsultaOrdenes.Forms
                 {
                     orden.IdOrdenPreparacion.ToString(),
                     orden.Estado.ToString(),
-                    orden.FechaUltimaActualizacionEstado.ToString("g")
+                    orden.FechaUltimaActualizacionEstado.ToString("g"),
                     orden.FechaEntrega.ToShortDateString(),
                     orden.ClienteCuit,
                     orden.ClienteRazonSocial,
