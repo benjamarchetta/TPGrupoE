@@ -285,9 +285,9 @@
             DniTransportistaLabel.Font = new Font("Segoe UI", 9F);
             DniTransportistaLabel.Location = new Point(18, 22);
             DniTransportistaLabel.Name = "DniTransportistaLabel";
-            DniTransportistaLabel.Size = new Size(222, 15);
+            DniTransportistaLabel.Size = new Size(246, 15);
             DniTransportistaLabel.TabIndex = 32;
-            DniTransportistaLabel.Text = "DNI (sólo números, sin punto ni espacio)";
+            DniTransportistaLabel.Text = "DNI (ingrese 8 dígitos, sin puntos ni espacios)";
             // 
             // CuitClienteLabel
             // 
