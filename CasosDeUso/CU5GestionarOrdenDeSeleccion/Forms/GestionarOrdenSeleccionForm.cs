@@ -43,7 +43,8 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
             detalleProductosListView.Columns.Add("Descripción", 100);
             detalleProductosListView.Columns.Add("Cantidad", 100);
             detalleProductosListView.Columns.Add("Pallet Cerrado", 120);
-            detalleProductosListView.Columns.Add("Ubicación", 400);
+            detalleProductosListView.Columns.Add("Ubicación", 300);
+            detalleProductosListView.Columns.Add("Domicilio", 400); // Nueva columna para domicilio
 
             VerDetallesButton.Text = "Seleccionar mercadería";
             VerDetallesButton.Enabled = false;
@@ -87,20 +88,23 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
         {
             if (ordenesListView.CheckedItems.Count == 0) return;
 
-            detalleProductosListView.Items.Clear();
+            detalleProductosListView.Items.Clear(); // Limpiar el ListView de productos
 
+            // Iterar sobre las órdenes seleccionadas
             foreach (ListViewItem item in ordenesListView.CheckedItems)
             {
                 int idOrdenSeleccion = (int)item.Tag;
-                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);
+                var productos = _modelo.ObtenerDetalleProductos(idOrdenSeleccion);  // Obtener los productos
 
+                // Agregar los productos al ListView
                 foreach (var p in productos)
                 {
-                    var fila = new ListViewItem(p.Sku);
-                    fila.SubItems.Add(p.Descripcion);
-                    fila.SubItems.Add(p.Cantidad.ToString());
-                    fila.SubItems.Add(p.PalletCerrado);
-                    fila.SubItems.Add(p.Ubicacion);
+                    var fila = new ListViewItem(p.Sku); // SKU
+                    fila.SubItems.Add(p.Descripcion); // Descripción
+                    fila.SubItems.Add(p.Cantidad.ToString()); // Cantidad
+                    fila.SubItems.Add(p.PalletCerrado); // Pallet Cerrado
+                    fila.SubItems.Add(p.Ubicacion); // Ubicación
+                    fila.SubItems.Add(p.Domicilio); // Domicilio del depósito
 
                     detalleProductosListView.Items.Add(fila);
                 }
