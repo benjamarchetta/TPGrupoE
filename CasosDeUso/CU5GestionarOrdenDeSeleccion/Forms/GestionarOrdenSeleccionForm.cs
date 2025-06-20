@@ -163,7 +163,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
         private void volverAlMenuButton_Click(object sender, EventArgs e)
         {
-            VolverAlMenuPrincipal()
+            VolverAlMenuPrincipal();
         }
 
         private void VolverAlMenuPrincipal()
