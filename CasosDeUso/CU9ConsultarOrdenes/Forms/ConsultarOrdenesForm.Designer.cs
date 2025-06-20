@@ -317,14 +317,14 @@
             ConsultarHistoricoPanel.Dock = DockStyle.Fill;
             ConsultarHistoricoPanel.Location = new Point(0, 0);
             ConsultarHistoricoPanel.Name = "ConsultarHistoricoPanel";
-            ConsultarHistoricoPanel.Size = new Size(1044, 808);
+            ConsultarHistoricoPanel.Size = new Size(907, 614);
             ConsultarHistoricoPanel.TabIndex = 6;
             // 
             // ConsultarOrdenesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1044, 808);
+            ClientSize = new Size(907, 614);
             Controls.Add(ConsultarHistoricoPanel);
             Name = "ConsultarOrdenesForm";
             Text = "Consultar histórico de órdenes";
