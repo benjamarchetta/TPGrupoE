@@ -58,7 +58,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
             if (_modelo.OrdenesDeSeleccion.Count == 0)
             {
-                MessageBox.Show("No hay órdenes de selección pendientes.");
+                MessageBox.Show("📭 No hay órdenes de selección pendientes.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -120,8 +120,10 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                 ids.Add((int)item.Tag);
             }
 
-            var mensaje = $"¿Desea confirmar el cumplimiento de la/s siguiente/s orden/es?\n\n" +
-                          string.Join("\n", ids.Select(id => $"OS-{id:D5}"));
+            var mensaje = " ÓRDENES A CONFIRMAR \n\n" +
+                  "Se procederá a confirmar el cumplimiento de las siguientes órdenes:\n\n" +
+                  string.Join("\n", ids.Select(id => $"• Orden N° {id}")) +
+                  "\n\n¿Desea continuar?";
 
             var result = MessageBox.Show(mensaje, "Confirmar selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -132,7 +134,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
                     _modelo.ConfirmarSeleccion(id);
                 }
 
-                MessageBox.Show("Órdenes de selección confirmadas correctamente.");
+                MessageBox.Show(" Órdenes de selección confirmadas correctamente.", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 detalleProductosListView.Items.Clear();
                 confirmarSeleccionButton.Enabled = false;

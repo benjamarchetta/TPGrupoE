@@ -70,31 +70,29 @@
             // FechaEntregaLabel
             // 
             FechaEntregaLabel.AutoSize = true;
-            FechaEntregaLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FechaEntregaLabel.Location = new Point(23, 23);
+            FechaEntregaLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FechaEntregaLabel.Location = new Point(20, 17);
             FechaEntregaLabel.Name = "FechaEntregaLabel";
-            FechaEntregaLabel.Size = new Size(123, 20);
+            FechaEntregaLabel.Size = new Size(97, 15);
             FechaEntregaLabel.TabIndex = 2;
             FechaEntregaLabel.Text = "Fecha de entrega";
             // 
             // despachoDateTimePicker
             // 
             despachoDateTimePicker.Font = new Font("Segoe UI", 9F);
-            despachoDateTimePicker.Location = new Point(23, 47);
-            despachoDateTimePicker.Margin = new Padding(3, 4, 3, 4);
+            despachoDateTimePicker.Location = new Point(20, 35);
             despachoDateTimePicker.MinDate = new DateTime(2025, 6, 4, 0, 0, 0, 0);
             despachoDateTimePicker.Name = "despachoDateTimePicker";
-            despachoDateTimePicker.Size = new Size(400, 27);
+            despachoDateTimePicker.Size = new Size(350, 23);
             despachoDateTimePicker.TabIndex = 3;
             // 
             // cargarOrdenButton
             // 
             cargarOrdenButton.BackColor = SystemColors.Highlight;
             cargarOrdenButton.Enabled = false;
-            cargarOrdenButton.Location = new Point(466, 772);
-            cargarOrdenButton.Margin = new Padding(3, 4, 3, 4);
+            cargarOrdenButton.Location = new Point(408, 579);
             cargarOrdenButton.Name = "cargarOrdenButton";
-            cargarOrdenButton.Size = new Size(436, 59);
+            cargarOrdenButton.Size = new Size(382, 44);
             cargarOrdenButton.TabIndex = 10;
             cargarOrdenButton.Text = "Cargar órden de preparación";
             cargarOrdenButton.UseVisualStyleBackColor = false;
@@ -105,10 +103,9 @@
             quitarProductoButton.BackColor = SystemColors.GradientActiveCaption;
             quitarProductoButton.Enabled = false;
             quitarProductoButton.Font = new Font("Segoe UI", 9F);
-            quitarProductoButton.Location = new Point(645, 200);
-            quitarProductoButton.Margin = new Padding(3, 4, 3, 4);
+            quitarProductoButton.Location = new Point(564, 150);
             quitarProductoButton.Name = "quitarProductoButton";
-            quitarProductoButton.Size = new Size(223, 40);
+            quitarProductoButton.Size = new Size(195, 30);
             quitarProductoButton.TabIndex = 14;
             quitarProductoButton.Text = "Quitar producto";
             quitarProductoButton.UseVisualStyleBackColor = false;
@@ -119,11 +116,10 @@
             ordenDePreparacionListView.Columns.AddRange(new ColumnHeader[] { skuColumnaSelec, cantidadColumnaSelec, posicionesColumna });
             ordenDePreparacionListView.Font = new Font("Segoe UI", 9F);
             ordenDePreparacionListView.FullRowSelect = true;
-            ordenDePreparacionListView.Location = new Point(19, 30);
-            ordenDePreparacionListView.Margin = new Padding(3, 4, 3, 4);
+            ordenDePreparacionListView.Location = new Point(17, 22);
             ordenDePreparacionListView.MultiSelect = false;
             ordenDePreparacionListView.Name = "ordenDePreparacionListView";
-            ordenDePreparacionListView.Size = new Size(847, 162);
+            ordenDePreparacionListView.Size = new Size(742, 122);
             ordenDePreparacionListView.TabIndex = 15;
             ordenDePreparacionListView.UseCompatibleStateImageBehavior = false;
             ordenDePreparacionListView.View = View.Details;
@@ -150,20 +146,19 @@
             razonSocialComboBox.DropDownWidth = 383;
             razonSocialComboBox.Font = new Font("Segoe UI", 9F);
             razonSocialComboBox.FormattingEnabled = true;
-            razonSocialComboBox.Location = new Point(466, 48);
-            razonSocialComboBox.Margin = new Padding(3, 4, 3, 4);
+            razonSocialComboBox.Location = new Point(408, 36);
             razonSocialComboBox.Name = "razonSocialComboBox";
-            razonSocialComboBox.Size = new Size(400, 28);
+            razonSocialComboBox.Size = new Size(350, 23);
             razonSocialComboBox.TabIndex = 16;
             razonSocialComboBox.SelectedIndexChanged += razonSocialComboBox_SelectedIndexChanged;
             // 
             // RazonSocialClienteLabel
             // 
             RazonSocialClienteLabel.AutoSize = true;
-            RazonSocialClienteLabel.Font = new Font("Segoe UI", 9F);
-            RazonSocialClienteLabel.Location = new Point(466, 24);
+            RazonSocialClienteLabel.Font = new Font("Segoe UI Semibold", 9F);
+            RazonSocialClienteLabel.Location = new Point(408, 18);
             RazonSocialClienteLabel.Name = "RazonSocialClienteLabel";
-            RazonSocialClienteLabel.Size = new Size(165, 20);
+            RazonSocialClienteLabel.Size = new Size(130, 15);
             RazonSocialClienteLabel.TabIndex = 17;
             RazonSocialClienteLabel.Text = "Razón social del cliente";
             // 
@@ -171,10 +166,9 @@
             // 
             cuitTextBox.Enabled = false;
             cuitTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cuitTextBox.Location = new Point(468, 107);
-            cuitTextBox.Margin = new Padding(3, 4, 3, 4);
+            cuitTextBox.Location = new Point(410, 80);
             cuitTextBox.Name = "cuitTextBox";
-            cuitTextBox.Size = new Size(400, 27);
+            cuitTextBox.Size = new Size(350, 23);
             cuitTextBox.TabIndex = 19;
             cuitTextBox.Text = "-";
             cuitTextBox.TextChanged += cuitTextBox_TextChanged;
@@ -185,38 +179,38 @@
             productoComboBox.Enabled = false;
             productoComboBox.Font = new Font("Segoe UI", 9F);
             productoComboBox.FormattingEnabled = true;
-            productoComboBox.Location = new Point(478, 223);
-            productoComboBox.Margin = new Padding(3, 4, 3, 4);
+            productoComboBox.Location = new Point(418, 167);
             productoComboBox.Name = "productoComboBox";
-            productoComboBox.Size = new Size(400, 28);
+            productoComboBox.Size = new Size(350, 23);
             productoComboBox.TabIndex = 20;
             productoComboBox.SelectedIndexChanged += productoComboBox_SelectedIndexChanged;
             // 
             // ProductoLabel
             // 
             ProductoLabel.AutoSize = true;
-            ProductoLabel.Location = new Point(478, 199);
+            ProductoLabel.Font = new Font("Segoe UI Semibold", 9F);
+            ProductoLabel.Location = new Point(418, 149);
             ProductoLabel.Name = "ProductoLabel";
-            ProductoLabel.Size = new Size(69, 20);
+            ProductoLabel.Size = new Size(56, 15);
             ProductoLabel.TabIndex = 21;
             ProductoLabel.Text = "Producto";
             // 
             // SkuProductoLabel
             // 
             SkuProductoLabel.AutoSize = true;
-            SkuProductoLabel.Location = new Point(478, 271);
+            SkuProductoLabel.Font = new Font("Segoe UI Semibold", 9F);
+            SkuProductoLabel.Location = new Point(418, 203);
             SkuProductoLabel.Name = "SkuProductoLabel";
-            SkuProductoLabel.Size = new Size(126, 20);
+            SkuProductoLabel.Size = new Size(100, 15);
             SkuProductoLabel.TabIndex = 22;
             SkuProductoLabel.Text = "SKU del producto";
             // 
             // skuTextBox
             // 
             skuTextBox.Enabled = false;
-            skuTextBox.Location = new Point(478, 295);
-            skuTextBox.Margin = new Padding(3, 4, 3, 4);
+            skuTextBox.Location = new Point(418, 221);
             skuTextBox.Name = "skuTextBox";
-            skuTextBox.Size = new Size(180, 27);
+            skuTextBox.Size = new Size(158, 23);
             skuTextBox.TabIndex = 23;
             skuTextBox.Text = "-";
             skuTextBox.TextChanged += skuTextBox_TextChanged;
@@ -224,10 +218,9 @@
             // cantidadEnStockTextBox
             // 
             cantidadEnStockTextBox.Enabled = false;
-            cantidadEnStockTextBox.Location = new Point(698, 295);
-            cantidadEnStockTextBox.Margin = new Padding(3, 4, 3, 4);
+            cantidadEnStockTextBox.Location = new Point(611, 221);
             cantidadEnStockTextBox.Name = "cantidadEnStockTextBox";
-            cantidadEnStockTextBox.Size = new Size(180, 27);
+            cantidadEnStockTextBox.Size = new Size(158, 23);
             cantidadEnStockTextBox.TabIndex = 24;
             cantidadEnStockTextBox.Text = "-";
             cantidadEnStockTextBox.TextChanged += cantidadEnStockTextBox_TextChanged;
@@ -235,9 +228,10 @@
             // CantidadStockLabel
             // 
             CantidadStockLabel.AutoSize = true;
-            CantidadStockLabel.Location = new Point(698, 271);
+            CantidadStockLabel.Font = new Font("Segoe UI Semibold", 9F);
+            CantidadStockLabel.Location = new Point(611, 203);
             CantidadStockLabel.Name = "CantidadStockLabel";
-            CantidadStockLabel.Size = new Size(127, 20);
+            CantidadStockLabel.Size = new Size(101, 15);
             CantidadStockLabel.TabIndex = 25;
             CantidadStockLabel.Text = "Cantidad en stock";
             // 
@@ -247,29 +241,28 @@
             palletCerradoComboBox.Font = new Font("Segoe UI", 9F);
             palletCerradoComboBox.FormattingEnabled = true;
             palletCerradoComboBox.Items.AddRange(new object[] { "No", "Sí" });
-            palletCerradoComboBox.Location = new Point(23, 107);
-            palletCerradoComboBox.Margin = new Padding(3, 4, 3, 4);
+            palletCerradoComboBox.Location = new Point(20, 80);
             palletCerradoComboBox.Name = "palletCerradoComboBox";
-            palletCerradoComboBox.Size = new Size(400, 28);
+            palletCerradoComboBox.Size = new Size(350, 23);
             palletCerradoComboBox.TabIndex = 26;
             palletCerradoComboBox.SelectedIndexChanged += palletCerradoComboBox_SelectedIndexChanged;
             // 
             // cantidadARetirarLabel
             // 
             cantidadARetirarLabel.AutoSize = true;
-            cantidadARetirarLabel.Location = new Point(33, 271);
+            cantidadARetirarLabel.Font = new Font("Segoe UI Semibold", 9F);
+            cantidadARetirarLabel.Location = new Point(29, 203);
             cantidadARetirarLabel.Name = "cantidadARetirarLabel";
-            cantidadARetirarLabel.Size = new Size(125, 20);
+            cantidadARetirarLabel.Size = new Size(97, 15);
             cantidadARetirarLabel.TabIndex = 28;
             cantidadARetirarLabel.Text = "Cantidad a retirar";
             // 
             // cantidadARetirarTextBox
             // 
             cantidadARetirarTextBox.Enabled = false;
-            cantidadARetirarTextBox.Location = new Point(33, 295);
-            cantidadARetirarTextBox.Margin = new Padding(3, 4, 3, 4);
+            cantidadARetirarTextBox.Location = new Point(29, 221);
             cantidadARetirarTextBox.Name = "cantidadARetirarTextBox";
-            cantidadARetirarTextBox.Size = new Size(400, 27);
+            cantidadARetirarTextBox.Size = new Size(350, 23);
             cantidadARetirarTextBox.TabIndex = 29;
             cantidadARetirarTextBox.TextChanged += cantidadARetirarTextBox_TextChanged_1;
             cantidadARetirarTextBox.KeyPress += cantidadARetirarTextBox_KeyPress;
@@ -278,10 +271,9 @@
             // 
             agregarProductoButton.BackColor = SystemColors.GradientActiveCaption;
             agregarProductoButton.Enabled = false;
-            agregarProductoButton.Location = new Point(655, 348);
-            agregarProductoButton.Margin = new Padding(3, 4, 3, 4);
+            agregarProductoButton.Location = new Point(573, 261);
             agregarProductoButton.Name = "agregarProductoButton";
-            agregarProductoButton.Size = new Size(223, 40);
+            agregarProductoButton.Size = new Size(195, 30);
             agregarProductoButton.TabIndex = 30;
             agregarProductoButton.Text = "Agregar producto";
             agregarProductoButton.UseVisualStyleBackColor = false;
@@ -291,19 +283,19 @@
             // 
             DniTransportistaLabel.AutoSize = true;
             DniTransportistaLabel.Font = new Font("Segoe UI", 9F);
-            DniTransportistaLabel.Location = new Point(21, 29);
+            DniTransportistaLabel.Location = new Point(18, 22);
             DniTransportistaLabel.Name = "DniTransportistaLabel";
-            DniTransportistaLabel.Size = new Size(277, 20);
+            DniTransportistaLabel.Size = new Size(246, 15);
             DniTransportistaLabel.TabIndex = 32;
-            DniTransportistaLabel.Text = "DNI (sólo números, sin punto ni espacio)";
+            DniTransportistaLabel.Text = "DNI (ingrese 8 dígitos, sin puntos ni espacios)";
             // 
             // CuitClienteLabel
             // 
             CuitClienteLabel.AutoSize = true;
-            CuitClienteLabel.Font = new Font("Segoe UI", 9F);
-            CuitClienteLabel.Location = new Point(468, 84);
+            CuitClienteLabel.Font = new Font("Segoe UI Semibold", 9F);
+            CuitClienteLabel.Location = new Point(410, 63);
             CuitClienteLabel.Name = "CuitClienteLabel";
-            CuitClienteLabel.Size = new Size(113, 20);
+            CuitClienteLabel.Size = new Size(90, 15);
             CuitClienteLabel.TabIndex = 37;
             CuitClienteLabel.Text = "CUIT del cliente";
             // 
@@ -311,10 +303,9 @@
             // 
             dniTransportistaTextBox.Enabled = false;
             dniTransportistaTextBox.Font = new Font("Segoe UI", 9F);
-            dniTransportistaTextBox.Location = new Point(21, 53);
-            dniTransportistaTextBox.Margin = new Padding(3, 4, 3, 4);
+            dniTransportistaTextBox.Location = new Point(18, 40);
             dniTransportistaTextBox.Name = "dniTransportistaTextBox";
-            dniTransportistaTextBox.Size = new Size(845, 27);
+            dniTransportistaTextBox.Size = new Size(740, 23);
             dniTransportistaTextBox.TabIndex = 39;
             dniTransportistaTextBox.TextChanged += dniTransportistaTextBox_TextChanged;
             dniTransportistaTextBox.KeyPress += dniTransportistaTextBox_KeyPress;
@@ -325,28 +316,27 @@
             depositoComboBox.Enabled = false;
             depositoComboBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             depositoComboBox.FormattingEnabled = true;
-            depositoComboBox.Location = new Point(33, 223);
-            depositoComboBox.Margin = new Padding(3, 4, 3, 4);
+            depositoComboBox.Location = new Point(29, 167);
             depositoComboBox.Name = "depositoComboBox";
-            depositoComboBox.Size = new Size(400, 28);
+            depositoComboBox.Size = new Size(350, 23);
             depositoComboBox.TabIndex = 40;
             depositoComboBox.SelectedIndexChanged += depositoComboBox_SelectedIndexChanged;
             // 
             // DepositoLabel
             // 
             DepositoLabel.AutoSize = true;
-            DepositoLabel.Location = new Point(33, 199);
+            DepositoLabel.Font = new Font("Segoe UI Semibold", 9F);
+            DepositoLabel.Location = new Point(29, 149);
             DepositoLabel.Name = "DepositoLabel";
-            DepositoLabel.Size = new Size(126, 20);
+            DepositoLabel.Size = new Size(98, 15);
             DepositoLabel.TabIndex = 41;
             DepositoLabel.Text = "Depósito a retirar";
             // 
             // VolverMenuPrincipalButton
             // 
-            VolverMenuPrincipalButton.Location = new Point(12, 772);
-            VolverMenuPrincipalButton.Margin = new Padding(3, 4, 3, 4);
+            VolverMenuPrincipalButton.Location = new Point(10, 579);
             VolverMenuPrincipalButton.Name = "VolverMenuPrincipalButton";
-            VolverMenuPrincipalButton.Size = new Size(436, 59);
+            VolverMenuPrincipalButton.Size = new Size(382, 44);
             VolverMenuPrincipalButton.TabIndex = 42;
             VolverMenuPrincipalButton.Text = "Volver al menú principal";
             VolverMenuPrincipalButton.UseVisualStyleBackColor = true;
@@ -355,11 +345,9 @@
             // DetalleOProupBox
             // 
             DetalleOProupBox.Font = new Font("Segoe UI Semibold", 10F);
-            DetalleOProupBox.Location = new Point(12, 171);
-            DetalleOProupBox.Margin = new Padding(3, 4, 3, 4);
+            DetalleOProupBox.Location = new Point(10, 128);
             DetalleOProupBox.Name = "DetalleOProupBox";
-            DetalleOProupBox.Padding = new Padding(3, 4, 3, 4);
-            DetalleOProupBox.Size = new Size(890, 231);
+            DetalleOProupBox.Size = new Size(779, 173);
             DetalleOProupBox.TabIndex = 43;
             DetalleOProupBox.TabStop = false;
             DetalleOProupBox.Text = "Detalle de la mercadería a despachar";
@@ -369,9 +357,11 @@
             DatosTransportistaGroupBox.Controls.Add(dniTransportistaTextBox);
             DatosTransportistaGroupBox.Controls.Add(DniTransportistaLabel);
             DatosTransportistaGroupBox.Font = new Font("Segoe UI Semibold", 10F);
-            DatosTransportistaGroupBox.Location = new Point(12, 670);
+            DatosTransportistaGroupBox.Location = new Point(10, 502);
+            DatosTransportistaGroupBox.Margin = new Padding(3, 2, 3, 2);
             DatosTransportistaGroupBox.Name = "DatosTransportistaGroupBox";
-            DatosTransportistaGroupBox.Size = new Size(890, 95);
+            DatosTransportistaGroupBox.Padding = new Padding(3, 2, 3, 2);
+            DatosTransportistaGroupBox.Size = new Size(779, 71);
             DatosTransportistaGroupBox.TabIndex = 44;
             DatosTransportistaGroupBox.TabStop = false;
             DatosTransportistaGroupBox.Text = "DNI del transportista";
@@ -387,9 +377,11 @@
             DatosObligatoriosGroupBox.Controls.Add(despachoDateTimePicker);
             DatosObligatoriosGroupBox.Controls.Add(FechaEntregaLabel);
             DatosObligatoriosGroupBox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DatosObligatoriosGroupBox.Location = new Point(12, 12);
+            DatosObligatoriosGroupBox.Location = new Point(10, 9);
+            DatosObligatoriosGroupBox.Margin = new Padding(3, 2, 3, 2);
             DatosObligatoriosGroupBox.Name = "DatosObligatoriosGroupBox";
-            DatosObligatoriosGroupBox.Size = new Size(890, 152);
+            DatosObligatoriosGroupBox.Padding = new Padding(3, 2, 3, 2);
+            DatosObligatoriosGroupBox.Size = new Size(779, 114);
             DatosObligatoriosGroupBox.TabIndex = 45;
             DatosObligatoriosGroupBox.TabStop = false;
             DatosObligatoriosGroupBox.Text = "Datos obligatorios";
@@ -398,10 +390,10 @@
             // FlagPalletCerradoLabel
             // 
             FlagPalletCerradoLabel.AutoSize = true;
-            FlagPalletCerradoLabel.Font = new Font("Segoe UI", 9F);
-            FlagPalletCerradoLabel.Location = new Point(23, 83);
+            FlagPalletCerradoLabel.Font = new Font("Segoe UI Semibold", 9F);
+            FlagPalletCerradoLabel.Location = new Point(20, 62);
             FlagPalletCerradoLabel.Name = "FlagPalletCerradoLabel";
-            FlagPalletCerradoLabel.Size = new Size(134, 20);
+            FlagPalletCerradoLabel.Size = new Size(103, 15);
             FlagPalletCerradoLabel.TabIndex = 38;
             FlagPalletCerradoLabel.Text = "¿Es pallet cerrado?";
             // 
@@ -410,9 +402,11 @@
             ProductosAsociadosOPGroupBox.Controls.Add(ordenDePreparacionListView);
             ProductosAsociadosOPGroupBox.Controls.Add(quitarProductoButton);
             ProductosAsociadosOPGroupBox.Font = new Font("Segoe UI Semibold", 10F);
-            ProductosAsociadosOPGroupBox.Location = new Point(12, 409);
+            ProductosAsociadosOPGroupBox.Location = new Point(10, 307);
+            ProductosAsociadosOPGroupBox.Margin = new Padding(3, 2, 3, 2);
             ProductosAsociadosOPGroupBox.Name = "ProductosAsociadosOPGroupBox";
-            ProductosAsociadosOPGroupBox.Size = new Size(890, 248);
+            ProductosAsociadosOPGroupBox.Padding = new Padding(3, 2, 3, 2);
+            ProductosAsociadosOPGroupBox.Size = new Size(779, 186);
             ProductosAsociadosOPGroupBox.TabIndex = 46;
             ProductosAsociadosOPGroupBox.TabStop = false;
             ProductosAsociadosOPGroupBox.Text = "Productos asignados a la órden de preparación";
@@ -439,17 +433,17 @@
             CargarOPPanel.Controls.Add(DatosTransportistaGroupBox);
             CargarOPPanel.Dock = DockStyle.Fill;
             CargarOPPanel.Location = new Point(0, 0);
+            CargarOPPanel.Margin = new Padding(3, 2, 3, 2);
             CargarOPPanel.Name = "CargarOPPanel";
-            CargarOPPanel.Size = new Size(922, 846);
+            CargarOPPanel.Size = new Size(807, 562);
             CargarOPPanel.TabIndex = 47;
             // 
             // CargarOrdenPreparacionForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(922, 846);
+            ClientSize = new Size(807, 562);
             Controls.Add(CargarOPPanel);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "CargarOrdenPreparacionForm";
             Text = "Cargar órden de preparación";
             FormClosing += ProcesarOrdenPreparacionForm_FormClosing;

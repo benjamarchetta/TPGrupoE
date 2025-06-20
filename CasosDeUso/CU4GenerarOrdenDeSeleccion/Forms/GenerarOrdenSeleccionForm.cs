@@ -39,6 +39,7 @@ namespace TPGrupoE.CasosDeUso.CU4GenerarOrdenDeSeleccion.Forms
             try
             {
                 var ordenesPendientes = modelo.BuscarOrdenesPendientes();
+                ordenesPendientes = ordenesPendientes.OrderBy(o => o.FechaEntrega).ToList();
                 ordenesPendientesListView.Items.Clear();
                 if (ordenesPendientes.Count == 0)
                 {
