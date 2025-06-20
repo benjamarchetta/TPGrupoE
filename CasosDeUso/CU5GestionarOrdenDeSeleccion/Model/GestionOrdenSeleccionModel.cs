@@ -61,45 +61,39 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 var ordenPrep = OrdenPreparacionAlmacen.BuscarOrdenesPorId(idOrdenPrep);
                 if (ordenPrep == null) continue;
 
+                // Obtener el domicilio del depósito
+                var deposito = DepositosAlmacen.BuscarDepositoPorId(ordenPrep.IdDeposito);
+                string domicilioDeposito = deposito != null ? deposito.Domicilio : "Sin domicilio"; // Asignar a la propiedad Domicilio
+
                 foreach (var producto in ordenPrep.ProductoOrden)
                 {
                     var productoEntidad = ProductoAlmacen.BuscarProductoPorId(producto.IdProducto);
-                    // var stock = StockFisicoAlmacen.ObtenerStockPorId(producto.IdProducto);
                     var stock = StockFisicoAlmacen.Stock
-                    .FirstOrDefault(s => s.IdProducto == producto.IdProducto && s.IdCliente == ordenPrep.IdCliente);
+                        .FirstOrDefault(s => s.IdProducto == producto.IdProducto && s.IdCliente == ordenPrep.IdCliente);
 
                     string ubicacion = "Sin ubicación";
                     if (stock != null && stock.Posiciones.Any())
-                  
                     {
                         var posicionesFiltradas = stock.Posiciones
-                     .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito && p.Cantidad > 0)
-                     .ToList();
-
-
-
-                        // .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito)
-                        // .ToList();
+                            .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito && p.Cantidad > 0)
+                            .ToList();
 
                         if (posicionesFiltradas.Any())
                         {
                             ubicacion = string.Join(", ", posicionesFiltradas
-                                .Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad} unidades)"));
-                            // Si se desea filtrar por cliente, descomentar la siguiente línea y comentar la anterior,  Si Posicion tiene una propiedad IdCliente
-                            /*.Where(p => p.PalletCerrado == true 
-                              && p.IdDeposito == ordenPrep.IdDeposito
-                               && p.IdCliente == ordenPrep.IdCliente)
-                            */
+                                .Select(p => $"{p.Posicion} (Cantidad: {p.Cantidad} unidades totales)"));
                         }
                     }
 
+                    // Ahora asignamos el domicilio correctamente al DTO ProductoDetalle
                     lista.Add(new ProductoDetalle
                     {
                         Sku = productoEntidad?.Sku ?? "N/A",
                         Descripcion = productoEntidad?.DescripcionProducto ?? "Sin descripción",
                         Cantidad = producto.Cantidad,
                         PalletCerrado = ordenPrep.PalletCerrado ? "Sí" : "No",
-                        Ubicacion = ubicacion
+                        Ubicacion = ubicacion,
+                        Domicilio = domicilioDeposito // Aquí se asigna el domicilio correctamente
                     });
                 }
             }

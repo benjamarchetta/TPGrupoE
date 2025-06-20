@@ -16,6 +16,7 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
         public int Cantidad { get; set; }
         public string PalletCerrado { get; set; } = "No";
         public string Ubicacion { get; set; } = "Sin ubicación";
-    }
+        public string Domicilio { get; set; } = "Sin domicilio";  // Nueva propiedad para el domicilio
+        }
     }
 }
