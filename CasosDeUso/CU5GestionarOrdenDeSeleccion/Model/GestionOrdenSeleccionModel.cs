@@ -64,14 +64,22 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Model
                 foreach (var producto in ordenPrep.ProductoOrden)
                 {
                     var productoEntidad = ProductoAlmacen.BuscarProductoPorId(producto.IdProducto);
-                    var stock = StockFisicoAlmacen.ObtenerStockPorId(producto.IdProducto);
+                    // var stock = StockFisicoAlmacen.ObtenerStockPorId(producto.IdProducto);
+                    var stock = StockFisicoAlmacen.Stock
+                    .FirstOrDefault(s => s.IdProducto == producto.IdProducto && s.IdCliente == ordenPrep.IdCliente);
 
                     string ubicacion = "Sin ubicación";
                     if (stock != null && stock.Posiciones.Any())
+                  
                     {
                         var posicionesFiltradas = stock.Posiciones
-                        .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito)
-                        .ToList();
+                     .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito && p.Cantidad > 0)
+                     .ToList();
+
+
+
+                        // .Where(p => p.PalletCerrado == true && p.IdDeposito == ordenPrep.IdDeposito)
+                        // .ToList();
 
                         if (posicionesFiltradas.Any())
                         {

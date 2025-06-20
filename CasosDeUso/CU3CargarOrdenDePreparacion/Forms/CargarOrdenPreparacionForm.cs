@@ -258,10 +258,10 @@ namespace TPGrupoE.CasosDeUso.CU3CargarOrdenDePreparacion.Forms
                     )
                     .Sum(p => p.Cantidad);
 
-                if (cantidadARetirar > cantidadDisponible)
+                if (cantidadARetirar > int.Parse(cantidadEnStockTextBox.Text))
                 {
                     MessageBox.Show(
-                        $"La cantidad ingresada supera el stock disponible ({cantidadDisponible}).",
+                        $"La cantidad ingresada supera el stock disponible ({cantidadEnStockTextBox.Text}).",
                         "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
