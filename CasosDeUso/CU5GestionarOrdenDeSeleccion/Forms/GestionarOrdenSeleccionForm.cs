@@ -163,9 +163,26 @@ namespace TPGrupoE.CasosDeUso.CU5GestionarOrdenDeSeleccion.Forms
 
         private void volverAlMenuButton_Click(object sender, EventArgs e)
         {
-            var menuForm = new MenuPrincipalGeneralForm();
-            menuForm.Show();
+            VolverAlMenuPrincipal()
+        }
+
+        private void VolverAlMenuPrincipal()
+        {
             this.Close();
+        }
+
+        private void GestionarOrdenSeleccionForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MenuPrincipalGeneralForm)
+                {
+                    form.Show();
+                    return;
+                }
+            }
+
+            new MenuPrincipalGeneralForm().Show();
         }
     }
 }
