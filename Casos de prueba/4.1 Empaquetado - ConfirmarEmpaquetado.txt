@@ -48,3 +48,13 @@ Verificaciones:
     "PalletCerrado": false
     }
 ]
+8- En el Archivo "ordenesEntrega.json", considerando que, los campos IdOrdenEntrega y FechaActualizacionEstado
+se completarán según el Id que corresponda, y la fecha del día de la prueba, la ultima linea debe ser:
+  {
+    "IdOrdenEntrega": 2001,
+    "Estado": 0,
+    "FechaActualizacionEstado": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm"
+    "IdOrdenPreparacion": [
+      1008, 1009
+    ]
+  }

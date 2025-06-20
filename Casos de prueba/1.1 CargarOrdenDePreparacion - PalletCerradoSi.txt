@@ -25,12 +25,12 @@ Verificaciones:
 
 17- En el Archivo "ordenesPreparacion.json" la ultima línea debe ser:
 {
-  "IdOrdenPreparacion": xxxx,
+  "IdOrdenPreparacion": 1011,
   "IdDeposito": 1,
   "IdCliente": 4,
   "DniTransportista": 23456712,
   "Estado": 0,
-  "FechaEntrega": "xxxxxxxx",
+  "FechaEntrega": "yyyy-MM-ddTHH:mm:ss.sssssss±hh:mm",
   "PalletCerrado": true,
   "ProductoOrden": [
     {
